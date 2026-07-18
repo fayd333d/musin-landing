@@ -15,8 +15,8 @@ burger.addEventListener("click", () => {
 });
 
 /* ---------- Hero: example screen rotation (every 3 s) ----------
-   Price, views and track change; the next screen slides into the
-   main phone from the right shade, right to left. */
+   Price, views and track change; the next screen scrolls up into the
+   main phone from below, TikTok-style (corrections #6). */
 const heroData = [
   { price: "+ $54", views: "324K", track: "Levitating", artist: "Dua Lipa", cover: "#ffac12" },
   { price: "+ $87", views: "1.2M", track: "Bad Guy", artist: "Billie Eilish", cover: "#8b5cf6" },
@@ -54,7 +54,7 @@ function nextHeroSlide() {
   const next = slides[heroIndex % slides.length];
   const data = heroData[heroIndex % heroData.length];
 
-  gsap.set(next, { visibility: "visible", xPercent: 100, zIndex: 2 });
+  gsap.set(next, { visibility: "visible", yPercent: 100, zIndex: 2 });
   gsap.set(prev, { zIndex: 1 });
 
   /* Self-scheduling (instead of setInterval) so rotations never overlap,
@@ -63,11 +63,11 @@ function nextHeroSlide() {
     onComplete: () => gsap.delayedCall(2.2, nextHeroSlide),
   });
   tl.to(next, {
-    xPercent: 0,
+    yPercent: 0,
     duration: 0.8,
     ease: "power3.inOut",
     onComplete: () => {
-      slides.forEach((s) => s !== next && gsap.set(s, { visibility: "hidden", xPercent: 0 }));
+      slides.forEach((s) => s !== next && gsap.set(s, { visibility: "hidden", yPercent: 0 }));
     },
   });
   tl.to(notifs, { opacity: 0, y: -6, duration: 0.22, stagger: 0.05, ease: "power1.in" }, 0.15)
@@ -133,10 +133,12 @@ gsap.to(marqueeInner, {
 });
 
 /* ---------- Genres: big colourful tags, lines drift slightly ---------- */
+/* Weighted toward pop, rap, electronic, rock & EDM plus their subgenres (corrections #9) */
 const genreRows = [
-  ["Lo-Fi", "Rap", "Bachata", "Pop", "Soul", "Electronic", "Metal", "Rock", "Punk"],
-  ["R&B", "Techno", "Alternative", "Blues", "Latin", "Piano", "Afrobeats", "Jazz", "Salsa"],
-  ["Instrumental", "Amapiano", "Country", "Reggae", "Dancehall", "Trap", "Hyperpop", "House"],
+  ["Pop", "Synth-Pop", "Hyperpop", "Dance-Pop", "Indie Pop", "K-Pop", "Electropop", "Rap", "Trap", "Drill"],
+  ["Boom Bap", "Cloud Rap", "Grime", "Conscious Rap", "Electronic", "House", "Deep House", "Techno", "Trance", "Dubstep"],
+  ["Drum & Bass", "Garage", "Future Bass", "Rock", "Punk", "Metal", "Indie Rock", "Alt Rock", "Grunge", "Post-Rock"],
+  ["EDM", "Big Room", "Electro House", "Progressive House", "Melodic Techno", "R&B", "Lo-Fi", "Afrobeats", "Latin", "Jazz"],
 ];
 
 const genreColors = [
@@ -197,11 +199,12 @@ window.addEventListener("pointerup", () => {
 const payCards = gsap.utils.toArray(".pay-card");
 
 if (!prefersReducedMotion) {
+  /* Only scale back the covered cards for depth — no opacity fade, so every
+     icon stays fully bright (corrections #11). */
   payCards.forEach((card, i) => {
     if (i === payCards.length - 1) return;
     gsap.to(card, {
       scale: 0.92 - (payCards.length - 2 - i) * 0.02,
-      opacity: 0.55,
       ease: "none",
       scrollTrigger: {
         trigger: payCards[i + 1],
