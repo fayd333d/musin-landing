@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Musin — For Content Creators</title>
+  <meta name="description" content="Discover music, use it in your content, get paid for posting. Musin connects content creators with artists and labels.">
+  <link rel="icon" href="assets/img/logo-mark.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/content.css">
+</head>
+<body>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header">
+    <div class="nav-wrap container">
+      <a class="nav-logo" href="index.html" aria-label="Musin home">
+        <img src="assets/img/logo-mark.svg" alt="" class="nav-logo__mark">
+        <span class="nav-logo__type">Musin</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="content.html" class="nav-link is-active" aria-current="page">Content</a>
+        <a href="music.html" class="nav-link">Music</a>
+        <a href="#" class="nav-link">Account</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="#" class="btn btn--primary btn--sm nav-cta">Get started</a>
+        <button class="nav-burger" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-menu" hidden>
+      <nav class="mobile-menu__links" aria-label="Mobile navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="content.html" class="nav-link is-active" aria-current="page">Content</a>
+        <a href="music.html" class="nav-link">Music</a>
+        <a href="#" class="nav-link">Account</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="hero">
+      <div class="container hero__inner">
+        <div class="badge-group">TikTok&nbsp;&nbsp;·&nbsp;&nbsp;Instagram&nbsp;&nbsp;·&nbsp;&nbsp;YouTube</div>
+        <h1 class="hero__title">Discover music.<br>Use it in your content.<br>Get paid for posting.</h1>
+        <p class="hero__subtitle">Discover and select tracks, use them in your social media content, and earn money for every confirmed post.</p>
+        <div class="hero__actions">
+          <a href="#" class="btn btn--primary btn--lg">
+            Join as a content creator
+            <img src="assets/img/icon-arrow-right.svg" alt="" class="btn__icon">
+          </a>
+          <p class="hero__note">Join free&nbsp;&nbsp;·&nbsp;&nbsp;Create content&nbsp;&nbsp;·&nbsp;&nbsp;Earn money</p>
+        </div>
+      </div>
+
+      <!-- Phone mockup / "example screen" -->
+      <div class="hero-mockup">
+        <div class="hero-mockup__strip">
+          <div class="side-phone side-phone--1"><img src="assets/img/hero-side-2.png" alt=""></div>
+          <div class="side-phone side-phone--2"><img src="assets/img/hero-side-1.png" alt=""></div>
+
+          <div class="main-phone">
+            <div class="main-phone__screen" id="phoneScreen">
+              <img src="assets/img/hero-phone-content.png" alt="Content creator filming" class="phone-slide is-current">
+              <img src="assets/img/video-dj.png" alt="DJ playing a set" class="phone-slide">
+              <img src="assets/img/video-ringlight.png" alt="Filming with a ring light" class="phone-slide">
+            </div>
+            <img src="assets/img/iphone-frame.png" alt="" class="main-phone__frame">
+
+            <div class="notif notif--money" id="notifMoney">
+              <div class="notif__icon notif__icon--green">$</div>
+              <div class="notif__text">
+                <p class="notif__title" data-rotate="price">+ $54</p>
+                <p class="notif__sub">received for post</p>
+              </div>
+            </div>
+
+            <div class="notif notif--views" id="notifViews">
+              <div class="notif__icon notif__icon--blue">
+                <img src="assets/img/icon-eye.svg" alt="">
+              </div>
+              <div class="notif__text">
+                <p class="notif__title" data-rotate="views">324K</p>
+                <p class="notif__sub">Views</p>
+              </div>
+            </div>
+
+            <div class="notif notif--track" id="notifTrack">
+              <div class="notif__cover" data-rotate="cover"></div>
+              <div class="notif__text">
+                <p class="notif__title" data-rotate="track">Track</p>
+                <p class="notif__sub" data-rotate="artist">Artist</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="side-phone side-phone--3"><img src="assets/img/hero-side-4.png" alt=""></div>
+          <div class="side-phone side-phone--4"><img src="assets/img/hero-side-3.png" alt=""></div>
+        </div>
+        <div class="hero-mockup__fade hero-mockup__fade--left"></div>
+        <div class="hero-mockup__fade hero-mockup__fade--right"></div>
+      </div>
+    </section>
+
+    <!-- ============ DISCOVER NEW MUSIC / TRACK MARQUEE ============ -->
+    <section class="discover" id="discover">
+      <h2 class="discover__heading">Discover New Music</h2>
+      <p class="discover__count" id="trackCount">3,436</p>
+
+      <div class="track-marquee" aria-label="Tracks available on Musin">
+        <div class="track-marquee__inner" id="trackMarquee"></div>
+      </div>
+    </section>
+
+    <!-- ============ CHOOSE MUSIC YOU LIKE ============ -->
+    <section class="genres" id="genres">
+      <div class="container">
+        <h2 class="section-title">Choose music you like</h2>
+      </div>
+      <div class="genre-lines" id="genreLines">
+        <div class="genre-line" data-drift="1"></div>
+        <div class="genre-line" data-drift="-1"></div>
+        <div class="genre-line" data-drift="1"></div>
+      </div>
+    </section>
+
+    <!-- ============ CREATE CONTENT WITH MUSIC ============ -->
+    <section class="create" id="create">
+      <div class="container create__head">
+        <h2 class="section-title section-title--left">Create content with music</h2>
+      </div>
+      <div class="create__scroller" id="createScroller">
+        <div class="video-card"><img src="assets/img/hero-phone-content.png" alt="Singer performing with guitar" loading="lazy"></div>
+        <div class="video-card"><img src="assets/img/video-dj.png" alt="DJ mixing on turntables" loading="lazy"></div>
+        <div class="video-card"><img src="assets/img/video-ringlight.png" alt="Creator filming with a ring light" loading="lazy"></div>
+        <div class="video-card"><img src="assets/img/video-concert.png" alt="DJ performing for a crowd" loading="lazy"></div>
+        <div class="video-card"><img src="assets/img/hero-side-1.png" alt="Filming a concert on a phone" loading="lazy"></div>
+        <div class="video-card"><img src="assets/img/hero-side-2.png" alt="Creator recording content" loading="lazy"></div>
+      </div>
+      <div class="container create__nav">
+        <button class="scroll-arrow" id="scrollPrev" aria-label="Scroll back">
+          <img src="assets/img/icon-arrow-right.svg" alt="" style="transform:rotate(180deg)">
+        </button>
+        <button class="scroll-arrow" id="scrollNext" aria-label="Scroll forward">
+          <img src="assets/img/icon-arrow-right.svg" alt="">
+        </button>
+      </div>
+    </section>
+
+    <!-- ============ GET PAID FOR POSTING (stacking cards) ============ -->
+    <section class="payments" id="payments">
+      <div class="container">
+        <h2 class="section-title">Get paid for posting</h2>
+        <div class="pay-stack" id="payStack">
+          <div class="pay-card">
+            <div class="pay-card__icon-wrap"><div class="pay-card__icon" style="background:#EAB308"><img src="assets/img/icons/pay-dollar.svg" alt=""></div></div>
+            <h3 class="pay-card__title">Set price</h3>
+            <p class="pay-card__text">Your follower count determines your publication price.</p>
+          </div>
+          <div class="pay-card">
+            <div class="pay-card__icon-wrap"><div class="pay-card__icon" style="background:#E54552"><img src="assets/img/icons/pay-share.svg" alt=""></div></div>
+            <h3 class="pay-card__title">Publish post</h3>
+            <p class="pay-card__text">Create content with the selected track and post it.</p>
+          </div>
+          <div class="pay-card">
+            <div class="pay-card__icon-wrap"><div class="pay-card__icon" style="background:#3D5DDC"><img src="assets/img/icons/pay-check.svg" alt=""></div></div>
+            <h3 class="pay-card__title">Post confirmation</h3>
+            <p class="pay-card__text">Submit your post link to confirm the order is complete.</p>
+          </div>
+          <div class="pay-card">
+            <div class="pay-card__icon-wrap"><div class="pay-card__icon" style="background:#22C55E"><img src="assets/img/icons/pay-wallet.svg" alt=""></div></div>
+            <h3 class="pay-card__title">Guaranteed payout</h3>
+            <p class="pay-card__text">Funds are released after confirmation or when the campaign ends.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ LOGO MARQUEE ============ -->
+    <section class="logos" aria-label="Platforms and partners">
+      <div class="logos__marquee" id="logoMarquee">
+        <div class="logos__group">
+          <img src="assets/img/logos/stripe.svg" alt="Stripe" class="logos__item logos__item--stripe">
+          <img src="assets/img/logos/facebook.svg" alt="Facebook" class="logos__item">
+          <img src="assets/img/logos/spotify.svg" alt="Spotify" class="logos__item">
+          <img src="assets/img/logos/youtube.svg" alt="YouTube" class="logos__item logos__item--wide">
+          <img src="assets/img/logos/instagram.svg" alt="Instagram" class="logos__item">
+          <img src="assets/img/logos/google.svg" alt="Google" class="logos__item">
+          <img src="assets/img/logos/tiktok-glyph.svg" alt="TikTok" class="logos__item">
+          <img src="assets/img/logos/soundcloud.svg" alt="SoundCloud" class="logos__item logos__item--wide">
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="faq" id="faq">
+      <div class="container faq__container">
+        <h2 class="section-title">FAQ</h2>
+        <div class="faq-list">
+          <details class="faq-item" open>
+            <summary>Do I need a minimum number of followers?</summary>
+            <p>No. Musin is open to creators of all sizes — from small niche pages to large audiences.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Which platforms are supported?</summary>
+            <p>TikTok, Instagram and YouTube. Connect one or several accounts and use tracks across all of them.</p>
+          </details>
+          <details class="faq-item">
+            <summary>When do I get paid?</summary>
+            <p>Once your post is confirmed. Funds are released after confirmation or when the campaign ends.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Do I have to post every track I accept?</summary>
+            <p>You only accept tracks you actually want to use — once accepted, you post by the agreed deadline.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Can I choose the music myself?</summary>
+            <p>Yes. Browse the catalog and pick only the tracks that fit your vibe and audience.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Is it free?</summary>
+            <p>Yes. No setup fees, no monthly fees, no subscriptions.</p>
+          </details>
+          <details class="faq-item">
+            <summary>How are payouts handled?</summary>
+            <p>Payouts are processed securely through Stripe, straight to your account.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Can artists or labels contact me directly?</summary>
+            <p>Yes — artists and labels can send you track offers directly through Musin.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CTA ============ -->
+    <section class="cta">
+      <div class="container">
+        <div class="cta__card">
+          <h2 class="cta__title">Sync your content with music</h2>
+          <p class="cta__text">No follower minimum, full creative freedom, direct Stripe payouts and completely free to use.</p>
+          <a href="#" class="btn btn--primary btn--lg">Get started</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container footer__top">
+      <div class="footer__brand">
+        <a class="nav-logo" href="index.html" aria-label="Musin home">
+          <img src="assets/img/logo-mark.svg" alt="" class="nav-logo__mark">
+          <span class="nav-logo__type">Musin</span>
+        </a>
+        <p class="footer__desc">Discuss music trends, analyze charts, and collaborate with others to make informed marketing decisions.</p>
+        <div class="footer__social">
+          <a href="#" aria-label="X"><img src="assets/img/social/s01-x.svg" alt=""></a>
+          <a href="#" aria-label="LinkedIn"><img src="assets/img/social/s02-linkedin.svg" alt=""></a>
+          <a href="#" aria-label="Snapchat"><img src="assets/img/social/s03-snapchat.svg" alt=""></a>
+          <a href="#" aria-label="Spotify"><img src="assets/img/social/s04-spotify.svg" alt=""></a>
+          <a href="#" aria-label="Telegram"><img src="assets/img/social/s05-telegram.svg" alt=""></a>
+          <a href="#" aria-label="Twitch"><img src="assets/img/social/s06-twitch.svg" alt=""></a>
+          <a href="#" aria-label="Facebook"><img src="assets/img/social/s07-facebook.svg" alt=""></a>
+          <a href="#" aria-label="Instagram"><img src="assets/img/social/s08-instagram.svg" alt=""></a>
+          <a href="#" aria-label="YouTube"><img src="assets/img/social/s09-youtube.svg" alt=""></a>
+          <a href="#" aria-label="TikTok"><img src="assets/img/social/s10-tiktok.svg" alt=""></a>
+          <a href="#" aria-label="Discord"><img src="assets/img/social/s11-discord.svg" alt=""></a>
+        </div>
+      </div>
+
+      <div class="footer__cols">
+        <div class="footer__col">
+          <p class="footer__col-title">Product</p>
+          <a href="#">Overview</a>
+          <a href="#">Features</a>
+          <a href="#">Solutions <span class="badge-new">New</span></a>
+          <a href="#">Tutorials</a>
+          <a href="#">Pricing</a>
+          <a href="#">Releases</a>
+        </div>
+        <div class="footer__col">
+          <p class="footer__col-title">Resources</p>
+          <a href="#">Blog</a>
+          <a href="#">Newsletter</a>
+          <a href="#">Events</a>
+          <a href="#">Help centre</a>
+          <a href="#">Tutorials</a>
+          <a href="#">Support</a>
+        </div>
+        <div class="footer__newsletter">
+          <p class="footer__col-title">Stay up to date</p>
+          <form class="newsletter-form" id="newsletterForm">
+            <input type="email" placeholder="Enter your email" aria-label="Email address" required>
+            <button type="submit" class="btn btn--secondary">Subscribe</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <p>© 2026 Musin. All rights reserved.</p>
+      <div class="footer__legal">
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Cookies</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="assets/js/content.js"></script>
+</body>
+</html>
