@@ -132,6 +132,41 @@ gsap.to(marqueeInner, {
   repeat: -1,
 });
 
+/* ---------- Track counter: occasional live movement (corrections #3) ----------
+   Nudges by a random 1–7 per event, trends upward, never above 5,000, and
+   fires only every ~30–70 s so the user sees just 1–2 events per session. */
+const countEl = document.getElementById("trackCount");
+let trackCount = parseInt((countEl.textContent || "3436").replace(/\D/g, ""), 10) || 3436;
+
+function renderCount(n) {
+  countEl.textContent = Math.round(n).toLocaleString("en-US");
+}
+
+function tweenCount(to) {
+  gsap.to({ v: trackCount }, {
+    v: to,
+    duration: 1.1,
+    ease: "power2.out",
+    onUpdate() {
+      renderCount(this.targets()[0].v);
+    },
+  });
+  trackCount = to;
+}
+
+function scheduleCountEvent() {
+  gsap.delayedCall(gsap.utils.random(30, 70), () => {
+    const goesUp = Math.random() < 0.72; // generally up
+    const delta = Math.ceil(Math.random() * 7); // 1..7, never more than 7
+    let next = trackCount + (goesUp ? delta : -delta);
+    next = Math.min(5000, Math.max(0, next)); // cap at 5,000
+    tweenCount(next);
+    scheduleCountEvent();
+  });
+}
+
+if (!prefersReducedMotion) scheduleCountEvent();
+
 /* ---------- Genres: big colourful tags, lines drift slightly ---------- */
 /* Mainstream genres first, then subgenres of rap / pop / electronic / rock (corrections #5) */
 const genreRows = [
@@ -202,6 +237,32 @@ window.addEventListener("pointerup", () => {
   isDown = false;
   scroller.classList.remove("is-dragging");
 });
+
+/* Wheel effect: the card nearest the centre scales up, neighbours recede,
+   so you see one focused card with two shaded ones on either side. */
+function updateWheel() {
+  const sr = scroller.getBoundingClientRect();
+  const centre = sr.left + sr.width / 2;
+  scroller.querySelectorAll(".video-card").forEach((card) => {
+    const cr = card.getBoundingClientRect();
+    const dist = Math.abs(centre - (cr.left + cr.width / 2)) / sr.width;
+    const scale = Math.max(0.84, 1 - dist * 0.9);
+    card.style.transform = `scale(${scale.toFixed(3)})`;
+  });
+}
+
+let wheelTick = false;
+scroller.addEventListener("scroll", () => {
+  if (wheelTick) return;
+  wheelTick = true;
+  requestAnimationFrame(() => {
+    updateWheel();
+    wheelTick = false;
+  });
+});
+window.addEventListener("resize", updateWheel);
+window.addEventListener("load", updateWheel);
+updateWheel();
 
 /* ---------- Get paid for posting: cards stack on scroll ---------- */
 const payCards = gsap.utils.toArray(".pay-card");

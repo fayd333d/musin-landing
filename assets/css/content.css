@@ -194,42 +194,45 @@ img { display: block; max-width: 100%; }
   align-items: center;
   gap: 16px;
   padding: 44px 52px 40px;
+  margin-bottom: 52px; /* leave room for the enlarged background frame */
 }
 
+/* Bigger background-video area — extends well beyond the title block */
 .hero__bg {
   position: absolute;
-  inset: 0;
+  inset: -64px -150px;
   z-index: -1;
-  border-radius: 24px;
+  border-radius: 28px;
   overflow: hidden;
-  border: 1.5px dashed rgba(255, 255, 255, 0.18);
-  /* Dim aurora placeholder — swap for a real <video> later. The dark overlay
-     keeps it from overwhelming the title text. */
-  background:
-    linear-gradient(rgba(10, 10, 10, 0.64), rgba(10, 10, 10, 0.64)),
-    radial-gradient(130% 90% at 18% 115%, rgba(34, 197, 94, 0.55), transparent 60%),
-    radial-gradient(130% 90% at 50% 120%, rgba(45, 212, 191, 0.5), transparent 60%),
-    radial-gradient(130% 90% at 82% 115%, rgba(139, 92, 246, 0.5), transparent 60%),
-    #0d0d10;
+  border: 1.5px dashed rgba(255, 255, 255, 0.16);
 }
 
-.hero__bg-video {
+/* Placeholder image (swap for a <video> later). A dark veil keeps it dim
+   enough not to overwhelm the title text. */
+.hero__bg-media {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.5;
+}
+
+.hero__bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 8, 10, 0.55);
 }
 
 .hero__bg-label {
   position: absolute;
-  top: 10px;
-  left: 14px;
+  z-index: 1;
+  top: 12px;
+  left: 16px;
   font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.02em;
-  color: rgba(255, 255, 255, 0.38);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .badge-group {
@@ -545,9 +548,9 @@ img { display: block; max-width: 100%; }
 
 .create__scroller {
   display: flex;
-  gap: 28px;
+  gap: 24px;
   overflow-x: auto;
-  padding: 20px calc(50% - clamp(240px, 70vw, 350px) / 2);
+  padding: 40px calc(50% - clamp(190px, 52vw, 270px) / 2);
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
   cursor: grab;
@@ -558,12 +561,16 @@ img { display: block; max-width: 100%; }
 
 .video-card {
   flex: 0 0 auto;
-  width: clamp(240px, 70vw, 350px);
+  width: clamp(190px, 52vw, 270px);
   aspect-ratio: 9 / 16;
   border-radius: 24px;
   overflow: hidden;
   scroll-snap-align: center;
   background: var(--bg-card);
+  /* Wheel effect — the centered card scales up, neighbours recede (set by JS) */
+  transform: scale(0.84);
+  transition: transform 0.35s ease;
+  transform-origin: center center;
 }
 
 /* Shade the outer halves of the side cards */
@@ -943,6 +950,22 @@ img { display: block; max-width: 100%; }
 
   .hero__title { font-size: 38px; line-height: 1.18; }
   .hero__headline { padding: 32px 24px 28px; }
+  /* Full-bleed background on small screens — 100vw wide, edges faded out so
+     there is no visible frame and the subtitle below stays clear */
+  .hero__bg {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    width: 100vw;
+    top: -170px;
+    bottom: -20px;
+    border: none;
+    border-radius: 0;
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 16%, #000 82%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 16%, #000 82%, transparent);
+  }
+  .hero__headline { margin-bottom: 36px; }
+  .hero__bg-label { display: none; }
   /* Narrower subheadline so it reads as 3 full lines on small screens */
   .hero__subtitle { max-width: 300px; font-size: 16px; line-height: 24px; text-wrap: balance; }
   .hero-mockup { margin-top: 48px; }
