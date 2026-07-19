@@ -132,15 +132,34 @@ gsap.to(marqueeInner, {
   repeat: -1,
 });
 
-/* ---------- Track counter: occasional live movement (corrections #3) ----------
-   Nudges by a random 1–7 per event, trends upward, never above 5,000, and
-   fires only every ~30–70 s so the user sees just 1–2 events per session. */
+/* ---------- Track counter (corrections #2) ----------
+   The base value is derived from the real clock, so every visitor sees the
+   same number and it grows steadily over time — it never resets on reload.
+   A locally-stored high-water mark keeps it from ever ticking backwards, and
+   it is capped at 5,000. Occasional live nudges add a little movement. */
 const countEl = document.getElementById("trackCount");
-let trackCount = parseInt((countEl.textContent || "3436").replace(/\D/g, ""), 10) || 3436;
+const COUNT_BASE = 3436;
+const COUNT_EPOCH = Date.UTC(2026, 6, 1); // 1 Jul 2026
+const COUNT_GROWTH_MS = 22 * 60 * 1000; // +1 roughly every 22 minutes
+const COUNT_MAX = 5000;
+
+function deterministicCount() {
+  const grown = COUNT_BASE + Math.floor((Date.now() - COUNT_EPOCH) / COUNT_GROWTH_MS);
+  return Math.min(COUNT_MAX, Math.max(COUNT_BASE, grown));
+}
+
+const storedCount = parseInt(localStorage.getItem("musinTrackCount") || "0", 10) || 0;
+let trackCount = Math.min(COUNT_MAX, Math.max(deterministicCount(), storedCount));
 
 function renderCount(n) {
   countEl.textContent = Math.round(n).toLocaleString("en-US");
 }
+renderCount(trackCount);
+
+function persistCount() {
+  localStorage.setItem("musinTrackCount", String(Math.round(trackCount)));
+}
+persistCount();
 
 function tweenCount(to) {
   gsap.to({ v: trackCount }, {
@@ -152,14 +171,15 @@ function tweenCount(to) {
     },
   });
   trackCount = to;
+  persistCount();
 }
 
 function scheduleCountEvent() {
   gsap.delayedCall(gsap.utils.random(30, 70), () => {
-    const goesUp = Math.random() < 0.72; // generally up
+    const goesUp = Math.random() < 0.78; // generally up
     const delta = Math.ceil(Math.random() * 7); // 1..7, never more than 7
     let next = trackCount + (goesUp ? delta : -delta);
-    next = Math.min(5000, Math.max(0, next)); // cap at 5,000
+    next = Math.min(COUNT_MAX, Math.max(COUNT_BASE, next)); // never below base, cap 5,000
     tweenCount(next);
     scheduleCountEvent();
   });
@@ -201,95 +221,83 @@ document.querySelectorAll(".genre-line").forEach((line, rowIdx) => {
   }
 });
 
-/* ---------- Create content: center-focused carousel (arrows + drag) ---------- */
-const scroller = document.getElementById("createScroller");
+/* ---------- Create content: endless 3D coverflow wheel (corrections #4-7) ----
+   Cards are positioned by "slot" (signed distance from the current centre,
+   wrapping around the list) rather than by scroll. Only slots -1/0/+1 are
+   visible; the side cards face OUTWARD and the rest stay hidden in the shade.
+   Advancing the centre index (arrows, swipe, or the auto-timer) loops for
+   ever. */
+const stage = document.getElementById("createScroller");
+const wheelCards = [...stage.querySelectorAll(".video-card")];
+const N = wheelCards.length;
+let centreIndex = Math.floor(N / 2);
+const lastSlot = new Array(N).fill(null);
 
-/* Advance by exactly one card (card width + gap) so it snaps card-to-card. */
-function cardStep() {
-  const card = scroller.querySelector(".video-card");
-  if (!card) return 340;
-  const gap = parseFloat(getComputedStyle(scroller).columnGap) || 16;
-  return card.offsetWidth + gap;
-}
+function renderWheel() {
+  if (!N) return;
+  const cardW = wheelCards[0].offsetWidth || 280;
+  const spacing = cardW * 0.62;
+  wheelCards.forEach((card, i) => {
+    let s = (((i - centreIndex) % N) + N) % N; // 0..N-1
+    if (s > N / 2) s -= N; // wrap to a signed slot
+    const a = Math.abs(s);
+    const dir = Math.sign(s);
+    const near = Math.min(a, 2);
+    const rotateY = dir * Math.min(a, 1) * 42; // side cards face outward
+    const tx = s * spacing;
+    const tz = -near * 100;
+    const scale = 1 - near * 0.16;
+    const bright = 1 - near * 0.5;
+    const visible = a <= 1;
 
-document.getElementById("scrollPrev").addEventListener("click", () => {
-  scroller.scrollBy({ left: -cardStep(), behavior: "smooth" });
-});
-document.getElementById("scrollNext").addEventListener("click", () => {
-  scroller.scrollBy({ left: cardStep(), behavior: "smooth" });
-});
+    const prev = lastSlot[i];
+    const wrapped = prev !== null && Math.abs(s - prev) > N / 2;
+    if (wrapped) card.style.transition = "none"; // jump hidden cards silently
 
-let isDown = false;
-let startX = 0;
-let startScroll = 0;
-
-scroller.addEventListener("pointerdown", (e) => {
-  isDown = true;
-  startX = e.clientX;
-  startScroll = scroller.scrollLeft;
-  scroller.classList.add("is-dragging");
-});
-window.addEventListener("pointermove", (e) => {
-  if (!isDown) return;
-  scroller.scrollLeft = startScroll - (e.clientX - startX);
-});
-window.addEventListener("pointerup", () => {
-  isDown = false;
-  scroller.classList.remove("is-dragging");
-});
-
-/* 3D coverflow wheel: the card nearest the centre faces us; the others turn
-   away, scale down, darken and sink back — so they look like they sit on a
-   wheel and emerge from the shades on each side. */
-function updateWheel() {
-  const cards = scroller.querySelectorAll(".video-card");
-  if (!cards.length) return;
-  const gap = parseFloat(getComputedStyle(scroller).columnGap) || 16;
-  const step = cards[0].offsetWidth + gap;
-  const centre = scroller.scrollLeft + scroller.clientWidth / 2;
-  cards.forEach((card) => {
-    // Layout-based distance (unaffected by the transforms we apply)
-    const sd = (card.offsetLeft + card.offsetWidth / 2 - centre) / step;
-    const a = Math.min(Math.abs(sd), 1.2);
-    const dir = Math.sign(sd) || 0;
-    const rotateY = -dir * a * 34;      // side cards angle toward the centre
-    const scale = 1 - a * 0.14;
-    const bright = 1 - a * 0.5;         // darker away from centre
-    const tz = -a * 70;                 // sink back
-    const tx = -dir * a * 34;           // tuck toward the centre
     card.style.transform =
-      `perspective(1600px) translateX(${tx.toFixed(1)}px) translateZ(${tz.toFixed(1)}px) rotateY(${rotateY.toFixed(1)}deg) scale(${scale.toFixed(3)})`;
+      `translate(-50%, -50%) perspective(1400px) translateX(${tx.toFixed(1)}px) translateZ(${tz.toFixed(1)}px) rotateY(${rotateY.toFixed(1)}deg) scale(${scale.toFixed(3)})`;
     card.style.filter = `brightness(${bright.toFixed(3)})`;
-    card.style.zIndex = String(100 - Math.round(a * 100));
+    card.style.opacity = visible ? "1" : "0";
+    card.style.zIndex = String(100 - a * 10);
+
+    if (wrapped) {
+      void card.offsetWidth; // force reflow, then restore the transition
+      card.style.transition = "";
+    }
+    lastSlot[i] = s;
   });
 }
 
-/* Bring a card to the centre of the viewport. */
-function centreCard(card, smooth) {
-  if (!card) return;
-  const target = card.offsetLeft - (scroller.clientWidth - card.offsetWidth) / 2;
-  scroller.scrollTo({ left: target, behavior: smooth ? "smooth" : "auto" });
+function advance(step) {
+  centreIndex = (((centreIndex + step) % N) + N) % N;
+  renderWheel();
 }
 
-/* Start with a middle card centred so the user can scroll both ways. */
-function centreInitial() {
-  const cards = scroller.querySelectorAll(".video-card");
-  centreCard(cards[Math.floor(cards.length / 2)], false);
-  updateWheel();
-}
+document.getElementById("scrollPrev").addEventListener("click", () => { advance(-1); resetAuto(); });
+document.getElementById("scrollNext").addEventListener("click", () => { advance(1); resetAuto(); });
 
-let wheelTick = false;
-scroller.addEventListener("scroll", () => {
-  if (wheelTick) return;
-  wheelTick = true;
-  requestAnimationFrame(() => {
-    updateWheel();
-    wheelTick = false;
-  });
+/* Swipe / drag to move one card */
+let dragStartX = null;
+stage.addEventListener("pointerdown", (e) => { dragStartX = e.clientX; stage.classList.add("is-dragging"); });
+window.addEventListener("pointerup", (e) => {
+  if (dragStartX === null) return;
+  const dx = e.clientX - dragStartX;
+  if (Math.abs(dx) > 40) { advance(dx < 0 ? 1 : -1); resetAuto(); }
+  dragStartX = null;
+  stage.classList.remove("is-dragging");
 });
-window.addEventListener("resize", centreInitial);
-window.addEventListener("load", centreInitial);
-centreInitial();
+
+/* Endless auto-rotation */
+let autoTimer = null;
+function startAuto() { if (!prefersReducedMotion) autoTimer = window.setInterval(() => advance(1), 3500); }
+function resetAuto() { window.clearInterval(autoTimer); startAuto(); }
+
+window.addEventListener("resize", renderWheel);
+stage.classList.add("no-anim");
+renderWheel();
+void stage.offsetWidth;
+stage.classList.remove("no-anim");
+startAuto();
 
 /* ---------- Get paid for posting: cards stack on scroll ---------- */
 const payCards = gsap.utils.toArray(".pay-card");
