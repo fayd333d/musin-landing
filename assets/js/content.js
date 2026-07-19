@@ -236,7 +236,7 @@ const lastSlot = new Array(N).fill(null);
 function renderWheel() {
   if (!N) return;
   const cardW = wheelCards[0].offsetWidth || 280;
-  const spacing = cardW * 0.62;
+  const spacing = cardW * 0.9; // more space so side cards aren't hidden behind the centre (#5)
   wheelCards.forEach((card, i) => {
     let s = (((i - centreIndex) % N) + N) % N; // 0..N-1
     if (s > N / 2) s -= N; // wrap to a signed slot
@@ -273,8 +273,10 @@ function advance(step) {
   renderWheel();
 }
 
-document.getElementById("scrollPrev").addEventListener("click", () => { advance(-1); resetAuto(); });
-document.getElementById("scrollNext").addEventListener("click", () => { advance(1); resetAuto(); });
+const prevBtn = document.getElementById("scrollPrev");
+const nextBtn = document.getElementById("scrollNext");
+if (prevBtn) prevBtn.addEventListener("click", () => { advance(-1); resetAuto(); });
+if (nextBtn) nextBtn.addEventListener("click", () => { advance(1); resetAuto(); });
 
 /* Swipe / drag to move one card */
 let dragStartX = null;
