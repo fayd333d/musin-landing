@@ -133,12 +133,12 @@ gsap.to(marqueeInner, {
 });
 
 /* ---------- Genres: big colourful tags, lines drift slightly ---------- */
-/* Weighted toward pop, rap, electronic, rock & EDM plus their subgenres (corrections #9) */
+/* Mainstream genres first, then subgenres of rap / pop / electronic / rock (corrections #5) */
 const genreRows = [
-  ["Pop", "Synth-Pop", "Hyperpop", "Dance-Pop", "Indie Pop", "K-Pop", "Electropop", "Rap", "Trap", "Drill"],
-  ["Boom Bap", "Cloud Rap", "Grime", "Conscious Rap", "Electronic", "House", "Deep House", "Techno", "Trance", "Dubstep"],
-  ["Drum & Bass", "Garage", "Future Bass", "Rock", "Punk", "Metal", "Indie Rock", "Alt Rock", "Grunge", "Post-Rock"],
-  ["EDM", "Big Room", "Electro House", "Progressive House", "Melodic Techno", "R&B", "Lo-Fi", "Afrobeats", "Latin", "Jazz"],
+  ["Rap", "Pop", "Electronic", "Rock", "R&B", "Alternative", "Latin", "Afrobeats", "Jazz"],
+  ["Instrumental", "Country", "Reggae", "Dancehall", "Trap", "Drill", "Boom Bap", "Melodic Rap", "Conscious Rap"],
+  ["Rage", "Jersey", "Cloud Rap", "Dance Pop", "Indie Pop", "Electropop", "Pop Rock", "Hyperpop", "House"],
+  ["Techno", "EDM", "Drum & Bass", "Dubstep", "Ambient", "Hard Rock", "Punk", "Metal", "Pop Punk", "Alternative Metal"],
 ];
 
 const genreColors = [
@@ -166,14 +166,22 @@ document.querySelectorAll(".genre-line").forEach((line, rowIdx) => {
   }
 });
 
-/* ---------- Create content: horizontal scroll (arrows + drag) ---------- */
+/* ---------- Create content: center-focused carousel (arrows + drag) ---------- */
 const scroller = document.getElementById("createScroller");
 
+/* Advance by exactly one card (card width + gap) so it snaps card-to-card. */
+function cardStep() {
+  const card = scroller.querySelector(".video-card");
+  if (!card) return 360;
+  const gap = parseFloat(getComputedStyle(scroller).columnGap) || 28;
+  return card.getBoundingClientRect().width + gap;
+}
+
 document.getElementById("scrollPrev").addEventListener("click", () => {
-  scroller.scrollBy({ left: -360, behavior: "smooth" });
+  scroller.scrollBy({ left: -cardStep(), behavior: "smooth" });
 });
 document.getElementById("scrollNext").addEventListener("click", () => {
-  scroller.scrollBy({ left: 360, behavior: "smooth" });
+  scroller.scrollBy({ left: cardStep(), behavior: "smooth" });
 });
 
 let isDown = false;

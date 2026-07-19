@@ -21,27 +21,27 @@
         <span class="nav-logo__type">Musin</span>
       </a>
 
-      <nav class="nav-links" aria-label="Main navigation">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="content.html" class="nav-link is-active" aria-current="page">For bloggers</a>
-        <a href="music.html" class="nav-link">For artists</a>
-        <a href="#" class="nav-link">Account</a>
-      </nav>
-
-      <div class="nav-actions">
-        <a href="#" class="btn btn--light nav-cta">Log in / Sign up</a>
-        <button class="nav-burger" aria-label="Open menu" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
+      <!-- Nav links grouped on the right, next to the Log in button -->
+      <div class="nav-right">
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="index.html" class="nav-link is-active" aria-current="page">Content</a>
+          <a href="music.html" class="nav-link">Music</a>
+        </nav>
+        <div class="nav-actions">
+          <a href="#" class="btn btn--light nav-cta">Log in / Sign up</a>
+          <button class="nav-burger" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
       </div>
     </div>
 
     <div class="mobile-menu" hidden>
       <nav class="mobile-menu__links" aria-label="Mobile navigation">
         <a href="index.html" class="nav-link">Home</a>
-        <a href="content.html" class="nav-link is-active" aria-current="page">For bloggers</a>
-        <a href="music.html" class="nav-link">For artists</a>
-        <a href="#" class="nav-link">Account</a>
+        <a href="index.html" class="nav-link is-active" aria-current="page">Content</a>
+        <a href="music.html" class="nav-link">Music</a>
       </nav>
     </div>
   </header>
@@ -50,8 +50,17 @@
     <!-- ============ HERO ============ -->
     <section class="hero" id="hero">
       <div class="container hero__inner">
-        <div class="badge-group">TikTok&nbsp;&nbsp;·&nbsp;&nbsp;Instagram&nbsp;&nbsp;·&nbsp;&nbsp;YouTube</div>
-        <h1 class="hero__title">Discover music.<br>Use it in your content.<br>Get paid for posting.</h1>
+        <div class="hero__headline">
+          <!-- Background video placeholder — plays behind the title.
+               Replace the .hero__bg contents later with:
+               <video class="hero__bg-video" autoplay muted loop playsinline
+                 poster="assets/img/hero-bg.jpg"><source src="assets/video/hero-bg.mp4" type="video/mp4"></video> -->
+          <div class="hero__bg" aria-hidden="true">
+            <span class="hero__bg-label">Background video</span>
+          </div>
+          <div class="badge-group">TikTok&nbsp;&nbsp;·&nbsp;&nbsp;Instagram&nbsp;&nbsp;·&nbsp;&nbsp;YouTube</div>
+          <h1 class="hero__title">Discover music.<br>Use it in your content.<br>Get paid for posting.</h1>
+        </div>
         <p class="hero__subtitle">Discover and select tracks, use them in your social media content, and earn money for every confirmed post.</p>
         <div class="hero__actions">
           <a href="#" class="btn btn--primary btn--md">
@@ -110,7 +119,7 @@
 
     <!-- ============ DISCOVER NEW MUSIC / TRACK MARQUEE ============ -->
     <section class="discover" id="discover">
-      <h2 class="discover__heading">Discover New Music</h2>
+      <h2 class="discover__heading">Tracks for Your Posts</h2>
       <p class="discover__count" id="trackCount">3,436</p>
 
       <div class="track-marquee" aria-label="Tracks available on Musin">
@@ -136,13 +145,17 @@
       <div class="container create__head">
         <h2 class="section-title">Create content with music</h2>
       </div>
-      <div class="create__scroller" id="createScroller">
-        <div class="video-card"><img src="assets/img/hero-phone-content.png" alt="Singer performing with guitar" loading="lazy"></div>
-        <div class="video-card"><img src="assets/img/video-dj.png" alt="DJ mixing on turntables" loading="lazy"></div>
-        <div class="video-card"><img src="assets/img/video-ringlight.png" alt="Creator filming with a ring light" loading="lazy"></div>
-        <div class="video-card"><img src="assets/img/video-concert.png" alt="DJ performing for a crowd" loading="lazy"></div>
-        <div class="video-card"><img src="assets/img/hero-side-1.png" alt="Filming a concert on a phone" loading="lazy"></div>
-        <div class="video-card"><img src="assets/img/hero-side-2.png" alt="Creator recording content" loading="lazy"></div>
+      <div class="create__viewport">
+        <div class="create__scroller" id="createScroller">
+          <div class="video-card"><img src="assets/img/hero-phone-content.png" alt="Singer performing with guitar" loading="lazy"></div>
+          <div class="video-card"><img src="assets/img/video-dj.png" alt="DJ mixing on turntables" loading="lazy"></div>
+          <div class="video-card"><img src="assets/img/video-ringlight.png" alt="Creator filming with a ring light" loading="lazy"></div>
+          <div class="video-card"><img src="assets/img/video-concert.png" alt="DJ performing for a crowd" loading="lazy"></div>
+          <div class="video-card"><img src="assets/img/hero-side-1.png" alt="Filming a concert on a phone" loading="lazy"></div>
+          <div class="video-card"><img src="assets/img/hero-side-2.png" alt="Creator recording content" loading="lazy"></div>
+        </div>
+        <div class="create__shade create__shade--left" aria-hidden="true"></div>
+        <div class="create__shade create__shade--right" aria-hidden="true"></div>
       </div>
       <div class="container create__nav">
         <button class="scroll-arrow" id="scrollPrev" aria-label="Scroll back">

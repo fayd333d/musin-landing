@@ -102,11 +102,17 @@ img { display: block; max-width: 100%; }
   color: var(--text-primary);
 }
 
-/* Bigger page buttons; selected page shown in white (PDF mod #1) */
+/* Page buttons grouped on the right, next to the Log in button */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 48px;
+  gap: 40px;
 }
 
 .nav-link {
@@ -156,9 +162,12 @@ img { display: block; max-width: 100%; }
   background: rgba(10, 10, 10, 0.97);
 }
 
+/* Small screens: list sits on the right, under the Log in button */
 .mobile-menu__links {
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
   padding: 16px 32px 24px;
   gap: 4px;
 }
@@ -174,6 +183,53 @@ img { display: block; max-width: 100%; }
   align-items: center;
   text-align: center;
   gap: 24px;
+}
+
+/* Headline wrapper holds the background-video placeholder behind the title */
+.hero__headline {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 44px 52px 40px;
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1.5px dashed rgba(255, 255, 255, 0.18);
+  /* Dim aurora placeholder — swap for a real <video> later. The dark overlay
+     keeps it from overwhelming the title text. */
+  background:
+    linear-gradient(rgba(10, 10, 10, 0.64), rgba(10, 10, 10, 0.64)),
+    radial-gradient(130% 90% at 18% 115%, rgba(34, 197, 94, 0.55), transparent 60%),
+    radial-gradient(130% 90% at 50% 120%, rgba(45, 212, 191, 0.5), transparent 60%),
+    radial-gradient(130% 90% at 82% 115%, rgba(139, 92, 246, 0.5), transparent 60%),
+    #0d0d10;
+}
+
+.hero__bg-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.5;
+}
+
+.hero__bg-label {
+  position: absolute;
+  top: 10px;
+  left: 14px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.38);
 }
 
 .badge-group {
@@ -483,12 +539,15 @@ img { display: block; max-width: 100%; }
   margin-bottom: 40px;
 }
 
-/* Horizontally scrollable videos (PDF mod #5) */
+/* Center-focused peek carousel: one card centered, neighbours peek on each
+   side and fade into shade; scroll left/right (corrections #6) */
+.create__viewport { position: relative; }
+
 .create__scroller {
   display: flex;
-  gap: 24px;
+  gap: 28px;
   overflow-x: auto;
-  padding: 0 max(32px, calc((100vw - 1280px) / 2 + 32px));
+  padding: 20px calc(50% - clamp(240px, 70vw, 350px) / 2);
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
   cursor: grab;
@@ -499,13 +558,26 @@ img { display: block; max-width: 100%; }
 
 .video-card {
   flex: 0 0 auto;
-  width: 320px;
+  width: clamp(240px, 70vw, 350px);
   aspect-ratio: 9 / 16;
   border-radius: 24px;
   overflow: hidden;
-  scroll-snap-align: start;
+  scroll-snap-align: center;
   background: var(--bg-card);
 }
+
+/* Shade the outer halves of the side cards */
+.create__shade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(80px, 24%, 360px);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.create__shade--left { left: 0; background: linear-gradient(to right, var(--bg) 14%, transparent); }
+.create__shade--right { right: 0; background: linear-gradient(to left, var(--bg) 14%, transparent); }
 
 .video-card img,
 .video-card video {
@@ -870,6 +942,9 @@ img { display: block; max-width: 100%; }
   .container { padding: 0 16px; }
 
   .hero__title { font-size: 38px; line-height: 1.18; }
+  .hero__headline { padding: 32px 24px 28px; }
+  /* Narrower subheadline so it reads as 3 full lines on small screens */
+  .hero__subtitle { max-width: 300px; font-size: 16px; line-height: 24px; text-wrap: balance; }
   .hero-mockup { margin-top: 48px; }
   .main-phone { width: 300px; height: 592px; }
   .main-phone__screen { top: 22px; left: 23px; width: 254px; height: 548px; border-radius: 30px; }
