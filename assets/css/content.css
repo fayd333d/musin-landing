@@ -175,14 +175,14 @@ img { display: block; max-width: 100%; }
 .mobile-menu .nav-link { font-size: 20px; padding: 12px 0; }
 
 /* ============ Hero ============ */
-.hero { padding-top: 96px; overflow: hidden; }
+.hero { padding-top: 52px; overflow: hidden; }
 
 .hero__inner {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 24px;
+  gap: 20px;
 }
 
 /* Headline wrapper holds the background-video placeholder behind the title */
@@ -193,16 +193,17 @@ img { display: block; max-width: 100%; }
   flex-direction: column;
   align-items: center;
   gap: 16px;
-  padding: 44px 52px 40px;
-  margin-bottom: 52px; /* leave room for the enlarged background frame */
+  padding: 26px 52px 22px;
+  margin-bottom: 20px; /* small gap under the background frame (#2) */
 }
 
-/* Bigger background-video area — extends well beyond the title block */
+/* Background-video placeholder area behind the title — kept compact so the
+   hero CTA stays visible on load (#1) */
 .hero__bg {
   position: absolute;
-  inset: -64px -150px;
+  inset: -26px -140px;
   z-index: -1;
-  border-radius: 28px;
+  border-radius: 26px;
   overflow: hidden;
   border: 1.5px dashed rgba(255, 255, 255, 0.16);
 }
@@ -542,15 +543,15 @@ img { display: block; max-width: 100%; }
   margin-bottom: 40px;
 }
 
-/* Center-focused peek carousel: one card centered, neighbours peek on each
-   side and fade into shade; scroll left/right (corrections #6) */
+/* 3D coverflow wheel: the centred card faces us; side cards are angled and
+   darkened, emerging from the shades on each side; scroll left/right (#3) */
 .create__viewport { position: relative; }
 
 .create__scroller {
   display: flex;
-  gap: 24px;
+  gap: 16px;
   overflow-x: auto;
-  padding: 40px calc(50% - clamp(190px, 52vw, 270px) / 2);
+  padding: 56px calc(50% - clamp(260px, 76vw, 330px) / 2);
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
   cursor: grab;
@@ -561,30 +562,31 @@ img { display: block; max-width: 100%; }
 
 .video-card {
   flex: 0 0 auto;
-  width: clamp(190px, 52vw, 270px);
+  width: clamp(260px, 76vw, 330px);
   aspect-ratio: 9 / 16;
-  border-radius: 24px;
+  border-radius: 26px;
   overflow: hidden;
   scroll-snap-align: center;
   background: var(--bg-card);
-  /* Wheel effect — the centered card scales up, neighbours recede (set by JS) */
-  transform: scale(0.84);
-  transition: transform 0.35s ease;
+  /* Wheel transform + brightness set per-card by JS (updateWheel) */
+  transition: transform 0.4s ease, filter 0.4s ease;
   transform-origin: center center;
+  backface-visibility: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
 }
 
-/* Shade the outer halves of the side cards */
+/* Shades on both edges — side videos come in from the dark */
 .create__shade {
   position: absolute;
   top: 0;
   bottom: 0;
-  width: clamp(80px, 24%, 360px);
+  width: clamp(90px, 22%, 340px);
   pointer-events: none;
-  z-index: 2;
+  z-index: 5;
 }
 
-.create__shade--left { left: 0; background: linear-gradient(to right, var(--bg) 14%, transparent); }
-.create__shade--right { right: 0; background: linear-gradient(to left, var(--bg) 14%, transparent); }
+.create__shade--left { left: 0; background: linear-gradient(to right, var(--bg), var(--bg) 8%, transparent); }
+.create__shade--right { right: 0; background: linear-gradient(to left, var(--bg), var(--bg) 8%, transparent); }
 
 .video-card img,
 .video-card video {
@@ -949,7 +951,7 @@ img { display: block; max-width: 100%; }
   .container { padding: 0 16px; }
 
   .hero__title { font-size: 38px; line-height: 1.18; }
-  .hero__headline { padding: 32px 24px 28px; }
+  .hero__headline { padding: 20px 24px 16px; }
   /* Full-bleed background on small screens — 100vw wide, edges faded out so
      there is no visible frame and the subtitle below stays clear */
   .hero__bg {
@@ -964,7 +966,7 @@ img { display: block; max-width: 100%; }
     -webkit-mask-image: linear-gradient(to bottom, transparent, #000 16%, #000 82%, transparent);
     mask-image: linear-gradient(to bottom, transparent, #000 16%, #000 82%, transparent);
   }
-  .hero__headline { margin-bottom: 36px; }
+  .hero__headline { margin-bottom: 12px; }
   .hero__bg-label { display: none; }
   /* Narrower subheadline so it reads as 3 full lines on small screens */
   .hero__subtitle { max-width: 300px; font-size: 16px; line-height: 24px; text-wrap: balance; }

@@ -207,9 +207,9 @@ const scroller = document.getElementById("createScroller");
 /* Advance by exactly one card (card width + gap) so it snaps card-to-card. */
 function cardStep() {
   const card = scroller.querySelector(".video-card");
-  if (!card) return 360;
-  const gap = parseFloat(getComputedStyle(scroller).columnGap) || 28;
-  return card.getBoundingClientRect().width + gap;
+  if (!card) return 340;
+  const gap = parseFloat(getComputedStyle(scroller).columnGap) || 16;
+  return card.offsetWidth + gap;
 }
 
 document.getElementById("scrollPrev").addEventListener("click", () => {
@@ -238,17 +238,44 @@ window.addEventListener("pointerup", () => {
   scroller.classList.remove("is-dragging");
 });
 
-/* Wheel effect: the card nearest the centre scales up, neighbours recede,
-   so you see one focused card with two shaded ones on either side. */
+/* 3D coverflow wheel: the card nearest the centre faces us; the others turn
+   away, scale down, darken and sink back — so they look like they sit on a
+   wheel and emerge from the shades on each side. */
 function updateWheel() {
-  const sr = scroller.getBoundingClientRect();
-  const centre = sr.left + sr.width / 2;
-  scroller.querySelectorAll(".video-card").forEach((card) => {
-    const cr = card.getBoundingClientRect();
-    const dist = Math.abs(centre - (cr.left + cr.width / 2)) / sr.width;
-    const scale = Math.max(0.84, 1 - dist * 0.9);
-    card.style.transform = `scale(${scale.toFixed(3)})`;
+  const cards = scroller.querySelectorAll(".video-card");
+  if (!cards.length) return;
+  const gap = parseFloat(getComputedStyle(scroller).columnGap) || 16;
+  const step = cards[0].offsetWidth + gap;
+  const centre = scroller.scrollLeft + scroller.clientWidth / 2;
+  cards.forEach((card) => {
+    // Layout-based distance (unaffected by the transforms we apply)
+    const sd = (card.offsetLeft + card.offsetWidth / 2 - centre) / step;
+    const a = Math.min(Math.abs(sd), 1.2);
+    const dir = Math.sign(sd) || 0;
+    const rotateY = -dir * a * 34;      // side cards angle toward the centre
+    const scale = 1 - a * 0.14;
+    const bright = 1 - a * 0.5;         // darker away from centre
+    const tz = -a * 70;                 // sink back
+    const tx = -dir * a * 34;           // tuck toward the centre
+    card.style.transform =
+      `perspective(1600px) translateX(${tx.toFixed(1)}px) translateZ(${tz.toFixed(1)}px) rotateY(${rotateY.toFixed(1)}deg) scale(${scale.toFixed(3)})`;
+    card.style.filter = `brightness(${bright.toFixed(3)})`;
+    card.style.zIndex = String(100 - Math.round(a * 100));
   });
+}
+
+/* Bring a card to the centre of the viewport. */
+function centreCard(card, smooth) {
+  if (!card) return;
+  const target = card.offsetLeft - (scroller.clientWidth - card.offsetWidth) / 2;
+  scroller.scrollTo({ left: target, behavior: smooth ? "smooth" : "auto" });
+}
+
+/* Start with a middle card centred so the user can scroll both ways. */
+function centreInitial() {
+  const cards = scroller.querySelectorAll(".video-card");
+  centreCard(cards[Math.floor(cards.length / 2)], false);
+  updateWheel();
 }
 
 let wheelTick = false;
@@ -260,9 +287,9 @@ scroller.addEventListener("scroll", () => {
     wheelTick = false;
   });
 });
-window.addEventListener("resize", updateWheel);
-window.addEventListener("load", updateWheel);
-updateWheel();
+window.addEventListener("resize", centreInitial);
+window.addEventListener("load", centreInitial);
+centreInitial();
 
 /* ---------- Get paid for posting: cards stack on scroll ---------- */
 const payCards = gsap.utils.toArray(".pay-card");
