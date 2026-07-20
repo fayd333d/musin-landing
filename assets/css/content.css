@@ -175,48 +175,17 @@ img { display: block; max-width: 100%; }
 .mobile-menu .nav-link { font-size: 20px; padding: 12px 0; }
 
 /* ============ Hero ============ */
-.hero { position: relative; padding-top: 60px; padding-bottom: 48px; overflow: hidden; }
+.hero { padding-top: 48px; padding-bottom: 48px; overflow: hidden; }
 
-/* Full-bleed neon render behind the title — reaches the screen edges (#1) */
-.hero__bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 540px;
-  z-index: 0;
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent);
-  mask-image: linear-gradient(to bottom, #000 60%, transparent);
-}
+.hero__inner { display: flex; justify-content: center; }
 
-.hero__bg-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.hero__bg::after { content: ""; position: absolute; inset: 0; background: rgba(8, 8, 10, 0.42); }
-
-.hero__inner {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.hero__title {
-  font-size: 72px;
-  line-height: 1.22;
-  font-weight: 600;
-  letter-spacing: -1.44px;
-  text-align: center;
-}
-
-/* Two-column row under the title: example screen (left) + pitch (right) */
+/* Two-column row: example screen (left) + badge/title/text/CTA (right) */
 .hero__row {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 120px;
+  gap: 104px;
   width: 100%;
-  margin-top: 44px;
 }
 
 .hero__pitch {
@@ -224,10 +193,11 @@ img { display: block; max-width: 100%; }
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
-  gap: 24px;
-  max-width: 440px;
+  gap: 22px;
+  max-width: 640px;
 }
 
+/* Badge sits above the title now (#1) */
 .badge-group {
   display: inline-flex;
   align-items: center;
@@ -241,13 +211,22 @@ img { display: block; max-width: 100%; }
   color: var(--text-secondary);
 }
 
-/* Bigger, white supporting text (#1) */
+/* Title on the right of the example screen (#1) */
+.hero__title {
+  font-size: 52px;
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -1px;
+  text-align: left;
+}
+
+/* Grey supporting text, like before (#1) */
 .hero__subtitle {
-  font-size: 22px;
-  line-height: 32px;
+  font-size: 20px;
+  line-height: 30px;
   font-weight: 400;
-  color: #ffffff;
-  max-width: 440px;
+  color: var(--text-tertiary);
+  max-width: 480px;
 }
 
 .hero__actions {
@@ -362,7 +341,7 @@ img { display: block; max-width: 100%; }
 
 .notif--money { top: -32px; left: 50%; transform: translateX(-50%); }
 .notif--views { top: 160px; left: -75px; }
-.notif--track { top: 340px; right: -105px; }
+.notif--track { top: 340px; right: -66px; }
 
 .notif__icon {
   display: flex;
@@ -422,15 +401,12 @@ img { display: block; max-width: 100%; }
   text-align: center;
 }
 
+/* Same size/colour as the 'Set your price' card title (#2) */
 .genres__count {
-  font-size: 20px;
-  line-height: 28px;
-  color: var(--text-tertiary);
-}
-
-.genres__count span {
-  color: var(--text-primary);
+  font-size: 24px;
+  line-height: 32px;
   font-weight: 600;
+  color: var(--text-primary);
 }
 
 /* Auto-running line of random tracks (below the genre tags) */
@@ -491,7 +467,7 @@ img { display: block; max-width: 100%; }
 }
 
 /* ============ Genres (PDF mod #4) ============ */
-.genres { padding: 96px 0 128px; overflow: hidden; }
+.genres { padding: 96px 0 72px; overflow: hidden; }
 
 .genre-lines {
   margin-top: 8px;
@@ -526,7 +502,7 @@ img { display: block; max-width: 100%; }
 .genre-tag .hash { opacity: 0.45; margin-right: 1px; }
 
 /* ============ Create content with music ============ */
-.create { padding: 88px 0 128px; } /* extra top gap under the genre tags (#1) */
+.create { padding: 48px 0 128px; }
 
 .create__head {
   display: flex;
@@ -823,13 +799,13 @@ img { display: block; max-width: 100%; }
   .nav-burger { display: flex; }
 
   .hero { padding-top: 40px; }
-  .hero__title { font-size: 48px; letter-spacing: -0.96px; }
+  .hero__title { font-size: 44px; line-height: 1.16; letter-spacing: -0.88px; }
 
-  /* Stack the example screen above the pitch */
-  .hero__row { flex-direction: column; gap: 40px; margin-top: 36px; }
-  .hero__pitch { align-items: center; text-align: center; }
+  /* Stack the pitch (badge, title, text, CTA) above the example screen */
+  .hero__row { flex-direction: column-reverse; gap: 40px; }
+  .hero__pitch { align-items: center; text-align: center; max-width: 520px; }
   .hero__actions { align-items: center; }
-  .hero__subtitle { font-size: 20px; line-height: 30px; }
+  .hero__subtitle { font-size: 18px; line-height: 28px; }
 
   .section-title,
   .cta__title { font-size: 36px; line-height: 44px; letter-spacing: -0.72px; }
@@ -850,7 +826,6 @@ img { display: block; max-width: 100%; }
   .container { padding: 0 16px; }
 
   .hero__title { font-size: 38px; line-height: 1.18; }
-  .hero__bg { height: 360px; }
   .hero__subtitle { font-size: 18px; line-height: 28px; max-width: 340px; }
   .hero-mockup { width: 288px; height: 568px; }
   .main-phone { transform: translateX(-50%) scale(0.72); }
