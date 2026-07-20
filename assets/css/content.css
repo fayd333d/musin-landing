@@ -236,25 +236,37 @@ img { display: block; max-width: 100%; }
   gap: 12px;
 }
 
-.hero__note {
-  font-size: 12px;
-  line-height: 18px;
-  color: var(--text-dim);
+/* The CTA and its note are wrapped so the note can never grow wider than the
+   button — it wraps within the CTA's width instead of spilling past it (#3) */
+.hero__cta-wrap {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
 }
 
-/* Example screen — a bit smaller, on the left */
+.hero__note {
+  width: 100%;
+  font-size: 11px;
+  line-height: 16px;
+  letter-spacing: -0.1px;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+/* Example screen — smaller so it sits nicely in the frame (#4) */
 .hero-mockup {
   position: relative;
   flex: 0 0 auto;
-  width: 340px;
-  height: 671px;
+  width: 296px;
+  height: 584px;
 }
 
 .main-phone {
   position: absolute;
   top: 0;
   left: 50%;
-  transform: translateX(-50%) scale(0.85);
+  transform: translateX(-50%) scale(0.74);
   transform-origin: top center;
   width: 400px;
   height: 789px;
@@ -401,12 +413,12 @@ img { display: block; max-width: 100%; }
   text-align: center;
 }
 
-/* Same size/colour as the 'Set your price' card title (#2) */
+/* Now the grey subtitle under the track count (#7) */
 .genres__count {
-  font-size: 24px;
-  line-height: 32px;
-  font-weight: 600;
-  color: var(--text-primary);
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 400;
+  color: var(--text-tertiary);
 }
 
 /* Auto-running line of random tracks (below the genre tags) */
@@ -520,7 +532,7 @@ img { display: block; max-width: 100%; }
 
 .create__scroller {
   position: relative;
-  height: calc(clamp(220px, 64vw, 300px) * 16 / 9 + 52px);
+  height: calc(clamp(190px, 56vw, 260px) * 16 / 9 + 52px);
   overflow: hidden;
   touch-action: pan-y;
   cursor: grab;
@@ -533,7 +545,7 @@ img { display: block; max-width: 100%; }
   position: absolute;
   left: 50%;
   top: 50%;
-  width: clamp(220px, 64vw, 300px);
+  width: clamp(190px, 56vw, 260px);
   aspect-ratio: 9 / 16;
   border-radius: 26px;
   overflow: hidden;
@@ -559,6 +571,32 @@ img { display: block; max-width: 100%; }
 
 .create__shade--left { left: 0; background: linear-gradient(to right, var(--bg), var(--bg) 30%, transparent); }
 .create__shade--right { right: 0; background: linear-gradient(to left, var(--bg), var(--bg) 30%, transparent); }
+
+/* Arrows on each side switch the video (#8) */
+.create__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: rgba(26, 26, 28, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.create__arrow:hover { background: rgba(40, 40, 44, 0.85); }
+.create__arrow:active { transform: translateY(-50%) scale(0.94); }
+.create__arrow img { width: 22px; height: 22px; opacity: 0.9; }
+.create__arrow--left { left: clamp(12px, 5vw, 72px); }
+.create__arrow--right { right: clamp(12px, 5vw, 72px); }
 
 .video-card img,
 .video-card video {
@@ -600,23 +638,19 @@ img { display: block; max-width: 100%; }
 .pay-card:nth-child(3) { top: 188px; }
 .pay-card:nth-child(4) { top: 212px; }
 
-.pay-card__icon-wrap {
-  padding: 19px;
-  border-radius: 18px;
-  background: var(--bg-elevated);
-  margin-bottom: 16px;
-}
-
+/* Card icon is now a single coloured square (its background is the icon
+   colour, set inline) with a large glyph filling it (#11, #12) */
 .pay-card__icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 14px;
+  width: 76px;
+  height: 76px;
+  border-radius: 20px;
+  margin-bottom: 20px;
 }
 
-.pay-card__icon img { width: 24px; height: 24px; }
+.pay-card__icon img { width: 44px; height: 44px; }
 
 .pay-card__title {
   font-size: 24px;
@@ -624,10 +658,11 @@ img { display: block; max-width: 100%; }
   font-weight: 600;
 }
 
+/* Bigger subtitle, like the hero supporting text; kept grey (#10) */
 .pay-card__text {
-  max-width: 320px;
-  font-size: 16px;
-  line-height: 24px;
+  max-width: 360px;
+  font-size: 20px;
+  line-height: 30px;
   color: var(--text-tertiary);
 }
 
@@ -787,10 +822,9 @@ img { display: block; max-width: 100%; }
 
 /* ============ Responsive — 960 ============ */
 @media (max-width: 1100px) {
-  .hero__title { font-size: 60px; letter-spacing: -1.2px; }
+  .hero__title { font-size: 46px; letter-spacing: -0.9px; }
+  .hero__row { gap: 64px; }
   .nav-links { gap: 32px; }
-  .notif--views { left: -40px; }
-  .notif--track { right: -60px; }
 }
 
 /* ============ Responsive — 720 ============ */
@@ -799,7 +833,8 @@ img { display: block; max-width: 100%; }
   .nav-burger { display: flex; }
 
   .hero { padding-top: 40px; }
-  .hero__title { font-size: 44px; line-height: 1.16; letter-spacing: -0.88px; }
+  /* Centre the title on small screens (#1) */
+  .hero__title { font-size: 44px; line-height: 1.16; letter-spacing: -0.88px; text-align: center; }
 
   /* Stack the pitch (badge, title, text, CTA) above the example screen */
   .hero__row { flex-direction: column-reverse; gap: 40px; }

@@ -54,25 +54,27 @@ function nextHeroSlide() {
   const next = slides[heroIndex % slides.length];
   const data = heroData[heroIndex % heroData.length];
 
-  gsap.set(next, { visibility: "visible", yPercent: 100, zIndex: 2 });
+  gsap.set(next, { visibility: "visible", yPercent: 100, scale: 1, zIndex: 2 });
   gsap.set(prev, { zIndex: 1 });
 
-  /* Self-scheduling (instead of setInterval) so rotations never overlap,
-     even when the tab is backgrounded and rAF is throttled. */
+  /* TikTok / Instagram-style vertical swipe: the current clip flicks up and
+     out while the next one rises from below in sync (#5). Self-scheduling so
+     rotations never overlap even when rAF is throttled. */
   const tl = gsap.timeline({
-    onComplete: () => gsap.delayedCall(2.2, nextHeroSlide),
+    onComplete: () => gsap.delayedCall(2.4, nextHeroSlide),
   });
-  tl.to(next, {
-    yPercent: 0,
-    duration: 0.8,
-    ease: "power3.inOut",
-    onComplete: () => {
-      slides.forEach((s) => s !== next && gsap.set(s, { visibility: "hidden", yPercent: 0 }));
-    },
-  });
-  tl.to(notifs, { opacity: 0, y: -6, duration: 0.22, stagger: 0.05, ease: "power1.in" }, 0.15)
+  tl.to(prev, { yPercent: -100, scale: 0.96, duration: 0.6, ease: "power3.in" }, 0)
+    .to(next, {
+      yPercent: 0,
+      duration: 0.6,
+      ease: "power3.out",
+      onComplete: () => {
+        slides.forEach((s) => s !== next && gsap.set(s, { visibility: "hidden", yPercent: 0, scale: 1 }));
+      },
+    }, 0);
+  tl.to(notifs, { opacity: 0, y: -6, duration: 0.2, stagger: 0.04, ease: "power1.in" }, 0.08)
     .add(() => applyHeroData(data))
-    .to(notifs, { opacity: 1, y: 0, duration: 0.3, stagger: 0.06, ease: "power2.out" });
+    .to(notifs, { opacity: 1, y: 0, duration: 0.28, stagger: 0.05, ease: "power2.out" });
 }
 
 if (!prefersReducedMotion) {
@@ -272,33 +274,28 @@ function advance(step) {
   renderWheel();
 }
 
+/* Manual only — side arrows on desktop, swipe on touch (#8). No auto-play. */
 const prevBtn = document.getElementById("scrollPrev");
 const nextBtn = document.getElementById("scrollNext");
-if (prevBtn) prevBtn.addEventListener("click", () => { advance(-1); resetAuto(); });
-if (nextBtn) nextBtn.addEventListener("click", () => { advance(1); resetAuto(); });
+if (prevBtn) prevBtn.addEventListener("click", () => advance(-1));
+if (nextBtn) nextBtn.addEventListener("click", () => advance(1));
 
-/* Swipe / drag to move one card */
+/* Swipe / drag to move one card (both directions, phone + pointer) */
 let dragStartX = null;
 stage.addEventListener("pointerdown", (e) => { dragStartX = e.clientX; stage.classList.add("is-dragging"); });
 window.addEventListener("pointerup", (e) => {
   if (dragStartX === null) return;
   const dx = e.clientX - dragStartX;
-  if (Math.abs(dx) > 40) { advance(dx < 0 ? 1 : -1); resetAuto(); }
+  if (Math.abs(dx) > 40) advance(dx < 0 ? 1 : -1);
   dragStartX = null;
   stage.classList.remove("is-dragging");
 });
-
-/* Endless auto-rotation */
-let autoTimer = null;
-function startAuto() { if (!prefersReducedMotion) autoTimer = window.setInterval(() => advance(1), 3500); }
-function resetAuto() { window.clearInterval(autoTimer); startAuto(); }
 
 window.addEventListener("resize", renderWheel);
 stage.classList.add("no-anim");
 renderWheel();
 void stage.offsetWidth;
 stage.classList.remove("no-anim");
-startAuto();
 
 /* ---------- Get paid for posting: cards stack on scroll ---------- */
 const payCards = gsap.utils.toArray(".pay-card");

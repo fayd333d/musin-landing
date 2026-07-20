@@ -98,13 +98,15 @@
           <div class="hero__pitch">
             <div class="badge-group">TikTok&nbsp;&nbsp;·&nbsp;&nbsp;Instagram&nbsp;&nbsp;·&nbsp;&nbsp;YouTube</div>
             <h1 class="hero__title">Discover music.<br>Use it in your content.<br>Get paid for posting.</h1>
-            <p class="hero__subtitle">Explore and receive tracks, choose which ones to use in your social media content, and earn money for every confirmed post.</p>
+            <p class="hero__subtitle">Explore and receive tracks.<br>Choose which ones to post with.<br>Earn money for every confirmed post.</p>
             <div class="hero__actions">
-              <a href="#" class="btn btn--primary btn--md">
-                Join as a content creator
-                <img src="assets/img/icon-arrow-right.svg" alt="" class="btn__icon">
-              </a>
-              <p class="hero__note">Join free&nbsp;&nbsp;·&nbsp;&nbsp;Create content&nbsp;&nbsp;·&nbsp;&nbsp;Earn money</p>
+              <div class="hero__cta-wrap">
+                <a href="#" class="btn btn--primary btn--md">
+                  Join as a content creator
+                  <img src="assets/img/icon-arrow-right.svg" alt="" class="btn__icon">
+                </a>
+                <p class="hero__note">Join free&nbsp;&nbsp;·&nbsp;&nbsp;Create content&nbsp;&nbsp;·&nbsp;&nbsp;Earn money</p>
+              </div>
             </div>
           </div>
         </div>
@@ -114,8 +116,8 @@
     <!-- ============ CHOOSE MUSIC YOU LIKE (merged with track list) ============ -->
     <section class="genres" id="genres">
       <div class="container genres__head">
-        <h2 class="section-title">Choose music you like</h2>
-        <p class="genres__count"><span id="trackCount">3,436</span> tracks available</p>
+        <h2 class="section-title"><span id="trackCount">3,436</span> tracks available now</h2>
+        <p class="genres__count">Choose music you like</p>
       </div>
       <div class="genre-lines" id="genreLines">
         <div class="genre-line" data-drift="1"></div>
@@ -143,6 +145,12 @@
         </div>
         <div class="create__shade create__shade--left" aria-hidden="true"></div>
         <div class="create__shade create__shade--right" aria-hidden="true"></div>
+        <button class="create__arrow create__arrow--left" id="scrollPrev" aria-label="Previous video">
+          <img src="assets/img/icon-arrow-right.svg" alt="" style="transform:rotate(180deg)">
+        </button>
+        <button class="create__arrow create__arrow--right" id="scrollNext" aria-label="Next video">
+          <img src="assets/img/icon-arrow-right.svg" alt="">
+        </button>
       </div>
     </section>
 
@@ -152,22 +160,22 @@
         <h2 class="section-title">Get paid for posting</h2>
         <div class="pay-stack" id="payStack">
           <div class="pay-card">
-            <div class="pay-card__icon-wrap"><div class="pay-card__icon" style="background:#EAB308"><img src="assets/img/icons/pay-dollar.svg" alt=""></div></div>
+            <div class="pay-card__icon" style="background:#EAB308"><img src="assets/img/icons/pay-dollar.svg" alt=""></div>
             <h3 class="pay-card__title">Set your price</h3>
             <p class="pay-card__text">Choose your price within the limit based on your follower count.</p>
           </div>
           <div class="pay-card">
-            <div class="pay-card__icon-wrap"><div class="pay-card__icon" style="background:#E54552"><img src="assets/img/icons/pay-share.svg" alt=""></div></div>
+            <div class="pay-card__icon" style="background:#E54552"><img src="assets/img/icons/pay-share.svg" alt=""></div>
             <h3 class="pay-card__title">Create and post</h3>
             <p class="pay-card__text">Create content with your selected track and publish it.</p>
           </div>
           <div class="pay-card">
-            <div class="pay-card__icon-wrap"><div class="pay-card__icon" style="background:#3D5DDC"><img src="assets/img/icons/pay-check.svg" alt=""></div></div>
+            <div class="pay-card__icon" style="background:#3D5DDC"><img src="assets/img/icons/pay-check.svg" alt=""></div>
             <h3 class="pay-card__title">Submit publication link</h3>
             <p class="pay-card__text">Add your publication link so the artist can confirm it.</p>
           </div>
           <div class="pay-card">
-            <div class="pay-card__icon-wrap"><div class="pay-card__icon" style="background:#22C55E"><img src="assets/img/icons/pay-wallet.svg" alt=""></div></div>
+            <div class="pay-card__icon" style="background:#22C55E"><img src="assets/img/icons/pay-wallet.svg" alt=""></div>
             <h3 class="pay-card__title">Get paid</h3>
             <p class="pay-card__text">Payment is released after confirmation or when the music campaign ends.</p>
           </div>
