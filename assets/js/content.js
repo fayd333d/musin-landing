@@ -188,12 +188,11 @@ function scheduleCountEvent() {
 if (!prefersReducedMotion) scheduleCountEvent();
 
 /* ---------- Genres: big colourful tags, lines drift slightly ---------- */
-/* Mainstream genres first, then subgenres of rap / pop / electronic / rock (corrections #5) */
+/* Three lines: mainstream genres first, then subgenres of rap, pop and EDM */
 const genreRows = [
-  ["Rap", "Pop", "Electronic", "Rock", "R&B", "Alternative", "Latin", "Afrobeats", "Jazz"],
-  ["Instrumental", "Country", "Reggae", "Dancehall", "Trap", "Drill", "Boom Bap", "Melodic Rap", "Conscious Rap"],
-  ["Rage", "Jersey", "Cloud Rap", "Dance Pop", "Indie Pop", "Electropop", "Pop Rock", "Hyperpop", "House"],
-  ["Techno", "EDM", "Drum & Bass", "Dubstep", "Ambient", "Hard Rock", "Punk", "Metal", "Pop Punk", "Alternative Metal"],
+  ["Rap", "Pop", "Electronic", "Rock", "R&B", "Alternative", "Latin", "Afrobeats", "Jazz", "Instrumental"],
+  ["Country", "Reggae", "Dancehall", "Trap", "Drill", "Boom Bap", "Melodic Rap", "Conscious Rap", "Cloud Rap"],
+  ["Dance Pop", "Indie Pop", "Electropop", "Hyperpop", "House", "Techno", "EDM", "Drum & Bass", "Dubstep"],
 ];
 
 const genreColors = [
@@ -363,12 +362,4 @@ faqItems.forEach((item) => {
   item.addEventListener("toggle", () => {
     if (item.open) faqItems.forEach((o) => o !== item && (o.open = false));
   });
-});
-
-/* ---------- Newsletter (no backend yet) ---------- */
-document.getElementById("newsletterForm").addEventListener("submit", (e) => {
-  e.preventDefault();
-  const btn = e.target.querySelector("button");
-  btn.textContent = "Subscribed ✓";
-  setTimeout(() => (btn.textContent = "Subscribe"), 2500);
 });

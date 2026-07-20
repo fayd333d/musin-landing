@@ -49,95 +49,89 @@
   <main>
     <!-- ============ HERO ============ -->
     <section class="hero" id="hero">
+      <!-- Full-bleed neon render behind the title. Swap for a real video later:
+           <video class="hero__bg-media" autoplay muted loop playsinline
+             poster="assets/img/hero-render.png"><source src="assets/video/hero-bg.mp4" type="video/mp4"></video> -->
+      <div class="hero__bg" aria-hidden="true">
+        <img class="hero__bg-media" src="assets/img/hero-render.png" alt="">
+      </div>
+
       <div class="container hero__inner">
-        <div class="hero__headline">
-          <!-- Background video placeholder — plays behind the title.
-               Placeholder image shown for now; replace the <img> below with:
-               <video class="hero__bg-media" autoplay muted loop playsinline
-                 poster="assets/img/hero-bg.jpg"><source src="assets/video/hero-bg.mp4" type="video/mp4"></video> -->
-          <div class="hero__bg" aria-hidden="true">
-            <img class="hero__bg-media" src="assets/img/hero-bg.jpg" alt="">
-            <span class="hero__bg-label">Background video</span>
-          </div>
-          <div class="badge-group">TikTok&nbsp;&nbsp;·&nbsp;&nbsp;Instagram&nbsp;&nbsp;·&nbsp;&nbsp;YouTube</div>
-          <h1 class="hero__title">Discover music.<br>Use it in your content.<br>Get paid for posting.</h1>
-        </div>
-        <p class="hero__subtitle">Discover and select tracks, use them in your social media content, and earn money for every confirmed post.</p>
-        <div class="hero__actions">
-          <a href="#" class="btn btn--primary btn--md">
-            Join as a content creator
-            <img src="assets/img/icon-arrow-right.svg" alt="" class="btn__icon">
-          </a>
-          <p class="hero__note">Join free&nbsp;&nbsp;·&nbsp;&nbsp;Create content&nbsp;&nbsp;·&nbsp;&nbsp;Earn money</p>
-        </div>
-      </div>
+        <h1 class="hero__title">Discover music.<br>Use it in your content.<br>Get paid for posting.</h1>
 
-      <!-- Phone mockup / "example screen" — single phone, TikTok-style vertical feed -->
-      <div class="hero-mockup">
-        <div class="main-phone">
-          <div class="main-phone__screen" id="phoneScreen">
-            <!-- Video placeholder. To use a real video later, replace the <img>
-                 below with: <video class="phone-video" autoplay muted loop playsinline
-                 poster="assets/img/hero-phone-content.png"><source src="assets/video/example-1.mp4" type="video/mp4"></video> -->
-            <div class="phone-slide phone-slide--video is-current">
-              <img class="phone-video" src="assets/img/hero-phone-content.png" alt="Your video preview">
-              <span class="phone-slide__badge">Your video here</span>
-            </div>
-            <img src="assets/img/video-dj.png" alt="DJ playing a set" class="phone-slide">
-            <img src="assets/img/video-ringlight.png" alt="Filming with a ring light" class="phone-slide">
-            <img src="assets/img/hero-phone-content.png" alt="Content creator filming" class="phone-slide">
-          </div>
-          <img src="assets/img/iphone-frame.png" alt="" class="main-phone__frame">
+        <div class="hero__row">
+          <!-- Example screen (phone) on the left -->
+          <div class="hero-mockup">
+            <div class="main-phone">
+              <div class="main-phone__screen" id="phoneScreen">
+                <!-- Video placeholder. Replace the <img> with a <video> when ready. -->
+                <div class="phone-slide phone-slide--video is-current">
+                  <img class="phone-video" src="assets/img/hero-phone-content.png" alt="Your video preview">
+                  <span class="phone-slide__badge">Your video here</span>
+                </div>
+                <img src="assets/img/video-dj.png" alt="DJ playing a set" class="phone-slide">
+                <img src="assets/img/video-ringlight.png" alt="Filming with a ring light" class="phone-slide">
+                <img src="assets/img/hero-phone-content.png" alt="Content creator filming" class="phone-slide">
+              </div>
+              <img src="assets/img/iphone-frame.png" alt="" class="main-phone__frame">
 
-          <div class="notif notif--money" id="notifMoney">
-            <div class="notif__icon notif__icon--green">$</div>
-            <div class="notif__text">
-              <p class="notif__title" data-rotate="price">+ $54</p>
-              <p class="notif__sub">received for post</p>
-            </div>
-          </div>
+              <div class="notif notif--money" id="notifMoney">
+                <div class="notif__icon notif__icon--green">$</div>
+                <div class="notif__text">
+                  <p class="notif__title" data-rotate="price">+ $54</p>
+                  <p class="notif__sub">received for post</p>
+                </div>
+              </div>
 
-          <div class="notif notif--views" id="notifViews">
-            <div class="notif__icon notif__icon--blue">
-              <img src="assets/img/icon-eye.svg" alt="">
-            </div>
-            <div class="notif__text">
-              <p class="notif__title" data-rotate="views">324K</p>
-              <p class="notif__sub">Views</p>
+              <div class="notif notif--views" id="notifViews">
+                <div class="notif__icon notif__icon--blue">
+                  <img src="assets/img/icon-eye.svg" alt="">
+                </div>
+                <div class="notif__text">
+                  <p class="notif__title" data-rotate="views">324K</p>
+                  <p class="notif__sub">Views</p>
+                </div>
+              </div>
+
+              <div class="notif notif--track" id="notifTrack">
+                <div class="notif__cover" data-rotate="cover"></div>
+                <div class="notif__text">
+                  <p class="notif__title" data-rotate="track">Track</p>
+                  <p class="notif__sub" data-rotate="artist">Artist</p>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="notif notif--track" id="notifTrack">
-            <div class="notif__cover" data-rotate="cover"></div>
-            <div class="notif__text">
-              <p class="notif__title" data-rotate="track">Track</p>
-              <p class="notif__sub" data-rotate="artist">Artist</p>
+          <!-- Badge, subtext and CTA on the right -->
+          <div class="hero__pitch">
+            <div class="badge-group">TikTok&nbsp;&nbsp;·&nbsp;&nbsp;Instagram&nbsp;&nbsp;·&nbsp;&nbsp;YouTube</div>
+            <p class="hero__subtitle">Explore and receive tracks, choose which ones to use in your social media content, and earn money for every confirmed post.</p>
+            <div class="hero__actions">
+              <a href="#" class="btn btn--primary btn--md">
+                Join as a content creator
+                <img src="assets/img/icon-arrow-right.svg" alt="" class="btn__icon">
+              </a>
+              <p class="hero__note">Join free&nbsp;&nbsp;·&nbsp;&nbsp;Create content&nbsp;&nbsp;·&nbsp;&nbsp;Earn money</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ============ DISCOVER NEW MUSIC / TRACK MARQUEE ============ -->
-    <section class="discover" id="discover">
-      <h2 class="discover__heading">Tracks for your content</h2>
-      <p class="discover__count" id="trackCount">3,436</p>
-
-      <div class="track-marquee" aria-label="Tracks available on Musin">
-        <div class="track-marquee__inner" id="trackMarquee"></div>
-      </div>
-    </section>
-
-    <!-- ============ CHOOSE MUSIC YOU LIKE ============ -->
+    <!-- ============ CHOOSE MUSIC YOU LIKE (merged with track list) ============ -->
     <section class="genres" id="genres">
-      <div class="container">
+      <div class="container genres__head">
         <h2 class="section-title">Choose music you like</h2>
+        <p class="genres__count"><span id="trackCount">3,436</span> tracks available</p>
       </div>
       <div class="genre-lines" id="genreLines">
         <div class="genre-line" data-drift="1"></div>
         <div class="genre-line" data-drift="-1"></div>
         <div class="genre-line" data-drift="1"></div>
-        <div class="genre-line" data-drift="-1"></div>
+      </div>
+      <div class="track-marquee" aria-label="Tracks available on Musin">
+        <div class="track-marquee__inner" id="trackMarquee"></div>
       </div>
     </section>
 
@@ -266,57 +260,24 @@
           <img src="assets/img/logo-mark.svg" alt="" class="nav-logo__mark">
           <span class="nav-logo__type">Musin</span>
         </a>
-        <p class="footer__desc">Discuss music trends, analyze charts, and collaborate with others to make informed marketing decisions.</p>
+        <p class="footer__copy">© 2026 Musin. All rights reserved.</p>
         <div class="footer__social">
           <a href="#" aria-label="X"><img src="assets/img/social/s01-x.svg" alt=""></a>
-          <a href="#" aria-label="LinkedIn"><img src="assets/img/social/s02-linkedin.svg" alt=""></a>
-          <a href="#" aria-label="Snapchat"><img src="assets/img/social/s03-snapchat.svg" alt=""></a>
-          <a href="#" aria-label="Spotify"><img src="assets/img/social/s04-spotify.svg" alt=""></a>
-          <a href="#" aria-label="Telegram"><img src="assets/img/social/s05-telegram.svg" alt=""></a>
-          <a href="#" aria-label="Twitch"><img src="assets/img/social/s06-twitch.svg" alt=""></a>
-          <a href="#" aria-label="Facebook"><img src="assets/img/social/s07-facebook.svg" alt=""></a>
           <a href="#" aria-label="Instagram"><img src="assets/img/social/s08-instagram.svg" alt=""></a>
-          <a href="#" aria-label="YouTube"><img src="assets/img/social/s09-youtube.svg" alt=""></a>
           <a href="#" aria-label="TikTok"><img src="assets/img/social/s10-tiktok.svg" alt=""></a>
+          <a href="#" aria-label="Telegram"><img src="assets/img/social/s05-telegram.svg" alt=""></a>
           <a href="#" aria-label="Discord"><img src="assets/img/social/s11-discord.svg" alt=""></a>
         </div>
       </div>
 
-      <div class="footer__cols">
-        <div class="footer__col">
-          <p class="footer__col-title">Product</p>
-          <a href="#">Overview</a>
-          <a href="#">Features</a>
-          <a href="#">Solutions <span class="badge-new">New</span></a>
-          <a href="#">Tutorials</a>
-          <a href="#">Pricing</a>
-          <a href="#">Releases</a>
-        </div>
-        <div class="footer__col">
-          <p class="footer__col-title">Resources</p>
-          <a href="#">Blog</a>
-          <a href="#">Newsletter</a>
-          <a href="#">Events</a>
-          <a href="#">Help centre</a>
-          <a href="#">Tutorials</a>
-          <a href="#">Support</a>
-        </div>
-        <div class="footer__newsletter">
-          <p class="footer__col-title">Stay up to date</p>
-          <form class="newsletter-form" id="newsletterForm">
-            <input type="email" placeholder="Enter your email" aria-label="Email address" required>
-            <button type="submit" class="btn btn--secondary">Subscribe</button>
-          </form>
-        </div>
-      </div>
-    </div>
-    <div class="container footer__bottom">
-      <p>© 2026 Musin. All rights reserved.</p>
-      <div class="footer__legal">
+      <nav class="footer__links" aria-label="Footer">
+        <a href="#">Features</a>
+        <a href="#">Tutorials</a>
+        <a href="#">Support</a>
         <a href="#">Terms</a>
         <a href="#">Privacy</a>
         <a href="#">Cookies</a>
-      </div>
+      </nav>
     </div>
   </footer>
 
