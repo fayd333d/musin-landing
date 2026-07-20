@@ -408,9 +408,18 @@ img { display: block; max-width: 100%; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   margin-bottom: 44px;
   text-align: center;
+}
+
+/* Big track number above the title (#1, #2) */
+.genres__number {
+  font-size: 72px;
+  line-height: 1.05;
+  font-weight: 700;
+  letter-spacing: -1.6px;
+  color: var(--text-primary);
 }
 
 /* Now the grey subtitle under the track count (#7) */
@@ -573,11 +582,14 @@ img { display: block; max-width: 100%; }
 .create__shade--right { right: 0; background: linear-gradient(to left, var(--bg), var(--bg) 30%, transparent); }
 
 /* Arrows on each side switch the video (#8) */
+/* Arrows sit just outside the centred screen, not at the page edges (#3);
+   above the cards so the side screens don't cover them */
 .create__arrow {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
-  z-index: 60;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 130;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -593,10 +605,10 @@ img { display: block; max-width: 100%; }
 }
 
 .create__arrow:hover { background: rgba(40, 40, 44, 0.85); }
-.create__arrow:active { transform: translateY(-50%) scale(0.94); }
+.create__arrow:active { transform: translate(-50%, -50%) scale(0.94); }
 .create__arrow img { width: 22px; height: 22px; opacity: 0.9; }
-.create__arrow--left { left: clamp(12px, 5vw, 72px); }
-.create__arrow--right { right: clamp(12px, 5vw, 72px); }
+.create__arrow--left { margin-left: calc(-1 * clamp(118px, 22vw, 176px)); }
+.create__arrow--right { margin-left: clamp(118px, 22vw, 176px); }
 
 .video-card img,
 .video-card video {
@@ -638,32 +650,32 @@ img { display: block; max-width: 100%; }
 .pay-card:nth-child(3) { top: 188px; }
 .pay-card:nth-child(4) { top: 212px; }
 
-/* Card icon is now a single coloured square (its background is the icon
-   colour, set inline) with a large glyph filling it (#11, #12) */
+/* The card itself is now the icon colour (set inline); the glyph sits large
+   on top with no separate square (#4) */
 .pay-card__icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 76px;
-  height: 76px;
-  border-radius: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
-.pay-card__icon img { width: 44px; height: 44px; }
+.pay-card__icon img { width: 64px; height: 64px; }
 
 .pay-card__title {
   font-size: 24px;
   line-height: 32px;
   font-weight: 600;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.22);
 }
 
-/* Bigger subtitle, like the hero supporting text; kept grey (#10) */
+/* Kept readable on the coloured cards */
 .pay-card__text {
   max-width: 360px;
   font-size: 20px;
   line-height: 30px;
-  color: var(--text-tertiary);
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
 }
 
 /* ============ Logos marquee (PDF mod #7) ============ */
@@ -848,6 +860,7 @@ img { display: block; max-width: 100%; }
   .notif__title { font-size: 17px; }
 
   .genre-tag { font-size: 24px; }
+  .genres__number { font-size: 54px; }
 
   .pay-card { padding: 40px 28px; }
 
@@ -869,6 +882,7 @@ img { display: block; max-width: 100%; }
   .cta__title { font-size: 30px; line-height: 38px; }
 
   .genres { padding: 64px 0 96px; }
+  .genres__number { font-size: 42px; }
   .genre-tag { font-size: 20px; }
   .genre-lines { gap: 18px; }
 
