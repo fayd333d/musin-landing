@@ -607,8 +607,9 @@ img { display: block; max-width: 100%; }
 .create__arrow:hover { background: rgba(40, 40, 44, 0.85); }
 .create__arrow:active { transform: translate(-50%, -50%) scale(0.94); }
 .create__arrow img { width: 22px; height: 22px; opacity: 0.9; }
-.create__arrow--left { margin-left: calc(-1 * clamp(118px, 22vw, 176px)); }
-.create__arrow--right { margin-left: clamp(118px, 22vw, 176px); }
+/* Just outside the side screens — close, but not covering them (#2) */
+.create__arrow--left { margin-left: calc(-1 * clamp(238px, 30vw, 360px)); }
+.create__arrow--right { margin-left: clamp(238px, 30vw, 360px); }
 
 .video-card img,
 .video-card video {
@@ -630,52 +631,50 @@ img { display: block; max-width: 100%; }
   margin-right: auto;
 }
 
+/* Grey card with a coloured top band; they stack so the coloured tops peek (#4) */
 .pay-card {
   position: sticky;
-  top: 140px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 8px;
-  padding: 48px 40px;
-  border-radius: var(--radius-card);
+  top: 120px;
+  border-radius: 32px;
+  overflow: hidden;
   background: var(--bg-card-2);
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 -8px 26px rgba(0, 0, 0, 0.5);
   will-change: transform;
 }
 
-.pay-card:nth-child(2) { top: 164px; }
-.pay-card:nth-child(3) { top: 188px; }
-.pay-card:nth-child(4) { top: 212px; }
+.pay-card:nth-child(1) { top: 120px; }
+.pay-card:nth-child(2) { top: 178px; }
+.pay-card:nth-child(3) { top: 236px; }
+.pay-card:nth-child(4) { top: 294px; }
 
-/* The card itself is now the icon colour (set inline); the glyph sits large
-   on top with no separate square (#4) */
-.pay-card__icon {
+/* Coloured top band (its colour is the icon colour, set inline) */
+.pay-card__top {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 18px;
+  height: 150px;
 }
 
-.pay-card__icon img { width: 64px; height: 64px; }
+.pay-card__top img { width: 60px; height: 60px; }
+
+.pay-card__body {
+  padding: 30px 40px 46px;
+  text-align: center;
+}
 
 .pay-card__title {
   font-size: 24px;
   line-height: 32px;
   font-weight: 600;
-  color: #fff;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.22);
+  color: var(--text-primary);
 }
 
-/* Kept readable on the coloured cards */
 .pay-card__text {
   max-width: 360px;
+  margin: 8px auto 0;
   font-size: 20px;
   line-height: 30px;
-  color: rgba(255, 255, 255, 0.9);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+  color: var(--text-tertiary);
 }
 
 /* ============ Logos marquee (PDF mod #7) ============ */
@@ -843,6 +842,9 @@ img { display: block; max-width: 100%; }
 @media (max-width: 860px) {
   .nav-links { display: none; }
   .nav-burger { display: flex; }
+
+  /* Touch users swipe instead (#1) */
+  .create__arrow { display: none; }
 
   .hero { padding-top: 40px; }
   /* Centre the title on small screens (#1) */

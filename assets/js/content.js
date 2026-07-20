@@ -297,26 +297,8 @@ renderWheel();
 void stage.offsetWidth;
 stage.classList.remove("no-anim");
 
-/* ---------- Get paid for posting: cards stack on scroll ---------- */
-const payCards = gsap.utils.toArray(".pay-card");
-
-if (!prefersReducedMotion) {
-  /* Only scale back the covered cards for depth — no opacity fade, so every
-     icon stays fully bright (corrections #11). */
-  payCards.forEach((card, i) => {
-    if (i === payCards.length - 1) return;
-    gsap.to(card, {
-      scale: 0.92 - (payCards.length - 2 - i) * 0.02,
-      ease: "none",
-      scrollTrigger: {
-        trigger: payCards[i + 1],
-        start: "top bottom-=120",
-        end: "top top+=220",
-        scrub: true,
-      },
-    });
-  });
-}
+/* Get paid for posting: the cards stack purely via CSS sticky positioning so
+   their coloured tops peek out — no JS needed. */
 
 /* ---------- Logos: auto-run left to right ---------- */
 const logoMarquee = document.getElementById("logoMarquee");
