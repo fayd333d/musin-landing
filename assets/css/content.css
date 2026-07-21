@@ -376,6 +376,8 @@ img { display: block; max-width: 100%; }
   height: 40px;
   border-radius: 8px;
   background: var(--orange);
+  background-size: cover;
+  background-position: center;
   border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
@@ -471,12 +473,9 @@ img { display: block; max-width: 100%; }
   width: 164px;
   height: 164px;
   border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 58px;
-  color: rgba(255, 255, 255, 0.9);
+  background-color: var(--bg-card);
+  background-size: cover;
+  background-position: center;
   flex: 0 0 auto;
 }
 
@@ -623,6 +622,49 @@ img { display: block; max-width: 100%; }
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* Play / pause button on each carousel clip (#6) */
+.video-card__play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 6;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.2s ease, background 0.2s ease, transform 0.15s ease;
+}
+.video-card__play::before {
+  content: "";
+  /* play triangle */
+  width: 0;
+  height: 0;
+  margin-left: 4px;
+  border-style: solid;
+  border-width: 10px 0 10px 17px;
+  border-color: transparent transparent transparent #fff;
+}
+.video-card__play:hover { background: rgba(0, 0, 0, 0.6); }
+.video-card__play:active { transform: translate(-50%, -50%) scale(0.94); }
+/* When playing: swap to pause bars and fade the button unless hovered */
+.video-card.is-playing .video-card__play { opacity: 0; }
+.video-card.is-playing:hover .video-card__play { opacity: 1; }
+.video-card.is-playing .video-card__play::before {
+  width: 16px;
+  height: 18px;
+  margin-left: 0;
+  border: none;
+  background: linear-gradient(to right, #fff 0 5px, transparent 5px 11px, #fff 11px 16px);
 }
 
 /* ============ Get paid for posting — stacking cards (PDF mod #6) ============ */
@@ -981,15 +1023,18 @@ img { display: block; max-width: 100%; }
   .logos__item--stripe { height: 24px; }
   .logos__item--wide { height: 22px; }
 
-  /* Inside Musin app — stack panel over screen on small screens */
+  /* Inside Musin app — stack panel over screen on small screens.
+     Bigger sticky stagger so each card's coloured panel peeks and the cards
+     visibly stack up like on desktop (#7) */
   .app-card {
     flex-direction: column;
     min-height: 0;
-    top: 96px;
+    top: 80px;
   }
-  .app-card:nth-child(2) { top: 112px; }
-  .app-card:nth-child(3) { top: 128px; }
-  .app-card__panel { flex-basis: auto; padding: 28px; }
+  .app-card:nth-child(1) { top: 80px; }
+  .app-card:nth-child(2) { top: 150px; }
+  .app-card:nth-child(3) { top: 220px; }
+  .app-card__panel { flex-basis: auto; padding: 24px 24px 20px; }
   .app-card__title { font-size: 26px; }
   .app-card__text { font-size: 17px; line-height: 26px; }
   .app-card__screen { padding: 20px; }

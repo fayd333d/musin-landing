@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/content.css?v=4">
+  <link rel="stylesheet" href="assets/css/content.css?v=6">
 </head>
 <body>
 
@@ -55,22 +55,18 @@
           <div class="hero-mockup">
             <div class="main-phone">
               <div class="main-phone__screen" id="phoneScreen">
-                <!-- Video placeholder. Replace the <img> with a <video> when ready. -->
-                <div class="phone-slide phone-slide--video is-current">
-                  <img class="phone-video" src="assets/img/hero-phone-content.png" alt="Your video preview">
-                  <span class="phone-slide__badge">Your video here</span>
-                </div>
-                <img src="assets/img/video-dj.png" alt="DJ playing a set" class="phone-slide">
-                <img src="assets/img/video-ringlight.png" alt="Filming with a ring light" class="phone-slide">
-                <img src="assets/img/hero-phone-content.png" alt="Content creator filming" class="phone-slide">
+                <!-- Real creator clips: Video 1, 2, 3 cycle every 3 s (#1) -->
+                <video class="phone-slide is-current" src="assets/video/video-1.mp4" muted playsinline loop autoplay preload="auto"></video>
+                <video class="phone-slide" src="assets/video/video-2.mp4" muted playsinline loop preload="auto"></video>
+                <video class="phone-slide" src="assets/video/video-3.mp4" muted playsinline loop preload="auto"></video>
               </div>
               <img src="assets/img/iphone-frame.png" alt="" class="main-phone__frame">
 
               <div class="notif notif--money" id="notifMoney">
                 <div class="notif__icon notif__icon--green">$</div>
                 <div class="notif__text">
-                  <p class="notif__title" data-rotate="price">+ $54</p>
-                  <p class="notif__sub">received for post</p>
+                  <p class="notif__title" data-rotate="price">+$26</p>
+                  <p class="notif__sub">Earned</p>
                 </div>
               </div>
 
@@ -139,12 +135,16 @@
       </div>
       <div class="create__viewport">
         <div class="create__scroller" id="createScroller">
-          <div class="video-card"><img src="assets/img/hero-phone-content.png" alt="Singer performing with guitar" loading="lazy"></div>
-          <div class="video-card"><img src="assets/img/video-dj.png" alt="DJ mixing on turntables" loading="lazy"></div>
-          <div class="video-card"><img src="assets/img/video-ringlight.png" alt="Creator filming with a ring light" loading="lazy"></div>
-          <div class="video-card"><img src="assets/img/video-concert.png" alt="DJ performing for a crowd" loading="lazy"></div>
-          <div class="video-card"><img src="assets/img/hero-side-1.png" alt="Filming a concert on a phone" loading="lazy"></div>
-          <div class="video-card"><img src="assets/img/hero-side-2.png" alt="Creator recording content" loading="lazy"></div>
+          <div class="video-card"><video src="assets/video/video-4.mp4#t=0.1" muted loop playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
+          <div class="video-card"><video src="assets/video/video-5.mp4#t=0.1" muted loop playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
+          <div class="video-card"><video src="assets/video/video-6.mp4#t=0.1" muted loop playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
+          <div class="video-card"><video src="assets/video/video-7.mp4#t=0.1" muted loop playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
+          <div class="video-card"><video src="assets/video/video-8.mp4#t=0.1" muted loop playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
+          <div class="video-card"><video src="assets/video/video-9.mp4#t=0.1" muted loop playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
+          <div class="video-card"><video src="assets/video/video-10.mp4#t=0.1" muted loop playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
+          <div class="video-card"><video src="assets/video/video-11.mp4#t=0.1" muted loop playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
+          <div class="video-card"><video src="assets/video/video-12.mp4#t=0.1" muted loop playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
+          <div class="video-card"><video src="assets/video/video-13.mp4#t=0.1" muted loop playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
         </div>
         <div class="create__shade create__shade--left" aria-hidden="true"></div>
         <div class="create__shade create__shade--right" aria-hidden="true"></div>
@@ -330,6 +330,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-  <script src="assets/js/content.js?v=4"></script>
+  <script src="assets/js/content.js?v=6"></script>
 </body>
 </html>

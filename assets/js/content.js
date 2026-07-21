@@ -18,9 +18,9 @@ burger.addEventListener("click", () => {
    Price, views and track change; the next screen scrolls up into the
    main phone from below, TikTok-style (corrections #6). */
 const heroData = [
-  { price: "+ $54", views: "324K", track: "Levitating", artist: "Dua Lipa", cover: "#ffac12" },
-  { price: "+ $87", views: "1.2M", track: "Bad Guy", artist: "Billie Eilish", cover: "#8b5cf6" },
-  { price: "+ $32", views: "87K", track: "Uptown Funk", artist: "Mark Ronson", cover: "#2dd4bf" },
+  { price: "+$26", views: "467K", track: "Like It", artist: "Eliot Felix", cover: "assets/img/covers/cover-1.jpg" },
+  { price: "+$48", views: "1.2M", track: "Get On", artist: "Natsha", cover: "assets/img/covers/cover-2.jpg" },
+  { price: "+$81", views: "891K", track: "Sway Me", artist: "Olmoy", cover: "assets/img/covers/cover-3.jpg" },
 ];
 
 const slides = gsap.utils.toArray(".phone-slide");
@@ -39,13 +39,34 @@ const notifs = [
 
 let heroIndex = 0;
 applyHeroData(heroData[0]);
+playCurrentClip(slides[0]);
 
 function applyHeroData(d) {
   rotateEls.price.textContent = d.price;
   rotateEls.views.textContent = d.views;
   rotateEls.track.textContent = d.track;
   rotateEls.artist.textContent = d.artist;
-  rotateEls.cover.style.background = d.cover;
+  rotateEls.cover.style.backgroundImage = `url("${d.cover}")`;
+  rotateEls.cover.style.backgroundSize = "cover";
+  rotateEls.cover.style.backgroundPosition = "center";
+}
+
+/* Restart the given clip from the top and pause the others so each video
+   plays exactly its 3-second window before the next one swipes in (#1). */
+function playCurrentClip(el) {
+  slides.forEach((s) => {
+    if (typeof s.pause === "function" && s !== el) s.pause();
+  });
+  if (el && typeof el.play === "function") {
+    try { el.currentTime = 0; } catch (e) {}
+    const p = el.play();
+    if (p && p.catch) {
+      p.catch(() => {
+        // Not buffered yet — retry once the clip can play
+        el.addEventListener("canplay", () => { const r = el.play(); if (r && r.catch) r.catch(() => {}); }, { once: true });
+      });
+    }
+  }
 }
 
 function nextHeroSlide() {
@@ -56,6 +77,7 @@ function nextHeroSlide() {
 
   gsap.set(next, { visibility: "visible", yPercent: 100, scale: 1, zIndex: 2 });
   gsap.set(prev, { zIndex: 1 });
+  playCurrentClip(next); // restart the incoming clip from 0
 
   /* TikTok / Instagram-style vertical swipe: the current clip flicks up and
      out while the next one rises from below in sync (#5). Self-scheduling so
@@ -84,27 +106,23 @@ if (!prefersReducedMotion) {
 /* ---------- Track marquee (replaces "tracks available right now") ----------
    Covers are placeholders until final artwork is provided. */
 const tracks = [
-  ["Levitating", "Dua Lipa"],
-  ["Bad Guy", "Billie Eilish"],
-  ["Uptown Funk", "Mark Ronson ft. Bruno Mars"],
-  ["Midnight Drive", "KØVA"],
-  ["Golden Hour", "Ava Lune"],
-  ["Static Love", "The Vermilion"],
-  ["Low Tide", "Marlowe"],
-  ["Paper Planes", "Juno East"],
-  ["Afterglow", "NYX"],
-  ["Cherry Soda", "Pastel Club"],
-  ["Gravity", "Solenne"],
-  ["Wildfire", "Rex Aurelio"],
-];
-
-const coverGradients = [
-  "linear-gradient(135deg,#e54552,#8b1e3f)",
-  "linear-gradient(135deg,#3d5ddc,#1e2a78)",
-  "linear-gradient(135deg,#ffac12,#c2410c)",
-  "linear-gradient(135deg,#22c55e,#065f46)",
-  "linear-gradient(135deg,#8b5cf6,#4c1d95)",
-  "linear-gradient(135deg,#2dd4bf,#0f766e)",
+  ["Miss the rage", "Den Best", 4],
+  ["Still lonely", "Hoover", 5],
+  ["6 Gold", "Leboi", 6],
+  ["You’re my fire", "Flare John", 7],
+  ["SVEG", "Lukrix", 8],
+  ["My world", "Je333", 9],
+  ["U WUT", "Zen X", 10],
+  ["Can’t get away", "Lin Xiao", 11],
+  ["Adrenaline rush", "Quayo", 12],
+  ["Not 1 of us", "ZEZTI", 13],
+  ["Hope", "Block Demons", 14],
+  ["Lit up", "Garraba", 15],
+  ["She was a baddie", "Onlock", 16],
+  ["Sax Neo", "With me", 17],
+  ["Fashion Diva", "8t Diggy", 18],
+  ["Wonders", "Fly Hollywood", 19],
+  ["Say so", "Imma Frost", 20],
 ];
 
 const marqueeInner = document.getElementById("trackMarquee");
@@ -112,9 +130,9 @@ const marqueeInner = document.getElementById("trackMarquee");
 function buildTrackChips() {
   return tracks
     .map(
-      ([title, artist], i) => `
+      ([title, artist, cover]) => `
       <div class="track-chip">
-        <div class="track-chip__cover" style="background:${coverGradients[i % coverGradients.length]}">${title[0]}</div>
+        <div class="track-chip__cover" style="background-image:url('assets/img/covers/cover-${cover}.jpg')"></div>
         <div>
           <p class="track-chip__title">${title}</p>
           <p class="track-chip__artist">${artist}</p>
@@ -200,11 +218,14 @@ function tweenCount(to) {
   persistCount();
 }
 
+/* Nudge by exactly 1, at most 3 times in a single session (#3) */
+let countEventsFired = 0;
 function scheduleCountEvent() {
+  if (countEventsFired >= 3) return;
   gsap.delayedCall(gsap.utils.random(30, 70), () => {
+    countEventsFired += 1;
     const goesUp = Math.random() < 0.78; // generally up
-    const delta = Math.ceil(Math.random() * 7); // 1..7, never more than 7
-    let next = trackCount + (goesUp ? delta : -delta);
+    let next = trackCount + (goesUp ? 1 : -1); // never more than 1 at a time
     next = Math.min(COUNT_MAX, Math.max(COUNT_BASE, next)); // never below base, cap 5,000
     tweenCount(next);
     scheduleCountEvent();
@@ -258,6 +279,37 @@ const N = wheelCards.length;
 let centreIndex = Math.floor(N / 2);
 const lastSlot = new Array(N).fill(null);
 
+/* Each card holds a real clip (Video 4-13) that plays / pauses on click (#6) */
+function pauseAllClips() {
+  wheelCards.forEach((c) => {
+    const v = c.querySelector("video");
+    if (v && typeof v.pause === "function") v.pause();
+    c.classList.remove("is-playing");
+  });
+}
+wheelCards.forEach((card) => {
+  const video = card.querySelector("video");
+  const btn = card.querySelector(".video-card__play");
+  if (!video) return;
+  const toggle = (e) => {
+    if (e) e.stopPropagation();
+    if (video.paused) {
+      wheelCards.forEach((c) => {
+        const v = c.querySelector("video");
+        if (v && v !== video) { v.pause(); c.classList.remove("is-playing"); }
+      });
+      const p = video.play();
+      if (p && p.catch) p.catch(() => {});
+    } else {
+      video.pause();
+    }
+  };
+  if (btn) btn.addEventListener("click", toggle);
+  video.addEventListener("click", toggle);
+  video.addEventListener("play", () => card.classList.add("is-playing"));
+  video.addEventListener("pause", () => card.classList.remove("is-playing"));
+});
+
 function renderWheel() {
   if (!N) return;
   const cardW = wheelCards[0].offsetWidth || 280;
@@ -295,6 +347,7 @@ function renderWheel() {
 
 function advance(step) {
   centreIndex = (((centreIndex + step) % N) + N) % N;
+  pauseAllClips(); // stop any playing clip when the wheel moves
   renderWheel();
 }
 
