@@ -711,7 +711,7 @@ img { display: block; max-width: 100%; }
 /* ============ Inside Musin app (correction #13.1) ============
    Same sticky-stacking behaviour as the pay cards, but laid out horizontally:
    a coloured panel down the left side and an app UI screen on the right. */
-.app { padding: 0 0 128px; }
+.app { padding: 80px 0 128px; }
 
 .app-stack {
   margin-top: 64px;
@@ -735,17 +735,17 @@ img { display: block; max-width: 100%; }
   will-change: transform;
 }
 
-/* Successive cards stick a little lower so the coloured left panels peek */
+/* Successive cards stick lower so each card's grey edge + coloured panel peek */
 .app-card:nth-child(1) { top: 120px; }
-.app-card:nth-child(2) { top: 168px; }
-.app-card:nth-child(3) { top: 216px; }
+.app-card:nth-child(2) { top: 190px; }
+.app-card:nth-child(3) { top: 260px; }
 
-/* Coloured panel on the left; text sits at the bottom (reads bottom-to-top) */
+/* Coloured panel on the left; text centred in the panel (#3.1) */
 .app-card__panel {
   flex: 0 0 38%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   padding: 40px;
   color: #fff;
 }
@@ -765,20 +765,22 @@ img { display: block; max-width: 100%; }
   color: rgba(255, 255, 255, 0.86);
 }
 
-/* App UI screen framed on the right */
+/* App UI screen framed on the right — transparent so the grey card body shows
+   through in the stacked peek (that grey edge is what reads as "stacking") */
 .app-card__screen {
   flex: 1 1 62%;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 28px;
-  background: var(--bg);
+  background: transparent;
 }
 
 .app-card__screen img {
   max-width: 100%;
   max-height: 320px;
   border-radius: 14px;
+  background: var(--bg);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
