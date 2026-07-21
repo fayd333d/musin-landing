@@ -708,6 +708,80 @@ img { display: block; max-width: 100%; }
 .logos__item--stripe { height: 30px; }
 .logos__item--wide { height: 28px; }
 
+/* ============ Inside Musin app (correction #13.1) ============
+   Same sticky-stacking behaviour as the pay cards, but laid out horizontally:
+   a coloured panel down the left side and an app UI screen on the right. */
+.app { padding: 0 0 128px; }
+
+.app-stack {
+  margin-top: 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  max-width: 1040px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.app-card {
+  position: sticky;
+  top: 120px;
+  display: flex;
+  min-height: 360px;
+  border-radius: 32px;
+  overflow: hidden;
+  background: var(--bg-card-2);
+  box-shadow: 0 -8px 26px rgba(0, 0, 0, 0.5);
+  will-change: transform;
+}
+
+/* Successive cards stick a little lower so the coloured left panels peek */
+.app-card:nth-child(1) { top: 120px; }
+.app-card:nth-child(2) { top: 168px; }
+.app-card:nth-child(3) { top: 216px; }
+
+/* Coloured panel on the left; text sits at the bottom (reads bottom-to-top) */
+.app-card__panel {
+  flex: 0 0 38%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 40px;
+  color: #fff;
+}
+
+.app-card__title {
+  font-size: 32px;
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.6px;
+}
+
+.app-card__text {
+  margin-top: 12px;
+  max-width: 340px;
+  font-size: 20px;
+  line-height: 30px;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+/* App UI screen framed on the right */
+.app-card__screen {
+  flex: 1 1 62%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+  background: var(--bg);
+}
+
+.app-card__screen img {
+  max-width: 100%;
+  max-height: 320px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
 /* ============ FAQ ============ */
 .faq { padding: 128px 0; }
 
@@ -904,6 +978,20 @@ img { display: block; max-width: 100%; }
   .logos__item { height: 26px; }
   .logos__item--stripe { height: 24px; }
   .logos__item--wide { height: 22px; }
+
+  /* Inside Musin app — stack panel over screen on small screens */
+  .app-card {
+    flex-direction: column;
+    min-height: 0;
+    top: 96px;
+  }
+  .app-card:nth-child(2) { top: 112px; }
+  .app-card:nth-child(3) { top: 128px; }
+  .app-card__panel { flex-basis: auto; padding: 28px; }
+  .app-card__title { font-size: 26px; }
+  .app-card__text { font-size: 17px; line-height: 26px; }
+  .app-card__screen { padding: 20px; }
+  .app-card__screen img { max-height: 260px; }
 
   .faq { padding: 96px 0; }
   .faq-list { margin-top: 40px; }
