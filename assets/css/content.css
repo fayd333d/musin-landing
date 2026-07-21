@@ -408,7 +408,7 @@ img { display: block; max-width: 100%; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 40px;
   margin-bottom: 44px;
   text-align: center;
 }
@@ -416,18 +416,20 @@ img { display: block; max-width: 100%; }
 /* Big number with 'tracks available now' sized to sit right under it (#1) */
 .genres__stat { display: flex; flex-direction: column; align-items: center; }
 
+/* The number is sized in JS so its width matches the line below it — the 88px
+   here is just a sensible pre-script default. */
 .genres__number {
-  font-size: clamp(100px, 12vw, 120px);
-  line-height: 0.98;
+  font-size: 88px;
+  line-height: 1;
   font-weight: 700;
   letter-spacing: -3px;
   color: var(--text-primary);
 }
 
-/* Small line under the number — same size as the card titles, never wider
-   than the number itself (#1) */
+/* Small line under the number — same size as the card titles; the number is
+   scaled to share its exact width (#3) */
 .genres__unit {
-  margin-top: 2px;
+  margin-top: 14px;
   font-size: 24px;
   line-height: 32px;
   font-weight: 600;
@@ -493,7 +495,7 @@ img { display: block; max-width: 100%; }
 }
 
 /* ============ Genres (PDF mod #4) ============ */
-.genres { padding: 96px 0 72px; overflow: hidden; }
+.genres { padding: 64px 0 72px; overflow: hidden; }
 
 .genre-lines {
   margin-top: 8px;

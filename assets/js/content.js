@@ -153,10 +153,34 @@ function deterministicCount() {
 const storedCount = parseInt(localStorage.getItem("musinTrackCount") || "0", 10) || 0;
 let trackCount = Math.min(COUNT_MAX, Math.max(deterministicCount(), storedCount));
 
+/* Scale the number so its rendered width matches the 'tracks available now'
+   line beneath it — they share the same width border (correction #3). Width
+   scales ~linearly with font-size, so a couple of iterations converge. */
+const unitEl = document.querySelector(".genres__unit");
+function fitStatWidth() {
+  if (!countEl || !unitEl) return;
+  const target = unitEl.getBoundingClientRect().width;
+  if (!target) return;
+  let fs = parseFloat(getComputedStyle(countEl).fontSize) || 88;
+  for (let i = 0; i < 5; i++) {
+    const w = countEl.getBoundingClientRect().width;
+    if (!w || Math.abs(w - target) < 0.5) break;
+    fs = Math.max(40, Math.min(160, fs * (target / w)));
+    countEl.style.fontSize = fs + "px";
+  }
+}
+
+let lastCountStr = "";
 function renderCount(n) {
-  countEl.textContent = Math.round(n).toLocaleString("en-US");
+  const s = Math.round(n).toLocaleString("en-US");
+  if (s === lastCountStr) return;
+  lastCountStr = s;
+  countEl.textContent = s;
+  fitStatWidth();
 }
 renderCount(trackCount);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitStatWidth);
+window.addEventListener("resize", fitStatWidth);
 
 function persistCount() {
   localStorage.setItem("musinTrackCount", String(Math.round(trackCount)));
