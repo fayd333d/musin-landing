@@ -419,7 +419,29 @@ stage.classList.add("no-anim");
 renderWheel();
 void stage.offsetWidth;
 stage.classList.remove("no-anim");
-playCentre(); // start with Video 4 playing (#3, #4)
+
+/* Autoplay Video 4 only once the "Create content with music" section scrolls
+   into view (not on page load); pause the clips when it leaves (#1) */
+let createStarted = false;
+const createSection = document.getElementById("create");
+if (createSection) {
+  const createObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          if (!createStarted) {
+            createStarted = true;
+            playCentre();
+          }
+        } else {
+          pauseAllClips();
+        }
+      });
+    },
+    { threshold: 0.4 }
+  );
+  createObserver.observe(createSection);
+}
 
 /* Get paid for posting: the cards stack purely via CSS sticky positioning so
    their coloured tops peek out — no JS needed. */
