@@ -410,7 +410,9 @@ img { display: block; max-width: 100%; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 40px;
+  /* space between the number/label and the heading, like the gaps between
+     sections (#2) */
+  gap: clamp(72px, 9vw, 128px);
   margin-bottom: 44px;
   text-align: center;
 }
@@ -680,47 +682,53 @@ img { display: block; max-width: 100%; }
   margin-right: auto;
 }
 
-/* Grey card with a coloured top band; they stack so the coloured tops peek (#4) */
+/* Plain grey cards: a big grey symbol on the left, text on the right. They all
+   stick at the same offset so each card fully covers the ones behind (#5, #6) */
 .pay-card {
   position: sticky;
   top: 120px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  min-height: 224px;
+  padding: 32px 48px;
   border-radius: 32px;
   overflow: hidden;
   background: var(--bg-card-2);
-  box-shadow: 0 -8px 26px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.6);
   will-change: transform;
 }
 
-.pay-card:nth-child(1) { top: 120px; }
-.pay-card:nth-child(2) { top: 178px; }
-.pay-card:nth-child(3) { top: 236px; }
-.pay-card:nth-child(4) { top: 294px; }
-
-/* Coloured top band (its colour is the icon colour, set inline) */
-.pay-card__top {
+/* Big grey symbol on the left */
+.pay-card__icon {
+  flex: 0 0 32%;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 108px;
 }
 
-.pay-card__top img { width: 60px; height: 60px; }
+.pay-card__icon img {
+  width: 104px;
+  height: 104px;
+  /* recolour the white glyphs to a solid grey */
+  filter: brightness(0) invert(0.42);
+}
 
 .pay-card__body {
-  padding: 30px 40px 46px;
-  text-align: center;
+  flex: 1;
+  text-align: left;
 }
 
 .pay-card__title {
-  font-size: 24px;
-  line-height: 32px;
+  font-size: 26px;
+  line-height: 34px;
   font-weight: 600;
   color: var(--text-primary);
 }
 
 .pay-card__text {
-  max-width: 360px;
-  margin: 8px auto 0;
+  max-width: 380px;
+  margin: 10px 0 0;
   font-size: 20px;
   line-height: 30px;
   color: var(--text-tertiary);
@@ -765,24 +773,21 @@ img { display: block; max-width: 100%; }
   margin-right: auto;
 }
 
+/* Uniform grey cards; all stick at the same offset so each fully covers the
+   ones behind it — no colours, no peeking back cards (#8) */
 .app-card {
   position: sticky;
   top: 120px;
   display: flex;
-  min-height: 360px;
+  min-height: 440px;
   border-radius: 32px;
   overflow: hidden;
   background: var(--bg-card-2);
-  box-shadow: 0 -8px 26px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.6);
   will-change: transform;
 }
 
-/* Successive cards stick lower so each card's grey edge + coloured panel peek */
-.app-card:nth-child(1) { top: 120px; }
-.app-card:nth-child(2) { top: 190px; }
-.app-card:nth-child(3) { top: 260px; }
-
-/* Coloured panel on the left; text centred in the panel (#3.1) */
+/* Plain grey panel on the left; text centred (#8) */
 .app-card__panel {
   flex: 0 0 38%;
   display: flex;
@@ -1013,27 +1018,25 @@ img { display: block; max-width: 100%; }
 
   .payments { padding-bottom: 96px; }
   .pay-stack { gap: 24px; }
-  .pay-card { top: 110px; }
-  .pay-card:nth-child(2) { top: 128px; }
-  .pay-card:nth-child(3) { top: 146px; }
-  .pay-card:nth-child(4) { top: 164px; }
+  /* All stick at the same offset so cards fully cover each other (#6) */
+  .pay-card { top: 96px; min-height: 168px; padding: 22px 24px; gap: 16px; }
+  .pay-card__icon { flex-basis: 30%; }
+  .pay-card__icon img { width: 68px; height: 68px; }
+  .pay-card__title { font-size: 22px; line-height: 28px; }
+  .pay-card__text { font-size: 16px; line-height: 24px; }
 
   .logos__group { gap: 64px; padding-right: 64px; }
   .logos__item { height: 26px; }
   .logos__item--stripe { height: 24px; }
   .logos__item--wide { height: 22px; }
 
-  /* Inside Musin app — stack panel over screen on small screens.
-     Bigger sticky stagger so each card's coloured panel peeks and the cards
-     visibly stack up like on desktop (#7) */
+  /* Inside Musin app — stack panel over screen; all cards stick at the same
+     offset and share a height so each fully covers the ones behind (#8) */
   .app-card {
     flex-direction: column;
-    min-height: 0;
+    min-height: 470px;
     top: 80px;
   }
-  .app-card:nth-child(1) { top: 80px; }
-  .app-card:nth-child(2) { top: 150px; }
-  .app-card:nth-child(3) { top: 220px; }
   .app-card__panel { flex-basis: auto; padding: 24px 24px 20px; }
   .app-card__title { font-size: 26px; }
   .app-card__text { font-size: 17px; line-height: 26px; }

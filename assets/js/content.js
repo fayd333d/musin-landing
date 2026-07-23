@@ -21,6 +21,8 @@ const heroData = [
   { price: "+$26", views: "467K", track: "Like It", artist: "Eliot Felix", cover: "assets/img/covers/cover-1.jpg" },
   { price: "+$48", views: "1.2M", track: "Get On", artist: "Natsha", cover: "assets/img/covers/cover-2.jpg" },
   { price: "+$81", views: "891K", track: "Sway Me", artist: "Olmoy", cover: "assets/img/covers/cover-3.jpg" },
+  { price: "+$56", views: "829K", track: "Legit Dog", artist: "Katika", cover: "assets/img/covers/cover-21.jpg" },
+  { price: "+$91", views: "1.1M", track: "Lolli", artist: "Indica Steve", cover: "assets/img/covers/cover-22.jpg" },
 ];
 
 const slides = gsap.utils.toArray(".phone-slide");
@@ -276,10 +278,12 @@ document.querySelectorAll(".genre-line").forEach((line, rowIdx) => {
 const stage = document.getElementById("createScroller");
 const wheelCards = [...stage.querySelectorAll(".video-card")];
 const N = wheelCards.length;
-let centreIndex = Math.floor(N / 2);
+let centreIndex = 0; // first screen the user sees is Video 4 (#3)
 const lastSlot = new Array(N).fill(null);
 
-/* Each card holds a real clip (Video 4-13) that plays / pauses on click (#6) */
+/* Each card holds a real clip (Video 4-13). The centre clip autoplays; when it
+   ends the wheel advances and the next one autoplays. The user can pause it or
+   change cards with the arrows / swipe (#4). */
 function pauseAllClips() {
   wheelCards.forEach((c) => {
     const v = c.querySelector("video");
@@ -287,7 +291,17 @@ function pauseAllClips() {
     c.classList.remove("is-playing");
   });
 }
-wheelCards.forEach((card) => {
+function playCentre() {
+  const card = wheelCards[centreIndex];
+  const video = card && card.querySelector("video");
+  if (!video) return;
+  try { video.currentTime = 0; } catch (e) {}
+  const p = video.play();
+  if (p && p.catch) p.catch(() => {
+    video.addEventListener("canplay", () => { const r = video.play(); if (r && r.catch) r.catch(() => {}); }, { once: true });
+  });
+}
+wheelCards.forEach((card, i) => {
   const video = card.querySelector("video");
   const btn = card.querySelector(".video-card__play");
   if (!video) return;
@@ -308,6 +322,8 @@ wheelCards.forEach((card) => {
   video.addEventListener("click", toggle);
   video.addEventListener("play", () => card.classList.add("is-playing"));
   video.addEventListener("pause", () => card.classList.remove("is-playing"));
+  // When the centre clip finishes, roll on to the next one automatically
+  video.addEventListener("ended", () => { if (i === centreIndex) advance(1); });
 });
 
 function renderWheel() {
@@ -349,9 +365,10 @@ function advance(step) {
   centreIndex = (((centreIndex + step) % N) + N) % N;
   pauseAllClips(); // stop any playing clip when the wheel moves
   renderWheel();
+  playCentre(); // autoplay the newly-centred clip (#4)
 }
 
-/* Manual only — side arrows on desktop, swipe on touch (#8). No auto-play. */
+/* Side arrows on desktop, swipe on touch; the centre clip autoplays (#4) */
 const prevBtn = document.getElementById("scrollPrev");
 const nextBtn = document.getElementById("scrollNext");
 if (prevBtn) prevBtn.addEventListener("click", () => advance(-1));
@@ -373,6 +390,7 @@ stage.classList.add("no-anim");
 renderWheel();
 void stage.offsetWidth;
 stage.classList.remove("no-anim");
+playCentre(); // start with Video 4 playing (#3, #4)
 
 /* Get paid for posting: the cards stack purely via CSS sticky positioning so
    their coloured tops peek out — no JS needed. */
