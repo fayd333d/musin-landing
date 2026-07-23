@@ -791,13 +791,14 @@ img { display: block; max-width: 100%; }
   margin-right: auto;
 }
 
-/* Grey cards; the screen fills 70% of the card on the right, text on the left.
-   Cards stagger as they stack so each card's top-left title stays visible (#8) */
+/* Screen fills 70% of the card on the right; a coloured symbol + centred text
+   on the left. Uniform height + same offset so cards fully cover each other
+   when stacked, like the pay cards (#8) */
 .app-card {
   position: sticky;
   top: 120px;
   display: flex;
-  min-height: 400px;
+  height: 400px; /* definite + equal so the screens crop and cards fully cover */
   border-radius: 32px;
   overflow: hidden;
   background: var(--bg-card-2);
@@ -805,24 +806,35 @@ img { display: block; max-width: 100%; }
   will-change: transform;
 }
 
-/* Successive cards stick lower so the whole top-left title peeks (#8) */
-.app-card:nth-child(1) { top: 120px; }
-.app-card:nth-child(2) { top: 224px; }
-.app-card:nth-child(3) { top: 328px; }
-
-/* Left column: title pinned top-left, subtext centred vertically (#8) */
+/* Left column: coloured symbol to the left of the centred title + subtitle (#8) */
 .app-card__panel {
-  position: relative;
   flex: 0 0 30%;
-  padding: 34px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 32px;
   color: #fff;
 }
 
+.app-card__symbol {
+  flex: 0 0 auto;
+  width: 52px;
+  height: 52px;
+  background-color: currentColor;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+/* Symbols + colours, in order — yellow, purple, pink (#8) */
+.app-card:nth-child(1) .app-card__symbol { color: #D9A10D; -webkit-mask-image: url("../img/icons/music-note.svg"); mask-image: url("../img/icons/music-note.svg"); }
+.app-card:nth-child(2) .app-card__symbol { color: #7D4AC7; -webkit-mask-image: url("../img/icons/exclamation.svg"); mask-image: url("../img/icons/exclamation.svg"); }
+.app-card:nth-child(3) .app-card__symbol { color: #C94F82; -webkit-mask-image: url("../img/icons/pay-dollar.svg"); mask-image: url("../img/icons/pay-dollar.svg"); }
+
 .app-card__title {
-  position: absolute;
-  top: 34px;
-  left: 34px;
-  right: 20px;
   font-size: 26px;
   line-height: 1.15;
   font-weight: 700;
@@ -830,13 +842,9 @@ img { display: block; max-width: 100%; }
 }
 
 .app-card__text {
-  position: absolute;
-  top: 50%;
-  left: 34px;
-  right: 20px;
-  transform: translateY(-50%);
-  font-size: 19px;
-  line-height: 28px;
+  margin-top: 8px;
+  font-size: 18px;
+  line-height: 26px;
   color: rgba(255, 255, 255, 0.86);
 }
 
@@ -1054,14 +1062,13 @@ img { display: block; max-width: 100%; }
 
   /* Inside Musin app — keep the text-left / screen-right layout; stagger the
      tops so the titles peek in a staircase (#8) */
-  .app-card { min-height: 300px; top: 84px; }
-  .app-card:nth-child(1) { top: 84px; }
-  .app-card:nth-child(2) { top: 150px; }
-  .app-card:nth-child(3) { top: 216px; }
-  .app-card__panel { flex-basis: 42%; padding: 18px; }
-  .app-card__title { font-size: 18px; top: 18px; left: 18px; right: 12px; letter-spacing: -0.3px; }
-  .app-card__text { font-size: 13px; line-height: 19px; left: 18px; right: 12px; }
-  .app-card__screen { flex-basis: 58%; }
+  /* All stick at the same offset so cards fully cover each other (#8) */
+  .app-card { height: 280px; top: 88px; }
+  .app-card__panel { flex-basis: 44%; padding: 16px; gap: 12px; }
+  .app-card__symbol { width: 36px; height: 36px; }
+  .app-card__title { font-size: 19px; letter-spacing: -0.3px; }
+  .app-card__text { font-size: 13px; line-height: 19px; }
+  .app-card__screen { flex-basis: 56%; }
 
   .faq { padding: 96px 0; }
   .faq-list { margin-top: 40px; }

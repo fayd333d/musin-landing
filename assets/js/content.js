@@ -41,7 +41,7 @@ const notifs = [
 
 let heroIndex = 0;
 applyHeroData(heroData[0]);
-playCurrentClip(slides[0]);
+// Playback starts when the hero scrolls into view — see the observer below (#2)
 
 function applyHeroData(d) {
   rotateEls.price.textContent = d.price;
@@ -53,19 +53,22 @@ function applyHeroData(d) {
   rotateEls.cover.style.backgroundPosition = "center";
 }
 
+/* Only play while the hero is on screen (#2) */
+let heroInView = false;
+
 /* Restart the given clip from the top and pause the others so each video
-   plays exactly its 3-second window before the next one swipes in (#1). */
+   plays its ~3-second window before the next one swipes in (#1). */
 function playCurrentClip(el) {
   slides.forEach((s) => {
     if (typeof s.pause === "function" && s !== el) s.pause();
   });
-  if (el && typeof el.play === "function") {
+  if (el && typeof el.play === "function" && heroInView) {
     try { el.currentTime = 0; } catch (e) {}
     const p = el.play();
     if (p && p.catch) {
       p.catch(() => {
         // Not buffered yet — retry once the clip can play
-        el.addEventListener("canplay", () => { const r = el.play(); if (r && r.catch) r.catch(() => {}); }, { once: true });
+        el.addEventListener("canplay", () => { const r = el.play(); if (r && r.catch && heroInView) r.catch(() => {}); }, { once: true });
       });
     }
   }
@@ -85,12 +88,14 @@ function nextHeroSlide() {
      out while the next one rises from below in sync (#5). Self-scheduling so
      rotations never overlap even when rAF is throttled. */
   const tl = gsap.timeline({
-    onComplete: () => gsap.delayedCall(1.9, nextHeroSlide),
+    onComplete: () => gsap.delayedCall(2.4, nextHeroSlide),
   });
-  tl.to(prev, { yPercent: -100, scale: 0.96, duration: 0.5, ease: "power3.in" }, 0)
+  // Let the clip play its ~3 s, then swipe fast so the swap lands right as it
+  // loops — the restart is hidden behind the quick transition (#1)
+  tl.to(prev, { yPercent: -100, scale: 0.96, duration: 0.3, ease: "power3.in" }, 0)
     .to(next, {
       yPercent: 0,
-      duration: 0.5,
+      duration: 0.3,
       ease: "power3.out",
       onComplete: () => {
         slides.forEach((s) => s !== next && gsap.set(s, { visibility: "hidden", yPercent: 0, scale: 1 }));
@@ -101,9 +106,33 @@ function nextHeroSlide() {
     .to(notifs, { opacity: 1, y: 0, duration: 0.28, stagger: 0.05, ease: "power2.out" });
 }
 
-if (!prefersReducedMotion) {
-  // Start the swap before the 3-second clip loops, so it never glitch-restarts (#1)
-  gsap.delayedCall(2.4, nextHeroSlide);
+/* Start playing only once the hero is scrolled into view; pause when it leaves
+   and resume when it comes back (#2) */
+let heroStarted = false;
+const heroSection = document.getElementById("hero");
+if (heroSection) {
+  const heroObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        heroInView = entry.isIntersecting;
+        const current = slides[heroIndex % slides.length];
+        if (entry.isIntersecting) {
+          if (!heroStarted) {
+            heroStarted = true;
+            playCurrentClip(slides[0]);
+            if (!prefersReducedMotion) gsap.delayedCall(2.7, nextHeroSlide);
+          } else if (current && current.paused && typeof current.play === "function") {
+            const p = current.play();
+            if (p && p.catch) p.catch(() => {});
+          }
+        } else if (current && typeof current.pause === "function") {
+          current.pause();
+        }
+      });
+    },
+    { threshold: 0.4 }
+  );
+  heroObserver.observe(heroSection);
 }
 
 /* ---------- Track marquee (replaces "tracks available right now") ----------
