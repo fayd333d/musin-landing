@@ -707,12 +707,30 @@ img { display: block; max-width: 100%; }
   justify-content: center;
 }
 
-.pay-card__icon img {
+/* The glyph is drawn as a mask filled with the card's colour, so only the
+   symbol is coloured — the card itself stays grey (#4) */
+.pay-card__icon::before {
+  content: "";
   width: 104px;
   height: 104px;
-  /* recolour the white glyphs to a solid grey */
-  filter: brightness(0) invert(0.42);
+  background-color: currentColor;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
 }
+
+/* Symbol colours + glyphs, in the original order (paths relative to this file) (#4) */
+.pay-card:nth-child(1) .pay-card__icon { color: #2AC4B1; }
+.pay-card:nth-child(1) .pay-card__icon::before { -webkit-mask-image: url("../img/icons/pay-dollar.svg"); mask-image: url("../img/icons/pay-dollar.svg"); }
+.pay-card:nth-child(2) .pay-card__icon { color: #E98532; }
+.pay-card:nth-child(2) .pay-card__icon::before { -webkit-mask-image: url("../img/icons/pay-share.svg"); mask-image: url("../img/icons/pay-share.svg"); }
+.pay-card:nth-child(3) .pay-card__icon { color: #4F8FDF; }
+.pay-card:nth-child(3) .pay-card__icon::before { -webkit-mask-image: url("../img/icons/pay-check.svg"); mask-image: url("../img/icons/pay-check.svg"); }
+.pay-card:nth-child(4) .pay-card__icon { color: #20B657; }
+.pay-card:nth-child(4) .pay-card__icon::before { -webkit-mask-image: url("../img/icons/pay-wallet.svg"); mask-image: url("../img/icons/pay-wallet.svg"); }
 
 .pay-card__body {
   flex: 1;
@@ -773,13 +791,13 @@ img { display: block; max-width: 100%; }
   margin-right: auto;
 }
 
-/* Uniform grey cards; all stick at the same offset so each fully covers the
-   ones behind it — no colours, no peeking back cards (#8) */
+/* Grey cards; the screen fills 70% of the card on the right, text on the left.
+   Cards stagger as they stack so each card's top-left title stays visible (#8) */
 .app-card {
   position: sticky;
   top: 120px;
   display: flex;
-  min-height: 440px;
+  min-height: 400px;
   border-radius: 32px;
   overflow: hidden;
   background: var(--bg-card-2);
@@ -787,48 +805,52 @@ img { display: block; max-width: 100%; }
   will-change: transform;
 }
 
-/* Plain grey panel on the left; text centred (#8) */
+/* Successive cards stick lower so the whole top-left title peeks (#8) */
+.app-card:nth-child(1) { top: 120px; }
+.app-card:nth-child(2) { top: 224px; }
+.app-card:nth-child(3) { top: 328px; }
+
+/* Left column: title pinned top-left, subtext centred vertically (#8) */
 .app-card__panel {
-  flex: 0 0 38%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 40px;
+  position: relative;
+  flex: 0 0 30%;
+  padding: 34px;
   color: #fff;
 }
 
 .app-card__title {
-  font-size: 32px;
+  position: absolute;
+  top: 34px;
+  left: 34px;
+  right: 20px;
+  font-size: 26px;
   line-height: 1.15;
   font-weight: 700;
-  letter-spacing: -0.6px;
+  letter-spacing: -0.5px;
 }
 
 .app-card__text {
-  margin-top: 12px;
-  max-width: 340px;
-  font-size: 20px;
-  line-height: 30px;
+  position: absolute;
+  top: 50%;
+  left: 34px;
+  right: 20px;
+  transform: translateY(-50%);
+  font-size: 19px;
+  line-height: 28px;
   color: rgba(255, 255, 255, 0.86);
 }
 
-/* App UI screen framed on the right — transparent so the grey card body shows
-   through in the stacked peek (that grey edge is what reads as "stacking") */
+/* App UI screen fills the whole right side of the card (70%) (#8) */
 .app-card__screen {
-  flex: 1 1 62%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 28px;
-  background: transparent;
+  flex: 0 0 70%;
+  overflow: hidden;
 }
 
 .app-card__screen img {
-  max-width: 100%;
-  max-height: 320px;
-  border-radius: 14px;
-  background: var(--bg);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left top;
 }
 
 /* ============ FAQ ============ */
@@ -1030,18 +1052,16 @@ img { display: block; max-width: 100%; }
   .logos__item--stripe { height: 24px; }
   .logos__item--wide { height: 22px; }
 
-  /* Inside Musin app — stack panel over screen; all cards stick at the same
-     offset and share a height so each fully covers the ones behind (#8) */
-  .app-card {
-    flex-direction: column;
-    min-height: 470px;
-    top: 80px;
-  }
-  .app-card__panel { flex-basis: auto; padding: 24px 24px 20px; }
-  .app-card__title { font-size: 26px; }
-  .app-card__text { font-size: 17px; line-height: 26px; }
-  .app-card__screen { padding: 20px; }
-  .app-card__screen img { max-height: 260px; }
+  /* Inside Musin app — keep the text-left / screen-right layout; stagger the
+     tops so the titles peek in a staircase (#8) */
+  .app-card { min-height: 300px; top: 84px; }
+  .app-card:nth-child(1) { top: 84px; }
+  .app-card:nth-child(2) { top: 150px; }
+  .app-card:nth-child(3) { top: 216px; }
+  .app-card__panel { flex-basis: 42%; padding: 18px; }
+  .app-card__title { font-size: 18px; top: 18px; left: 18px; right: 12px; letter-spacing: -0.3px; }
+  .app-card__text { font-size: 13px; line-height: 19px; left: 18px; right: 12px; }
+  .app-card__screen { flex-basis: 58%; }
 
   .faq { padding: 96px 0; }
   .faq-list { margin-top: 40px; }

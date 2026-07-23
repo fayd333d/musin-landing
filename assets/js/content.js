@@ -85,12 +85,12 @@ function nextHeroSlide() {
      out while the next one rises from below in sync (#5). Self-scheduling so
      rotations never overlap even when rAF is throttled. */
   const tl = gsap.timeline({
-    onComplete: () => gsap.delayedCall(2.4, nextHeroSlide),
+    onComplete: () => gsap.delayedCall(1.9, nextHeroSlide),
   });
-  tl.to(prev, { yPercent: -100, scale: 0.96, duration: 0.6, ease: "power3.in" }, 0)
+  tl.to(prev, { yPercent: -100, scale: 0.96, duration: 0.5, ease: "power3.in" }, 0)
     .to(next, {
       yPercent: 0,
-      duration: 0.6,
+      duration: 0.5,
       ease: "power3.out",
       onComplete: () => {
         slides.forEach((s) => s !== next && gsap.set(s, { visibility: "hidden", yPercent: 0, scale: 1 }));
@@ -102,7 +102,8 @@ function nextHeroSlide() {
 }
 
 if (!prefersReducedMotion) {
-  gsap.delayedCall(3, nextHeroSlide);
+  // Start the swap before the 3-second clip loops, so it never glitch-restarts (#1)
+  gsap.delayedCall(2.4, nextHeroSlide);
 }
 
 /* ---------- Track marquee (replaces "tracks available right now") ----------
@@ -322,8 +323,8 @@ wheelCards.forEach((card, i) => {
   video.addEventListener("click", toggle);
   video.addEventListener("play", () => card.classList.add("is-playing"));
   video.addEventListener("pause", () => card.classList.remove("is-playing"));
-  // When the centre clip finishes, roll on to the next one automatically
-  video.addEventListener("ended", () => { if (i === centreIndex) advance(1); });
+  // When a clip finishes, show its play button again (no auto-advance, #3)
+  video.addEventListener("ended", () => card.classList.remove("is-playing"));
 });
 
 function renderWheel() {
@@ -363,9 +364,8 @@ function renderWheel() {
 
 function advance(step) {
   centreIndex = (((centreIndex + step) % N) + N) % N;
-  pauseAllClips(); // stop any playing clip when the wheel moves
+  pauseAllClips(); // stop any playing clip when the wheel moves; user clicks play (#3)
   renderWheel();
-  playCentre(); // autoplay the newly-centred clip (#4)
 }
 
 /* Side arrows on desktop, swipe on touch; the centre clip autoplays (#4) */
