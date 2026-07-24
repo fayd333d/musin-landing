@@ -701,7 +701,7 @@ img { display: block; max-width: 100%; }
 
 /* Big grey symbol on the left */
 .pay-card__icon {
-  flex: 0 0 32%;
+  flex: 0 0 38%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -709,11 +709,13 @@ img { display: block; max-width: 100%; }
   color: var(--bg);
 }
 
-/* The glyph is drawn as a mask filled with the icon colour */
+/* The glyph is drawn as a mask filled with the icon colour; sized to fill most
+   of the left side of the card */
 .pay-card__icon::before {
   content: "";
-  width: 104px;
-  height: 104px;
+  width: 100%;
+  max-width: 200px;
+  aspect-ratio: 1 / 1;
   background-color: currentColor;
   -webkit-mask-position: center;
   mask-position: center;
