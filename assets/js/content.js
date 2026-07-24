@@ -39,6 +39,10 @@ const notifs = [
   document.getElementById("notifTrack"),
 ];
 
+// Preload every track cover so they appear instantly instead of popping in
+// on top of a placeholder box (#1)
+heroData.forEach((d) => { const im = new Image(); im.src = d.cover; });
+
 let heroIndex = 0;
 applyHeroData(heroData[0]);
 // Playback starts when the hero scrolls into view — see the observer below (#2)

@@ -375,9 +375,11 @@ img { display: block; max-width: 100%; }
   width: 40px;
   height: 40px;
   border-radius: 8px;
-  background: var(--orange);
+  /* neutral dark fallback so there's no coloured box before the cover loads (#1) */
+  background-color: var(--bg-card-2);
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
@@ -705,8 +707,8 @@ img { display: block; max-width: 100%; }
   display: flex;
   align-items: center;
   justify-content: center;
-  /* symbols are black, matching the main background (#2) */
-  color: var(--bg);
+  /* white symbols (project text colour) */
+  color: var(--text-primary);
 }
 
 /* The glyph is drawn as a mask filled with the icon colour; sized to fill most
