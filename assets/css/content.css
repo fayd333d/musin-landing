@@ -531,7 +531,7 @@ img { display: block; max-width: 100%; }
 .genre-tag .hash { opacity: 0.45; margin-right: 1px; }
 
 /* ============ Create content with music ============ */
-.create { padding: 48px 0 128px; }
+.create { padding: 104px 0 128px; }
 
 .create__head {
   display: flex;
@@ -694,8 +694,7 @@ img { display: block; max-width: 100%; }
   padding: 32px 48px;
   border-radius: 32px;
   overflow: hidden;
-  /* black, matching the main page background (#2) */
-  background: var(--bg);
+  background: var(--bg-card-2);
   box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.6);
   will-change: transform;
 }
@@ -706,10 +705,11 @@ img { display: block; max-width: 100%; }
   display: flex;
   align-items: center;
   justify-content: center;
+  /* symbols are black, matching the main background (#2) */
+  color: var(--bg);
 }
 
-/* The glyph is drawn as a mask filled with the card's colour, so only the
-   symbol is coloured — the card itself stays grey (#4) */
+/* The glyph is drawn as a mask filled with the icon colour */
 .pay-card__icon::before {
   content: "";
   width: 104px;
@@ -723,14 +723,10 @@ img { display: block; max-width: 100%; }
   mask-repeat: no-repeat;
 }
 
-/* Symbol colours + glyphs, in the original order (paths relative to this file) (#4) */
-.pay-card:nth-child(1) .pay-card__icon { color: #2AC4B1; }
+/* Each card's glyph (paths relative to this file) */
 .pay-card:nth-child(1) .pay-card__icon::before { -webkit-mask-image: url("../img/icons/pay-dollar.svg"); mask-image: url("../img/icons/pay-dollar.svg"); }
-.pay-card:nth-child(2) .pay-card__icon { color: #E98532; }
 .pay-card:nth-child(2) .pay-card__icon::before { -webkit-mask-image: url("../img/icons/pay-share.svg"); mask-image: url("../img/icons/pay-share.svg"); }
-.pay-card:nth-child(3) .pay-card__icon { color: #4F8FDF; }
 .pay-card:nth-child(3) .pay-card__icon::before { -webkit-mask-image: url("../img/icons/pay-check.svg"); mask-image: url("../img/icons/pay-check.svg"); }
-.pay-card:nth-child(4) .pay-card__icon { color: #20B657; }
 .pay-card:nth-child(4) .pay-card__icon::before { -webkit-mask-image: url("../img/icons/pay-wallet.svg"); mask-image: url("../img/icons/pay-wallet.svg"); }
 
 .pay-card__body {
