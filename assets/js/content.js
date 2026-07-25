@@ -188,24 +188,26 @@ gsap.to(marqueeInner, {
   repeat: -1,
 });
 
-/* ---------- Track counter (corrections #2) ----------
-   The base value is derived from the real clock, so every visitor sees the
-   same number and it grows steadily over time — it never resets on reload.
-   A locally-stored high-water mark keeps it from ever ticking backwards, and
-   it is capped at 5,000. Occasional live nudges add a little movement. */
+/* ---------- Track counter ----------
+   The number gently fluctuates between COUNT_MIN and COUNT_MAX. A slow
+   triangle wave off the real clock sets the starting value (so it drifts over
+   time and is the same for everyone), then live nudges keep it moving. */
 const countEl = document.getElementById("trackCount");
-const COUNT_BASE = 3436;
+const COUNT_MIN = 3764;
+const COUNT_MAX = 3873;
 const COUNT_EPOCH = Date.UTC(2026, 6, 1); // 1 Jul 2026
-const COUNT_GROWTH_MS = 22 * 60 * 1000; // +1 roughly every 22 minutes
-const COUNT_MAX = 4998; // never reach 4,999 or 5,000
+const COUNT_STEP_MS = 8 * 60 * 1000; // drift one step every ~8 minutes
 
-function deterministicCount() {
-  const grown = COUNT_BASE + Math.floor((Date.now() - COUNT_EPOCH) / COUNT_GROWTH_MS);
-  return Math.min(COUNT_MAX, Math.max(COUNT_BASE, grown));
+const clampCount = (n) => Math.min(COUNT_MAX, Math.max(COUNT_MIN, Math.round(n)));
+
+function baseCount() {
+  const span = COUNT_MAX - COUNT_MIN; // 109
+  const step = Math.floor((Date.now() - COUNT_EPOCH) / COUNT_STEP_MS);
+  const tri = Math.abs((step % (2 * span)) - span); // triangle wave 0..span
+  return COUNT_MIN + tri;
 }
 
-const storedCount = parseInt(localStorage.getItem("musinTrackCount") || "0", 10) || 0;
-let trackCount = Math.min(COUNT_MAX, Math.max(deterministicCount(), storedCount));
+let trackCount = baseCount();
 
 /* Scale the number so its rendered width matches the 'tracks available now'
    line beneath it — they share the same width border (correction #3). Width
@@ -236,11 +238,6 @@ renderCount(trackCount);
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitStatWidth);
 window.addEventListener("resize", fitStatWidth);
 
-function persistCount() {
-  localStorage.setItem("musinTrackCount", String(Math.round(trackCount)));
-}
-persistCount();
-
 function tweenCount(to) {
   gsap.to({ v: trackCount }, {
     v: to,
@@ -251,19 +248,16 @@ function tweenCount(to) {
     },
   });
   trackCount = to;
-  persistCount();
 }
 
-/* Nudge by exactly 1, at most 3 times in a single session (#3) */
-let countEventsFired = 0;
+/* Keep the number gently fluctuating, always within [COUNT_MIN, COUNT_MAX] */
 function scheduleCountEvent() {
-  if (countEventsFired >= 3) return;
-  gsap.delayedCall(gsap.utils.random(30, 70), () => {
-    countEventsFired += 1;
-    const goesUp = Math.random() < 0.78; // generally up
-    let next = trackCount + (goesUp ? 1 : -1); // never more than 1 at a time
-    next = Math.min(COUNT_MAX, Math.max(COUNT_BASE, next)); // never below base, cap 5,000
-    tweenCount(next);
+  gsap.delayedCall(gsap.utils.random(20, 45), () => {
+    const goesUp = trackCount <= COUNT_MIN ? true
+                 : trackCount >= COUNT_MAX ? false
+                 : Math.random() < 0.5;
+    const delta = Math.ceil(Math.random() * 2); // 1..2 at a time
+    tweenCount(clampCount(trackCount + (goesUp ? delta : -delta)));
     scheduleCountEvent();
   });
 }
