@@ -397,8 +397,9 @@ function renderWheel() {
 
 function advance(step) {
   centreIndex = (((centreIndex + step) % N) + N) % N;
-  pauseAllClips(); // stop any playing clip when the wheel moves; user clicks play (#3)
+  pauseAllClips(); // stop the clip we're leaving
   renderWheel();
+  playCentre(); // autoplay the newly-centred clip when the user switches
 }
 
 /* Side arrows on desktop, swipe on touch; the centre clip autoplays (#4) */
