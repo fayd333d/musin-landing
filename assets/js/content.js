@@ -197,7 +197,7 @@ const countEl = document.getElementById("trackCount");
 const COUNT_BASE = 3436;
 const COUNT_EPOCH = Date.UTC(2026, 6, 1); // 1 Jul 2026
 const COUNT_GROWTH_MS = 22 * 60 * 1000; // +1 roughly every 22 minutes
-const COUNT_MAX = 5000;
+const COUNT_MAX = 4998; // never reach 4,999 or 5,000
 
 function deterministicCount() {
   const grown = COUNT_BASE + Math.floor((Date.now() - COUNT_EPOCH) / COUNT_GROWTH_MS);

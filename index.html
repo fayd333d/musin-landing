@@ -11,8 +11,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600&display=swap" rel="stylesheet">
   <!-- Hero is the first thing on screen: fetch its first cover ASAP (the first
        clip is prioritised on the <video> element itself to avoid a double fetch) -->
+  <link rel="preload" as="image" href="assets/img/poster/poster-1.jpg" fetchpriority="high">
   <link rel="preload" as="image" href="assets/img/covers/cover-1.jpg" fetchpriority="high">
-  <link rel="stylesheet" href="assets/css/content.css?v=20">
+  <link rel="stylesheet" href="assets/css/content.css?v=21">
 </head>
 <body>
 
@@ -59,11 +60,11 @@
             <div class="main-phone">
               <div class="main-phone__screen" id="phoneScreen">
                 <!-- Real creator clips: Video 1, 2, 3 cycle every 3 s (#1) -->
-                <video class="phone-slide is-current" src="assets/video/video-1.mp4" muted loop playsinline preload="auto" fetchpriority="high"></video>
-                <video class="phone-slide" src="assets/video/video-2.mp4" muted loop playsinline preload="auto" fetchpriority="low"></video>
-                <video class="phone-slide" src="assets/video/video-3.mp4" muted loop playsinline preload="auto" fetchpriority="low"></video>
-                <video class="phone-slide" src="assets/video/video-14.mp4" muted loop playsinline preload="metadata"></video>
-                <video class="phone-slide" src="assets/video/video-15.mp4" muted loop playsinline preload="metadata"></video>
+                <video class="phone-slide is-current" poster="assets/img/poster/poster-1.jpg" src="assets/video/video-1.mp4" muted loop playsinline preload="auto" fetchpriority="high"></video>
+                <video class="phone-slide" poster="assets/img/poster/poster-2.jpg" src="assets/video/video-2.mp4" muted loop playsinline preload="auto" fetchpriority="low"></video>
+                <video class="phone-slide" poster="assets/img/poster/poster-3.jpg" src="assets/video/video-3.mp4" muted loop playsinline preload="auto" fetchpriority="low"></video>
+                <video class="phone-slide" poster="assets/img/poster/poster-14.jpg" src="assets/video/video-14.mp4" muted loop playsinline preload="metadata"></video>
+                <video class="phone-slide" poster="assets/img/poster/poster-15.jpg" src="assets/video/video-15.mp4" muted loop playsinline preload="metadata"></video>
               </div>
               <img src="assets/img/iphone-frame.png" alt="" class="main-phone__frame">
 
@@ -341,6 +342,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-  <script src="assets/js/content.js?v=20"></script>
+  <script src="assets/js/content.js?v=21"></script>
 </body>
 </html>
