@@ -123,8 +123,21 @@ if (heroSection) {
         if (entry.isIntersecting) {
           if (!heroStarted) {
             heroStarted = true;
-            playCurrentClip(slides[0]);
-            if (!prefersReducedMotion) gsap.delayedCall(2.7, nextHeroSlide);
+            // Don't start cycling until the first clip is buffered enough to
+            // play through, so it doesn't stutter/advance mid-load (#1)
+            const first = slides[0];
+            let begun = false;
+            const begin = () => {
+              if (begun) return;
+              begun = true;
+              playCurrentClip(first);
+              if (!prefersReducedMotion) gsap.delayedCall(2.7, nextHeroSlide);
+            };
+            if (first.readyState >= 4) begin();
+            else {
+              first.addEventListener("canplaythrough", begin, { once: true });
+              setTimeout(begin, 4000); // fallback so it can never stall
+            }
           } else if (current && current.paused && typeof current.play === "function") {
             const p = current.play();
             if (p && p.catch) p.catch(() => {});
