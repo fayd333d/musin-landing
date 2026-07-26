@@ -13,7 +13,7 @@
        clip is prioritised on the <video> element itself to avoid a double fetch) -->
   <link rel="preload" as="image" href="assets/img/poster/poster-1.jpg" fetchpriority="high">
   <link rel="preload" as="image" href="assets/img/covers/cover-1.jpg" fetchpriority="high">
-  <link rel="stylesheet" href="assets/css/content.css?v=23">
+  <link rel="stylesheet" href="assets/css/content.css?v=25">
 </head>
 <body>
 
@@ -229,7 +229,10 @@
               </div>
             </div>
             <div class="app-card__screen">
-              <img src="assets/img/app/app-browse.png" alt="Browse active campaigns in the Musin app" loading="lazy">
+              <picture>
+                <source media="(max-width: 860px)" srcset="assets/img/app/app-CC-phone1.svg">
+                <img src="assets/img/app/app-CC-PC1.svg" alt="Browse active campaigns in the Musin app" loading="lazy">
+              </picture>
             </div>
           </div>
           <div class="app-card">
@@ -240,7 +243,10 @@
               </div>
             </div>
             <div class="app-card__screen">
-              <img src="assets/img/app/app-select.png" alt="Track and campaign details in the Musin app" loading="lazy">
+              <picture>
+                <source media="(max-width: 860px)" srcset="assets/img/app/app-CC-phone2.svg">
+                <img src="assets/img/app/app-CC-PC2.svg" alt="Track and campaign details in the Musin app" loading="lazy">
+              </picture>
             </div>
           </div>
           <div class="app-card">
@@ -251,7 +257,10 @@
               </div>
             </div>
             <div class="app-card__screen">
-              <img src="assets/img/app/app-payments.png" alt="Payments and earnings dashboard in the Musin app" loading="lazy">
+              <picture>
+                <source media="(max-width: 860px)" srcset="assets/img/app/app-CC-phone3.svg">
+                <img src="assets/img/app/app-CC-PC3.svg" alt="Payments and earnings dashboard in the Musin app" loading="lazy">
+              </picture>
             </div>
           </div>
         </div>
@@ -342,6 +351,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-  <script src="assets/js/content.js?v=23"></script>
+  <script src="assets/js/content.js?v=25"></script>
 </body>
 </html>

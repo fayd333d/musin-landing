@@ -840,12 +840,12 @@ img { display: block; max-width: 100%; }
   padding: 28px;
 }
 
+.app-card__screen picture { display: contents; }
+
+/* The SVG screens carry their own rounded dark panel, so no extra frame */
 .app-card__screen img {
   max-width: 100%;
-  max-height: 320px;
-  border-radius: 14px;
-  background: var(--bg);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  max-height: 340px;
 }
 
 /* ============ FAQ ============ */
