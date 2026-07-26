@@ -13,7 +13,7 @@
        clip is prioritised on the <video> element itself to avoid a double fetch) -->
   <link rel="preload" as="image" href="assets/img/poster/poster-1.jpg" fetchpriority="high">
   <link rel="preload" as="image" href="assets/img/covers/cover-1.jpg" fetchpriority="high">
-  <link rel="stylesheet" href="assets/css/content.css?v=26">
+  <link rel="stylesheet" href="assets/css/content.css?v=27">
 </head>
 <body>
 
@@ -179,13 +179,13 @@
             <div class="pay-card__icon" style="--sym:url('assets/img/icons/pay-share.svg')"></div>
             <div class="pay-card__body">
               <h3 class="pay-card__title">Create and post</h3>
-              <p class="pay-card__text">Create content with your selected track and publish it.</p>
+              <p class="pay-card__text">Create content with the selected track and publish it.</p>
             </div>
           </div>
           <div class="pay-card">
             <div class="pay-card__icon" style="--sym:url('assets/img/icons/pay-check.svg')"></div>
             <div class="pay-card__body">
-              <h3 class="pay-card__title">Submit publication link</h3>
+              <h3 class="pay-card__title">Submit link</h3>
               <p class="pay-card__text">Add your publication link so the artist can confirm it.</p>
             </div>
           </div>
@@ -193,7 +193,7 @@
             <div class="pay-card__icon" style="--sym:url('assets/img/icons/pay-wallet.svg')"></div>
             <div class="pay-card__body">
               <h3 class="pay-card__title">Get paid</h3>
-              <p class="pay-card__text">Payment is released after confirmation or when the music campaign ends.</p>
+              <p class="pay-card__text">Payment is released after artist confirmation or automatically if no dispute is opened.</p>
             </div>
           </div>
         </div>
@@ -225,7 +225,7 @@
             <div class="app-card__panel">
               <div class="app-card__copy">
                 <h3 class="app-card__title">Discover music</h3>
-                <p class="app-card__text">Browse active music campaigns and preview their tracks.</p>
+                <p class="app-card__text">Find and receive tracks that match your preferences.</p>
               </div>
             </div>
             <div class="app-card__screen">
@@ -239,7 +239,7 @@
             <div class="app-card__panel">
               <div class="app-card__copy">
                 <h3 class="app-card__title">Select tracks</h3>
-                <p class="app-card__text">Click “+ Select” to join a campaign and start working with the track.</p>
+                <p class="app-card__text">Click “+ Select” to start working with the track.</p>
               </div>
             </div>
             <div class="app-card__screen">
@@ -253,7 +253,7 @@
             <div class="app-card__panel">
               <div class="app-card__copy">
                 <h3 class="app-card__title">Receive payments</h3>
-                <p class="app-card__text">Review your payments, total earnings and withdraw your funds.</p>
+                <p class="app-card__text">View all your payments, total earnings and withdraw</p>
               </div>
             </div>
             <div class="app-card__screen">
@@ -273,8 +273,8 @@
         <h2 class="section-title">FAQ</h2>
         <div class="faq-list">
           <details class="faq-item" open>
-            <summary>Do I need a minimum number of followers?</summary>
-            <p>No. Musin is open to creators of all sizes — from small niche pages to large audiences.</p>
+            <summary>How many followers do I need?</summary>
+            <p>Just 100 followers are enough to get started. Musin is built for creators of all sizes.</p>
           </details>
           <details class="faq-item">
             <summary>Which platforms are supported?</summary>
@@ -282,27 +282,23 @@
           </details>
           <details class="faq-item">
             <summary>When do I get paid?</summary>
-            <p>Payouts are released after your post is approved by the campaign. Payments are sent directly to your Stripe account.</p>
+            <p>Payment is released after the artist confirms your post, or automatically if no dispute is opened. Funds are sent to your connected Stripe account.</p>
           </details>
           <details class="faq-item">
-            <summary>Do I have to post every track I accept?</summary>
-            <p>No. Only accept tracks you genuinely want to use in your content.</p>
+            <summary>Do I have to post with every track?</summary>
+            <p>No. You select tracks you like to use in your content.</p>
           </details>
           <details class="faq-item">
-            <summary>Can I choose the music myself?</summary>
-            <p>Yes. You receive or browse music and choose tracks that fit your style, audience, and content.</p>
+            <summary>How can I find tracks to use?</summary>
+            <p>You can search for available music or receive tracks directly, then select the ones that you like.</p>
           </details>
           <details class="faq-item">
             <summary>Is it free?</summary>
-            <p>Yes. Creating an account and browsing campaigns is completely free.</p>
+            <p>Yes. Creating an account and finding tracks is completely free. Musin charges a 20% commission only when you receive payment for a confirmed post.</p>
           </details>
           <details class="faq-item">
             <summary>How are payouts handled?</summary>
             <p>All payouts are processed securely through Stripe and sent in your local currency where supported.</p>
-          </details>
-          <details class="faq-item">
-            <summary>Can artists or labels contact me directly?</summary>
-            <p>Yes. Some music campaigns can be offered to you directly from artists, labels, or music teams interested in your content style.</p>
           </details>
         </div>
       </div>
@@ -351,6 +347,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-  <script src="assets/js/content.js?v=26"></script>
+  <script src="assets/js/content.js?v=27"></script>
 </body>
 </html>

@@ -900,7 +900,8 @@ img { display: block; max-width: 100%; }
 .faq-item[open] summary::before { content: "−"; }
 
 .faq-item p {
-  margin: 8px 0 4px 40px;
+  /* answer sits a couple of spaces forward of the question when open (#5) */
+  margin: 8px 0 4px 52px;
   font-size: 16px;
   line-height: 24px;
   color: var(--text-tertiary);
@@ -943,7 +944,8 @@ img { display: block; max-width: 100%; }
 .footer__top {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  /* drop the page links to the bottom-right, level with the social icons (#6) */
+  align-items: flex-end;
   gap: 64px;
 }
 
@@ -963,9 +965,9 @@ img { display: block; max-width: 100%; }
 
 .footer__links {
   display: flex;
-  flex-wrap: wrap;
-  gap: 16px 40px;
-  align-items: flex-start;
+  flex-wrap: nowrap;
+  gap: 16px 32px;
+  align-items: center;
 }
 
 .footer__links a {
@@ -1060,7 +1062,7 @@ img { display: block; max-width: 100%; }
   .faq-list { margin-top: 40px; }
   .faq-item { padding: 16px; }
   .faq-item summary { font-size: 16px; line-height: 24px; }
-  .faq-item p { margin-left: 40px; font-size: 15px; }
+  .faq-item p { margin-left: 48px; font-size: 15px; }
 
   .footer__top { gap: 32px; }
   .footer__links { gap: 12px 28px; }
