@@ -1,0 +1,223 @@
+/* ============ Musin — Music Artists landing ============
+   Loaded on top of content.css: the shell (nav, sections, stacking cards,
+   footer) is shared with the Content Creators landing and only the pieces that
+   differ for artists are redefined here. */
+
+/* ============ Hero: campaign track card above the example screen (#1) ============
+   The mockup column grows to hold the card; the phone is pushed down below it
+   but keeps the same scale and floating badges as the Content landing. */
+.hero-mockup {
+  width: min(340px, 100%);
+  height: 750px;
+}
+
+/* clears the campaign card (~143px) plus a little breathing room */
+.main-phone { top: 166px; }
+
+.campaign-card {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  width: 100%;
+  padding: 14px;
+  border-radius: 24px;
+  background: var(--bg-card-2);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.55);
+}
+
+/* Cover + title/artist row, on its own slightly lighter shelf */
+.campaign-card__track {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 16px;
+  background: var(--bg-elevated);
+}
+
+.campaign-card__cover {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  flex: 0 0 auto;
+}
+
+.campaign-card__title {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  color: var(--text-primary);
+}
+
+.campaign-card__artist {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--text-dim);
+}
+
+/* Posts / Spend / Views / Streams, counting up from 0 (#1) */
+.campaign-card__stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  margin-top: 14px;
+  padding: 0 4px 2px;
+}
+
+.campaign-stat { text-align: left; }
+
+.campaign-stat__label {
+  font-size: 11px;
+  line-height: 16px;
+  color: var(--text-dim);
+}
+
+.campaign-stat__value {
+  margin-top: 1px;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 22px;
+  letter-spacing: -0.3px;
+  color: var(--text-primary);
+  /* the digits change every frame while counting — keep the columns steady */
+  font-variant-numeric: tabular-nums;
+}
+
+/* Views on the left, +Streams on the right of the example screen (#1).
+   Offsets are in the phone's own (unscaled) 400px space. */
+.notif--views { top: 150px; left: -62px; }
+.notif--streams { top: 372px; right: -62px; }
+.notif--streams .notif__icon img { width: 22px; height: 22px; }
+
+/* ============ Select content creators ============
+   Same layout as "Choose music you like", but the cards hold a round creator
+   photo, the platform they post on, their handle and follower count (#3). */
+.creator-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 16px 22px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--bg-card-2);
+  text-align: center;
+  flex: 0 0 auto;
+  width: 196px;
+}
+
+/* Circle frame instead of the square track cover (#3) */
+.creator-chip__photo {
+  width: 152px;
+  height: 152px;
+  border-radius: 50%;
+  background-color: var(--bg-card);
+  background-size: cover;
+  background-position: center;
+  flex: 0 0 auto;
+}
+
+.creator-chip__name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--text-primary);
+}
+
+/* Small platform glyph, drawn as a mask so it always matches the text colour.
+   The mask URLs live here rather than in a custom property because a url()
+   passed through var() resolves against this file, not the page. */
+.creator-chip__platform {
+  flex: 0 0 auto;
+  width: 15px;
+  height: 15px;
+  background-color: var(--text-primary);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+.creator-chip__platform--instagram { -webkit-mask-image: url("../img/social/s08-instagram.svg"); mask-image: url("../img/social/s08-instagram.svg"); }
+.creator-chip__platform--tiktok { -webkit-mask-image: url("../img/social/s10-tiktok.svg"); mask-image: url("../img/social/s10-tiktok.svg"); }
+.creator-chip__platform--youtube { -webkit-mask-image: url("../img/social/s09-youtube.svg"); mask-image: url("../img/social/s09-youtube.svg"); }
+
+.creator-chip__followers {
+  margin-top: 3px;
+  font-size: 13px;
+  line-height: 1.35;
+  color: var(--text-dim);
+}
+
+/* ============ Pay only for results (#5) ============
+   Same four stacking cards as the Content landing, different glyphs. */
+.pay-card:nth-child(1) .pay-card__icon::before { -webkit-mask-image: url("../img/icons/music-note.svg"); mask-image: url("../img/icons/music-note.svg"); }
+.pay-card:nth-child(2) .pay-card__icon::before { -webkit-mask-image: url("../img/icons/pay-profile.svg"); mask-image: url("../img/icons/pay-profile.svg"); }
+.pay-card:nth-child(3) .pay-card__icon::before { -webkit-mask-image: url("../img/icons/pay-check.svg"); mask-image: url("../img/icons/pay-check.svg"); }
+.pay-card:nth-child(4) .pay-card__icon::before { -webkit-mask-image: url("../img/icons/pay-dollar.svg"); mask-image: url("../img/icons/pay-dollar.svg"); }
+
+/* ============ Footer on small screens (#9) ============ */
+@media (max-width: 860px) {
+  .footer__top { align-items: center; text-align: center; }
+
+  .footer__brand { align-items: center; gap: 24px; }
+
+  /* Logo, name and "© 2026 Musin…" all on one centred line */
+  .footer__identity {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px 14px;
+  }
+
+  .footer__copy { margin: 0; }
+
+  /* Social icons centred and spread further apart */
+  .footer__social {
+    justify-content: center;
+    gap: 32px;
+  }
+
+  /* Page links centred under the brand block */
+  .footer__links {
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    gap: 14px 28px;
+  }
+}
+
+/* ============ Responsive ============ */
+@media (max-width: 600px) {
+  .hero-mockup { width: min(324px, 100%); height: 724px; }
+  .main-phone { top: 156px; }
+
+  .campaign-card { padding: 12px; border-radius: 20px; }
+  .campaign-card__stats { gap: 4px; margin-top: 12px; }
+  .campaign-stat__value { font-size: 15px; line-height: 20px; }
+  .campaign-stat__label { font-size: 10px; }
+
+  .notif--views { top: 150px; left: -46px; }
+  .notif--streams { top: 372px; right: -46px; }
+
+  .creator-chip { width: 168px; gap: 16px; padding: 16px 12px 18px; }
+  .creator-chip__photo { width: 132px; height: 132px; }
+  .creator-chip__name { font-size: 15px; }
+
+  .footer__social { gap: 26px; }
+}
+
+/* Very narrow phones: keep the 4 campaign numbers on one line */
+@media (max-width: 360px) {
+  .campaign-stat__value { font-size: 13px; letter-spacing: -0.4px; }
+  .campaign-stat__label { font-size: 9px; }
+}

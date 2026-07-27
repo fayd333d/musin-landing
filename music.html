@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Musin — For Music Artists</title>
+  <meta name="description" content="Upload your music, people post with it, grow your audience. Launch music campaigns on Musin, choose who posts with your track and pay for every confirmed post.">
+  <link rel="icon" href="assets/img/logo-mark.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600&display=swap" rel="stylesheet">
+  <!-- Hero is the first thing on screen: fetch the campaign cover and the first
+       clip's poster ASAP (the clip itself is prioritised on the <video> tag) -->
+  <link rel="preload" as="image" href="assets/img/poster/poster-ma-a.jpg" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/img/my-track-cover.svg" fetchpriority="high">
+  <!-- Shared shell (nav, sections, cards, footer) + music-artist specifics -->
+  <link rel="stylesheet" href="assets/css/content.css?v=27">
+  <link rel="stylesheet" href="assets/css/music.css?v=1">
+</head>
+<body>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header">
+    <div class="nav-wrap container">
+      <a class="nav-logo" href="index.html" aria-label="Musin home">
+        <img src="assets/img/logo-mark.svg" alt="" class="nav-logo__mark">
+        <span class="nav-logo__type">Musin</span>
+      </a>
+
+      <!-- Nav links grouped on the right, next to the Log in button -->
+      <div class="nav-right">
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="index.html" class="nav-link">Content</a>
+          <a href="music.html" class="nav-link is-active" aria-current="page">Music</a>
+        </nav>
+        <div class="nav-actions">
+          <a href="#" class="btn btn--light nav-cta">Log in / Sign up</a>
+          <button class="nav-burger" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="mobile-menu" hidden>
+      <nav class="mobile-menu__links" aria-label="Mobile navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html" class="nav-link">Content</a>
+        <a href="music.html" class="nav-link is-active" aria-current="page">Music</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="hero">
+      <div class="container hero__inner">
+        <div class="hero__row">
+          <!-- Example screen (phone) on the left, campaign track card on top -->
+          <div class="hero-mockup">
+            <!-- Campaign track card: cover + title/artist, then the campaign
+                 numbers, each counting up from 0 when the hero comes into view -->
+            <div class="campaign-card">
+              <div class="campaign-card__track">
+                <img src="assets/img/my-track-cover.svg" alt="" class="campaign-card__cover">
+                <div class="campaign-card__meta">
+                  <p class="campaign-card__title">My Track</p>
+                  <p class="campaign-card__artist">Me</p>
+                </div>
+              </div>
+              <div class="campaign-card__stats">
+                <div class="campaign-stat">
+                  <p class="campaign-stat__label">Posts</p>
+                  <p class="campaign-stat__value" data-count="67">0</p>
+                </div>
+                <div class="campaign-stat">
+                  <p class="campaign-stat__label">Spend</p>
+                  <p class="campaign-stat__value" data-count="236" data-prefix="$">$0</p>
+                </div>
+                <div class="campaign-stat">
+                  <p class="campaign-stat__label">Views</p>
+                  <p class="campaign-stat__value" data-count="2200000" data-compact="1">0</p>
+                </div>
+                <div class="campaign-stat">
+                  <p class="campaign-stat__label">Streams</p>
+                  <p class="campaign-stat__value" data-count="43000" data-compact="1">0</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="main-phone">
+              <div class="main-phone__screen" id="phoneScreen">
+                <!-- Real campaign clips: Video A-E cycle every ~3 s -->
+                <video class="phone-slide is-current" poster="assets/img/poster/poster-ma-a.jpg" src="assets/video/ma-a.mp4" muted loop playsinline preload="auto" fetchpriority="high"></video>
+                <video class="phone-slide" src="assets/video/ma-b.mp4" muted loop playsinline preload="auto"></video>
+                <video class="phone-slide" src="assets/video/ma-c.mp4" muted loop playsinline preload="auto"></video>
+                <video class="phone-slide" src="assets/video/ma-d.mp4" muted loop playsinline preload="auto"></video>
+                <video class="phone-slide" src="assets/video/ma-e.mp4" muted loop playsinline preload="auto"></video>
+              </div>
+              <img src="assets/img/iphone-frame.png" alt="" class="main-phone__frame">
+
+              <div class="notif notif--views" id="notifViews">
+                <div class="notif__icon notif__icon--blue">
+                  <img src="assets/img/icon-eye.svg" alt="">
+                </div>
+                <div class="notif__text">
+                  <p class="notif__title" data-rotate="views">398K</p>
+                  <p class="notif__sub">Views</p>
+                </div>
+              </div>
+
+              <div class="notif notif--streams" id="notifStreams">
+                <div class="notif__icon notif__icon--green">
+                  <img src="assets/img/icons/music-note.svg" alt="">
+                </div>
+                <div class="notif__text">
+                  <p class="notif__title" data-rotate="streams">+2.9K</p>
+                  <p class="notif__sub">Streams</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Badge, title, subtext and CTA on the right -->
+          <div class="hero__pitch">
+            <div class="badge-group">Spotify&nbsp;&nbsp;·&nbsp;&nbsp;SoundCloud</div>
+            <h1 class="hero__title">Upload your music.<br>People post with it.<br>Grow your audience.</h1>
+            <p class="hero__subtitle">Launch music campaigns.<br>Choose who posts with your track.<br>Pay for every confirmed post.</p>
+            <div class="hero__actions">
+              <div class="hero__cta-wrap">
+                <a href="#" class="btn btn--primary btn--md">
+                  Join as a music artist
+                  <img src="assets/img/icon-arrow-right.svg" alt="" class="btn__icon">
+                </a>
+                <p class="hero__note">Join free&nbsp;&nbsp;·&nbsp;&nbsp;Upload music&nbsp;&nbsp;·&nbsp;&nbsp;Grow audience</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SELECT CONTENT CREATORS (merged with creator list) ============ -->
+    <section class="genres creators" id="creators">
+      <div class="container genres__head">
+        <div class="genres__stat">
+          <p class="genres__number" id="creatorCount">8,024</p>
+          <p class="genres__unit">content creators active</p>
+        </div>
+        <h2 class="section-title">Select content creators</h2>
+      </div>
+      <!-- Feel / Theme / Content type instead of genres -->
+      <div class="genre-lines" id="genreLines">
+        <div class="genre-line" data-drift="1"></div>
+        <div class="genre-line" data-drift="-1"></div>
+        <div class="genre-line" data-drift="1"></div>
+      </div>
+      <div class="track-marquee" aria-label="Content creators on Musin">
+        <div class="track-marquee__inner" id="creatorMarquee"></div>
+      </div>
+    </section>
+
+    <!-- ============ MUSIC DISCOVERY THROUGH CONTENT ============ -->
+    <section class="create" id="create">
+      <div class="container create__head">
+        <h2 class="section-title">Music discovery through content</h2>
+      </div>
+      <div class="create__viewport">
+        <div class="create__scroller" id="createScroller">
+          <div class="video-card"><video src="assets/video/video-4.mp4#t=0.1" muted playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
+          <div class="video-card"><video src="assets/video/video-5.mp4#t=0.1" muted playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
+          <div class="video-card"><video src="assets/video/video-6.mp4#t=0.1" muted playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
+          <div class="video-card"><video src="assets/video/video-7.mp4#t=0.1" muted playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
+          <div class="video-card"><video src="assets/video/video-8.mp4#t=0.1" muted playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
+          <div class="video-card"><video src="assets/video/video-9.mp4#t=0.1" muted playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
+          <div class="video-card"><video src="assets/video/video-10.mp4#t=0.1" muted playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
+          <div class="video-card"><video src="assets/video/video-11.mp4#t=0.1" muted playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
+          <div class="video-card"><video src="assets/video/video-12.mp4#t=0.1" muted playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
+          <div class="video-card"><video src="assets/video/video-13.mp4#t=0.1" muted playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
+        </div>
+        <div class="create__shade create__shade--left" aria-hidden="true"></div>
+        <div class="create__shade create__shade--right" aria-hidden="true"></div>
+        <button class="create__arrow create__arrow--left" id="scrollPrev" aria-label="Previous video">
+          <img src="assets/img/icon-arrow-right.svg" alt="" style="transform:rotate(180deg)">
+        </button>
+        <button class="create__arrow create__arrow--right" id="scrollNext" aria-label="Next video">
+          <img src="assets/img/icon-arrow-right.svg" alt="">
+        </button>
+      </div>
+    </section>
+
+    <!-- ============ PAY ONLY FOR RESULTS (stacking cards) ============ -->
+    <section class="payments" id="payments">
+      <div class="container">
+        <h2 class="section-title">Pay only for results</h2>
+        <div class="pay-stack" id="payStack">
+          <div class="pay-card">
+            <div class="pay-card__icon"></div>
+            <div class="pay-card__body">
+              <h3 class="pay-card__title">Create campaign</h3>
+              <p class="pay-card__text">Upload your track, set the budget and other parameters.</p>
+            </div>
+          </div>
+          <div class="pay-card">
+            <div class="pay-card__icon"></div>
+            <div class="pay-card__body">
+              <h3 class="pay-card__title">Select accounts</h3>
+              <p class="pay-card__text">Choose the social media accounts you want to post with your track.</p>
+            </div>
+          </div>
+          <div class="pay-card">
+            <div class="pay-card__icon"></div>
+            <div class="pay-card__body">
+              <h3 class="pay-card__title">Confirm publications</h3>
+              <p class="pay-card__text">Review submitted post links and confirm that they contain your track.</p>
+            </div>
+          </div>
+          <div class="pay-card">
+            <div class="pay-card__icon"></div>
+            <div class="pay-card__body">
+              <h3 class="pay-card__title">Pay per post</h3>
+              <p class="pay-card__text">Pay only for completed and confirmed publications.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ LOGO MARQUEE ============ -->
+    <section class="logos" aria-label="Platforms and partners">
+      <div class="logos__marquee" id="logoMarquee">
+        <div class="logos__group">
+          <img src="assets/img/logos/stripe.svg" alt="Stripe" class="logos__item logos__item--stripe">
+          <img src="assets/img/logos/facebook.svg" alt="Facebook" class="logos__item">
+          <img src="assets/img/logos/spotify.svg" alt="Spotify" class="logos__item">
+          <img src="assets/img/logos/youtube.svg" alt="YouTube" class="logos__item logos__item--wide">
+          <img src="assets/img/logos/instagram.svg" alt="Instagram" class="logos__item">
+          <img src="assets/img/logos/google.svg" alt="Google" class="logos__item">
+          <img src="assets/img/logos/tiktok-glyph.svg" alt="TikTok" class="logos__item">
+          <img src="assets/img/logos/soundcloud.svg" alt="SoundCloud" class="logos__item logos__item--wide">
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ INSIDE MUSIN APP ============ -->
+    <section class="app" id="app">
+      <div class="container">
+        <h2 class="section-title">Inside Musin app</h2>
+        <div class="app-stack" id="appStack">
+          <div class="app-card">
+            <div class="app-card__panel">
+              <div class="app-card__copy">
+                <h3 class="app-card__title">Create campaign</h3>
+                <p class="app-card__text">Upload your track, set the budget and choose other parameters.</p>
+              </div>
+            </div>
+            <div class="app-card__screen">
+              <picture>
+                <source media="(max-width: 860px)" srcset="assets/img/app/app-MA-phone1.svg">
+                <img src="assets/img/app/app-MA-PC1.svg" alt="Creating a music campaign in the Musin app" loading="lazy">
+              </picture>
+            </div>
+          </div>
+          <div class="app-card">
+            <div class="app-card__panel">
+              <div class="app-card__copy">
+                <h3 class="app-card__title">Select accounts</h3>
+                <p class="app-card__text">Choose accounts you want to post with your track.</p>
+              </div>
+            </div>
+            <div class="app-card__screen">
+              <picture>
+                <source media="(max-width: 860px)" srcset="assets/img/app/app-MA-phone2.svg">
+                <img src="assets/img/app/app-MA-PC2.svg" alt="Selecting content creator accounts in the Musin app" loading="lazy">
+              </picture>
+            </div>
+          </div>
+          <div class="app-card">
+            <div class="app-card__panel">
+              <div class="app-card__copy">
+                <h3 class="app-card__title">Manage results</h3>
+                <p class="app-card__text">Review your payouts and top up your campaign.</p>
+              </div>
+            </div>
+            <div class="app-card__screen">
+              <picture>
+                <source media="(max-width: 860px)" srcset="assets/img/app/app-MA-phone3.svg">
+                <img src="assets/img/app/app-MA-PC3.svg" alt="Campaign payouts and results in the Musin app" loading="lazy">
+              </picture>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="faq" id="faq">
+      <div class="container faq__container">
+        <h2 class="section-title">FAQ</h2>
+        <div class="faq-list">
+          <details class="faq-item" open>
+            <summary>Do I need a label?</summary>
+            <p>No. Independent artists, labels and managers can launch campaigns.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Can I choose who promotes my music?</summary>
+            <p>Yes. Choose the content creators you want to post with your track, invite them directly or review incoming offers, and confirm each completed publication before payment is released.</p>
+          </details>
+          <details class="faq-item">
+            <summary>How much does a campaign cost?</summary>
+            <p>You choose the campaign period and social media accounts. Each account has a fixed price per post, and the combined cost becomes your campaign budget.</p>
+          </details>
+          <details class="faq-item">
+            <summary>When are content creators paid?</summary>
+            <p>Content creators are paid after they publish the content and you confirm the post. The funds are then released to their account.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Can I withdraw unused funds?</summary>
+            <p>Yes. Any unused reserved funds can be withdrawn after your promotion campaign ends.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Which platforms are supported?</summary>
+            <p>Spotify, SoundCloud, TikTok, Instagram and YouTube.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Who can see my track?</summary>
+            <p>While your campaign is active, your track is visible to registered content creators who have linked at least one social media account.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CTA ============ -->
+    <section class="cta">
+      <div class="container">
+        <div class="cta__card">
+          <h2 class="cta__title">Music promotion through content</h2>
+          <p class="cta__text">Direct access to content creators, transparent payments, and real campaign results.</p>
+          <a href="#" class="btn btn--primary btn--lg">Get started</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container footer__top">
+      <div class="footer__brand">
+        <!-- On small screens the mark, name and copyright sit on one centred
+             line — see .footer__identity in music.css (#9) -->
+        <div class="footer__identity">
+          <a class="nav-logo" href="index.html" aria-label="Musin home">
+            <img src="assets/img/logo-mark.svg" alt="" class="nav-logo__mark">
+            <span class="nav-logo__type">Musin</span>
+          </a>
+          <p class="footer__copy">© 2026 Musin. All rights reserved.</p>
+        </div>
+        <div class="footer__social">
+          <a href="#" aria-label="X"><img src="assets/img/social/s01-x.svg" alt=""></a>
+          <a href="#" aria-label="Instagram"><img src="assets/img/social/s08-instagram.svg" alt=""></a>
+          <a href="#" aria-label="TikTok"><img src="assets/img/social/s10-tiktok.svg" alt=""></a>
+          <a href="#" aria-label="Telegram"><img src="assets/img/social/s05-telegram.svg" alt=""></a>
+          <a href="#" aria-label="Discord"><img src="assets/img/social/s11-discord.svg" alt=""></a>
+        </div>
+      </div>
+
+      <nav class="footer__links" aria-label="Footer">
+        <a href="#">Features</a>
+        <a href="#">Guide</a>
+        <a href="#">Support</a>
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Cookies</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="assets/js/music.js?v=1"></script>
+</body>
+</html>
