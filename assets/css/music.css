@@ -3,16 +3,18 @@
    footer) is shared with the Content Creators landing and only the pieces that
    differ for artists are redefined here. */
 
-/* ============ Hero: campaign track card above the example screen (#1) ============
-   The mockup column grows to hold the card; the phone is pushed down below it
-   but keeps the same scale and floating badges as the Content landing. */
+/* ============ Hero: campaign card on top of the example screen ============
+   The mockup column is exactly as wide as the phone so the card can share its
+   width; the phone is pushed down to sit under the card, and a short connector
+   joins the two into one unit. */
 .hero-mockup {
-  width: min(340px, 100%);
-  height: 750px;
+  /* .main-phone is 400px wide at scale(.74) → 296x584px on screen */
+  width: min(296px, 100%);
+  height: 862px; /* card + connector + phone */
 }
 
-/* clears the campaign card (~143px) plus a little breathing room */
-.main-phone { top: 166px; }
+/* clears the campaign card (~260px) plus the connector gap */
+.main-phone { top: 278px; }
 
 .campaign-card {
   position: absolute;
@@ -21,52 +23,59 @@
   transform: translateX(-50%);
   z-index: 4;
   width: 100%;
-  padding: 14px;
-  border-radius: 24px;
+  padding: 20px 18px 18px;
+  border-radius: 28px;
   background: var(--bg-card-2);
   box-shadow: 0 18px 44px rgba(0, 0, 0, 0.55);
+  text-align: center;
 }
 
-/* Cover + title/artist row, on its own slightly lighter shelf */
-.campaign-card__track {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 12px;
-  border-radius: 16px;
-  background: var(--bg-elevated);
+/* The connector: a short stem down to the phone, so the card reads as part of
+   the example screen rather than a card floating above it. */
+.campaign-card::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 2px;
+  height: 18px;
+  transform: translateX(-50%);
+  background: linear-gradient(to bottom, var(--bg-elevated), rgba(255, 255, 255, 0.06));
 }
 
+/* Big centred cover art, name and artist underneath */
 .campaign-card__cover {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  flex: 0 0 auto;
+  width: 96px;
+  height: 96px;
+  margin: 0 auto;
+  border-radius: 20px;
 }
 
 .campaign-card__title {
-  font-size: 16px;
+  margin-top: 12px;
+  font-size: 18px;
   font-weight: 700;
-  line-height: 20px;
+  line-height: 24px;
   color: var(--text-primary);
 }
 
 .campaign-card__artist {
-  font-size: 13px;
-  line-height: 18px;
+  font-size: 14px;
+  line-height: 20px;
   color: var(--text-dim);
 }
 
-/* Posts / Spend / Views / Streams, counting up from 0 (#1) */
+/* Posts / Spend / Views / Streams, counting up from 0 */
 .campaign-card__stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 6px;
-  margin-top: 14px;
-  padding: 0 4px 2px;
+  gap: 4px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
 }
 
-.campaign-stat { text-align: left; }
+.campaign-stat { text-align: center; }
 
 .campaign-stat__label {
   font-size: 11px;
@@ -76,7 +85,7 @@
 
 .campaign-stat__value {
   margin-top: 1px;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 700;
   line-height: 22px;
   letter-spacing: -0.3px;
@@ -85,10 +94,10 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Views on the left, +Streams on the right of the example screen (#1).
-   Offsets are in the phone's own (unscaled) 400px space. */
+/* Views on the left, +Streams a little lower on the right of the example
+   screen. Offsets are in the phone's own (unscaled) 400px space. */
 .notif--views { top: 150px; left: -62px; }
-.notif--streams { top: 372px; right: -62px; }
+.notif--streams { top: 268px; right: -62px; }
 .notif--streams .notif__icon img { width: 22px; height: 22px; }
 
 /* ============ Select content creators ============
@@ -170,13 +179,12 @@
 
   .footer__brand { align-items: center; gap: 24px; }
 
-  /* Logo, name and "© 2026 Musin…" all on one centred line */
+  /* Logo + "Musin" stacked above "© 2026 Musin…", both centred */
   .footer__identity {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 8px 14px;
+    gap: 10px;
   }
 
   .footer__copy { margin: 0; }
@@ -198,16 +206,19 @@
 
 /* ============ Responsive ============ */
 @media (max-width: 600px) {
-  .hero-mockup { width: min(324px, 100%); height: 724px; }
-  .main-phone { top: 156px; }
+  /* .main-phone drops to scale(.72) here → 288x568px on screen */
+  .hero-mockup { width: min(288px, 100%); height: 826px; }
+  .main-phone { top: 258px; }
 
-  .campaign-card { padding: 12px; border-radius: 20px; }
-  .campaign-card__stats { gap: 4px; margin-top: 12px; }
+  .campaign-card { padding: 18px 14px 16px; border-radius: 24px; }
+  .campaign-card__cover { width: 88px; height: 88px; border-radius: 18px; }
+  .campaign-card__title { margin-top: 11px; font-size: 17px; }
+  .campaign-card__stats { margin-top: 14px; padding-top: 12px; }
   .campaign-stat__value { font-size: 15px; line-height: 20px; }
   .campaign-stat__label { font-size: 10px; }
 
   .notif--views { top: 150px; left: -46px; }
-  .notif--streams { top: 372px; right: -46px; }
+  .notif--streams { top: 268px; right: -46px; }
 
   .creator-chip { width: 168px; gap: 16px; padding: 16px 12px 18px; }
   .creator-chip__photo { width: 132px; height: 132px; }

@@ -78,8 +78,8 @@ function runCampaignCounters() {
     }
     gsap.to({ v: 0 }, {
       v: target,
-      duration: 1.8,
-      delay: 0.15 * i,
+      duration: 3.4,
+      delay: 0.25 * i,
       ease: "power2.out",
       onUpdate() { renderStat(el, this.targets()[0].v); },
       onComplete() { renderStat(el, target); },
@@ -196,12 +196,14 @@ const creators = [
   [8, "youtube", "slay", "2.4K"],
   [9, "tiktok", "glogirlx", "46K"],
   [10, "tiktok", "lemanche23", "14K"],
-  [11, "tiktok", "3xox3ne", "1.3K"],
+  [11, "instagram", "cc_cp91", "4.1K"],
   [12, "instagram", "ivori8", "19K"],
   [13, "youtube", "musfile", "3.5K"],
-  [14, "tiktok", "artell", "34K"],
+  // edit_ed and dancingbonito sit between musfile and artell so the two
+  // aren't neighbours in the line
   [15, "instagram", "edit_ed", "72K"],
   [16, "tiktok", "dancingbonito", "13K"],
+  [14, "tiktok", "artell", "34K"],
 ];
 
 const creatorMarquee = document.getElementById("creatorMarquee");
@@ -309,11 +311,11 @@ function scheduleCountEvent() {
 
 if (!prefersReducedMotion) scheduleCountEvent();
 
-/* ---------- Tags: Feel, Theme and Content type (#3) ---------- */
+/* ---------- Tags creators can be filtered by ---------- */
 const tagRows = [
-  ["Chill", "Happy", "Confident", "Energetic", "Intense", "Emotional"],
-  ["Lifestyle", "Love", "Success", "Party", "Struggle", "Motivation", "Heartbreak", "Friendship"],
-  ["Dance", "Lip-sync", "Fashion", "Beauty", "Fitness", "Travel", "Food", "Comedy", "Gaming", "Vlog", "Sports", "Performance"],
+  ["Lifestyle", "Love", "Fashion", "Sports", "Beauty", "Party", "Fitness", "Travel", "Success", "Gaming", "Chill", "Food"],
+  ["Motivation", "Romantic", "Dance", "Glow Up", "POV", "Flirty", "Outfit Check", "Hype", "Soft Life", "Heartbreak", "Chaotic"],
+  ["Night Out", "Confident", "Edits", "Dating", "Dreamy", "Storytime", "Nostalgic", "Vlog", "Self-Care", "Funny", "Lip-sync"],
 ];
 
 const tagColors = [
