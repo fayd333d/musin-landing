@@ -15,7 +15,7 @@
   <link rel="preload" as="image" href="assets/img/my-track-cover.svg" fetchpriority="high">
   <!-- Shared shell (nav, sections, cards, footer) + music-artist specifics -->
   <link rel="stylesheet" href="assets/css/content.css?v=28">
-  <link rel="stylesheet" href="assets/css/music.css?v=3">
+  <link rel="stylesheet" href="assets/css/music.css?v=4">
 </head>
 <body>
 
@@ -57,7 +57,7 @@
     <section class="hero" id="hero">
       <div class="container hero__inner">
         <div class="hero__row">
-          <!-- Example screen (phone) on the left, campaign card across its foot -->
+          <!-- Example screen (phone) on the left, campaign results in its foot -->
           <div class="hero-mockup">
             <div class="main-phone">
               <div class="main-phone__screen" id="phoneScreen">
@@ -67,6 +67,29 @@
                 <video class="phone-slide" src="assets/video/ma-c.mp4" muted loop playsinline preload="auto"></video>
                 <video class="phone-slide" src="assets/video/ma-d.mp4" muted loop playsinline preload="auto"></video>
                 <video class="phone-slide" src="assets/video/ma-e.mp4" muted loop playsinline preload="auto"></video>
+
+                <!-- Campaign results, part of the example screen itself. Starts
+                     at zero on page load and banks each clip's figures as the
+                     screen rotates; after 20 clips it starts over from zero. -->
+                <div class="campaign-card">
+                  <div class="campaign-card__track">
+                    <img src="assets/img/my-track-cover.svg" alt="" class="campaign-card__cover">
+                    <div>
+                      <p class="campaign-card__title">My Track</p>
+                      <p class="campaign-card__artist">Me</p>
+                    </div>
+                  </div>
+                  <div class="campaign-card__rows">
+                    <p class="campaign-row__label">Posts:</p>
+                    <p class="campaign-row__value" data-stat="posts">0</p>
+                    <p class="campaign-row__label">Views:</p>
+                    <p class="campaign-row__value" data-stat="views">0</p>
+                    <p class="campaign-row__label">+Streams:</p>
+                    <p class="campaign-row__value" data-stat="streams">0</p>
+                    <p class="campaign-row__label">Cost:</p>
+                    <p class="campaign-row__value" data-stat="cost">$0</p>
+                  </div>
+                </div>
               </div>
               <img src="assets/img/iphone-frame.png" alt="" class="main-phone__frame">
 
@@ -87,36 +110,6 @@
                 <div class="notif__text">
                   <p class="notif__title" data-rotate="streams">+2.9K</p>
                   <p class="notif__sub">Streams</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Campaign card: sits across the foot of the example screen and
-                 covers its bottom. It opens on the numbers below, then adds each
-                 clip's views/streams (plus a post and its cost) as the screen
-                 rotates — the running total never resets while the page is open. -->
-            <div class="campaign-card">
-              <img src="assets/img/my-track-cover.svg" alt="" class="campaign-card__cover">
-              <div class="campaign-cell campaign-cell--track">
-                <p class="campaign-card__title">My Track</p>
-                <p class="campaign-card__artist">Me</p>
-              </div>
-              <div class="campaign-card__grid">
-                <div class="campaign-cell">
-                  <p class="campaign-stat__label">Posts</p>
-                  <p class="campaign-stat__value" data-stat="posts">15</p>
-                </div>
-                <div class="campaign-cell">
-                  <p class="campaign-stat__label">Views</p>
-                  <p class="campaign-stat__value" data-stat="views">867K</p>
-                </div>
-                <div class="campaign-cell">
-                  <p class="campaign-stat__label">+Streams</p>
-                  <p class="campaign-stat__value" data-stat="streams">6.2K</p>
-                </div>
-                <div class="campaign-cell">
-                  <p class="campaign-stat__label">Cost</p>
-                  <p class="campaign-stat__value" data-stat="cost">$193</p>
                 </div>
               </div>
             </div>
@@ -252,7 +245,7 @@
             <div class="app-card__panel">
               <div class="app-card__copy">
                 <h3 class="app-card__title">Create campaign</h3>
-                <p class="app-card__text">Upload your track and set the parameters.</p>
+                <p class="app-card__text">Upload your track and set campaign parameters.</p>
               </div>
             </div>
             <div class="app-card__screen">
@@ -280,7 +273,7 @@
             <div class="app-card__panel">
               <div class="app-card__copy">
                 <h3 class="app-card__title">Manage results</h3>
-                <p class="app-card__text">Review your payouts and top up your campaign.</p>
+                <p class="app-card__text">Review your campaign results and payouts.</p>
               </div>
             </div>
             <div class="app-card__screen">
@@ -378,6 +371,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-  <script src="assets/js/music.js?v=3"></script>
+  <script src="assets/js/music.js?v=4"></script>
 </body>
 </html>

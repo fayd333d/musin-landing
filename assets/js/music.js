@@ -37,10 +37,10 @@ const notifs = [
 
 let heroIndex = 0;
 
-/* 398000 → "398K", 2900 → "+2.9K" on the floating badges */
+/* 398000 → "398K", 43000 → "43K", 2900 → "2.9K", 625 → "625" */
 function badge(n) {
   if (n >= 1e6) return (Math.floor(n / 1e5) / 10).toFixed(1) + "M";
-  if (n >= 1e5) return Math.round(n / 1e3) + "K";
+  if (n >= 1e4) return Math.round(n / 1e3) + "K";
   if (n >= 1e3) return (Math.floor(n / 100) / 10).toFixed(1) + "K";
   return String(n);
 }
@@ -54,11 +54,12 @@ applyHeroData(heroData[0]);
 // Playback starts when the hero scrolls into view — see the observer below
 
 /* ---------- Campaign card: a running total ----------
-   The card opens on the figures below. Every time the example screen rotates to
-   the next clip, that clip's views and streams are added, along with one post
-   and its cost. The total keeps climbing across cycles — it only resets when
-   the page is reloaded. */
-const campaign = { posts: 15, views: 867000, streams: 6200, cost: 193 };
+   The card starts empty when the page loads. Every time the example screen
+   rotates to the next clip, that clip's views and streams are added, along with
+   one post and its cost. After 20 clips the campaign starts over from zero. */
+const CAMPAIGN_RESET_AFTER = 20;
+const campaign = { posts: 0, views: 0, streams: 0, cost: 0 };
+let videosPlayed = 0;
 
 const campaignEls = {
   posts: document.querySelector('[data-stat="posts"]'),
@@ -67,10 +68,11 @@ const campaignEls = {
   cost: document.querySelector('[data-stat="cost"]'),
 };
 
-/* 867000 → "867K", 1265000 → "1.26M", 9100 → "9.1K" */
+/* 1265000 → "1.26M", 867000 → "867K", 37000 → "37K", 9100 → "9.1K".
+   The decimal only shows below 10K, where it still carries information. */
 function campaignNum(n) {
   if (n >= 1e6) return (Math.floor(n / 1e4) / 100).toFixed(2) + "M";
-  if (n >= 1e5) return Math.round(n / 1e3) + "K";
+  if (n >= 1e4) return Math.round(n / 1e3) + "K";
   if (n >= 1e3) return (Math.floor(n / 100) / 10).toFixed(1) + "K";
   return String(Math.round(n));
 }
@@ -85,6 +87,13 @@ renderCampaign(campaign);
 
 /* Add the clip that just finished playing, tweening to the new total */
 function addToCampaign(clip) {
+  // the 20-clip total stays up until the next clip lands, then it starts over
+  if (videosPlayed >= CAMPAIGN_RESET_AFTER) {
+    videosPlayed = 0;
+    Object.assign(campaign, { posts: 0, views: 0, streams: 0, cost: 0 });
+  }
+  videosPlayed += 1;
+
   const from = { ...campaign };
   campaign.posts += 1;
   campaign.views += clip.views;
@@ -333,7 +342,7 @@ if (!prefersReducedMotion) scheduleCountEvent();
 /* ---------- Tags creators can be filtered by ---------- */
 const tagRows = [
   ["Lifestyle", "Love", "Fashion", "Sports", "Beauty", "Party", "Fitness", "Travel", "Success", "Gaming", "Chill", "Food"],
-  ["Motivation", "Romantic", "Dance", "Glow Up", "Clips", "Music", "Fit", "Hype", "Soft Life", "Heartbreak", "Chaotic"],
+  ["Motivation", "Romantic", "Dance", "Mog", "Clips", "Music", "Fit", "Hype", "Fyp", "Heartbreak", "Chaotic"],
   ["Night", "Confident", "Edits", "Dating", "Dreamy", "Storytime", "Nostalgic", "Vlog", "Self-Care", "Funny", "Lip-sync"],
 ];
 
