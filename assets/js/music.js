@@ -18,11 +18,11 @@ burger.addEventListener("click", () => {
    Views and +Streams change with each clip; the next screen scrolls up into
    the main phone from below, TikTok-style. */
 const heroData = [
-  { views: "398K", streams: "+2.9K" },   // Video A
-  { views: "847K", streams: "+6.8K" },   // Video B
-  { views: "913K", streams: "+7.9K" },   // Video C
-  { views: "123K", streams: "+843" },    // Video D
-  { views: "1.8M", streams: "+11K" },    // Video E
+  { views: 398000, streams: 2900 },  // Video A
+  { views: 43000, streams: 625 },    // Video B
+  { views: 640000, streams: 7900 },  // Video C
+  { views: 123000, streams: 843 },   // Video D
+  { views: 12000, streams: 213 },    // Video E
 ];
 
 const slides = gsap.utils.toArray(".phone-slide");
@@ -36,54 +36,74 @@ const notifs = [
 ];
 
 let heroIndex = 0;
+
+/* 398000 → "398K", 2900 → "+2.9K" on the floating badges */
+function badge(n) {
+  if (n >= 1e6) return (Math.floor(n / 1e5) / 10).toFixed(1) + "M";
+  if (n >= 1e5) return Math.round(n / 1e3) + "K";
+  if (n >= 1e3) return (Math.floor(n / 100) / 10).toFixed(1) + "K";
+  return String(n);
+}
+
+function applyHeroData(d) {
+  rotateEls.views.textContent = badge(d.views);
+  rotateEls.streams.textContent = "+" + badge(d.streams);
+}
+
 applyHeroData(heroData[0]);
 // Playback starts when the hero scrolls into view — see the observer below
 
-function applyHeroData(d) {
-  rotateEls.views.textContent = d.views;
-  rotateEls.streams.textContent = d.streams;
-}
+/* ---------- Campaign card: a running total ----------
+   The card opens on the figures below. Every time the example screen rotates to
+   the next clip, that clip's views and streams are added, along with one post
+   and its cost. The total keeps climbing across cycles — it only resets when
+   the page is reloaded. */
+const campaign = { posts: 15, views: 867000, streams: 6200, cost: 193 };
 
-/* ---------- Campaign track card: numbers count up from 0 ----------
-   Runs once, when the hero first comes into view. */
-const campaignStats = [...document.querySelectorAll(".campaign-stat__value")];
+const campaignEls = {
+  posts: document.querySelector('[data-stat="posts"]'),
+  views: document.querySelector('[data-stat="views"]'),
+  streams: document.querySelector('[data-stat="streams"]'),
+  cost: document.querySelector('[data-stat="cost"]'),
+};
 
-/* 0 → 999 → 1.2K → 43K → 1.8M, so the unit grows naturally while counting */
-function compact(n) {
-  if (n >= 1e6) {
-    const m = n / 1e6;
-    return (m >= 10 ? Math.round(m) : Math.round(m * 10) / 10) + "M";
-  }
-  if (n >= 1000) return Math.round(n / 1000) + "K";
+/* 867000 → "867K", 1265000 → "1.26M", 9100 → "9.1K" */
+function campaignNum(n) {
+  if (n >= 1e6) return (Math.floor(n / 1e4) / 100).toFixed(2) + "M";
+  if (n >= 1e5) return Math.round(n / 1e3) + "K";
+  if (n >= 1e3) return (Math.floor(n / 100) / 10).toFixed(1) + "K";
   return String(Math.round(n));
 }
 
-function renderStat(el, value) {
-  const prefix = el.dataset.prefix || "";
-  const text = el.dataset.compact
-    ? compact(value)
-    : Math.round(value).toLocaleString("en-US");
-  el.textContent = prefix + text;
+function renderCampaign(c) {
+  campaignEls.posts.textContent = Math.round(c.posts);
+  campaignEls.views.textContent = campaignNum(c.views);
+  campaignEls.streams.textContent = campaignNum(c.streams);
+  campaignEls.cost.textContent = "$" + Math.round(c.cost);
 }
+renderCampaign(campaign);
 
-let campaignCounted = false;
-function runCampaignCounters() {
-  if (campaignCounted) return;
-  campaignCounted = true;
-  campaignStats.forEach((el, i) => {
-    const target = Number(el.dataset.count) || 0;
-    if (prefersReducedMotion) {
-      renderStat(el, target);
-      return;
-    }
-    gsap.to({ v: 0 }, {
-      v: target,
-      duration: 3.4,
-      delay: 0.25 * i,
-      ease: "power2.out",
-      onUpdate() { renderStat(el, this.targets()[0].v); },
-      onComplete() { renderStat(el, target); },
-    });
+/* Add the clip that just finished playing, tweening to the new total */
+function addToCampaign(clip) {
+  const from = { ...campaign };
+  campaign.posts += 1;
+  campaign.views += clip.views;
+  campaign.streams += clip.streams;
+  campaign.cost += Math.floor(gsap.utils.random(8, 20)); // $8–19 per post
+
+  if (prefersReducedMotion) {
+    renderCampaign(campaign);
+    return;
+  }
+  gsap.to(from, {
+    posts: campaign.posts,
+    views: campaign.views,
+    streams: campaign.streams,
+    cost: campaign.cost,
+    duration: 0.9,
+    ease: "power2.out",
+    onUpdate: () => renderCampaign(from),
+    onComplete: () => renderCampaign(campaign),
   });
 }
 
@@ -110,6 +130,8 @@ function playCurrentClip(el) {
 
 function nextHeroSlide() {
   const prev = slides[heroIndex % slides.length];
+  // the clip that just played is now banked into the campaign total
+  addToCampaign(heroData[heroIndex % heroData.length]);
   heroIndex += 1;
   const next = slides[heroIndex % slides.length];
   const data = heroData[heroIndex % heroData.length];
@@ -149,7 +171,6 @@ if (heroSection) {
         heroInView = entry.isIntersecting;
         const current = slides[heroIndex % slides.length];
         if (entry.isIntersecting) {
-          runCampaignCounters(); // campaign numbers roll up from 0 (#1)
           if (!heroStarted) {
             heroStarted = true;
             // Don't start cycling until the first clip is buffered enough to
@@ -179,8 +200,6 @@ if (heroSection) {
     { threshold: 0.4 }
   );
   heroObserver.observe(heroSection);
-} else {
-  runCampaignCounters();
 }
 
 /* ---------- Creator marquee (replaces the track marquee) ----------
@@ -314,8 +333,8 @@ if (!prefersReducedMotion) scheduleCountEvent();
 /* ---------- Tags creators can be filtered by ---------- */
 const tagRows = [
   ["Lifestyle", "Love", "Fashion", "Sports", "Beauty", "Party", "Fitness", "Travel", "Success", "Gaming", "Chill", "Food"],
-  ["Motivation", "Romantic", "Dance", "Glow Up", "POV", "Flirty", "Outfit Check", "Hype", "Soft Life", "Heartbreak", "Chaotic"],
-  ["Night Out", "Confident", "Edits", "Dating", "Dreamy", "Storytime", "Nostalgic", "Vlog", "Self-Care", "Funny", "Lip-sync"],
+  ["Motivation", "Romantic", "Dance", "Glow Up", "Clips", "Music", "Fit", "Hype", "Soft Life", "Heartbreak", "Chaotic"],
+  ["Night", "Confident", "Edits", "Dating", "Dreamy", "Storytime", "Nostalgic", "Vlog", "Self-Care", "Funny", "Lip-sync"],
 ];
 
 const tagColors = [

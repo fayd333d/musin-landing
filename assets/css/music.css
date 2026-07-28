@@ -3,94 +3,93 @@
    footer) is shared with the Content Creators landing and only the pieces that
    differ for artists are redefined here. */
 
-/* ============ Hero: campaign card on top of the example screen ============
-   The mockup column is exactly as wide as the phone so the card can share its
-   width; the phone is pushed down to sit under the card, and a short connector
-   joins the two into one unit. */
+/* ============ Hero: campaign card across the foot of the example screen ======
+   The card is wider than the phone and overlaps the bottom of the screen, so
+   the mockup column is sized to the card rather than the phone. */
 .hero-mockup {
-  /* .main-phone is 400px wide at scale(.74) → 296x584px on screen */
-  width: min(296px, 100%);
-  height: 862px; /* card + connector + phone */
+  /* .main-phone is 400px wide at scale(.74) → 296x584px on screen; the column
+     is sized to the wider campaign card that overhangs it */
+  width: min(440px, 100%);
+  height: 584px;
 }
 
-/* clears the campaign card (~260px) plus the connector gap */
-.main-phone { top: 278px; }
+/* back to the shared default — the card now sits over the phone, not above it */
+.main-phone { top: 0; }
 
 .campaign-card {
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: 50%;
   transform: translateX(-50%);
   z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 16px;
   width: 100%;
-  padding: 20px 18px 18px;
-  border-radius: 28px;
+  padding: 16px;
+  border-radius: 24px;
   background: var(--bg-card-2);
   box-shadow: 0 18px 44px rgba(0, 0, 0, 0.55);
-  text-align: center;
 }
 
-/* The connector: a short stem down to the phone, so the card reads as part of
-   the example screen rather than a card floating above it. */
-.campaign-card::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  width: 2px;
-  height: 18px;
-  transform: translateX(-50%);
-  background: linear-gradient(to bottom, var(--bg-elevated), rgba(255, 255, 255, 0.06));
-}
-
-/* Big centred cover art, name and artist underneath */
+/* Track cover on the left */
 .campaign-card__cover {
-  width: 96px;
-  height: 96px;
-  margin: 0 auto;
-  border-radius: 20px;
+  flex: 0 0 auto;
+  width: 84px;
+  height: 84px;
+  border-radius: 16px;
+}
+
+/* Track/artist next to the cover, then Posts / Views / +Streams / Cost.
+   The columns are weighted to the width each label needs — "+Streams" is the
+   widest, "Posts" the narrowest. */
+.campaign-cell--track { flex: 1.2 1 0; }
+
+.campaign-card__grid {
+  flex: 4 1 0;
+  min-width: 0;
+  display: grid;
+  grid-template-columns:
+    minmax(0, 0.8fr) minmax(0, 1fr) minmax(0, 1.25fr) minmax(0, 0.95fr);
+  align-items: center;
+  gap: 8px;
+}
+
+.campaign-cell { min-width: 0; }
+
+.campaign-card__title,
+.campaign-stat__label {
+  font-size: 12px;
+  line-height: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .campaign-card__title {
-  margin-top: 12px;
-  font-size: 18px;
   font-weight: 700;
-  line-height: 24px;
   color: var(--text-primary);
 }
 
-.campaign-card__artist {
-  font-size: 14px;
+.campaign-stat__label { color: var(--text-dim); }
+
+.campaign-card__artist,
+.campaign-stat__value {
+  margin-top: 4px;
+  font-size: 15px;
+  font-weight: 700;
   line-height: 20px;
-  color: var(--text-dim);
+  letter-spacing: -0.3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* Posts / Spend / Views / Streams, counting up from 0 */
-.campaign-card__stats {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 4px;
-  margin-top: 16px;
-  padding-top: 14px;
-  border-top: 1px solid var(--border);
-}
-
-.campaign-stat { text-align: center; }
-
-.campaign-stat__label {
-  font-size: 11px;
-  line-height: 16px;
-  color: var(--text-dim);
-}
+.campaign-card__artist { color: var(--text-dim); }
 
 .campaign-stat__value {
-  margin-top: 1px;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 22px;
-  letter-spacing: -0.3px;
   color: var(--text-primary);
-  /* the digits change every frame while counting — keep the columns steady */
+  /* the digits tween on every clip change — keep the columns steady */
   font-variant-numeric: tabular-nums;
 }
 
@@ -173,49 +172,35 @@
 .pay-card:nth-child(3) .pay-card__icon::before { -webkit-mask-image: url("../img/icons/pay-check.svg"); mask-image: url("../img/icons/pay-check.svg"); }
 .pay-card:nth-child(4) .pay-card__icon::before { -webkit-mask-image: url("../img/icons/pay-dollar.svg"); mask-image: url("../img/icons/pay-dollar.svg"); }
 
-/* ============ Footer on small screens (#9) ============ */
-@media (max-width: 860px) {
-  .footer__top { align-items: center; text-align: center; }
-
-  .footer__brand { align-items: center; gap: 24px; }
-
-  /* Logo + "Musin" stacked above "© 2026 Musin…", both centred */
-  .footer__identity {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .footer__copy { margin: 0; }
-
-  /* Social icons centred and spread further apart */
-  .footer__social {
-    justify-content: center;
-    gap: 32px;
-  }
-
-  /* Page links centred under the brand block */
-  .footer__links {
-    flex-wrap: wrap;
-    justify-content: center;
-    text-align: center;
-    gap: 14px 28px;
-  }
-}
+/* The footer is identical on every page — its rules live in content.css. */
 
 /* ============ Responsive ============ */
 @media (max-width: 600px) {
   /* .main-phone drops to scale(.72) here → 288x568px on screen */
-  .hero-mockup { width: min(288px, 100%); height: 826px; }
-  .main-phone { top: 258px; }
+  .hero-mockup { width: 100%; max-width: 360px; height: 568px; }
 
-  .campaign-card { padding: 18px 14px 16px; border-radius: 24px; }
-  .campaign-card__cover { width: 88px; height: 88px; border-radius: 18px; }
-  .campaign-card__title { margin-top: 11px; font-size: 17px; }
-  .campaign-card__stats { margin-top: 14px; padding-top: 12px; }
-  .campaign-stat__value { font-size: 15px; line-height: 20px; }
-  .campaign-stat__label { font-size: 10px; }
+  /* Too narrow for one row: cover + track on top, the four numbers underneath */
+  .campaign-card {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      "cover track"
+      "stats stats";
+    gap: 14px 12px;
+    padding: 14px;
+    border-radius: 20px;
+  }
+
+  .campaign-card__cover { grid-area: cover; width: 56px; height: 56px; border-radius: 14px; }
+  .campaign-cell--track { grid-area: track; align-self: center; }
+  .campaign-card__grid {
+    grid-area: stats;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .campaign-card__title, .campaign-stat__label { font-size: 11px; line-height: 16px; }
+  .campaign-card__artist, .campaign-stat__value { font-size: 14px; line-height: 19px; }
 
   .notif--views { top: 150px; left: -46px; }
   .notif--streams { top: 268px; right: -46px; }
@@ -223,8 +208,6 @@
   .creator-chip { width: 168px; gap: 16px; padding: 16px 12px 18px; }
   .creator-chip__photo { width: 132px; height: 132px; }
   .creator-chip__name { font-size: 15px; }
-
-  .footer__social { gap: 26px; }
 }
 
 /* Very narrow phones: keep the 4 campaign numbers on one line */

@@ -14,8 +14,8 @@
   <link rel="preload" as="image" href="assets/img/poster/poster-ma-a.jpg" fetchpriority="high">
   <link rel="preload" as="image" href="assets/img/my-track-cover.svg" fetchpriority="high">
   <!-- Shared shell (nav, sections, cards, footer) + music-artist specifics -->
-  <link rel="stylesheet" href="assets/css/content.css?v=27">
-  <link rel="stylesheet" href="assets/css/music.css?v=2">
+  <link rel="stylesheet" href="assets/css/content.css?v=28">
+  <link rel="stylesheet" href="assets/css/music.css?v=3">
 </head>
 <body>
 
@@ -57,35 +57,8 @@
     <section class="hero" id="hero">
       <div class="container hero__inner">
         <div class="hero__row">
-          <!-- Example screen (phone) on the left, campaign track card on top -->
+          <!-- Example screen (phone) on the left, campaign card across its foot -->
           <div class="hero-mockup">
-            <!-- Campaign track card: sits on top of the example screen, shares
-                 its width and is joined to it by a short connector. The numbers
-                 count up from 0 when the hero comes into view. -->
-            <div class="campaign-card">
-              <img src="assets/img/my-track-cover.svg" alt="" class="campaign-card__cover">
-              <p class="campaign-card__title">My Track</p>
-              <p class="campaign-card__artist">Me</p>
-              <div class="campaign-card__stats">
-                <div class="campaign-stat">
-                  <p class="campaign-stat__label">Posts</p>
-                  <p class="campaign-stat__value" data-count="67">0</p>
-                </div>
-                <div class="campaign-stat">
-                  <p class="campaign-stat__label">Spend</p>
-                  <p class="campaign-stat__value" data-count="236" data-prefix="$">$0</p>
-                </div>
-                <div class="campaign-stat">
-                  <p class="campaign-stat__label">Views</p>
-                  <p class="campaign-stat__value" data-count="2200000" data-compact="1">0</p>
-                </div>
-                <div class="campaign-stat">
-                  <p class="campaign-stat__label">Streams</p>
-                  <p class="campaign-stat__value" data-count="43000" data-compact="1">0</p>
-                </div>
-              </div>
-            </div>
-
             <div class="main-phone">
               <div class="main-phone__screen" id="phoneScreen">
                 <!-- Real campaign clips: Video A-E cycle every ~3 s -->
@@ -114,6 +87,36 @@
                 <div class="notif__text">
                   <p class="notif__title" data-rotate="streams">+2.9K</p>
                   <p class="notif__sub">Streams</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Campaign card: sits across the foot of the example screen and
+                 covers its bottom. It opens on the numbers below, then adds each
+                 clip's views/streams (plus a post and its cost) as the screen
+                 rotates — the running total never resets while the page is open. -->
+            <div class="campaign-card">
+              <img src="assets/img/my-track-cover.svg" alt="" class="campaign-card__cover">
+              <div class="campaign-cell campaign-cell--track">
+                <p class="campaign-card__title">My Track</p>
+                <p class="campaign-card__artist">Me</p>
+              </div>
+              <div class="campaign-card__grid">
+                <div class="campaign-cell">
+                  <p class="campaign-stat__label">Posts</p>
+                  <p class="campaign-stat__value" data-stat="posts">15</p>
+                </div>
+                <div class="campaign-cell">
+                  <p class="campaign-stat__label">Views</p>
+                  <p class="campaign-stat__value" data-stat="views">867K</p>
+                </div>
+                <div class="campaign-cell">
+                  <p class="campaign-stat__label">+Streams</p>
+                  <p class="campaign-stat__value" data-stat="streams">6.2K</p>
+                </div>
+                <div class="campaign-cell">
+                  <p class="campaign-stat__label">Cost</p>
+                  <p class="campaign-stat__value" data-stat="cost">$193</p>
                 </div>
               </div>
             </div>
@@ -375,6 +378,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-  <script src="assets/js/music.js?v=2"></script>
+  <script src="assets/js/music.js?v=3"></script>
 </body>
 </html>

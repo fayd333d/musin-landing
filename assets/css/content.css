@@ -951,6 +951,9 @@ img { display: block; max-width: 100%; }
 
 .footer__brand { display: flex; flex-direction: column; gap: 20px; }
 
+/* Logo + name and the copyright line; centred and stacked on small screens */
+.footer__identity { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; }
+
 .footer__copy {
   font-size: 14px;
   line-height: 20px;
@@ -1012,7 +1015,36 @@ img { display: block; max-width: 100%; }
 
   .genre-tag { font-size: 24px; }
 
-  .footer__top { flex-direction: column; gap: 40px; }
+  /* Footer stacks and centres — same on every page (#6) */
+  .footer__top {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 40px;
+  }
+
+  .footer__brand { align-items: center; gap: 24px; }
+
+  /* Logo + "Musin" sits above "© 2026 Musin…", both centred */
+  .footer__identity {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .footer__copy { margin: 0; }
+
+  /* Social icons centred and spread further apart */
+  .footer__social { justify-content: center; gap: 32px; }
+
+  /* Page links centred under the brand block */
+  .footer__links {
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    gap: 14px 28px;
+  }
 
   .cta__card { padding: 64px 24px; }
 }
@@ -1066,6 +1098,7 @@ img { display: block; max-width: 100%; }
 
   .footer__top { gap: 32px; }
   .footer__links { gap: 12px 28px; }
+  .footer__social { gap: 26px; }
 }
 
 /* Reduced motion */

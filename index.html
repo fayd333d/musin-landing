@@ -13,7 +13,7 @@
        clip is prioritised on the <video> element itself to avoid a double fetch) -->
   <link rel="preload" as="image" href="assets/img/poster/poster-1.jpg" fetchpriority="high">
   <link rel="preload" as="image" href="assets/img/covers/cover-1.jpg" fetchpriority="high">
-  <link rel="stylesheet" href="assets/css/content.css?v=27">
+  <link rel="stylesheet" href="assets/css/content.css?v=28">
 </head>
 <body>
 
@@ -320,11 +320,14 @@
   <footer class="footer">
     <div class="container footer__top">
       <div class="footer__brand">
-        <a class="nav-logo" href="index.html" aria-label="Musin home">
-          <img src="assets/img/logo-mark.svg" alt="" class="nav-logo__mark">
-          <span class="nav-logo__type">Musin</span>
-        </a>
-        <p class="footer__copy">© 2026 Musin. All rights reserved.</p>
+        <!-- On small screens the mark + name sit above the copyright, centred -->
+        <div class="footer__identity">
+          <a class="nav-logo" href="index.html" aria-label="Musin home">
+            <img src="assets/img/logo-mark.svg" alt="" class="nav-logo__mark">
+            <span class="nav-logo__type">Musin</span>
+          </a>
+          <p class="footer__copy">© 2026 Musin. All rights reserved.</p>
+        </div>
         <div class="footer__social">
           <a href="#" aria-label="X"><img src="assets/img/social/s01-x.svg" alt=""></a>
           <a href="#" aria-label="Instagram"><img src="assets/img/social/s08-instagram.svg" alt=""></a>
@@ -347,6 +350,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-  <script src="assets/js/content.js?v=27"></script>
+  <script src="assets/js/content.js?v=28"></script>
 </body>
 </html>
