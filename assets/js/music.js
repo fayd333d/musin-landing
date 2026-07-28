@@ -54,12 +54,15 @@ applyHeroData(heroData[0]);
 // Playback starts when the hero scrolls into view — see the observer below
 
 /* ---------- Campaign card: a running total ----------
-   The card starts empty when the page loads. Every time the example screen
-   rotates to the next clip, that clip's views and streams are added, along with
-   one post and its cost. After 20 clips the campaign starts over from zero. */
+   The figures always cover the clips shown so far, including the one on screen,
+   so the card opens on the first clip already counted — 1 post, its views and
+   streams, and its cost. Each rotation banks the incoming clip. After 20 clips
+   the campaign starts over at the next one. */
 const CAMPAIGN_RESET_AFTER = 20;
 const campaign = { posts: 0, views: 0, streams: 0, cost: 0 };
 let videosPlayed = 0;
+
+const clipCost = () => Math.floor(gsap.utils.random(8, 20)); // $8–19 per post
 
 const campaignEls = {
   posts: document.querySelector('[data-stat="posts"]'),
@@ -83,10 +86,8 @@ function renderCampaign(c) {
   campaignEls.streams.textContent = campaignNum(c.streams);
   campaignEls.cost.textContent = "$" + Math.round(c.cost);
 }
-renderCampaign(campaign);
-
-/* Add the clip that just finished playing, tweening to the new total */
-function addToCampaign(clip) {
+/* Bank the clip now showing, tweening to the new total */
+function addToCampaign(clip, animate = true) {
   // the 20-clip total stays up until the next clip lands, then it starts over
   if (videosPlayed >= CAMPAIGN_RESET_AFTER) {
     videosPlayed = 0;
@@ -98,9 +99,9 @@ function addToCampaign(clip) {
   campaign.posts += 1;
   campaign.views += clip.views;
   campaign.streams += clip.streams;
-  campaign.cost += Math.floor(gsap.utils.random(8, 20)); // $8–19 per post
+  campaign.cost += clipCost();
 
-  if (prefersReducedMotion) {
+  if (!animate || prefersReducedMotion) {
     renderCampaign(campaign);
     return;
   }
@@ -115,6 +116,9 @@ function addToCampaign(clip) {
     onComplete: () => renderCampaign(campaign),
   });
 }
+
+// the first clip is already on screen, so the card opens on 1 post, not 0
+addToCampaign(heroData[0], false);
 
 /* Only play while the hero is on screen */
 let heroInView = false;
@@ -139,11 +143,12 @@ function playCurrentClip(el) {
 
 function nextHeroSlide() {
   const prev = slides[heroIndex % slides.length];
-  // the clip that just played is now banked into the campaign total
-  addToCampaign(heroData[heroIndex % heroData.length]);
   heroIndex += 1;
   const next = slides[heroIndex % slides.length];
   const data = heroData[heroIndex % heroData.length];
+
+  // the clip coming on screen joins the campaign total
+  addToCampaign(data);
 
   gsap.set(next, { visibility: "visible", yPercent: 100, scale: 1, zIndex: 2 });
   gsap.set(prev, { zIndex: 1 });
