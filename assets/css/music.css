@@ -23,7 +23,9 @@
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 26px 24px 30px;
+  /* the card is anchored to the foot of the screen, so its spacing sets how far
+     up the video it reaches — kept tight so it starts low */
+  padding: 20px 24px 22px;
   /* top corners are the card's own; the bottom pair follows the screen's */
   border-radius: 34px 34px 40px 40px;
   background: rgba(32, 32, 34, 0.9);
@@ -36,44 +38,44 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 16px;
 }
 
 .campaign-card__cover {
   flex: 0 0 auto;
-  width: 78px;
-  height: 78px;
-  border-radius: 18px;
+  width: 58px;
+  height: 58px;
+  border-radius: 14px;
 }
 
 .campaign-card__title {
-  font-size: 23px;
+  font-size: 21px;
   font-weight: 700;
-  line-height: 30px;
+  line-height: 27px;
   color: var(--text-primary);
 }
 
 .campaign-card__artist {
-  font-size: 20px;
-  line-height: 28px;
+  font-size: 18px;
+  line-height: 24px;
   color: var(--text-dim);
 }
 
-/* Posts / Views / +Streams / Cost, label right of centre, value left of it */
+/* Posts / Views / Streams / Cost, label right of centre, value left of it */
 .campaign-card__rows {
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: baseline;
   column-gap: 20px;
-  row-gap: 6px;
-  margin-top: 24px;
+  row-gap: 2px;
+  margin-top: 14px;
 }
 
 .campaign-row__label,
 .campaign-row__value {
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 700;
-  line-height: 28px;
+  line-height: 24px;
   white-space: nowrap;
 }
 
