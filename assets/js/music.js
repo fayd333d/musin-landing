@@ -378,143 +378,51 @@ document.querySelectorAll(".genre-line").forEach((line, rowIdx) => {
   }
 });
 
-/* ---------- Grow your audience: endless 3D coverflow wheel ----------
-   Cards are positioned by "slot" (signed distance from the current centre,
-   wrapping around the list) rather than by scroll. Only slots -1/0/+1 are
-   visible; the side cards face OUTWARD and the rest stay hidden in the shade. */
-const stage = document.getElementById("createScroller");
-const wheelCards = [...stage.querySelectorAll(".video-card")];
-const N = wheelCards.length;
-let centreIndex = 0;
-const lastSlot = new Array(N).fill(null);
+/* ---------- Grow your music audience: campaign cards ----------
+   Ten example campaigns drifting past on their own — no arrows, no playback
+   controls. Covers and track names come from the Content landing's line-up. */
+const campaigns = [
+  ["Miss the rage", "Den Best", 4, 14, "486,320", "612"],
+  ["Still lonely", "Hoover", 5, 18, "793,540", "948"],
+  ["6 Gold", "Leboi", 6, 23, "1,247,860", "1,514"],
+  ["You\u2019re my fire", "Flare John", 7, 32, "2,335,132", "3,321"],
+  ["SVEG", "Lukrix", 8, 27, "1,684,710", "2,106"],
+  ["My world", "Je333", 9, 41, "3,928,450", "5,174"],
+  ["U WUT", "Zen X", 10, 56, "5,612,780", "6,903"],
+  ["Can\u2019t get away", "Lin Xiao", 11, 68, "7,438,920", "9,241"],
+  ["Adrenaline rush", "Quayo", 12, 84, "9,126,370", "11,084"],
+  ["Not 1 of us", "ZEZTI", 13, 36, "4,287,640", "6,118"],
+];
 
-function pauseAllClips() {
-  wheelCards.forEach((c) => {
-    const v = c.querySelector("video");
-    if (v && typeof v.pause === "function") v.pause();
-    c.classList.remove("is-playing");
+const campaignMarquee = document.getElementById("campaignMarquee");
+
+if (campaignMarquee) {
+  const tiles = campaigns
+    .map(
+      ([title, artist, cover, posts, views, listeners]) => `
+      <article class="campaign-tile">
+        <div class="campaign-tile__cover" style="background-image:url('assets/img/covers/cover-${cover}.jpg')"></div>
+        <p class="campaign-tile__title">${title}</p>
+        <p class="campaign-tile__artist">${artist}</p>
+        <div class="campaign-tile__stats">
+          <p><span>posts:</span> ${posts}</p>
+          <p><span>views:</span> ${views}</p>
+        </div>
+        <p class="campaign-tile__listeners">+${listeners}</p>
+        <p class="campaign-tile__listeners-label">new listeners</p>
+      </article>`
+    )
+    .join("");
+
+  /* Two copies for a seamless wrap, same as the other running lines. */
+  campaignMarquee.innerHTML = tiles + tiles;
+
+  gsap.to(campaignMarquee, {
+    xPercent: -50,
+    duration: 70,
+    ease: "none",
+    repeat: -1,
   });
-}
-function playCentre() {
-  const card = wheelCards[centreIndex];
-  const video = card && card.querySelector("video");
-  if (!video) return;
-  try { video.currentTime = 0; } catch (e) {}
-  const p = video.play();
-  if (p && p.catch) p.catch(() => {
-    video.addEventListener("canplay", () => { const r = video.play(); if (r && r.catch) r.catch(() => {}); }, { once: true });
-  });
-}
-wheelCards.forEach((card) => {
-  const video = card.querySelector("video");
-  const btn = card.querySelector(".video-card__play");
-  if (!video) return;
-  const toggle = (e) => {
-    if (e) e.stopPropagation();
-    if (video.paused) {
-      wheelCards.forEach((c) => {
-        const v = c.querySelector("video");
-        if (v && v !== video) { v.pause(); c.classList.remove("is-playing"); }
-      });
-      const p = video.play();
-      if (p && p.catch) p.catch(() => {});
-    } else {
-      video.pause();
-    }
-  };
-  if (btn) btn.addEventListener("click", toggle);
-  video.addEventListener("click", toggle);
-  video.addEventListener("play", () => card.classList.add("is-playing"));
-  video.addEventListener("pause", () => card.classList.remove("is-playing"));
-  video.addEventListener("ended", () => card.classList.remove("is-playing"));
-});
-
-function renderWheel() {
-  if (!N) return;
-  const cardW = wheelCards[0].offsetWidth || 280;
-  const spacing = cardW * 0.9; // space so side cards aren't hidden behind the centre
-  wheelCards.forEach((card, i) => {
-    let s = (((i - centreIndex) % N) + N) % N; // 0..N-1
-    if (s > N / 2) s -= N; // wrap to a signed slot
-    const a = Math.abs(s);
-    const dir = Math.sign(s);
-    const near = Math.min(a, 2);
-    const rotateY = dir * Math.min(a, 1) * 42; // side cards face outward
-    const tx = s * spacing;
-    const tz = -near * 100;
-    const scale = 1 - near * 0.16;
-    const bright = 1 - near * 0.5;
-    const visible = a <= 1;
-
-    const prev = lastSlot[i];
-    const wrapped = prev !== null && Math.abs(s - prev) > N / 2;
-    if (wrapped) card.style.transition = "none"; // jump hidden cards silently
-
-    card.style.transform =
-      `translate(-50%, -50%) perspective(1400px) translateX(${tx.toFixed(1)}px) translateZ(${tz.toFixed(1)}px) rotateY(${rotateY.toFixed(1)}deg) scale(${scale.toFixed(3)})`;
-    card.style.filter = `brightness(${bright.toFixed(3)})`;
-    card.style.opacity = visible ? "1" : "0";
-    card.style.zIndex = String(100 - a * 10);
-
-    if (wrapped) {
-      void card.offsetWidth; // force reflow, then restore the transition
-      card.style.transition = "";
-    }
-    lastSlot[i] = s;
-  });
-}
-
-function advance(step) {
-  centreIndex = (((centreIndex + step) % N) + N) % N;
-  pauseAllClips(); // stop the clip we're leaving
-  renderWheel();
-  playCentre(); // autoplay the newly-centred clip when the user switches
-}
-
-/* Side arrows on desktop, swipe on touch; the centre clip autoplays */
-const prevBtn = document.getElementById("scrollPrev");
-const nextBtn = document.getElementById("scrollNext");
-if (prevBtn) prevBtn.addEventListener("click", () => advance(-1));
-if (nextBtn) nextBtn.addEventListener("click", () => advance(1));
-
-/* Swipe / drag to move one card (both directions, phone + pointer) */
-let dragStartX = null;
-stage.addEventListener("pointerdown", (e) => { dragStartX = e.clientX; stage.classList.add("is-dragging"); });
-window.addEventListener("pointerup", (e) => {
-  if (dragStartX === null) return;
-  const dx = e.clientX - dragStartX;
-  if (Math.abs(dx) > 40) advance(dx < 0 ? 1 : -1);
-  dragStartX = null;
-  stage.classList.remove("is-dragging");
-});
-
-window.addEventListener("resize", renderWheel);
-stage.classList.add("no-anim");
-renderWheel();
-void stage.offsetWidth;
-stage.classList.remove("no-anim");
-
-/* Autoplay the first clip only once the section scrolls into view (not on page
-   load); pause the clips when it leaves */
-let createStarted = false;
-const createSection = document.getElementById("create");
-if (createSection) {
-  const createObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          if (!createStarted) {
-            createStarted = true;
-            playCentre();
-          }
-        } else {
-          pauseAllClips();
-        }
-      });
-    },
-    { threshold: 0.4 }
-  );
-  createObserver.observe(createSection);
 }
 
 /* Pay only for results: the cards stack purely via CSS sticky positioning —
