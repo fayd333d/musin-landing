@@ -15,29 +15,31 @@ burger.addEventListener("click", () => {
 });
 
 /* ---------- Hero: example screen rotation (every 3 s) ----------
-   Views and +Streams change with each clip; the next screen scrolls up into
-   the main phone from below, TikTok-style. */
+   Views change with each clip; so does the Engagements badge, which shows
+   that clip's average engagements (likes + shares + comments) per 1,000
+   views rather than a running count. The next screen scrolls up into the
+   main phone from below, TikTok-style. */
 const heroData = [
-  { views: 398000, streams: 2900 },  // Video A
-  { views: 43000, streams: 625 },    // Video B
-  { views: 640000, streams: 7900 },  // Video C
-  { views: 123000, streams: 843 },   // Video D
-  { views: 12000, streams: 213 },    // Video E
+  { views: 398000, engagementRate: 15 },  // Video A
+  { views: 43000, engagementRate: 9 },    // Video B
+  { views: 640000, engagementRate: 16 },  // Video C
+  { views: 123000, engagementRate: 11 },  // Video D
+  { views: 12000, engagementRate: 22 },   // Video E
 ];
 
 const slides = gsap.utils.toArray(".phone-slide");
 const rotateEls = {
   views: document.querySelector('[data-rotate="views"]'),
-  streams: document.querySelector('[data-rotate="streams"]'),
+  engagements: document.querySelector('[data-rotate="engagements"]'),
 };
 const notifs = [
   document.getElementById("notifViews"),
-  document.getElementById("notifStreams"),
+  document.getElementById("notifEngagements"),
 ];
 
 let heroIndex = 0;
 
-/* 398000 → "398K", 43000 → "43K", 2900 → "2.9K", 625 → "625" */
+/* 398000 → "398K", 43000 → "43K" */
 function badge(n) {
   if (n >= 1e6) return (Math.floor(n / 1e5) / 10).toFixed(1) + "M";
   if (n >= 1e4) return Math.round(n / 1e3) + "K";
@@ -47,7 +49,7 @@ function badge(n) {
 
 function applyHeroData(d) {
   rotateEls.views.textContent = badge(d.views);
-  rotateEls.streams.textContent = "+" + badge(d.streams);
+  rotateEls.engagements.textContent = String(d.engagementRate);
 }
 
 applyHeroData(heroData[0]);
@@ -56,18 +58,21 @@ applyHeroData(heroData[0]);
 /* ---------- Campaign card: a running total ----------
    The figures always cover the clips shown so far, including the one on screen,
    so the card opens on the first clip already counted — 1 post, its views and
-   streams, and its cost. Each rotation banks the incoming clip. After 20 clips
-   the campaign starts over at the next one. */
+   engagements, and its cost. Each clip's engagements are its views times its
+   engagement rate (per 1,000 views), so the total tracks an absolute count
+   even though the badge above only ever shows a rate. Each rotation banks the
+   incoming clip. After 20 clips the campaign starts over at the next one. */
 const CAMPAIGN_RESET_AFTER = 20;
-const campaign = { posts: 0, views: 0, streams: 0, cost: 0 };
+const campaign = { posts: 0, views: 0, engagements: 0, cost: 0 };
 let videosPlayed = 0;
 
 const clipCost = () => Math.floor(gsap.utils.random(8, 20)); // $8–19 per post
+const clipEngagements = (clip) => Math.round((clip.views / 1000) * clip.engagementRate);
 
 const campaignEls = {
   posts: document.querySelector('[data-stat="posts"]'),
   views: document.querySelector('[data-stat="views"]'),
-  streams: document.querySelector('[data-stat="streams"]'),
+  engagements: document.querySelector('[data-stat="engagements"]'),
   cost: document.querySelector('[data-stat="cost"]'),
 };
 
@@ -83,7 +88,7 @@ function campaignNum(n) {
 function renderCampaign(c) {
   campaignEls.posts.textContent = Math.round(c.posts);
   campaignEls.views.textContent = campaignNum(c.views);
-  campaignEls.streams.textContent = campaignNum(c.streams);
+  campaignEls.engagements.textContent = campaignNum(c.engagements);
   campaignEls.cost.textContent = "$" + Math.round(c.cost);
 }
 /* Bank the clip now showing, tweening to the new total */
@@ -91,14 +96,14 @@ function addToCampaign(clip, animate = true) {
   // the 20-clip total stays up until the next clip lands, then it starts over
   if (videosPlayed >= CAMPAIGN_RESET_AFTER) {
     videosPlayed = 0;
-    Object.assign(campaign, { posts: 0, views: 0, streams: 0, cost: 0 });
+    Object.assign(campaign, { posts: 0, views: 0, engagements: 0, cost: 0 });
   }
   videosPlayed += 1;
 
   const from = { ...campaign };
   campaign.posts += 1;
   campaign.views += clip.views;
-  campaign.streams += clip.streams;
+  campaign.engagements += clipEngagements(clip);
   campaign.cost += clipCost();
 
   if (!animate || prefersReducedMotion) {
@@ -108,7 +113,7 @@ function addToCampaign(clip, animate = true) {
   gsap.to(from, {
     posts: campaign.posts,
     views: campaign.views,
-    streams: campaign.streams,
+    engagements: campaign.engagements,
     cost: campaign.cost,
     duration: 0.9,
     ease: "power2.out",
@@ -402,7 +407,7 @@ const campaignStage = document.getElementById("campaignScroller");
 if (campaignStage) {
   campaignStage.innerHTML = campaigns
     .map(
-      ([title, artist, cover, posts, views, listeners]) => `
+      ([title, artist, cover, posts, views, engagements]) => `
       <article class="campaign-tile">
         <div class="campaign-tile__cover" style="background-image:url('assets/img/covers/cover-${cover}.jpg')"></div>
         <div class="campaign-tile__body">
@@ -413,11 +418,8 @@ if (campaignStage) {
           <dl class="campaign-tile__stats">
             <div><dt>Posts</dt><dd>${posts}</dd></div>
             <div><dt>Views</dt><dd>${views}</dd></div>
+            <div><dt>Engagements</dt><dd>${engagements}</dd></div>
           </dl>
-          <div class="campaign-tile__listeners">
-            <p class="campaign-tile__listeners-value">+${listeners}</p>
-            <p class="campaign-tile__listeners-label">new listeners</p>
-          </div>
         </div>
       </article>`
     )

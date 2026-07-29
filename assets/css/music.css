@@ -24,9 +24,8 @@
   right: 0;
   bottom: 0;
   /* the card is anchored to the foot of the screen, so its spacing sets how far
-     up the video it reaches. It holds only the figures now — the track itself
-     floats above the screen — so the rows get room to breathe. */
-  padding: 26px 24px 30px;
+     up the video it reaches */
+  padding: 20px 24px 26px;
   /* top corners are the card's own; the bottom pair follows the screen's */
   border-radius: 34px 34px 40px 40px;
   background: rgba(32, 32, 34, 0.9);
@@ -34,13 +33,43 @@
   -webkit-backdrop-filter: blur(18px);
 }
 
-/* Posts / Views / Streams / Cost, label right of centre, value left of it */
+/* Cover + title/artist, at the top of the card */
+.campaign-card__track {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.campaign-card__cover {
+  flex: 0 0 auto;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+}
+
+.campaign-card__title {
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 22px;
+  color: var(--text-primary);
+}
+
+.campaign-card__artist {
+  font-size: 14px;
+  line-height: 19px;
+  color: var(--text-dim);
+}
+
+/* Posts / Views / Engagements / Cost, label right of centre, value left of it */
 .campaign-card__rows {
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: baseline;
   column-gap: 26px;
-  row-gap: 16px;
+  row-gap: 14px;
 }
 
 .campaign-row__label,
@@ -63,27 +92,11 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* The track badge across the top of the screen, with Views on the left and
-   +Streams a little lower on the right. Offsets are in the phone's own
-   (unscaled) 400px space. */
-/* Same padding and type as the other two badges — only the artwork sets it
-   apart, and that stays close to their icon size */
-.notif--track {
-  top: -26px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.notif--track .notif__cover {
-  width: 46px;
-  height: 46px;
-  border-radius: 12px;
-  border: none;
-}
-
-.notif--views { top: 160px; left: -62px; }
-.notif--streams { top: 278px; right: -62px; }
-.notif--streams .notif__icon img { width: 22px; height: 22px; }
+/* Views on the left, Engagements a little lower on the right of the example
+   screen. Offsets are in the phone's own (unscaled) 400px space. */
+.notif--views { top: 150px; left: -62px; }
+.notif--engagements { top: 268px; right: -62px; }
+.notif--engagements .notif__icon img { width: 20px; height: 20px; }
 
 /* ============ Select content creators ============
    Same layout as "Choose music you like", but the cards hold a round creator
@@ -220,7 +233,9 @@
   text-overflow: ellipsis;
 }
 
-/* Label left, figure right, so the numbers line up down the card */
+/* Label left, figure right, so the numbers line up down the card. Posts,
+   Views and Engagements are three equal rows — none is emphasised over
+   the others. */
 .campaign-tile__stats { display: flex; flex-direction: column; gap: 4px; }
 
 .campaign-tile__stats > div {
@@ -231,6 +246,8 @@
   padding-bottom: 4px;
   border-bottom: 1px solid var(--border);
 }
+
+.campaign-tile__stats > div:last-child { border-bottom: none; }
 
 .campaign-tile__stats dt {
   font-size: 13px;
@@ -246,23 +263,6 @@
   font-variant-numeric: tabular-nums;
 }
 
-.campaign-tile__listeners { text-align: center; }
-
-.campaign-tile__listeners-value {
-  font-size: 28px;
-  font-weight: 700;
-  line-height: 34px;
-  letter-spacing: -0.6px;
-  color: var(--text-primary);
-  font-variant-numeric: tabular-nums;
-}
-
-.campaign-tile__listeners-label {
-  font-size: 13px;
-  line-height: 18px;
-  color: var(--text-dim);
-}
-
 /* ============ Pay only for results (#5) ============
    Same four stacking cards as the Content landing, different glyphs. */
 .pay-card:nth-child(1) .pay-card__icon::before { -webkit-mask-image: url("../img/icons/music-note.svg"); mask-image: url("../img/icons/music-note.svg"); }
@@ -274,14 +274,13 @@
 
 /* ============ Responsive ============ */
 @media (max-width: 600px) {
-  /* .main-phone drops to scale(.72) here → 288x568px on screen */
   /* .main-phone drops to scale(.72) here → 288x568px on screen. The campaign
      card lives inside the screen, so it scales with the phone and needs no
      rules of its own. */
   .hero-mockup { width: min(288px, 100%); height: 568px; }
 
   .notif--views { top: 150px; left: -46px; }
-  .notif--streams { top: 268px; right: -46px; }
+  .notif--engagements { top: 268px; right: -46px; }
 
   .creator-chip { width: 168px; gap: 16px; padding: 16px 12px 18px; }
   .creator-chip__photo { width: 132px; height: 132px; }

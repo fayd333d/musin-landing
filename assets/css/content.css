@@ -1061,14 +1061,14 @@ img { display: block; max-width: 100%; }
   .logos__item--stripe { height: 24px; }
   .logos__item--wide { height: 22px; }
 
-  /* Inside Musin app — text left, small framed screen right; all stick at the
-     same offset so cards fully cover each other (#5, #8) */
-  .app-card { height: 300px; top: 88px; }
-  .app-card__panel { flex-basis: 42%; padding: 18px; }
+  /* Inside Musin app — text on top, full-width screen underneath; all stick at
+     the same offset so cards fully cover each other (#5, #8) */
+  .app-card { flex-direction: column; height: auto; top: 88px; }
+  .app-card__panel { flex: 0 0 auto; width: 100%; padding: 22px 22px 4px; text-align: left; }
   .app-card__title { font-size: 20px; }
-  .app-card__text { font-size: 14px; line-height: 20px; }
-  .app-card__screen { flex-basis: 58%; padding: 16px; }
-  .app-card__screen img { max-height: 220px; }
+  .app-card__text { max-width: none; font-size: 14px; line-height: 20px; }
+  .app-card__screen { flex: 0 0 auto; width: 100%; padding: 16px 22px 22px; }
+  .app-card__screen img { max-height: 300px; }
 
   .faq { padding: 96px 0; }
   .faq-list { margin-top: 40px; }

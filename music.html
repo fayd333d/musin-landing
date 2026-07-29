@@ -14,8 +14,8 @@
   <link rel="preload" as="image" href="assets/img/poster/poster-ma-a.jpg" fetchpriority="high">
   <link rel="preload" as="image" href="assets/img/my-track-cover.svg" fetchpriority="high">
   <!-- Shared shell (nav, sections, cards, footer) + music-artist specifics -->
-  <link rel="stylesheet" href="assets/css/content.css?v=31">
-  <link rel="stylesheet" href="assets/css/music.css?v=12">
+  <link rel="stylesheet" href="assets/css/content.css?v=32">
+  <link rel="stylesheet" href="assets/css/music.css?v=13">
 </head>
 <body>
 
@@ -73,29 +73,26 @@
                      first clip (the values below) and grow as the screen
                      rotates; after 20 clips the count starts over. -->
                 <div class="campaign-card">
+                  <div class="campaign-card__track">
+                    <img src="assets/img/my-track-cover.svg" alt="" class="campaign-card__cover">
+                    <div>
+                      <p class="campaign-card__title">My Track</p>
+                      <p class="campaign-card__artist">Me</p>
+                    </div>
+                  </div>
                   <div class="campaign-card__rows">
                     <p class="campaign-row__label">Posts:</p>
                     <p class="campaign-row__value" data-stat="posts">1</p>
                     <p class="campaign-row__label">Views:</p>
                     <p class="campaign-row__value" data-stat="views">398K</p>
-                    <p class="campaign-row__label">Streams:</p>
-                    <p class="campaign-row__value" data-stat="streams">2.9K</p>
+                    <p class="campaign-row__label">Engagements:</p>
+                    <p class="campaign-row__value" data-stat="engagements">6.0K</p>
                     <p class="campaign-row__label">Cost:</p>
                     <p class="campaign-row__value" data-stat="cost">$12</p>
                   </div>
                 </div>
               </div>
               <img src="assets/img/iphone-frame.png" alt="" class="main-phone__frame">
-
-              <!-- The campaign's track, floating above the screen alongside the
-                   views/streams badges -->
-              <div class="notif notif--track" id="notifTrack">
-                <img src="assets/img/my-track-cover.svg" alt="" class="notif__cover">
-                <div class="notif__text">
-                  <p class="notif__title">My Track</p>
-                  <p class="notif__sub">Me</p>
-                </div>
-              </div>
 
               <div class="notif notif--views" id="notifViews">
                 <div class="notif__icon notif__icon--blue">
@@ -107,13 +104,13 @@
                 </div>
               </div>
 
-              <div class="notif notif--streams" id="notifStreams">
+              <div class="notif notif--engagements" id="notifEngagements">
                 <div class="notif__icon notif__icon--green">
-                  <img src="assets/img/icons/music-note.svg" alt="">
+                  <img src="assets/img/icons/engagement.svg" alt="">
                 </div>
                 <div class="notif__text">
-                  <p class="notif__title" data-rotate="streams">+2.9K</p>
-                  <p class="notif__sub">Streams</p>
+                  <p class="notif__title" data-rotate="engagements">15</p>
+                  <p class="notif__sub">Engagements</p>
                 </div>
               </div>
             </div>
@@ -358,6 +355,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-  <script src="assets/js/music.js?v=13"></script>
+  <script src="assets/js/music.js?v=14"></script>
 </body>
 </html>
