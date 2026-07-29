@@ -14,8 +14,8 @@
   <link rel="preload" as="image" href="assets/img/poster/poster-ma-a.jpg" fetchpriority="high">
   <link rel="preload" as="image" href="assets/img/my-track-cover.svg" fetchpriority="high">
   <!-- Shared shell (nav, sections, cards, footer) + music-artist specifics -->
-  <link rel="stylesheet" href="assets/css/content.css?v=28">
-  <link rel="stylesheet" href="assets/css/music.css?v=7">
+  <link rel="stylesheet" href="assets/css/content.css?v=29">
+  <link rel="stylesheet" href="assets/css/music.css?v=8">
 </head>
 <body>
 
@@ -135,30 +135,28 @@
       </div>
     </section>
 
-    <!-- ============ SELECT CONTENT CREATORS (merged with creator list) ============ -->
+    <!-- ============ CHOOSE WHO POSTS WITH YOUR TRACK ============ -->
     <section class="genres creators" id="creators">
       <div class="container genres__head">
         <div class="genres__stat">
           <p class="genres__number" id="creatorCount">8,024</p>
           <p class="genres__unit">content creators active</p>
         </div>
-        <h2 class="section-title">Select content creators</h2>
+        <h2 class="section-title">Choose who posts with your track</h2>
       </div>
-      <!-- Feel / Theme / Content type instead of genres -->
-      <div class="genre-lines" id="genreLines">
-        <div class="genre-line" data-drift="1"></div>
-        <div class="genre-line" data-drift="-1"></div>
-        <div class="genre-line" data-drift="1"></div>
-      </div>
+      <!-- Two rows of creators running in opposite directions -->
       <div class="track-marquee" aria-label="Content creators on Musin">
         <div class="track-marquee__inner" id="creatorMarquee"></div>
       </div>
+      <div class="track-marquee track-marquee--row2" aria-hidden="true">
+        <div class="track-marquee__inner" id="creatorMarquee2"></div>
+      </div>
     </section>
 
-    <!-- ============ MUSIC DISCOVERY THROUGH CONTENT ============ -->
+    <!-- ============ GROW YOUR AUDIENCE THROUGH CONTENT ============ -->
     <section class="create" id="create">
       <div class="container create__head">
-        <h2 class="section-title">Music discovery through content</h2>
+        <h2 class="section-title">Grow your audience through content</h2>
       </div>
       <div class="create__viewport">
         <div class="create__scroller" id="createScroller">
@@ -329,7 +327,7 @@
     <section class="cta">
       <div class="container">
         <div class="cta__card">
-          <h2 class="cta__title">Music promotion through content</h2>
+          <h2 class="cta__title">Promote your music through content</h2>
           <p class="cta__text">Direct access to content creators, transparent payments, and real campaign results.</p>
           <a href="#" class="btn btn--primary btn--lg">Get started</a>
         </div>
@@ -372,6 +370,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-  <script src="assets/js/music.js?v=6"></script>
+  <script src="assets/js/music.js?v=8"></script>
 </body>
 </html>

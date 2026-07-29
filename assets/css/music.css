@@ -160,6 +160,9 @@
 .creator-chip__platform--tiktok { -webkit-mask-image: url("../img/social/s10-tiktok.svg"); mask-image: url("../img/social/s10-tiktok.svg"); }
 .creator-chip__platform--youtube { -webkit-mask-image: url("../img/social/s09-youtube.svg"); mask-image: url("../img/social/s09-youtube.svg"); }
 
+/* Second creator row sits just under the first (which travels the other way) */
+.track-marquee--row2 { margin-top: 16px; }
+
 .creator-chip__followers {
   margin-top: 3px;
   font-size: 13px;
