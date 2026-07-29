@@ -33,14 +33,14 @@
   -webkit-backdrop-filter: blur(18px);
 }
 
-/* Cover + title/artist, at the top of the card */
+/* Cover + title/artist, centred at the top of the card so the block sits
+   straight above the figures below it */
 .campaign-card__track {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 14px;
-  padding-bottom: 16px;
-  margin-bottom: 16px;
-  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
 }
 
 .campaign-card__cover {
@@ -96,6 +96,7 @@
    screen. Offsets are in the phone's own (unscaled) 400px space. */
 .notif--views { top: 150px; left: -62px; }
 .notif--engagements { top: 268px; right: -62px; }
+.notif--engagements .notif__icon { background: #d8a608; }
 .notif--engagements .notif__icon img { width: 20px; height: 20px; }
 
 /* ============ Select content creators ============

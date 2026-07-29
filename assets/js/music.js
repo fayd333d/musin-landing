@@ -14,17 +14,21 @@ burger.addEventListener("click", () => {
   mobileMenu.hidden = !open;
 });
 
+/* Engagements (likes + shares + comments) run at ~5% of views, so
+   486,320 views → ~24,316 engagements. Every engagement figure on the page
+   comes from this one rate. */
+const ENGAGEMENT_RATE = 0.05;
+const engagementsFor = (views) => Math.round(views * ENGAGEMENT_RATE);
+
 /* ---------- Hero: example screen rotation (every 3 s) ----------
-   Views change with each clip; so does the Engagements badge, which shows
-   that clip's average engagements (likes + shares + comments) per 1,000
-   views rather than a running count. The next screen scrolls up into the
-   main phone from below, TikTok-style. */
+   Views and Engagements both change with each clip; the next screen scrolls
+   up into the main phone from below, TikTok-style. */
 const heroData = [
-  { views: 398000, engagementRate: 15 },  // Video A
-  { views: 43000, engagementRate: 9 },    // Video B
-  { views: 640000, engagementRate: 16 },  // Video C
-  { views: 123000, engagementRate: 11 },  // Video D
-  { views: 12000, engagementRate: 22 },   // Video E
+  { views: 398000 },  // Video A
+  { views: 43000 },   // Video B
+  { views: 640000 },  // Video C
+  { views: 123000 },  // Video D
+  { views: 12000 },   // Video E
 ];
 
 const slides = gsap.utils.toArray(".phone-slide");
@@ -49,7 +53,7 @@ function badge(n) {
 
 function applyHeroData(d) {
   rotateEls.views.textContent = badge(d.views);
-  rotateEls.engagements.textContent = String(d.engagementRate);
+  rotateEls.engagements.textContent = badge(engagementsFor(d.views));
 }
 
 applyHeroData(heroData[0]);
@@ -58,16 +62,13 @@ applyHeroData(heroData[0]);
 /* ---------- Campaign card: a running total ----------
    The figures always cover the clips shown so far, including the one on screen,
    so the card opens on the first clip already counted — 1 post, its views and
-   engagements, and its cost. Each clip's engagements are its views times its
-   engagement rate (per 1,000 views), so the total tracks an absolute count
-   even though the badge above only ever shows a rate. Each rotation banks the
-   incoming clip. After 20 clips the campaign starts over at the next one. */
+   engagements, and its cost. Each rotation banks the incoming clip. After 20
+   clips the campaign starts over at the next one. */
 const CAMPAIGN_RESET_AFTER = 20;
 const campaign = { posts: 0, views: 0, engagements: 0, cost: 0 };
 let videosPlayed = 0;
 
 const clipCost = () => Math.floor(gsap.utils.random(8, 20)); // $8–19 per post
-const clipEngagements = (clip) => Math.round((clip.views / 1000) * clip.engagementRate);
 
 const campaignEls = {
   posts: document.querySelector('[data-stat="posts"]'),
@@ -103,7 +104,7 @@ function addToCampaign(clip, animate = true) {
   const from = { ...campaign };
   campaign.posts += 1;
   campaign.views += clip.views;
-  campaign.engagements += clipEngagements(clip);
+  campaign.engagements += engagementsFor(clip.views);
   campaign.cost += clipCost();
 
   if (!animate || prefersReducedMotion) {
@@ -389,25 +390,28 @@ document.querySelectorAll(".genre-line").forEach((line, rowIdx) => {
    signed distance from the centre, wrapping round the list — so only slots
    -1/0/+1 are visible and the side cards face outward.
    Covers and track names come from the Content landing's line-up. */
+/* [title, artist, cover number, posts, views] \u2014 engagements come off the views */
 const campaigns = [
-  ["Miss the rage", "Den Best", 4, "14", "486,320", "612"],
-  ["Still lonely", "Hoover", 5, "18", "793,540", "948"],
-  ["6 Gold", "Leboi", 6, "23", "1,247,860", "1,514"],
-  ["You\u2019re my fire", "Flare John", 7, "32", "2,335,132", "3,321"],
-  ["SVEG", "Lukrix", 8, "27", "1,684,710", "2,106"],
-  ["My world", "Je333", 9, "41", "3,928,450", "5,174"],
-  ["U WUT", "Zen X", 10, "56", "5,612,780", "6,903"],
-  ["Can\u2019t get away", "Lin Xiao", 11, "68", "7,438,920", "9,241"],
-  ["Adrenaline rush", "Quayo", 12, "84", "9,126,370", "11,084"],
-  ["Not 1 of us", "ZEZTI", 13, "36", "4,287,640", "6,118"],
+  ["Miss the rage", "Den Best", 4, 14, 486320],
+  ["Still lonely", "Hoover", 5, 18, 793540],
+  ["6 Gold", "Leboi", 6, 23, 1247860],
+  ["You\u2019re my fire", "Flare John", 7, 32, 2335132],
+  ["SVEG", "Lukrix", 8, 27, 1684710],
+  ["My world", "Je333", 9, 41, 3928450],
+  ["U WUT", "Zen X", 10, 56, 5612780],
+  ["Can\u2019t get away", "Lin Xiao", 11, 68, 7438920],
+  ["Adrenaline rush", "Quayo", 12, 84, 9126370],
+  ["Not 1 of us", "ZEZTI", 13, 36, 4287640],
 ];
 
 const campaignStage = document.getElementById("campaignScroller");
 
 if (campaignStage) {
+  const group = (n) => n.toLocaleString("en-US");
+
   campaignStage.innerHTML = campaigns
     .map(
-      ([title, artist, cover, posts, views, engagements]) => `
+      ([title, artist, cover, posts, views]) => `
       <article class="campaign-tile">
         <div class="campaign-tile__cover" style="background-image:url('assets/img/covers/cover-${cover}.jpg')"></div>
         <div class="campaign-tile__body">
@@ -417,8 +421,8 @@ if (campaignStage) {
           </div>
           <dl class="campaign-tile__stats">
             <div><dt>Posts</dt><dd>${posts}</dd></div>
-            <div><dt>Views</dt><dd>${views}</dd></div>
-            <div><dt>Engagements</dt><dd>${engagements}</dd></div>
+            <div><dt>Views</dt><dd>${group(views)}</dd></div>
+            <div><dt>Engagements</dt><dd>${group(engagementsFor(views))}</dd></div>
           </dl>
         </div>
       </article>`
