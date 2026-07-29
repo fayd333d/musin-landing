@@ -378,51 +378,118 @@ document.querySelectorAll(".genre-line").forEach((line, rowIdx) => {
   }
 });
 
-/* ---------- Grow your music audience: campaign cards ----------
-   Ten example campaigns drifting past on their own — no arrows, no playback
-   controls. Covers and track names come from the Content landing's line-up. */
+/* ---------- Grow your music audience: campaign card carousel ----------
+   The same 3D coverflow the Content landing uses for its clips, but the cards
+   advance on a timer: no arrows, no dragging. Cards are placed by "slot" — the
+   signed distance from the centre, wrapping round the list — so only slots
+   -1/0/+1 are visible and the side cards face outward.
+   Covers and track names come from the Content landing's line-up. */
 const campaigns = [
-  ["Miss the rage", "Den Best", 4, 14, "486,320", "612"],
-  ["Still lonely", "Hoover", 5, 18, "793,540", "948"],
-  ["6 Gold", "Leboi", 6, 23, "1,247,860", "1,514"],
-  ["You\u2019re my fire", "Flare John", 7, 32, "2,335,132", "3,321"],
-  ["SVEG", "Lukrix", 8, 27, "1,684,710", "2,106"],
-  ["My world", "Je333", 9, 41, "3,928,450", "5,174"],
-  ["U WUT", "Zen X", 10, 56, "5,612,780", "6,903"],
-  ["Can\u2019t get away", "Lin Xiao", 11, 68, "7,438,920", "9,241"],
-  ["Adrenaline rush", "Quayo", 12, 84, "9,126,370", "11,084"],
-  ["Not 1 of us", "ZEZTI", 13, 36, "4,287,640", "6,118"],
+  ["Miss the rage", "Den Best", 4, "14", "486,320", "612"],
+  ["Still lonely", "Hoover", 5, "18", "793,540", "948"],
+  ["6 Gold", "Leboi", 6, "23", "1,247,860", "1,514"],
+  ["You\u2019re my fire", "Flare John", 7, "32", "2,335,132", "3,321"],
+  ["SVEG", "Lukrix", 8, "27", "1,684,710", "2,106"],
+  ["My world", "Je333", 9, "41", "3,928,450", "5,174"],
+  ["U WUT", "Zen X", 10, "56", "5,612,780", "6,903"],
+  ["Can\u2019t get away", "Lin Xiao", 11, "68", "7,438,920", "9,241"],
+  ["Adrenaline rush", "Quayo", 12, "84", "9,126,370", "11,084"],
+  ["Not 1 of us", "ZEZTI", 13, "36", "4,287,640", "6,118"],
 ];
 
-const campaignMarquee = document.getElementById("campaignMarquee");
+const campaignStage = document.getElementById("campaignScroller");
 
-if (campaignMarquee) {
-  const tiles = campaigns
+if (campaignStage) {
+  campaignStage.innerHTML = campaigns
     .map(
       ([title, artist, cover, posts, views, listeners]) => `
       <article class="campaign-tile">
         <div class="campaign-tile__cover" style="background-image:url('assets/img/covers/cover-${cover}.jpg')"></div>
-        <p class="campaign-tile__title">${title}</p>
-        <p class="campaign-tile__artist">${artist}</p>
-        <div class="campaign-tile__stats">
-          <p><span>posts:</span> ${posts}</p>
-          <p><span>views:</span> ${views}</p>
+        <div class="campaign-tile__body">
+          <div class="campaign-tile__track">
+            <p class="campaign-tile__title">${title}</p>
+            <p class="campaign-tile__artist">${artist}</p>
+          </div>
+          <dl class="campaign-tile__stats">
+            <div><dt>Posts</dt><dd>${posts}</dd></div>
+            <div><dt>Views</dt><dd>${views}</dd></div>
+          </dl>
+          <div class="campaign-tile__listeners">
+            <p class="campaign-tile__listeners-value">+${listeners}</p>
+            <p class="campaign-tile__listeners-label">new listeners</p>
+          </div>
         </div>
-        <p class="campaign-tile__listeners">+${listeners}</p>
-        <p class="campaign-tile__listeners-label">new listeners</p>
       </article>`
     )
     .join("");
 
-  /* Two copies for a seamless wrap, same as the other running lines. */
-  campaignMarquee.innerHTML = tiles + tiles;
+  const wheelCards = [...campaignStage.querySelectorAll(".campaign-tile")];
+  const N = wheelCards.length;
+  let centreIndex = 0;
+  const lastSlot = new Array(N).fill(null);
 
-  gsap.to(campaignMarquee, {
-    xPercent: -50,
-    duration: 70,
-    ease: "none",
-    repeat: -1,
-  });
+  function renderWheel() {
+    if (!N) return;
+    const cardW = wheelCards[0].offsetWidth || 260;
+    const spacing = cardW * 0.9; // room so the side cards aren't hidden behind the centre
+    wheelCards.forEach((card, i) => {
+      let s = (((i - centreIndex) % N) + N) % N; // 0..N-1
+      if (s > N / 2) s -= N; // wrap to a signed slot
+      const a = Math.abs(s);
+      const dir = Math.sign(s);
+      const near = Math.min(a, 2);
+      const rotateY = dir * Math.min(a, 1) * 42; // side cards face outward
+      const tx = s * spacing;
+      const tz = -near * 100;
+      const scale = 1 - near * 0.16;
+      const bright = 1 - near * 0.5;
+
+      const prev = lastSlot[i];
+      const wrapped = prev !== null && Math.abs(s - prev) > N / 2;
+      if (wrapped) card.style.transition = "none"; // jump hidden cards silently
+
+      card.style.transform =
+        `translate(-50%, -50%) perspective(1400px) translateX(${tx.toFixed(1)}px) translateZ(${tz.toFixed(1)}px) rotateY(${rotateY.toFixed(1)}deg) scale(${scale.toFixed(3)})`;
+      card.style.filter = `brightness(${bright.toFixed(3)})`;
+      card.style.opacity = a <= 1 ? "1" : "0";
+      card.style.zIndex = String(100 - a * 10);
+
+      if (wrapped) {
+        void card.offsetWidth; // force reflow, then restore the transition
+        card.style.transition = "";
+      }
+      lastSlot[i] = s;
+    });
+  }
+
+  window.addEventListener("resize", renderWheel);
+  campaignStage.classList.add("no-anim");
+  renderWheel();
+  void campaignStage.offsetWidth;
+  campaignStage.classList.remove("no-anim");
+
+  /* Advance on a timer. It runs from the start rather than waiting on the
+     observer, which only pauses it while the section is off screen — so the
+     carousel can never end up stuck if the observer never reports back. */
+  let campaignTimer = null;
+  if (!prefersReducedMotion) {
+    campaignTimer = gsap.to({}, {
+      duration: 3.2,
+      repeat: -1,
+      onRepeat: () => {
+        centreIndex = (centreIndex + 1) % N;
+        renderWheel();
+      },
+    });
+
+    const campaignSection = document.getElementById("create");
+    if (campaignSection) {
+      new IntersectionObserver(
+        (entries) => entries.forEach((e) => (e.isIntersecting ? campaignTimer.play() : campaignTimer.pause())),
+        { threshold: 0.2 }
+      ).observe(campaignSection);
+    }
+  }
 }
 
 /* Pay only for results: the cards stack purely via CSS sticky positioning —

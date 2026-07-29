@@ -39,8 +39,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: baseline;
-  column-gap: 20px;
-  row-gap: 6px;
+  column-gap: 26px;
+  row-gap: 16px;
 }
 
 .campaign-row__label,
@@ -66,36 +66,24 @@
 /* The track badge across the top of the screen, with Views on the left and
    +Streams a little lower on the right. Offsets are in the phone's own
    (unscaled) 400px space. */
+/* Same padding and type as the other two badges — only the artwork sets it
+   apart, and that stays close to their icon size */
 .notif--track {
-  top: -30px;
+  top: -26px;
   left: 50%;
   transform: translateX(-50%);
-  /* a size up on the other two badges */
-  gap: 16px;
-  padding: 14px 20px;
-  border-radius: 22px;
 }
 
 .notif--track .notif__cover {
-  width: 56px;
-  height: 56px;
-  border-radius: 14px;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
   border: none;
 }
 
-.notif--track .notif__title { font-size: 23px; }
-.notif--track .notif__sub { font-size: 16px; line-height: 22px; }
-
-.notif--views { top: 168px; left: -62px; }
-.notif--streams { top: 286px; right: -62px; }
+.notif--views { top: 160px; left: -62px; }
+.notif--streams { top: 278px; right: -62px; }
 .notif--streams .notif__icon img { width: 22px; height: 22px; }
-
-/* Hero subtitle set as separate lines with air between them */
-.hero__subtitle--spaced {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
 
 /* ============ Select content creators ============
    Same layout as "Choose music you like", but the cards hold a round creator
@@ -164,86 +152,114 @@
 }
 
 /* ============ Grow your music audience ============
-   A self-scrolling line of campaign cards, roughly the footprint the example
-   clips had. No arrows, no playback controls. */
-.campaigns { padding-bottom: 128px; }
+   Campaign cards on the same coverflow the Content landing uses for its clips.
+   They advance on a timer, so the scroller takes no pointer input. */
+.campaigns .create__scroller { cursor: default; touch-action: auto; }
+.campaigns .create__scroller.no-anim .campaign-tile { transition: none; }
 
-.campaign-marquee {
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
-  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
-}
-
-.campaign-marquee__inner {
-  display: flex;
-  align-items: stretch;
-  gap: 20px;
-  width: max-content;
-  will-change: transform;
-}
-
+/* Positioned by the wheel, exactly like .video-card */
 .campaign-tile {
-  flex: 0 0 auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
   width: clamp(190px, 56vw, 260px);
+  aspect-ratio: 9 / 16;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 18px 18px 24px;
-  border: 1px solid var(--border);
+  padding: 16px;
   border-radius: 26px;
+  overflow: hidden;
   background: var(--bg-card-2);
-  text-align: center;
+  transform: translate(-50%, -50%);
+  transform-origin: center center;
+  transition: transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1), filter 0.55s ease, opacity 0.55s ease;
+  backface-visibility: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+  will-change: transform, filter, opacity;
 }
 
 .campaign-tile__cover {
+  flex: 0 0 auto;
   width: 100%;
   aspect-ratio: 1 / 1;
-  border-radius: 18px;
+  border-radius: 16px;
   background-color: var(--bg-card);
   background-size: cover;
   background-position: center;
 }
 
+/* The text fills the space under the cover, evenly divided between the track,
+   its figures and the headline number */
+.campaign-tile__body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding-top: 4px;
+}
+
+.campaign-tile__track { text-align: center; }
+
 .campaign-tile__title {
-  margin-top: 16px;
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 700;
-  line-height: 24px;
+  line-height: 23px;
   color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .campaign-tile__artist {
-  font-size: 15px;
-  line-height: 22px;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--text-dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Label left, figure right, so the numbers line up down the card */
+.campaign-tile__stats { display: flex; flex-direction: column; gap: 4px; }
+
+.campaign-tile__stats > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--border);
+}
+
+.campaign-tile__stats dt {
+  font-size: 13px;
+  line-height: 18px;
   color: var(--text-dim);
 }
 
-.campaign-tile__stats {
-  margin-top: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  font-size: 15px;
-  line-height: 22px;
-  color: var(--text-secondary);
+.campaign-tile__stats dd {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  color: var(--text-primary);
   font-variant-numeric: tabular-nums;
 }
 
-.campaign-tile__stats span { color: var(--text-dim); }
+.campaign-tile__listeners { text-align: center; }
 
-.campaign-tile__listeners {
-  margin-top: 16px;
-  font-size: 30px;
+.campaign-tile__listeners-value {
+  font-size: 28px;
   font-weight: 700;
-  line-height: 36px;
+  line-height: 34px;
   letter-spacing: -0.6px;
   color: var(--text-primary);
   font-variant-numeric: tabular-nums;
 }
 
 .campaign-tile__listeners-label {
-  font-size: 15px;
-  line-height: 20px;
+  font-size: 13px;
+  line-height: 18px;
   color: var(--text-dim);
 }
 
