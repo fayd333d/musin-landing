@@ -239,26 +239,6 @@ const creators = [
   [14, "tiktok", "artell", "34K"],
 ];
 
-/* Second row, running the other way */
-const creators2 = [
-  [1, "tiktok", "milaafterdark", "46K"],
-  [2, "instagram", "noahoffline", "18K"],
-  [3, "tiktok", "lilacframe", "7.8K"],
-  [4, "instagram", "juleson_film", "63K"],
-  [5, "youtube", "fitwithkenzi", "29K"],
-  [6, "instagram", "marco0s", "13K"],
-  [7, "tiktok", "softgirlbea", "36K"],
-  [8, "tiktok", "dailybyliv", "982"],
-  [9, "instagram", "xanderrr23", "1.3K"],
-  [10, "youtube", "sundayswithmia", "12K"],
-  [11, "tiktok", "daniinmotion", "5.7K"],
-  [12, "instagram", "calleme.1", "12.3K"],
-  [13, "tiktok", "glowbyren", "8.2K"],
-  [14, "instagram", "theo._.mit", "46K"],
-  [15, "tiktok", "nightswithnaya", "765"],
-  [16, "tiktok", "rorydoesstuff", "19K"],
-];
-
 /* `prefix` is the path up to the file number, e.g. "assets/img/creators/creator" */
 function buildCreatorChips(list, prefix) {
   return list
@@ -277,21 +257,16 @@ function buildCreatorChips(list, prefix) {
     .join("");
 }
 
-/* Two copies of each row for a seamless wrap. Row 1 travels left, row 2 right. */
-[
-  ["creatorMarquee", creators, "assets/img/creators/creator", -50, 0],
-  ["creatorMarquee2", creators2, "assets/img/creators2/creator2", 0, -50],
-].forEach(([id, list, prefix, to, from]) => {
-  const el = document.getElementById(id);
-  if (!el) return;
-  const html = buildCreatorChips(list, prefix);
-  el.innerHTML = html + html;
-  gsap.fromTo(el, { xPercent: from }, {
-    xPercent: to,
-    duration: 40,
-    ease: "none",
-    repeat: -1,
-  });
+/* Two copies for a seamless wrap. */
+const creatorMarquee = document.getElementById("creatorMarquee");
+const creatorHtml = buildCreatorChips(creators, "assets/img/creators/creator");
+creatorMarquee.innerHTML = creatorHtml + creatorHtml;
+
+gsap.to(creatorMarquee, {
+  xPercent: -50,
+  duration: 40,
+  ease: "none",
+  repeat: -1,
 });
 
 /* ---------- Active creator counter ----------
@@ -369,6 +344,39 @@ function scheduleCountEvent() {
 }
 
 if (!prefersReducedMotion) scheduleCountEvent();
+
+/* ---------- Genres: big colourful tags, lines drift slightly ----------
+   The same set as the Content landing, sitting above the creator line. */
+const genreRows = [
+  ["Rap", "Pop", "Electronic", "Rock", "R&B", "Alternative", "Latin", "Afrobeats", "Jazz", "Instrumental"],
+  ["Country", "Reggae", "Dancehall", "Trap", "Drill", "Boom Bap", "Melodic Rap", "Conscious Rap", "Cloud Rap"],
+  ["Dance Pop", "Indie Pop", "Electropop", "Hyperpop", "House", "Techno", "EDM", "Drum & Bass", "Dubstep"],
+];
+
+const genreColors = [
+  "#e54552", "#ffac12", "#22c55e", "#3d5ddc", "#8b5cf6",
+  "#2dd4bf", "#f472b6", "#eab308", "#60a5fa", "#fb923c",
+];
+
+document.querySelectorAll(".genre-line").forEach((line, rowIdx) => {
+  line.innerHTML = genreRows[rowIdx]
+    .map(
+      (g, i) =>
+        `<span class="genre-tag" style="color:${genreColors[(rowIdx * 3 + i) % genreColors.length]}"><span class="hash">#</span>${g}</span>`
+    )
+    .join("");
+
+  if (!prefersReducedMotion) {
+    const dir = Number(line.dataset.drift) || 1;
+    gsap.to(line, {
+      x: 36 * dir,
+      duration: 5 + rowIdx * 1.3,
+      ease: "sine.inOut",
+      yoyo: true,
+      repeat: -1,
+    });
+  }
+});
 
 /* ---------- Grow your audience: endless 3D coverflow wheel ----------
    Cards are positioned by "slot" (signed distance from the current centre,

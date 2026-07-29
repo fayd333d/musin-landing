@@ -188,27 +188,14 @@ img { display: block; max-width: 100%; }
   width: 100%;
 }
 
+/* Title, supporting text and CTA, with plenty of air between them (#4) */
 .hero__pitch {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
-  gap: 22px;
+  gap: 38px;
   max-width: 640px;
-}
-
-/* Badge sits above the title now (#1) */
-.badge-group {
-  display: inline-flex;
-  align-items: center;
-  padding: 5px 12px;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.03);
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 20px;
-  color: var(--text-secondary);
 }
 
 /* Title on the right of the example screen (#1) */
@@ -236,22 +223,10 @@ img { display: block; max-width: 100%; }
   gap: 12px;
 }
 
-/* The CTA and its note are wrapped so the note can never grow wider than the
-   button — it wraps within the CTA's width instead of spilling past it (#3) */
 .hero__cta-wrap {
   display: inline-flex;
   flex-direction: column;
   align-items: stretch;
-  gap: 10px;
-}
-
-.hero__note {
-  width: 100%;
-  font-size: 11px;
-  line-height: 16px;
-  letter-spacing: -0.1px;
-  color: var(--text-dim);
-  text-align: center;
 }
 
 /* Example screen — smaller so it sits nicely in the frame (#4) */
@@ -1002,9 +977,9 @@ img { display: block; max-width: 100%; }
   /* Centre the title on small screens (#1) */
   .hero__title { font-size: 44px; line-height: 1.16; letter-spacing: -0.88px; text-align: center; }
 
-  /* Stack the pitch (badge, title, text, CTA) above the example screen */
+  /* Stack the pitch (title, text, CTA) above the example screen */
   .hero__row { flex-direction: column-reverse; gap: 40px; }
-  .hero__pitch { align-items: center; text-align: center; max-width: 520px; }
+  .hero__pitch { align-items: center; text-align: center; max-width: 520px; gap: 30px; }
   .hero__actions { align-items: center; }
   .hero__subtitle { font-size: 18px; line-height: 28px; }
 
