@@ -91,10 +91,6 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* "Join as a music artist" is a shorter label than the Content landing's
-   "Join as a content creator", so pad it out to the same button length. */
-.hero__cta-wrap .btn--md { padding-left: 31px; padding-right: 31px; }
-
 /* Views on the left, +Streams a little lower on the right of the example
    screen. Offsets are in the phone's own (unscaled) 400px space. */
 .notif--views { top: 150px; left: -62px; }
