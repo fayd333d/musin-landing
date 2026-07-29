@@ -1039,7 +1039,8 @@ img { display: block; max-width: 100%; }
     top: 96px;
   }
 
-  .app-card__panel { flex: 0 0 auto; width: 100%; padding: 26px 26px 6px; }
+  /* text sits in from the card edge a little further than the screen below it */
+  .app-card__panel { flex: 0 0 auto; width: 100%; padding: 26px 26px 6px 36px; }
   .app-card__text { max-width: none; }
 
   .app-card__screen {
@@ -1086,7 +1087,7 @@ img { display: block; max-width: 100%; }
 
   /* Inside Musin app — same stacked card, tightened for phone widths */
   .app-card { height: 470px; max-width: 330px; top: 88px; }
-  .app-card__panel { padding: 22px 22px 4px; }
+  .app-card__panel { padding: 22px 22px 4px 32px; }
   .app-card__title { font-size: 20px; }
   .app-card__text { font-size: 14px; line-height: 20px; }
   .app-card__screen { padding: 12px 22px 22px; }

@@ -14,21 +14,26 @@ burger.addEventListener("click", () => {
   mobileMenu.hidden = !open;
 });
 
-/* Engagements (likes + shares + comments) run at ~5% of views, so
-   486,320 views → ~24,316 engagements. Every engagement figure on the page
-   comes from this one rate. */
+/* Engagements (likes + shares + comments) run at roughly 5% of views, so
+   486,320 views → ~24,316 engagements. The campaign carousel derives its
+   figure straight from that flat rate. */
 const ENGAGEMENT_RATE = 0.05;
 const engagementsFor = (views) => Math.round(views * ENGAGEMENT_RATE);
 
 /* ---------- Hero: example screen rotation (every 3 s) ----------
    Views and Engagements both change with each clip; the next screen scrolls
-   up into the main phone from below, TikTok-style. */
+   up into the main phone from below, TikTok-style.
+
+   Each clip carries its own engagement count rather than deriving one, so the
+   badge lands on believable figures instead of the round numbers a flat 5%
+   produces (398K views would read a suspiciously neat "20K"). They still sit
+   between 4.9% and 5.3% of that clip's views. */
 const heroData = [
-  { views: 398000 },  // Video A
-  { views: 43000 },   // Video B
-  { views: 640000 },  // Video C
-  { views: 123000 },  // Video D
-  { views: 12000 },   // Video E
+  { views: 398000, engagements: 19383 },  // Video A — 4.9% of views
+  { views: 43000, engagements: 2292 },    // Video B — 5.3%
+  { views: 640000, engagements: 31744 },  // Video C — 5.0%
+  { views: 123000, engagements: 6408 },   // Video D — 5.2%
+  { views: 12000, engagements: 631 },     // Video E — 5.3%
 ];
 
 const slides = gsap.utils.toArray(".phone-slide");
@@ -51,9 +56,17 @@ function badge(n) {
   return String(n);
 }
 
+/* Engagement counts keep their decimal all the way up, so the badge reads
+   "19.3K" rather than collapsing to a flat-looking "19K" */
+function engagementBadge(n) {
+  if (n >= 1e6) return (Math.floor(n / 1e5) / 10).toFixed(1) + "M";
+  if (n >= 1e3) return (Math.floor(n / 100) / 10).toFixed(1) + "K";
+  return String(n);
+}
+
 function applyHeroData(d) {
   rotateEls.views.textContent = badge(d.views);
-  rotateEls.engagements.textContent = badge(engagementsFor(d.views));
+  rotateEls.engagements.textContent = engagementBadge(d.engagements);
 }
 
 applyHeroData(heroData[0]);
@@ -104,7 +117,7 @@ function addToCampaign(clip, animate = true) {
   const from = { ...campaign };
   campaign.posts += 1;
   campaign.views += clip.views;
-  campaign.engagements += engagementsFor(clip.views);
+  campaign.engagements += clip.engagements;
   campaign.cost += clipCost();
 
   if (!animate || prefersReducedMotion) {
