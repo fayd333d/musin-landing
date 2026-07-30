@@ -75,9 +75,12 @@ applyHeroData(heroData[0]);
 /* ---------- Campaign card: a running total ----------
    The figures always cover the clips shown so far, including the one on screen,
    so the card opens on the first clip already counted — 1 post, its views and
-   engagements, and its cost. Each rotation banks the incoming clip. After 20
-   clips the campaign starts over at the next one. */
-const CAMPAIGN_RESET_AFTER = 20;
+   engagements, and its cost. Each rotation banks the incoming clip.
+
+   The total covers exactly one pass of the example screen, so it never claims
+   more posts than the viewer has actually been shown: it climbs to 5 and then
+   starts over as the clips come round again. */
+const CAMPAIGN_RESET_AFTER = heroData.length;
 const campaign = { posts: 0, views: 0, engagements: 0, cost: 0 };
 let videosPlayed = 0;
 
