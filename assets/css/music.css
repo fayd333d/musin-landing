@@ -165,7 +165,7 @@
   color: var(--text-dim);
 }
 
-/* ============ Grow your music audience ============
+/* ============ Build engagement around your music ============
    Campaign cards on the same coverflow the Content landing uses for its clips.
    They advance on a timer, so the scroller takes no pointer input. */
 .campaigns .create__scroller { cursor: default; touch-action: auto; }

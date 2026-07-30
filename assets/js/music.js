@@ -397,7 +397,7 @@ document.querySelectorAll(".genre-line").forEach((line, rowIdx) => {
   }
 });
 
-/* ---------- Grow your music audience: campaign card carousel ----------
+/* ---------- Build engagement around your music: campaign card carousel ------
    The same 3D coverflow the Content landing uses for its clips, but the cards
    advance on a timer: no arrows, no dragging. Cards are placed by "slot" — the
    signed distance from the centre, wrapping round the list — so only slots
