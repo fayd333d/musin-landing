@@ -1,0 +1,423 @@
+/* ============ Musin — Home landing ============
+   Loaded on top of content.css: the shell (nav, buttons, stats, logos, footer)
+   is shared with the other two landings and only what's specific to the home
+   page is defined here. */
+
+/* ============ Hero ============ */
+.home-hero {
+  padding-top: 72px;
+  padding-bottom: 112px;
+  text-align: center;
+}
+
+.home-hero__title {
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: 48px;
+  line-height: 60px;
+  font-weight: 600;
+  letter-spacing: -0.96px;
+  color: var(--text-primary);
+}
+
+/* ---- Mode tabs ----
+   The pill pair straddles the top edge of the box below, so it reads as one
+   piece of UI rather than a control floating above a panel. */
+.mode-tabs {
+  position: relative;
+  z-index: 3;
+  display: inline-flex;
+  margin: 48px auto -28px;
+  border-radius: 9999px;
+  background: #7f2a30; /* the unselected half — brand red, dimmed */
+  overflow: hidden;
+}
+
+.mode-tab {
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  padding: 15px 32px;
+  border-radius: 9999px;
+  background: transparent;
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.mode-tab.is-active { background: var(--brand); }
+.mode-tab:not(.is-active):hover { background: rgba(255, 255, 255, 0.08); }
+.mode-tab:focus-visible { outline: 2px solid #fff; outline-offset: -4px; }
+
+.mode-box {
+  position: relative;
+  padding: 64px 40px 48px;
+  border-radius: var(--radius-card);
+  background: var(--bg-card-2);
+  text-align: left;
+}
+
+/* Copy on the left, wheel on the right, CTAs under the copy */
+.mode-pane {
+  display: grid;
+  grid-template-columns: minmax(0, 44%) minmax(0, 1fr);
+  grid-template-areas:
+    "copy visual"
+    "actions visual";
+  align-items: center;
+  column-gap: 40px;
+  row-gap: 32px;
+}
+
+.mode-pane[hidden] { display: none; }
+
+.mode-pane__text {
+  grid-area: copy;
+  align-self: end;
+  font-size: 24px;
+  line-height: 38px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.mode-pane__actions {
+  grid-area: actions;
+  align-self: start;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.mode-pane__visual { grid-area: visual; min-width: 0; }
+
+/* A smaller wheel than the full-width ones on the other landings, and no
+   pointer affordances — both wheels run on their own here */
+.mode-pane__visual .create__scroller {
+  --wheel-card: clamp(112px, 15vw, 168px);
+  height: calc(var(--wheel-card) * 16 / 9 + 40px);
+  cursor: default;
+  touch-action: auto;
+}
+
+.mode-pane__visual .video-card,
+.mode-pane__visual .campaign-tile { width: var(--wheel-card); }
+
+.mode-pane__visual .create__scroller.no-anim .video-card,
+.mode-pane__visual .create__scroller.no-anim .campaign-tile { transition: none; }
+
+/* The shades fade into the box, not the page background */
+.mode-pane__visual .create__shade { width: clamp(40px, 14%, 120px); }
+.mode-pane__visual .create__shade--left { background: linear-gradient(to right, var(--bg-card-2), transparent); }
+.mode-pane__visual .create__shade--right { background: linear-gradient(to left, var(--bg-card-2), transparent); }
+
+/* ---- Campaign cards inside the wheel (same as the Music landing) ---- */
+.campaign-tile {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  aspect-ratio: 9 / 16;
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--bg-card);
+  transform: translate(-50%, -50%);
+  transform-origin: center center;
+  transition: transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1), filter 0.55s ease, opacity 0.55s ease;
+  backface-visibility: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+  will-change: transform, filter, opacity;
+}
+
+.campaign-tile__cover {
+  flex: 0 0 auto;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
+  background-color: var(--bg-elevated);
+  background-size: cover;
+  background-position: center;
+}
+
+.campaign-tile__body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding-top: 4px;
+}
+
+.campaign-tile__track { text-align: center; }
+
+.campaign-tile__title {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.campaign-tile__artist {
+  font-size: 10px;
+  line-height: 14px;
+  color: var(--text-dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.campaign-tile__stats { display: flex; flex-direction: column; gap: 2px; }
+
+.campaign-tile__stats > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid var(--border);
+}
+
+.campaign-tile__stats > div:last-child { border-bottom: none; }
+
+.campaign-tile__stats dt { font-size: 9px; line-height: 13px; color: var(--text-dim); }
+
+.campaign-tile__stats dd {
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 13px;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.mode-pane__visual .video-card video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ============ What Musin is ============ */
+.about { padding: 24px 0 96px; }
+
+.about__lead {
+  max-width: 860px;
+  margin: 0 auto;
+  font-size: 36px;
+  line-height: 48px;
+  font-weight: 600;
+  letter-spacing: -0.6px;
+  text-align: center;
+  color: var(--text-primary);
+}
+
+.about__cols {
+  margin-top: 72px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+}
+
+.about__col {
+  padding: 40px;
+  border-radius: 32px;
+  background: var(--bg-card-2);
+}
+
+.about__who {
+  font-size: 22px;
+  line-height: 30px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.about__list {
+  margin-top: 20px;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.about__list li {
+  position: relative;
+  padding-left: 26px;
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--text-tertiary);
+}
+
+/* Small brand dot instead of a bullet */
+.about__list li::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 11px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--brand);
+}
+
+/* ============ Statistics ============
+   Side by side on wide screens, stacked on small ones */
+.stats { padding: 40px 0 112px; }
+
+.stats__row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: clamp(48px, 10vw, 140px);
+}
+
+/* ============ Why Musin ============
+   Sticky-stacking cards, the same behaviour as the pay cards on the other
+   landings. Each card is a 480x480 artwork. */
+.why { padding: 0 0 128px; }
+
+.why-stack {
+  margin-top: 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.why-card {
+  position: sticky;
+  top: 120px;
+  border-radius: 40px;
+  overflow: hidden;
+  background: var(--bg-card);
+  box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.6);
+  will-change: transform;
+}
+
+.why-card img,
+.why-card__art { display: block; width: 100%; height: auto; }
+
+/* Card 3 draws its own type, so it needs the page's text styles */
+.why-card__title {
+  font-family: var(--font-body);
+  font-size: 26px;
+  font-weight: 700;
+  fill: var(--text-primary);
+}
+
+.why-card__text {
+  font-family: var(--font-body);
+  font-size: 18px;
+  fill: var(--text-tertiary);
+}
+
+.why-card__label {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  fill: var(--text-primary);
+}
+
+.why-card__sub {
+  font-family: var(--font-body);
+  font-size: 13px;
+  fill: var(--text-dim);
+}
+
+/* ============ Final CTA cards ============ */
+.home-cta { padding-bottom: 96px; }
+
+.home-cta__row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+}
+
+.home-cta__card { gap: 16px; padding: 64px 40px; }
+
+.home-cta__title {
+  font-size: 36px;
+  line-height: 44px;
+  font-weight: 600;
+  letter-spacing: -0.72px;
+  color: var(--text-primary);
+}
+
+.home-cta__actions {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
+
+/* ============ Responsive ============ */
+@media (max-width: 1100px) {
+  .home-hero__title { font-size: 42px; line-height: 54px; }
+  .mode-pane { column-gap: 28px; }
+  .mode-pane__text { font-size: 21px; line-height: 34px; }
+}
+
+@media (max-width: 860px) {
+  .home-hero { padding-top: 40px; padding-bottom: 80px; }
+  .home-hero__title { font-size: 36px; line-height: 46px; letter-spacing: -0.72px; }
+
+  .mode-tab { padding: 13px 24px; font-size: 17px; line-height: 24px; }
+  .mode-tabs { margin: 36px auto -25px; }
+  .mode-box { padding: 56px 24px 40px; }
+
+  /* Stacked, with the CTAs below the wheel */
+  .mode-pane {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "copy"
+      "visual"
+      "actions";
+    justify-items: center;
+    text-align: center;
+    row-gap: 28px;
+  }
+
+  .mode-pane__text { align-self: auto; }
+  .mode-pane__actions { align-self: auto; justify-content: center; }
+  .mode-pane__visual { width: 100%; }
+  .mode-pane__visual .create__scroller { --wheel-card: clamp(150px, 44vw, 220px); }
+
+  .about__lead { font-size: 28px; line-height: 38px; }
+  .about__cols { margin-top: 48px; grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .about__col { padding: 28px 24px; }
+
+  /* Stats stack on small screens */
+  .stats { padding: 24px 0 88px; }
+  .stats__row { flex-direction: column; align-items: center; gap: 56px; }
+
+  .home-cta__row { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .home-cta__card { padding: 48px 24px; }
+  .home-cta__title { font-size: 30px; line-height: 38px; }
+}
+
+@media (max-width: 600px) {
+  .home-hero__title { font-size: 30px; line-height: 40px; }
+  .mode-tab { padding: 12px 18px; font-size: 15px; line-height: 22px; }
+  /* the title runs to three or four lines here, so the pills need more air */
+  .mode-tabs { margin: 40px auto -23px; }
+  .mode-box { padding: 48px 16px 32px; border-radius: 28px; }
+  .mode-pane__text { font-size: 18px; line-height: 30px; }
+  .mode-pane__actions .btn { flex: 1 1 auto; }
+
+  .about { padding-bottom: 72px; }
+  .about__lead { font-size: 24px; line-height: 34px; }
+  .about__who { font-size: 19px; line-height: 27px; }
+  .about__list li { font-size: 16px; line-height: 25px; }
+
+  .why { padding-bottom: 96px; }
+  .why-card { top: 96px; border-radius: 28px; }
+}

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Musin — Music promotion through social media content</title>
+  <meta name="description" content="Musin connects music with content creators for paid social media placements. Artists launch campaigns and choose who posts; creators find tracks and get paid for confirmed posts.">
+  <link rel="icon" href="assets/img/logo-mark.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600&display=swap" rel="stylesheet">
+  <!-- The hero opens on the Promote Music wheel, so its first cover matters most -->
+  <link rel="preload" as="image" href="assets/img/covers/cover-4.jpg" fetchpriority="high">
+  <!-- Shared shell (nav, sections, cards, footer) + home specifics -->
+  <link rel="stylesheet" href="assets/css/content.css?v=35">
+  <link rel="stylesheet" href="assets/css/home.css?v=2">
+</head>
+<body>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header">
+    <div class="nav-wrap container">
+      <a class="nav-logo" href="home.html" aria-label="Musin home">
+        <img src="assets/img/logo-mark.svg" alt="" class="nav-logo__mark">
+        <span class="nav-logo__type">Musin</span>
+      </a>
+
+      <!-- Nav links grouped on the right, next to the Log in button -->
+      <div class="nav-right">
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="home.html" class="nav-link is-active" aria-current="page">Home</a>
+          <a href="index.html" class="nav-link">Content</a>
+          <a href="music.html" class="nav-link">Music</a>
+        </nav>
+        <div class="nav-actions">
+          <a href="#" class="btn btn--light nav-cta">Log in / Sign up</a>
+          <button class="nav-burger" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="mobile-menu" hidden>
+      <nav class="mobile-menu__links" aria-label="Mobile navigation">
+        <a href="home.html" class="nav-link is-active" aria-current="page">Home</a>
+        <a href="index.html" class="nav-link">Content</a>
+        <a href="music.html" class="nav-link">Music</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="hero home-hero" id="hero">
+      <div class="container">
+        <h1 class="home-hero__title">Connecting music with content creators<br>for paid social media placements.</h1>
+
+        <!-- The tab pills straddle the top edge of the box below them -->
+        <div class="mode-tabs" role="tablist" aria-label="What would you like to do?">
+          <button type="button" class="mode-tab is-active" role="tab" id="tabMusic" aria-selected="true" aria-controls="paneMusic">Promote Music</button>
+          <button type="button" class="mode-tab" role="tab" id="tabContent" aria-selected="false" aria-controls="paneContent" tabindex="-1">Create Content</button>
+        </div>
+
+        <div class="mode-box">
+          <!-- Promote Music: campaign cards, the same wheel as the Music landing -->
+          <div class="mode-pane is-active" id="paneMusic" role="tabpanel" aria-labelledby="tabMusic">
+            <p class="mode-pane__text">Launch a music campaign.<br>Choose who posts with your track.<br>Pay only for confirmed posts.</p>
+            <div class="mode-pane__visual">
+              <div class="create__viewport">
+                <div class="create__scroller" id="campaignScroller" aria-label="Example campaigns on Musin"></div>
+                <div class="create__shade create__shade--left" aria-hidden="true"></div>
+                <div class="create__shade create__shade--right" aria-hidden="true"></div>
+              </div>
+            </div>
+            <div class="mode-pane__actions">
+              <a href="music.html" class="btn btn--primary btn--md">Launch Campaign</a>
+              <a href="music.html" class="btn btn--light btn--md">Learn More</a>
+            </div>
+          </div>
+
+          <!-- Create Content: example clips, autoplaying and advancing on their own -->
+          <div class="mode-pane" id="paneContent" role="tabpanel" aria-labelledby="tabContent" hidden>
+            <p class="mode-pane__text">Discover tracks that fit your content.<br>Choose which ones to post with.<br>Get paid for every confirmed post.</p>
+            <div class="mode-pane__visual">
+              <div class="create__viewport">
+                <div class="create__scroller" id="clipScroller" aria-label="Example posts made with Musin tracks">
+                  <div class="video-card"><video src="assets/video/video-4.mp4#t=0.1" muted loop playsinline preload="metadata"></video></div>
+                  <div class="video-card"><video src="assets/video/video-5.mp4#t=0.1" muted loop playsinline preload="metadata"></video></div>
+                  <div class="video-card"><video src="assets/video/video-6.mp4#t=0.1" muted loop playsinline preload="metadata"></video></div>
+                  <div class="video-card"><video src="assets/video/video-7.mp4#t=0.1" muted loop playsinline preload="metadata"></video></div>
+                  <div class="video-card"><video src="assets/video/video-8.mp4#t=0.1" muted loop playsinline preload="metadata"></video></div>
+                  <div class="video-card"><video src="assets/video/video-9.mp4#t=0.1" muted loop playsinline preload="metadata"></video></div>
+                  <div class="video-card"><video src="assets/video/video-10.mp4#t=0.1" muted loop playsinline preload="metadata"></video></div>
+                  <div class="video-card"><video src="assets/video/video-11.mp4#t=0.1" muted loop playsinline preload="metadata"></video></div>
+                  <div class="video-card"><video src="assets/video/video-12.mp4#t=0.1" muted loop playsinline preload="metadata"></video></div>
+                  <div class="video-card"><video src="assets/video/video-13.mp4#t=0.1" muted loop playsinline preload="metadata"></video></div>
+                </div>
+                <div class="create__shade create__shade--left" aria-hidden="true"></div>
+                <div class="create__shade create__shade--right" aria-hidden="true"></div>
+              </div>
+            </div>
+            <div class="mode-pane__actions">
+              <a href="index.html" class="btn btn--primary btn--md">Find Tracks</a>
+              <a href="index.html" class="btn btn--light btn--md">Learn More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WHAT MUSIN IS ============ -->
+    <section class="about" id="about">
+      <div class="container">
+        <p class="about__lead">Musin is a platform for music promotion through social media content.</p>
+
+        <div class="about__cols">
+          <div class="about__col">
+            <h2 class="about__who">For artists, managers, labels and music teams</h2>
+            <ul class="about__list">
+              <li>Create authentic social content around your music.</li>
+              <li>Choose the accounts you want to post with your track.</li>
+              <li>Confirm completed posts and release payments.</li>
+            </ul>
+          </div>
+          <div class="about__col">
+            <h2 class="about__who">For music fans, social media users, influencers and agencies</h2>
+            <ul class="about__list">
+              <li>Discover tracks that fit your content.</li>
+              <li>Create content in your own style.</li>
+              <li>Get paid for every confirmed post.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ LOGOS ============ -->
+    <section class="logos" aria-label="Platforms and partners">
+      <div class="logos__marquee" id="logoMarquee">
+        <div class="logos__group">
+          <img src="assets/img/logos/stripe.svg" alt="Stripe" class="logos__item logos__item--stripe">
+          <img src="assets/img/logos/facebook.svg" alt="Facebook" class="logos__item">
+          <img src="assets/img/logos/spotify.svg" alt="Spotify" class="logos__item">
+          <img src="assets/img/logos/youtube.svg" alt="YouTube" class="logos__item logos__item--wide">
+          <img src="assets/img/logos/instagram.svg" alt="Instagram" class="logos__item">
+          <img src="assets/img/logos/google.svg" alt="Google" class="logos__item">
+          <img src="assets/img/logos/tiktok-glyph.svg" alt="TikTok" class="logos__item">
+          <img src="assets/img/logos/soundcloud.svg" alt="SoundCloud" class="logos__item logos__item--wide">
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ STATISTICS ============ -->
+    <section class="stats" aria-label="Musin in numbers">
+      <div class="container stats__row">
+        <div class="genres__stat">
+          <p class="genres__number" id="trackCount">3,818</p>
+          <p class="genres__unit">Tracks available now</p>
+        </div>
+        <div class="genres__stat">
+          <p class="genres__number" id="creatorCount">8,024</p>
+          <p class="genres__unit">Content creators active</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WHY MUSIN (stacking cards) ============ -->
+    <section class="why" id="why">
+      <div class="container">
+        <h2 class="section-title">Why Musin</h2>
+        <div class="why-stack">
+          <article class="why-card">
+            <img src="assets/img/why/why-1-direct.svg" alt="Direct collaborations — tracks and social media accounts connect directly." loading="lazy">
+          </article>
+
+          <article class="why-card">
+            <img src="assets/img/why/why-2-results.svg" alt="Pay for results — payments are released only after content is confirmed to be published." loading="lazy">
+          </article>
+
+          <!-- Card 3 is inline rather than a file so its type renders in the
+               page's Inter, matching the lettering baked into the two above -->
+          <article class="why-card">
+            <svg class="why-card__art" viewBox="0 0 480 480" role="img" aria-labelledby="why3title why3desc">
+              <title id="why3title">Choice on both sides</title>
+              <desc id="why3desc">Music artists choose who posts. Content creators choose which tracks to post with.</desc>
+              <path d="M0 40C0 17.9086 17.9086 0 40 0H440C462.091 0 480 17.9086 480 40V440C480 462.091 462.091 480 440 480H40C17.9086 480 0 462.091 0 440V40Z" fill="#1A1A1A"/>
+
+              <text class="why-card__title" x="33" y="57">Choice on both sides</text>
+              <text class="why-card__text" x="33" y="89">Music artists choose who posts. Content</text>
+              <text class="why-card__text" x="33" y="117">creators choose which tracks to post with.</text>
+
+              <!-- Track card, chosen by a creator -->
+              <g>
+                <rect x="32" y="182" width="188" height="80" rx="18" fill="#262626"/>
+                <rect x="48" y="200" width="44" height="44" rx="11" fill="#e54552"/>
+                <text class="why-card__label" x="104" y="219">Track name</text>
+                <text class="why-card__sub" x="104" y="239">Artist</text>
+                <circle cx="216" cy="186" r="13" fill="#3ddc97"/>
+                <path d="M210 186.5l4 4 8-8.5" stroke="#0a0a0a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              </g>
+
+              <!-- Creator profile, chosen by an artist -->
+              <g>
+                <rect x="260" y="182" width="188" height="80" rx="18" fill="#262626"/>
+                <clipPath id="why3avatar"><circle cx="298" cy="222" r="22"/></clipPath>
+                <circle cx="298" cy="222" r="22" fill="#2e2e2e"/>
+                <image href="assets/img/creators/creator-5.jpg" x="276" y="200" width="44" height="44" clip-path="url(#why3avatar)" preserveAspectRatio="xMidYMid slice"/>
+                <text class="why-card__label" x="332" y="219">@creator</text>
+                <text class="why-card__sub" x="332" y="239">46K followers</text>
+                <circle cx="444" cy="186" r="13" fill="#3ddc97"/>
+                <path d="M438 186.5l4 4 8-8.5" stroke="#0a0a0a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              </g>
+
+              <!-- Both selections converge on one matched deal -->
+              <path d="M126 262v34c0 12 10 22 22 22h70" stroke="#3e3e3e" stroke-width="2" fill="none"/>
+              <path d="M354 262v34c0 12-10 22-22 22h-70" stroke="#3e3e3e" stroke-width="2" fill="none"/>
+              <path d="M240 318v28" stroke="#3e3e3e" stroke-width="2" fill="none"/>
+
+              <rect x="140" y="346" width="200" height="72" rx="20" fill="#262626" stroke="#3ddc97" stroke-width="1.5"/>
+              <circle cx="176" cy="382" r="16" fill="#3ddc97"/>
+              <path d="M169 382.5l5 5 9-10" stroke="#0a0a0a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <text class="why-card__label" x="204" y="377">Matched</text>
+              <text class="why-card__sub" x="204" y="397">Ready to post</text>
+            </svg>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FINAL CTA CARDS ============ -->
+    <section class="cta home-cta">
+      <div class="container home-cta__row">
+        <div class="cta__card home-cta__card">
+          <h2 class="home-cta__title">Promote Music</h2>
+          <p class="cta__text">Launch campaigns and choose who posts with your tracks.</p>
+          <div class="home-cta__actions">
+            <a href="music.html" class="btn btn--primary btn--md">Create Campaign</a>
+            <a href="music.html" class="btn btn--light btn--md">Learn More</a>
+          </div>
+        </div>
+
+        <div class="cta__card home-cta__card">
+          <h2 class="home-cta__title">Create Content</h2>
+          <p class="cta__text">Discover tracks, create content and get paid for confirmed posts.</p>
+          <div class="home-cta__actions">
+            <a href="index.html" class="btn btn--primary btn--md">Find Tracks</a>
+            <a href="index.html" class="btn btn--light btn--md">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container footer__top">
+      <div class="footer__brand">
+        <!-- On small screens the mark + name sit above the copyright, centred -->
+        <div class="footer__identity">
+          <a class="nav-logo" href="home.html" aria-label="Musin home">
+            <img src="assets/img/logo-mark.svg" alt="" class="nav-logo__mark">
+            <span class="nav-logo__type">Musin</span>
+          </a>
+          <p class="footer__copy">© 2026 Musin. All rights reserved.</p>
+        </div>
+        <div class="footer__social">
+          <a href="#" aria-label="X"><img src="assets/img/social/s01-x.svg" alt=""></a>
+          <a href="#" aria-label="Instagram"><img src="assets/img/social/s08-instagram.svg" alt=""></a>
+          <a href="#" aria-label="TikTok"><img src="assets/img/social/s10-tiktok.svg" alt=""></a>
+          <a href="#" aria-label="Telegram"><img src="assets/img/social/s05-telegram.svg" alt=""></a>
+          <a href="#" aria-label="Discord"><img src="assets/img/social/s11-discord.svg" alt=""></a>
+        </div>
+      </div>
+
+      <nav class="footer__links" aria-label="Footer">
+        <a href="#">Features</a>
+        <a href="#">Guide</a>
+        <a href="#">Support</a>
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Cookies</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="assets/js/home.js?v=1"></script>
+</body>
+</html>
