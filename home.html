@@ -13,7 +13,7 @@
   <link rel="preload" as="image" href="assets/img/covers/cover-4.jpg" fetchpriority="high">
   <!-- Shared shell (nav, sections, cards, footer) + home specifics -->
   <link rel="stylesheet" href="assets/css/content.css?v=35">
-  <link rel="stylesheet" href="assets/css/home.css?v=2">
+  <link rel="stylesheet" href="assets/css/home.css?v=3">
 </head>
 <body>
 
@@ -54,18 +54,18 @@
     <!-- ============ HERO ============ -->
     <section class="hero home-hero" id="hero">
       <div class="container">
-        <h1 class="home-hero__title">Connecting music with content creators<br>for paid social media placements.</h1>
-
-        <!-- The tab pills straddle the top edge of the box below them -->
-        <div class="mode-tabs" role="tablist" aria-label="What would you like to do?">
-          <button type="button" class="mode-tab is-active" role="tab" id="tabMusic" aria-selected="true" aria-controls="paneMusic">Promote Music</button>
-          <button type="button" class="mode-tab" role="tab" id="tabContent" aria-selected="false" aria-controls="paneContent" tabindex="-1">Create Content</button>
-        </div>
+        <h1 class="home-hero__title">Music promotion through social media content</h1>
 
         <div class="mode-box">
+          <!-- The switch sits inside the top of the card -->
+          <div class="mode-tabs" role="tablist" aria-label="What would you like to do?">
+            <button type="button" class="mode-tab is-active" role="tab" id="tabMusic" aria-selected="true" aria-controls="paneMusic">Promote Music</button>
+            <button type="button" class="mode-tab" role="tab" id="tabContent" aria-selected="false" aria-controls="paneContent" tabindex="-1">Create Content</button>
+          </div>
+
           <!-- Promote Music: campaign cards, the same wheel as the Music landing -->
           <div class="mode-pane is-active" id="paneMusic" role="tabpanel" aria-labelledby="tabMusic">
-            <p class="mode-pane__text">Launch a music campaign.<br>Choose who posts with your track.<br>Pay only for confirmed posts.</p>
+            <p class="mode-pane__text">Reach new audiences and build social engagement around your music through social media content.</p>
             <div class="mode-pane__visual">
               <div class="create__viewport">
                 <div class="create__scroller" id="campaignScroller" aria-label="Example campaigns on Musin"></div>
@@ -74,14 +74,13 @@
               </div>
             </div>
             <div class="mode-pane__actions">
-              <a href="music.html" class="btn btn--primary btn--md">Launch Campaign</a>
               <a href="music.html" class="btn btn--light btn--md">Learn More</a>
             </div>
           </div>
 
           <!-- Create Content: example clips, autoplaying and advancing on their own -->
           <div class="mode-pane" id="paneContent" role="tabpanel" aria-labelledby="tabContent" hidden>
-            <p class="mode-pane__text">Discover tracks that fit your content.<br>Choose which ones to post with.<br>Get paid for every confirmed post.</p>
+            <p class="mode-pane__text">Discover music that fits your content and get paid to feature it in your social media posts.</p>
             <div class="mode-pane__visual">
               <div class="create__viewport">
                 <div class="create__scroller" id="clipScroller" aria-label="Example posts made with Musin tracks">
@@ -101,7 +100,6 @@
               </div>
             </div>
             <div class="mode-pane__actions">
-              <a href="index.html" class="btn btn--primary btn--md">Find Tracks</a>
               <a href="index.html" class="btn btn--light btn--md">Learn More</a>
             </div>
           </div>
@@ -111,27 +109,10 @@
 
     <!-- ============ WHAT MUSIN IS ============ -->
     <section class="about" id="about">
-      <div class="container">
-        <p class="about__lead">Musin is a platform for music promotion through social media content.</p>
-
-        <div class="about__cols">
-          <div class="about__col">
-            <h2 class="about__who">For artists, managers, labels and music teams</h2>
-            <ul class="about__list">
-              <li>Create authentic social content around your music.</li>
-              <li>Choose the accounts you want to post with your track.</li>
-              <li>Confirm completed posts and release payments.</li>
-            </ul>
-          </div>
-          <div class="about__col">
-            <h2 class="about__who">For music fans, social media users, influencers and agencies</h2>
-            <ul class="about__list">
-              <li>Discover tracks that fit your content.</li>
-              <li>Create content in your own style.</li>
-              <li>Get paid for every confirmed post.</li>
-            </ul>
-          </div>
-        </div>
+      <div class="container about__container">
+        <p class="about__lead">Musin is a platform for music promotion through social media content. It connects tracks with creators who can introduce them to audiences through the posts they already watch and engage with.</p>
+        <p class="about__body">For artists, managers and labels, Musin provides a direct way to generate authentic content around a release, choose who posts with the track and pay only for confirmed publications. For creators, it offers music that fits their content, full creative freedom and payment for every confirmed post.</p>
+        <p class="about__body">This makes Musin an efficient way to grow music discovery because promotion becomes part of real social content rather than a separate advertisement. Matching, publishing and payment all happen in one place.</p>
       </div>
     </section>
 
@@ -168,7 +149,6 @@
     <!-- ============ WHY MUSIN (stacking cards) ============ -->
     <section class="why" id="why">
       <div class="container">
-        <h2 class="section-title">Why Musin</h2>
         <div class="why-stack">
           <article class="why-card">
             <img src="assets/img/why/why-1-direct.svg" alt="Direct collaborations — tracks and social media accounts connect directly." loading="lazy">
@@ -228,25 +208,38 @@
       </div>
     </section>
 
-    <!-- ============ FINAL CTA CARDS ============ -->
-    <section class="cta home-cta">
-      <div class="container home-cta__row">
-        <div class="cta__card home-cta__card">
-          <h2 class="home-cta__title">Promote Music</h2>
-          <p class="cta__text">Launch campaigns and choose who posts with your tracks.</p>
-          <div class="home-cta__actions">
-            <a href="music.html" class="btn btn--primary btn--md">Create Campaign</a>
-            <a href="music.html" class="btn btn--light btn--md">Learn More</a>
-          </div>
-        </div>
-
-        <div class="cta__card home-cta__card">
-          <h2 class="home-cta__title">Create Content</h2>
-          <p class="cta__text">Discover tracks, create content and get paid for confirmed posts.</p>
-          <div class="home-cta__actions">
-            <a href="index.html" class="btn btn--primary btn--md">Find Tracks</a>
-            <a href="index.html" class="btn btn--light btn--md">Learn More</a>
-          </div>
+    <!-- ============ FAQ (no section title, by design) ============ -->
+    <section class="faq home-faq" id="faq">
+      <div class="container faq__container">
+        <div class="faq-list">
+          <details class="faq-item" open>
+            <summary>Why does content drive music discovery?</summary>
+            <p>People discover music while watching videos they already enjoy. When a track becomes part of relevant social content it reaches audiences in a natural and memorable context.</p>
+          </details>
+          <details class="faq-item">
+            <summary>How is content-based promotion different from traditional advertising?</summary>
+            <p>Traditional advertising asks people to stop and pay attention. Content-based promotion places music inside something they already chose to watch.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Why do content creators matter in music promotion?</summary>
+            <p>Creators already understand their audience and know what type of content performs well. Their posts can introduce a track to communities beyond the artist’s existing followers.</p>
+          </details>
+          <details class="faq-item">
+            <summary>What makes music placement feel authentic?</summary>
+            <p>Content creators choose tracks that fit their style and decide how to use them. This creative freedom helps the music feel like part of the content rather than a forced advertisement.</p>
+          </details>
+          <details class="faq-item">
+            <summary>How does Musin help promote music?</summary>
+            <p>Musin lets music artists launch campaigns, choose suitable social media accounts, manage publications and release payment after each completed post is confirmed.</p>
+          </details>
+          <details class="faq-item">
+            <summary>How does Musin help content creators?</summary>
+            <p>Creators can discover paid music opportunities, choose tracks that suit their content, publish in their own style and get paid for confirmed posts.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Why use Musin instead of arranging collaborations manually?</summary>
+            <p>Musin brings track discovery, account selection, campaign management, post confirmation and payments into one place instead of relying on scattered messages, spreadsheets and individual negotiations.</p>
+          </details>
         </div>
       </div>
     </section>
@@ -286,6 +279,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-  <script src="assets/js/home.js?v=1"></script>
+  <script src="assets/js/home.js?v=2"></script>
 </body>
 </html>

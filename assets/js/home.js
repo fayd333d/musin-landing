@@ -19,7 +19,7 @@ burger.addEventListener("click", () => {
    "slot" (signed distance from the centre, wrapping round the list) so only
    slots -1/0/+1 are visible and the side cards face outward. Here they advance
    on a timer only — no arrows, no dragging, no play/pause. */
-function createWheel(stage, { onCentre, interval = 3.2 } = {}) {
+function createWheel(stage, { onCentre, interval = 3.2, dim = 0.28 } = {}) {
   const cards = [...stage.children];
   const N = cards.length;
   if (!N) return null;
@@ -40,7 +40,9 @@ function createWheel(stage, { onCentre, interval = 3.2 } = {}) {
       const tx = s * spacing;
       const tz = -near * 100;
       const scale = 1 - near * 0.16;
-      const bright = 1 - near * 0.5;
+      /* a gentler falloff than the other landings use — these wheels sit on a
+         lighter card, where a heavy dim just looks muddy */
+      const bright = 1 - near * dim;
 
       const prev = lastSlot[i];
       const wrapped = prev !== null && Math.abs(s - prev) > N / 2;
@@ -246,8 +248,11 @@ if (heroSection) {
 const COUNT_EPOCH = Date.UTC(2026, 6, 1); // 1 Jul 2026
 const COUNT_STEP_MS = 8 * 60 * 1000; // drift one step every ~8 minutes
 
-function liveCounter(numberEl, unitEl, min, max) {
-  if (!numberEl || !unitEl) return;
+/* Unlike the other landings, the two numbers here sit side by side, so they
+   keep one shared size from the stylesheet rather than each being scaled to
+   the width of its own label — that left them visibly different sizes. */
+function liveCounter(numberEl, min, max) {
+  if (!numberEl) return;
 
   const clamp = (n) => Math.min(max, Math.max(min, Math.round(n)));
 
@@ -255,33 +260,15 @@ function liveCounter(numberEl, unitEl, min, max) {
   const step = Math.floor((Date.now() - COUNT_EPOCH) / COUNT_STEP_MS);
   let value = min + Math.abs((step % (2 * span)) - span); // triangle wave
 
-  /* Scale the number so its rendered width matches the label beneath it — they
-     share the same width. Width scales ~linearly with font-size, so a couple of
-     iterations converge. */
-  function fitWidth() {
-    const target = unitEl.getBoundingClientRect().width;
-    if (!target) return;
-    let fs = parseFloat(getComputedStyle(numberEl).fontSize) || 88;
-    for (let i = 0; i < 5; i++) {
-      const w = numberEl.getBoundingClientRect().width;
-      if (!w || Math.abs(w - target) < 0.5) break;
-      fs = Math.max(40, Math.min(160, fs * (target / w)));
-      numberEl.style.fontSize = fs + "px";
-    }
-  }
-
   let lastStr = "";
   function render(n) {
     const s = Math.round(n).toLocaleString("en-US");
     if (s === lastStr) return;
     lastStr = s;
     numberEl.textContent = s;
-    fitWidth();
   }
 
   render(value);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitWidth);
-  window.addEventListener("resize", fitWidth);
 
   if (prefersReducedMotion) return;
 
@@ -302,19 +289,8 @@ function liveCounter(numberEl, unitEl, min, max) {
   schedule();
 }
 
-const statBlocks = [...document.querySelectorAll(".stats .genres__stat")];
-liveCounter(
-  document.getElementById("trackCount"),
-  statBlocks[0] && statBlocks[0].querySelector(".genres__unit"),
-  3764,
-  3873
-);
-liveCounter(
-  document.getElementById("creatorCount"),
-  statBlocks[1] && statBlocks[1].querySelector(".genres__unit"),
-  7843,
-  8214
-);
+liveCounter(document.getElementById("trackCount"), 3764, 3873);
+liveCounter(document.getElementById("creatorCount"), 7843, 8214);
 
 /* ---------- Logos: auto-run left to right ---------- */
 const logoMarquee = document.getElementById("logoMarquee");
@@ -330,7 +306,7 @@ if (logoMarquee) {
 /* ---------- Section entrance animations ---------- */
 if (!prefersReducedMotion) {
   gsap.utils
-    .toArray([".home-hero__title", ".about__lead", ".section-title", ".home-cta__card"])
+    .toArray([".home-hero__title", ".about__lead", ".section-title"])
     .forEach((el) => {
       gsap.from(el, {
         y: 40,
