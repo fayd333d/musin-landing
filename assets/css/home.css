@@ -22,9 +22,10 @@
 
 /* ---- Mode tabs ----
    A brand-pink track with a white pill marking the selected side. It sits
-   inside the top of the role card. */
+   under the hero title, above the role card. */
 .mode-tabs {
   display: inline-flex;
+  margin-top: 36px;
   padding: 6px;
   border-radius: 9999px;
   background: var(--brand);
@@ -50,41 +51,47 @@
 .mode-tab:not(.is-active):hover { background: rgba(255, 255, 255, 0.14); }
 .mode-tab:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
 
+/* The card hugs its contents rather than filling the container */
 .mode-box {
   position: relative;
-  /* narrower than the full container on wide screens */
-  max-width: 1040px;
-  margin: 48px auto 0;
-  padding: 28px 40px 48px;
+  width: fit-content;
+  max-width: 100%;
+  margin: 28px auto 0;
+  padding: 32px 40px;
   border-radius: var(--radius-card);
   background: var(--bg-card-2);
   text-align: center;
 }
 
-/* One column at every width: the wheel on top, then the text, then the CTAs */
+/* Text to the left of the wheel, CTAs under the text */
 .mode-pane {
-  margin-top: 28px;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: minmax(0, 300px) minmax(0, auto);
+  grid-template-areas:
+    "copy visual"
+    "actions visual";
   align-items: center;
-  gap: 28px;
-  text-align: center;
+  column-gap: 40px;
+  row-gap: 20px;
+  text-align: left;
 }
 
 .mode-pane[hidden] { display: none; }
 
 .mode-pane__text {
-  max-width: 620px;
-  font-size: 22px;
-  line-height: 34px;
+  grid-area: copy;
+  align-self: end;
+  font-size: 20px;
+  line-height: 31px;
   font-weight: 600;
   color: var(--text-primary);
 }
 
 .mode-pane__actions {
+  grid-area: actions;
+  align-self: start;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 12px;
 }
 
@@ -95,15 +102,13 @@
   line-height: 20px;
 }
 
-.mode-pane__visual { width: 100%; min-width: 0; }
+.mode-pane__visual { grid-area: visual; min-width: 0; }
 
-/* A smaller wheel than the full-width ones on the other landings, and no
-   pointer affordances — both wheels run on their own here */
+/* Sized so three screens sit side by side without the card growing wide */
 .mode-pane__visual .create__scroller {
-  /* the wheel has the full width of the card to itself now that the pane is a
-     single column, so the screens can be larger */
-  --wheel-card: clamp(150px, 17vw, 208px);
-  height: calc(var(--wheel-card) * 16 / 9 + 40px);
+  --wheel-card: clamp(120px, 13vw, 156px);
+  width: calc(var(--wheel-card) * 2.8);
+  height: calc(var(--wheel-card) * 16 / 9 + 24px);
   cursor: default;
   touch-action: auto;
 }
@@ -117,7 +122,7 @@
 /* The shades fade into the card, not the page background, and stay a soft
    gradient the whole way — the base rule holds a solid block for its first 30%,
    which clipped a hard edge across the side cards. */
-.mode-pane__visual .create__shade { width: clamp(32px, 12%, 96px); }
+.mode-pane__visual .create__shade { width: clamp(32px, 16%, 88px); }
 
 .mode-pane__visual .create__shade--left {
   background: linear-gradient(to right, var(--bg-card-2), rgba(28, 28, 28, 0));
@@ -222,9 +227,9 @@
 .about__container { max-width: 900px; }
 
 .about__text {
-  font-size: 22px;
-  line-height: 36px;
-  color: var(--text-secondary);
+  font-size: 26px;
+  line-height: 42px;
+  color: var(--text-primary);
 }
 
 .about__text + .about__text { margin-top: 28px; }
@@ -248,22 +253,35 @@
 }
 
 /* ============ Why Musin ============
-   Sticky-stacking cards, the same behaviour as the pay cards on the other
-   landings. Each card is a 480x480 artwork. */
-.why { padding: 0 0 128px; }
+   The cards ride the same coverflow as the hero wheels, but the centre index
+   follows the page scroll rather than a timer. */
+.why { padding: 0 0 48px; }
 
-/* Three across on wide screens; they fall back to the sticky stack below */
+.why-viewport { margin-top: 56px; }
+
 .why-stack {
-  margin-top: 64px;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px;
+  --why-card: clamp(260px, 34vw, 420px);
+  position: relative;
+  height: calc(var(--why-card) + 40px);
+  overflow: hidden;
 }
 
+.why-stack.no-anim .why-card { transition: none; }
+
 .why-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--why-card);
   border-radius: 40px;
   overflow: hidden;
   background: var(--bg-card);
+  transform: translate(-50%, -50%);
+  transform-origin: center center;
+  transition: transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1), filter 0.55s ease, opacity 0.55s ease;
+  backface-visibility: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+  will-change: transform, filter, opacity;
 }
 
 .why-card img,
@@ -296,68 +314,70 @@
   fill: var(--text-dim);
 }
 
-/* The FAQ needs no rules of its own — content.css already styles it. */
+/* Closer to the cards above it than the shared 128px would put it */
+.home-faq { padding-top: 72px; }
 
 /* ============ Responsive ============ */
 @media (max-width: 1100px) {
   .home-hero__title { font-size: 42px; line-height: 54px; }
-  .mode-pane__text { font-size: 20px; line-height: 32px; }
-}
-
-/* Below this the three Why cards no longer fit side by side, so they fall back
-   to the sticky stack the other landings use */
-@media (max-width: 980px) {
-  .why-stack {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    max-width: 480px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .why-card {
-    position: sticky;
-    top: 120px;
-    box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.6);
-  }
+  .mode-pane { column-gap: 28px; grid-template-columns: minmax(0, 260px) minmax(0, auto); }
+  .mode-pane__text { font-size: 18px; line-height: 28px; }
 }
 
 @media (max-width: 860px) {
   .home-hero { padding-top: 40px; padding-bottom: 80px; }
   .home-hero__title { font-size: 36px; line-height: 46px; letter-spacing: -0.72px; }
 
+  .mode-tabs { margin-top: 28px; }
   .mode-tab { padding: 12px 22px; font-size: 17px; line-height: 24px; }
-  .mode-box { margin-top: 36px; padding: 22px 24px 40px; }
+  .mode-box { width: auto; margin-top: 24px; padding: 24px; }
 
-  .mode-pane { gap: 24px; }
-  .mode-pane__text { max-width: 520px; }
-  .mode-pane__visual .create__scroller { --wheel-card: clamp(150px, 44vw, 220px); }
+  /* Stacked: wheel on top, then the text, then the CTAs */
+  .mode-pane {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "visual"
+      "copy"
+      "actions";
+    justify-items: center;
+    text-align: center;
+    row-gap: 24px;
+  }
+
+  .mode-pane__text { align-self: auto; max-width: 460px; font-size: 19px; line-height: 30px; }
+  .mode-pane__actions { align-self: auto; justify-content: center; }
+  .mode-pane__visual { width: 100%; }
+
+  .mode-pane__visual .create__scroller {
+    --wheel-card: clamp(140px, 40vw, 200px);
+    width: 100%;
+  }
 
   .about { padding: 24px 0 80px; }
-  .about__text { font-size: 19px; line-height: 31px; }
+  .about__text { font-size: 21px; line-height: 34px; }
   .about__text + .about__text { margin-top: 22px; }
 
   /* Stats stack on small screens */
   .stats { padding: 24px 0 88px; }
   .stats__row { flex-direction: column; align-items: center; gap: 56px; }
+
+  .why-viewport { margin-top: 40px; }
 }
 
 @media (max-width: 600px) {
   .home-hero__title { font-size: 30px; line-height: 40px; }
-  /* the pair still has to fit one line inside the card */
+  /* the pair still has to fit one line */
   .mode-tabs { padding: 5px; }
   .mode-tab { padding: 11px 14px; font-size: 14px; line-height: 20px; }
-  .mode-box { margin-top: 28px; padding: 18px 16px 32px; border-radius: 28px; }
-  .mode-pane { margin-top: 24px; }
-  .mode-pane__text { font-size: 18px; line-height: 28px; }
+  .mode-box { margin-top: 20px; padding: 18px 16px 24px; border-radius: 28px; }
+  .mode-pane__text { font-size: 17px; line-height: 27px; }
   .mode-pane__btn { flex: 1 1 auto; }
 
   .about { padding-bottom: 64px; }
-  .about__text { font-size: 17px; line-height: 28px; }
+  .about__text { font-size: 18px; line-height: 30px; }
 
-  .why { padding-bottom: 80px; }
-  .why-card { top: 96px; border-radius: 28px; }
+  .why { padding-bottom: 32px; }
+  .why-card { border-radius: 28px; }
 
-  .home-faq { padding: 80px 0 96px; }
+  .home-faq { padding: 64px 0 96px; }
 }

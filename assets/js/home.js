@@ -19,7 +19,7 @@ burger.addEventListener("click", () => {
    "slot" (signed distance from the centre, wrapping round the list) so only
    slots -1/0/+1 are visible and the side cards face outward. Here they advance
    on a timer only — no arrows, no dragging, no play/pause. */
-function createWheel(stage, { onCentre, interval = 3.2, dim = 0.28 } = {}) {
+function createWheel(stage, { onCentre, interval = 3.2, dim = 0.28, auto = true } = {}) {
   const cards = [...stage.children];
   const N = cards.length;
   if (!N) return null;
@@ -74,7 +74,7 @@ function createWheel(stage, { onCentre, interval = 3.2, dim = 0.28 } = {}) {
   /* The timer runs from the start and the observer only pauses it off screen,
      so a wheel can never end up stuck if the observer never reports back. */
   let timer = null;
-  if (!prefersReducedMotion) {
+  if (auto && !prefersReducedMotion) {
     timer = gsap.to({}, {
       duration: interval,
       repeat: -1,
@@ -91,6 +91,12 @@ function createWheel(stage, { onCentre, interval = 3.2, dim = 0.28 } = {}) {
     centre: () => cards[centreIndex],
     play: () => timer && timer.play(),
     pause: () => timer && timer.pause(),
+    setCentre(i) {
+      const next = ((i % N) + N) % N;
+      if (next === centreIndex) return;
+      centreIndex = next;
+      render();
+    },
   };
 }
 
@@ -239,6 +245,30 @@ if (heroSection) {
     }),
     { threshold: 0.15 }
   ).observe(heroSection);
+}
+
+/* ---------- Why Musin: a coverflow the page scroll drives ----------
+   Same wheel as the hero, but instead of a timer the centre index tracks how
+   far the section has travelled through the viewport, so the cards turn as
+   the reader scrolls past them. */
+const whyStage = document.getElementById("whyStack");
+
+if (whyStage) {
+  const whyWheel = createWheel(whyStage, { auto: false, dim: 0.34 });
+
+  if (whyWheel && !prefersReducedMotion) {
+    const steps = whyWheel.cards.length;
+    ScrollTrigger.create({
+      trigger: ".why",
+      start: "top bottom",
+      end: "bottom top",
+      onUpdate: (self) => {
+        // hold the first and last card a little longer than the middle ones
+        const eased = gsap.utils.clamp(0, 1, (self.progress - 0.15) / 0.7);
+        whyWheel.setCentre(Math.round(eased * (steps - 1)));
+      },
+    });
+  }
 }
 
 /* ---------- Statistics ----------

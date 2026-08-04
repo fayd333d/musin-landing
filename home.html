@@ -13,7 +13,7 @@
   <link rel="preload" as="image" href="assets/img/covers/cover-4.jpg" fetchpriority="high">
   <!-- Shared shell (nav, sections, cards, footer) + home specifics -->
   <link rel="stylesheet" href="assets/css/content.css?v=35">
-  <link rel="stylesheet" href="assets/css/home.css?v=5">
+  <link rel="stylesheet" href="assets/css/home.css?v=8">
 </head>
 <body>
 
@@ -56,13 +56,12 @@
       <div class="container">
         <h1 class="home-hero__title">Music promotion through content</h1>
 
-        <div class="mode-box">
-          <!-- The switch sits inside the top of the card -->
-          <div class="mode-tabs" role="tablist" aria-label="What would you like to do?">
-            <button type="button" class="mode-tab is-active" role="tab" id="tabMusic" aria-selected="true" aria-controls="paneMusic">Promote Music</button>
-            <button type="button" class="mode-tab" role="tab" id="tabContent" aria-selected="false" aria-controls="paneContent" tabindex="-1">Create Content</button>
-          </div>
+        <div class="mode-tabs" role="tablist" aria-label="What would you like to do?">
+          <button type="button" class="mode-tab is-active" role="tab" id="tabMusic" aria-selected="true" aria-controls="paneMusic">Promote Music</button>
+          <button type="button" class="mode-tab" role="tab" id="tabContent" aria-selected="false" aria-controls="paneContent" tabindex="-1">Create Content</button>
+        </div>
 
+        <div class="mode-box">
           <!-- Promote Music: campaign cards, the same wheel as the Music landing -->
           <div class="mode-pane is-active" id="paneMusic" role="tabpanel" aria-labelledby="tabMusic">
             <div class="mode-pane__visual">
@@ -151,7 +150,8 @@
     <!-- ============ WHY MUSIN (stacking cards) ============ -->
     <section class="why" id="why">
       <div class="container">
-        <div class="why-stack">
+        <div class="create__viewport why-viewport">
+          <div class="why-stack" id="whyStack">
           <article class="why-card">
             <img src="assets/img/why/why-1-direct.svg" alt="Direct collaborations — tracks and social media accounts connect directly." loading="lazy">
           </article>
@@ -206,6 +206,9 @@
               <text class="why-card__sub" x="204" y="397">Ready to post</text>
             </svg>
           </article>
+          </div>
+          <div class="create__shade create__shade--left" aria-hidden="true"></div>
+          <div class="create__shade create__shade--right" aria-hidden="true"></div>
         </div>
       </div>
     </section>
@@ -282,6 +285,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-  <script src="assets/js/home.js?v=3"></script>
+  <script src="assets/js/home.js?v=4"></script>
 </body>
 </html>
