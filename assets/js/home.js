@@ -306,7 +306,7 @@ if (logoMarquee) {
 /* ---------- Section entrance animations ---------- */
 if (!prefersReducedMotion) {
   gsap.utils
-    .toArray([".home-hero__title", ".about__lead", ".section-title"])
+    .toArray([".home-hero__title", ".about__text", ".section-title"])
     .forEach((el) => {
       gsap.from(el, {
         y: 40,

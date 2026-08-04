@@ -13,7 +13,7 @@
   <link rel="preload" as="image" href="assets/img/covers/cover-4.jpg" fetchpriority="high">
   <!-- Shared shell (nav, sections, cards, footer) + home specifics -->
   <link rel="stylesheet" href="assets/css/content.css?v=35">
-  <link rel="stylesheet" href="assets/css/home.css?v=3">
+  <link rel="stylesheet" href="assets/css/home.css?v=5">
 </head>
 <body>
 
@@ -54,7 +54,7 @@
     <!-- ============ HERO ============ -->
     <section class="hero home-hero" id="hero">
       <div class="container">
-        <h1 class="home-hero__title">Music promotion through social media content</h1>
+        <h1 class="home-hero__title">Music promotion through content</h1>
 
         <div class="mode-box">
           <!-- The switch sits inside the top of the card -->
@@ -65,7 +65,6 @@
 
           <!-- Promote Music: campaign cards, the same wheel as the Music landing -->
           <div class="mode-pane is-active" id="paneMusic" role="tabpanel" aria-labelledby="tabMusic">
-            <p class="mode-pane__text">Reach new audiences and build social engagement around your music through social media content.</p>
             <div class="mode-pane__visual">
               <div class="create__viewport">
                 <div class="create__scroller" id="campaignScroller" aria-label="Example campaigns on Musin"></div>
@@ -73,14 +72,15 @@
                 <div class="create__shade create__shade--right" aria-hidden="true"></div>
               </div>
             </div>
+            <p class="mode-pane__text">Reach new audiences and build social engagement around your music through social media content.</p>
             <div class="mode-pane__actions">
-              <a href="music.html" class="btn btn--light btn--md">Learn More</a>
+              <a href="music.html" class="btn btn--primary mode-pane__btn">Launch Campaign</a>
+              <a href="music.html" class="btn btn--light mode-pane__btn">Learn More</a>
             </div>
           </div>
 
           <!-- Create Content: example clips, autoplaying and advancing on their own -->
           <div class="mode-pane" id="paneContent" role="tabpanel" aria-labelledby="tabContent" hidden>
-            <p class="mode-pane__text">Discover music that fits your content and get paid to feature it in your social media posts.</p>
             <div class="mode-pane__visual">
               <div class="create__viewport">
                 <div class="create__scroller" id="clipScroller" aria-label="Example posts made with Musin tracks">
@@ -99,8 +99,10 @@
                 <div class="create__shade create__shade--right" aria-hidden="true"></div>
               </div>
             </div>
+            <p class="mode-pane__text">Discover music that fits your content and get paid to feature it in your social media posts.</p>
             <div class="mode-pane__actions">
-              <a href="index.html" class="btn btn--light btn--md">Learn More</a>
+              <a href="index.html" class="btn btn--primary mode-pane__btn">Find Tracks</a>
+              <a href="index.html" class="btn btn--light mode-pane__btn">Learn More</a>
             </div>
           </div>
         </div>
@@ -110,9 +112,9 @@
     <!-- ============ WHAT MUSIN IS ============ -->
     <section class="about" id="about">
       <div class="container about__container">
-        <p class="about__lead">Musin is a platform for music promotion through social media content. It connects tracks with creators who can introduce them to audiences through the posts they already watch and engage with.</p>
-        <p class="about__body">For artists, managers and labels, Musin provides a direct way to generate authentic content around a release, choose who posts with the track and pay only for confirmed publications. For creators, it offers music that fits their content, full creative freedom and payment for every confirmed post.</p>
-        <p class="about__body">This makes Musin an efficient way to grow music discovery because promotion becomes part of real social content rather than a separate advertisement. Matching, publishing and payment all happen in one place.</p>
+        <p class="about__text">Musin is a platform that connects tracks with content creators who can feature them in their social media posts.</p>
+        <p class="about__text">For artists, managers and labels, Musin provides a direct way to generate content around a track at scale generating wide audience engagement around music.</p>
+        <p class="about__text">For content creators, influencers and agencies, Musin offers an opportunity to earn by posting on social media with selected music.</p>
       </div>
     </section>
 
@@ -208,9 +210,10 @@
       </div>
     </section>
 
-    <!-- ============ FAQ (no section title, by design) ============ -->
+    <!-- ============ FAQ ============ -->
     <section class="faq home-faq" id="faq">
       <div class="container faq__container">
+        <h2 class="section-title">FAQ</h2>
         <div class="faq-list">
           <details class="faq-item" open>
             <summary>Why does content drive music discovery?</summary>
@@ -279,6 +282,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-  <script src="assets/js/home.js?v=2"></script>
+  <script src="assets/js/home.js?v=3"></script>
 </body>
 </html>
