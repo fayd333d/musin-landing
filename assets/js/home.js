@@ -19,7 +19,7 @@ burger.addEventListener("click", () => {
    "slot" (signed distance from the centre, wrapping round the list) so only
    slots -1/0/+1 are visible and the side cards face outward. Here they advance
    on a timer only — no arrows, no dragging, no play/pause. */
-function createWheel(stage, { onCentre, interval = 3.2, dim = 0.28, auto = true } = {}) {
+function createWheel(stage, { onCentre, interval = 3.2, dim = 0.28, drag = false } = {}) {
   const cards = [...stage.children];
   const N = cards.length;
   if (!N) return null;
@@ -74,7 +74,7 @@ function createWheel(stage, { onCentre, interval = 3.2, dim = 0.28, auto = true 
   /* The timer runs from the start and the observer only pauses it off screen,
      so a wheel can never end up stuck if the observer never reports back. */
   let timer = null;
-  if (auto && !prefersReducedMotion) {
+  if (!prefersReducedMotion) {
     timer = gsap.to({}, {
       duration: interval,
       repeat: -1,
@@ -85,18 +85,59 @@ function createWheel(stage, { onCentre, interval = 3.2, dim = 0.28, auto = true 
     });
   }
 
+  function step(delta) {
+    centreIndex = (((centreIndex + delta) % N) + N) % N;
+    render();
+  }
+
+  /* Drag with a pointer, swipe on touch, or flick a trackpad sideways. Any of
+     them moves the wheel one card and restarts the timer, so the automatic
+     rotation never fights the reader mid-gesture. */
+  if (drag) {
+    const restart = () => {
+      if (!timer) return;
+      timer.restart(true);
+    };
+
+    let startX = null;
+    stage.addEventListener("pointerdown", (e) => {
+      startX = e.clientX;
+      stage.classList.add("is-dragging");
+      if (timer) timer.pause();
+    });
+
+    const endDrag = (e) => {
+      if (startX === null) return;
+      const dx = e.clientX - startX;
+      startX = null;
+      stage.classList.remove("is-dragging");
+      if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+      if (timer) { timer.play(); restart(); }
+    };
+    window.addEventListener("pointerup", endDrag);
+    window.addEventListener("pointercancel", endDrag);
+
+    let wheelLock = false;
+    stage.addEventListener("wheel", (e) => {
+      // only claim the gesture when it's clearly sideways, so the page can
+      // still scroll vertically over the cards
+      if (Math.abs(e.deltaX) <= Math.abs(e.deltaY) || Math.abs(e.deltaX) < 12) return;
+      e.preventDefault();
+      if (wheelLock) return;
+      wheelLock = true;
+      step(e.deltaX > 0 ? 1 : -1);
+      restart();
+      setTimeout(() => { wheelLock = false; }, 380);
+    }, { passive: false });
+  }
+
   return {
     render,
     cards,
     centre: () => cards[centreIndex],
     play: () => timer && timer.play(),
     pause: () => timer && timer.pause(),
-    setCentre(i) {
-      const next = ((i % N) + N) % N;
-      if (next === centreIndex) return;
-      centreIndex = next;
-      render();
-    },
+    step,
   };
 }
 
@@ -247,27 +288,20 @@ if (heroSection) {
   ).observe(heroSection);
 }
 
-/* ---------- Why Musin: a coverflow the page scroll drives ----------
-   Same wheel as the hero, but instead of a timer the centre index tracks how
-   far the section has travelled through the viewport, so the cards turn as
-   the reader scrolls past them. */
+/* ---------- Why Musin: the same coverflow as the hero wheels ----------
+   It turns on its own and takes drag, swipe or a sideways trackpad flick;
+   any gesture restarts the timer so the two never fight. */
 const whyStage = document.getElementById("whyStack");
+const whyWheel = whyStage ? createWheel(whyStage, { interval: 4.5, dim: 0.34, drag: true }) : null;
 
-if (whyStage) {
-  const whyWheel = createWheel(whyStage, { auto: false, dim: 0.34 });
-
-  if (whyWheel && !prefersReducedMotion) {
-    const steps = whyWheel.cards.length;
-    ScrollTrigger.create({
-      trigger: ".why",
-      start: "top bottom",
-      end: "bottom top",
-      onUpdate: (self) => {
-        // hold the first and last card a little longer than the middle ones
-        const eased = gsap.utils.clamp(0, 1, (self.progress - 0.15) / 0.7);
-        whyWheel.setCentre(Math.round(eased * (steps - 1)));
-      },
-    });
+/* Only run it while the section is on screen */
+if (whyWheel) {
+  const whySection = document.querySelector(".why");
+  if (whySection) {
+    new IntersectionObserver(
+      (entries) => entries.forEach((e) => (e.isIntersecting ? whyWheel.play() : whyWheel.pause())),
+      { threshold: 0.15 }
+    ).observe(whySection);
   }
 }
 

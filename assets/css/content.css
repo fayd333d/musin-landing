@@ -1019,11 +1019,18 @@ img { display: block; max-width: 100%; }
   .footer__social { justify-content: center; gap: 32px; }
 
   /* Page links centred under the brand block */
+  /* All six links stay on one line — the type shrinks to fit rather than
+     wrapping onto a second row */
   .footer__links {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: center;
     text-align: center;
-    gap: 14px 28px;
+    gap: clamp(8px, 2.6vw, 28px);
+  }
+
+  .footer__links a {
+    font-size: clamp(10px, 3vw, 16px);
+    white-space: nowrap;
   }
 
   .cta__card { padding: 64px 24px; }
@@ -1099,7 +1106,7 @@ img { display: block; max-width: 100%; }
   .faq-item p { margin-left: 48px; font-size: 15px; }
 
   .footer__top { gap: 32px; }
-  .footer__links { gap: 12px 28px; }
+
   .footer__social { gap: 26px; }
 }
 

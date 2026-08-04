@@ -82,8 +82,7 @@
   grid-area: copy;
   align-self: end;
   font-size: 20px;
-  line-height: 31px;
-  font-weight: 600;
+  line-height: 32px;
   color: var(--text-primary);
 }
 
@@ -264,7 +263,12 @@
   position: relative;
   height: calc(var(--why-card) + 40px);
   overflow: hidden;
+  cursor: grab;
+  /* let the page scroll vertically while we take the horizontal drag */
+  touch-action: pan-y;
 }
+
+.why-stack.is-dragging { cursor: grabbing; }
 
 .why-stack.no-anim .why-card { transition: none; }
 
