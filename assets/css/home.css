@@ -251,6 +251,103 @@
   letter-spacing: -2.5px;
 }
 
+/* ============ Every genre, both sides ============
+   The tag cloud from the persona pages; the section title needs the spacing
+   their merged heads gave it. */
+.home-genres { padding: 24px 0 96px; }
+.home-genres .section-title { margin-bottom: 44px; }
+
+/* ============ How it works ============ */
+.how { padding: 0 0 96px; }
+
+.how__lead {
+  max-width: 720px;
+  margin: 20px auto 0;
+  font-size: 19px;
+  line-height: 30px;
+  text-align: center;
+  color: var(--text-tertiary);
+}
+
+.how__cols {
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.how__col {
+  padding: 36px 36px 40px;
+  border-radius: 32px;
+  background: var(--bg-card-2);
+}
+
+.how__who {
+  font-size: 22px;
+  line-height: 30px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.how__steps {
+  margin-top: 24px;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  counter-reset: step;
+}
+
+.how__steps li {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.how__n {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--brand);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.how__steps b {
+  display: block;
+  font-size: 17px;
+  line-height: 26px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.how__steps span:not(.how__n) {
+  display: block;
+  font-size: 16px;
+  line-height: 25px;
+  color: var(--text-tertiary);
+}
+
+/* The one fee line on the page — kept short rather than given its own section */
+.how__fees {
+  margin-top: 32px;
+  text-align: center;
+  font-size: 17px;
+  line-height: 26px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* ============ Inside Musin app ============ */
+.home-app { padding: 0 0 96px; }
+
 /* ============ Why Musin ============
    The cards ride the same coverflow as the hero wheels, but the centre index
    follows the page scroll rather than a timer. */
@@ -321,6 +418,24 @@
 /* Closer to the cards above it than the shared 128px would put it */
 .home-faq { padding-top: 72px; }
 
+/* ============ Closing CTA ============ */
+.home-cta { padding-bottom: 96px; }
+
+.home-cta__actions {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
+
+.home-cta__fees {
+  margin-top: 4px;
+  font-size: 15px;
+  line-height: 24px;
+  color: var(--text-dim);
+}
+
 /* ============ Responsive ============ */
 @media (max-width: 1100px) {
   .home-hero__title { font-size: 42px; line-height: 54px; }
@@ -365,6 +480,12 @@
   .stats { padding: 24px 0 88px; }
   .stats__row { flex-direction: column; align-items: center; gap: 56px; }
 
+  .home-genres { padding-bottom: 72px; }
+  .how { padding-bottom: 72px; }
+  .how__cols { margin-top: 40px; grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .how__col { padding: 28px 24px 32px; }
+  .home-app { padding-bottom: 72px; }
+
   .why-viewport { margin-top: 40px; }
 }
 
@@ -383,5 +504,13 @@
   .why { padding-bottom: 32px; }
   .why-card { border-radius: 28px; }
 
-  .home-faq { padding: 64px 0 96px; }
+  .how__lead { font-size: 17px; line-height: 27px; }
+  .how__who { font-size: 19px; line-height: 27px; }
+  .how__steps b { font-size: 16px; }
+  .how__steps span:not(.how__n) { font-size: 15px; line-height: 24px; }
+  .how__fees { font-size: 15px; line-height: 24px; }
+
+  .home-faq { padding: 64px 0 72px; }
+  .home-cta { padding-bottom: 72px; }
+  .home-cta__actions .btn { flex: 1 1 auto; }
 }

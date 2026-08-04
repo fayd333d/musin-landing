@@ -305,6 +305,39 @@ if (whyWheel) {
   }
 }
 
+/* ---------- Genre tags: the same cloud as the persona pages ----------
+   Three lines: mainstream genres first, then subgenres of rap, pop and EDM. */
+const genreRows = [
+  ["Rap", "Pop", "Electronic", "Rock", "R&B", "Alternative", "Latin", "Afrobeats", "Jazz", "Instrumental"],
+  ["Country", "Reggae", "Dancehall", "Trap", "Drill", "Boom Bap", "Melodic Rap", "Conscious Rap", "Cloud Rap"],
+  ["Dance Pop", "Indie Pop", "Electropop", "Hyperpop", "House", "Techno", "EDM", "Drum & Bass", "Dubstep"],
+];
+
+const genreColors = [
+  "#e54552", "#ffac12", "#22c55e", "#3d5ddc", "#8b5cf6",
+  "#2dd4bf", "#f472b6", "#eab308", "#60a5fa", "#fb923c",
+];
+
+document.querySelectorAll(".genre-line").forEach((line, rowIdx) => {
+  line.innerHTML = genreRows[rowIdx]
+    .map(
+      (g, i) =>
+        `<span class="genre-tag" style="color:${genreColors[(rowIdx * 3 + i) % genreColors.length]}"><span class="hash">#</span>${g}</span>`
+    )
+    .join("");
+
+  if (!prefersReducedMotion) {
+    const dir = Number(line.dataset.drift) || 1;
+    gsap.to(line, {
+      x: 36 * dir,
+      duration: 5 + rowIdx * 1.3,
+      ease: "sine.inOut",
+      yoyo: true,
+      repeat: -1,
+    });
+  }
+});
+
 /* ---------- Statistics ----------
    Each number gently fluctuates within its own range. A slow triangle wave off
    the real clock sets the starting value (so it drifts over time and is the
@@ -355,6 +388,7 @@ function liveCounter(numberEl, min, max) {
 
 liveCounter(document.getElementById("trackCount"), 3764, 3873);
 liveCounter(document.getElementById("creatorCount"), 7843, 8214);
+liveCounter(document.getElementById("postCount"), 41204, 42630);
 
 /* ---------- Logos: auto-run left to right ---------- */
 const logoMarquee = document.getElementById("logoMarquee");

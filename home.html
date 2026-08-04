@@ -13,7 +13,7 @@
   <link rel="preload" as="image" href="assets/img/covers/cover-4.jpg" fetchpriority="high">
   <!-- Shared shell (nav, sections, cards, footer) + home specifics -->
   <link rel="stylesheet" href="assets/css/content.css?v=36">
-  <link rel="stylesheet" href="assets/css/home.css?v=9">
+  <link rel="stylesheet" href="assets/css/home.css?v=10">
 </head>
 <body>
 
@@ -73,7 +73,7 @@
             </div>
             <p class="mode-pane__text">Reach new audiences and build social engagement around your music through social media content.</p>
             <div class="mode-pane__actions">
-              <a href="music.html" class="btn btn--primary mode-pane__btn">Promote Music</a>
+              <a href="music.html" class="btn btn--primary mode-pane__btn">Join as a music artist</a>
               <a href="music.html" class="btn btn--light mode-pane__btn">Learn More</a>
             </div>
           </div>
@@ -100,7 +100,7 @@
             </div>
             <p class="mode-pane__text">Discover music that fits your content and get paid to feature it in your social media posts.</p>
             <div class="mode-pane__actions">
-              <a href="index.html" class="btn btn--primary mode-pane__btn">Create Content</a>
+              <a href="index.html" class="btn btn--primary mode-pane__btn">Join as a content creator</a>
               <a href="index.html" class="btn btn--light mode-pane__btn">Learn More</a>
             </div>
           </div>
@@ -133,6 +133,18 @@
       </div>
     </section>
 
+    <!-- ============ EVERY GENRE, BOTH SIDES ============ -->
+    <section class="genres home-genres" id="genres">
+      <div class="container">
+        <h2 class="section-title">Every genre, both sides</h2>
+      </div>
+      <div class="genre-lines" id="genreLines">
+        <div class="genre-line" data-drift="1"></div>
+        <div class="genre-line" data-drift="-1"></div>
+        <div class="genre-line" data-drift="1"></div>
+      </div>
+    </section>
+
     <!-- ============ STATISTICS ============ -->
     <section class="stats" aria-label="Musin in numbers">
       <div class="container stats__row">
@@ -143,6 +155,94 @@
         <div class="genres__stat">
           <p class="genres__number" id="creatorCount">8,024</p>
           <p class="genres__unit">Content creators active</p>
+        </div>
+        <div class="genres__stat">
+          <p class="genres__number" id="postCount">41,860</p>
+          <p class="genres__unit">Posts published</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HOW IT WORKS ============ -->
+    <section class="how" id="how">
+      <div class="container">
+        <h2 class="section-title">How it works</h2>
+        <p class="how__lead">One loop, two sides. Artists put a track up, creators post with it, and
+          payment is released once the post is confirmed.</p>
+
+        <div class="how__cols">
+          <div class="how__col">
+            <h3 class="how__who">For music artists</h3>
+            <ol class="how__steps">
+              <li><span class="how__n">1</span><div><b>Create campaign</b><span>Upload your track and set campaign parameters.</span></div></li>
+              <li><span class="how__n">2</span><div><b>Select accounts</b><span>Choose the accounts you want to post with your track.</span></div></li>
+              <li><span class="how__n">3</span><div><b>Confirm publications</b><span>Review submitted post links and confirm they contain your track.</span></div></li>
+              <li><span class="how__n">4</span><div><b>Pay per post</b><span>Pay only for completed and confirmed publications.</span></div></li>
+            </ol>
+          </div>
+
+          <div class="how__col">
+            <h3 class="how__who">For content creators</h3>
+            <ol class="how__steps">
+              <li><span class="how__n">1</span><div><b>Set your price</b><span>Choose your price within the limit based on your follower count.</span></div></li>
+              <li><span class="how__n">2</span><div><b>Create and post</b><span>Create content with the selected track and publish it.</span></div></li>
+              <li><span class="how__n">3</span><div><b>Submit link</b><span>Add your publication link so the artist can confirm it.</span></div></li>
+              <li><span class="how__n">4</span><div><b>Get paid</b><span>Payment is released after confirmation, or automatically if no dispute is opened.</span></div></li>
+            </ol>
+          </div>
+        </div>
+
+        <p class="how__fees">Free to join. Musin takes a 20% commission only on confirmed posts.</p>
+      </div>
+    </section>
+
+    <!-- ============ INSIDE MUSIN APP ============ -->
+    <section class="app home-app" id="app">
+      <div class="container">
+        <h2 class="section-title">Inside Musin app</h2>
+        <div class="app-stack" id="appStack">
+          <div class="app-card">
+            <div class="app-card__panel">
+              <div class="app-card__copy">
+                <h3 class="app-card__title">Create campaign</h3>
+                <p class="app-card__text">Artists upload a track and set the campaign parameters.</p>
+              </div>
+            </div>
+            <div class="app-card__screen">
+              <picture>
+                <source media="(max-width: 860px)" srcset="assets/img/app/app-MA-phone1.svg">
+                <img src="assets/img/app/app-MA-PC1.svg" alt="Creating a music campaign in the Musin app" loading="lazy">
+              </picture>
+            </div>
+          </div>
+          <div class="app-card">
+            <div class="app-card__panel">
+              <div class="app-card__copy">
+                <h3 class="app-card__title">Discover music</h3>
+                <p class="app-card__text">Creators find and receive tracks that match their content.</p>
+              </div>
+            </div>
+            <div class="app-card__screen">
+              <picture>
+                <source media="(max-width: 860px)" srcset="assets/img/app/app-CC-phone1.svg">
+                <img src="assets/img/app/app-CC-PC1.svg" alt="Browsing active campaigns in the Musin app" loading="lazy">
+              </picture>
+            </div>
+          </div>
+          <div class="app-card">
+            <div class="app-card__panel">
+              <div class="app-card__copy">
+                <h3 class="app-card__title">Confirm and pay</h3>
+                <p class="app-card__text">Posts are confirmed and payment is released to the creator.</p>
+              </div>
+            </div>
+            <div class="app-card__screen">
+              <picture>
+                <source media="(max-width: 860px)" srcset="assets/img/app/app-MA-phone3.svg">
+                <img src="assets/img/app/app-MA-PC3.svg" alt="Campaign payouts and results in the Musin app" loading="lazy">
+              </picture>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -219,33 +319,56 @@
         <h2 class="section-title">FAQ</h2>
         <div class="faq-list">
           <details class="faq-item" open>
+            <summary>How much does it cost to join?</summary>
+            <p>Joining is free for both artists and creators. Musin takes a 20% commission only on
+              payment for a confirmed post — there are no listing fees or subscriptions.</p>
+          </details>
+          <details class="faq-item">
+            <summary>What follower count do I need to start earning?</summary>
+            <p>100 followers is enough to start as a content creator. Your follower count sets the
+              upper limit on the price you can ask per post.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Which platforms are supported?</summary>
+            <p>TikTok, Instagram and YouTube for posting, Spotify and SoundCloud for tracks, and
+              Stripe for payouts.</p>
+          </details>
+          <details class="faq-item">
+            <summary>When are payments released?</summary>
+            <p>After the artist confirms the post, or automatically if no dispute is opened. Funds
+              go to the creator's connected Stripe account.</p>
+          </details>
+          <details class="faq-item">
             <summary>Why does content drive music discovery?</summary>
-            <p>People discover music while watching videos they already enjoy. When a track becomes part of relevant social content it reaches audiences in a natural and memorable context.</p>
+            <p>People discover music while watching videos they already enjoy. When a track becomes
+              part of relevant social content it reaches audiences in a natural and memorable context.</p>
           </details>
           <details class="faq-item">
             <summary>How is content-based promotion different from traditional advertising?</summary>
-            <p>Traditional advertising asks people to stop and pay attention. Content-based promotion places music inside something they already chose to watch.</p>
-          </details>
-          <details class="faq-item">
-            <summary>Why do content creators matter in music promotion?</summary>
-            <p>Creators already understand their audience and know what type of content performs well. Their posts can introduce a track to communities beyond the artist’s existing followers.</p>
-          </details>
-          <details class="faq-item">
-            <summary>What makes music placement feel authentic?</summary>
-            <p>Content creators choose tracks that fit their style and decide how to use them. This creative freedom helps the music feel like part of the content rather than a forced advertisement.</p>
-          </details>
-          <details class="faq-item">
-            <summary>How does Musin help promote music?</summary>
-            <p>Musin lets music artists launch campaigns, choose suitable social media accounts, manage publications and release payment after each completed post is confirmed.</p>
-          </details>
-          <details class="faq-item">
-            <summary>How does Musin help content creators?</summary>
-            <p>Creators can discover paid music opportunities, choose tracks that suit their content, publish in their own style and get paid for confirmed posts.</p>
+            <p>Traditional advertising asks people to stop and pay attention. Content-based promotion
+              places music inside something they already chose to watch.</p>
           </details>
           <details class="faq-item">
             <summary>Why use Musin instead of arranging collaborations manually?</summary>
-            <p>Musin brings track discovery, account selection, campaign management, post confirmation and payments into one place instead of relying on scattered messages, spreadsheets and individual negotiations.</p>
+            <p>Musin brings track discovery, account selection, campaign management, post confirmation
+              and payments into one place instead of relying on scattered messages, spreadsheets and
+              individual negotiations.</p>
           </details>
+        </div>
+      </div>
+    </section>
+    <!-- ============ CLOSING CTA ============ -->
+    <section class="cta home-cta">
+      <div class="container">
+        <div class="cta__card">
+          <h2 class="cta__title">Music promotion through content</h2>
+          <p class="cta__text">Artists reach new audiences through real social posts. Creators earn
+            from the content they already make.</p>
+          <div class="home-cta__actions">
+            <a href="music.html" class="btn btn--primary btn--md">Join as an artist</a>
+            <a href="index.html" class="btn btn--light btn--md">Join as a creator</a>
+          </div>
+          <p class="home-cta__fees">Free to join. Musin takes a 20% commission only on confirmed posts.</p>
         </div>
       </div>
     </section>
@@ -285,6 +408,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-  <script src="assets/js/home.js?v=5"></script>
+  <script src="assets/js/home.js?v=6"></script>
 </body>
 </html>
