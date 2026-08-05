@@ -13,7 +13,7 @@
   <link rel="preload" as="image" href="assets/img/covers/cover-4.jpg" fetchpriority="high">
   <!-- Shared shell (nav, sections, cards, footer) + home specifics -->
   <link rel="stylesheet" href="assets/css/content.css?v=36">
-  <link rel="stylesheet" href="assets/css/home.css?v=10">
+  <link rel="stylesheet" href="assets/css/home.css?v=12">
 </head>
 <body>
 
@@ -71,7 +71,7 @@
                 <div class="create__shade create__shade--right" aria-hidden="true"></div>
               </div>
             </div>
-            <p class="mode-pane__text">Reach new audiences and build social engagement around your music through social media content.</p>
+            <p class="mode-pane__text">Reach new audiences and build engagement around your music through social media content.</p>
             <div class="mode-pane__actions">
               <a href="music.html" class="btn btn--primary mode-pane__btn">Join as a music artist</a>
               <a href="music.html" class="btn btn--light mode-pane__btn">Learn More</a>
@@ -133,18 +133,6 @@
       </div>
     </section>
 
-    <!-- ============ EVERY GENRE, BOTH SIDES ============ -->
-    <section class="genres home-genres" id="genres">
-      <div class="container">
-        <h2 class="section-title">Every genre, both sides</h2>
-      </div>
-      <div class="genre-lines" id="genreLines">
-        <div class="genre-line" data-drift="1"></div>
-        <div class="genre-line" data-drift="-1"></div>
-        <div class="genre-line" data-drift="1"></div>
-      </div>
-    </section>
-
     <!-- ============ STATISTICS ============ -->
     <section class="stats" aria-label="Musin in numbers">
       <div class="container stats__row">
@@ -156,10 +144,6 @@
           <p class="genres__number" id="creatorCount">8,024</p>
           <p class="genres__unit">Content creators active</p>
         </div>
-        <div class="genres__stat">
-          <p class="genres__number" id="postCount">41,860</p>
-          <p class="genres__unit">Posts published</p>
-        </div>
       </div>
     </section>
 
@@ -167,12 +151,9 @@
     <section class="how" id="how">
       <div class="container">
         <h2 class="section-title">How it works</h2>
-        <p class="how__lead">One loop, two sides. Artists put a track up, creators post with it, and
-          payment is released once the post is confirmed.</p>
-
         <div class="how__cols">
           <div class="how__col">
-            <h3 class="how__who">For music artists</h3>
+            <h3 class="how__who">Music promotion</h3>
             <ol class="how__steps">
               <li><span class="how__n">1</span><div><b>Create campaign</b><span>Upload your track and set campaign parameters.</span></div></li>
               <li><span class="how__n">2</span><div><b>Select accounts</b><span>Choose the accounts you want to post with your track.</span></div></li>
@@ -182,7 +163,7 @@
           </div>
 
           <div class="how__col">
-            <h3 class="how__who">For content creators</h3>
+            <h3 class="how__who">Content creation</h3>
             <ol class="how__steps">
               <li><span class="how__n">1</span><div><b>Set your price</b><span>Choose your price within the limit based on your follower count.</span></div></li>
               <li><span class="how__n">2</span><div><b>Create and post</b><span>Create content with the selected track and publish it.</span></div></li>
@@ -192,7 +173,6 @@
           </div>
         </div>
 
-        <p class="how__fees">Free to join. Musin takes a 20% commission only on confirmed posts.</p>
       </div>
     </section>
 
@@ -250,6 +230,7 @@
     <!-- ============ WHY MUSIN (stacking cards) ============ -->
     <section class="why" id="why">
       <div class="container">
+        <h2 class="section-title">Why Musin</h2>
         <div class="create__viewport why-viewport">
           <div class="why-stack" id="whyStack">
           <article class="why-card">
@@ -320,8 +301,8 @@
         <div class="faq-list">
           <details class="faq-item" open>
             <summary>How much does it cost to join?</summary>
-            <p>Joining is free for both artists and creators. Musin takes a 20% commission only on
-              payment for a confirmed post — there are no listing fees or subscriptions.</p>
+            <p>Joining is free. There are no listing fees or subscriptions. Musin takes a 20% commission
+              from content creator accounts only on payment for a confirmed post.</p>
           </details>
           <details class="faq-item">
             <summary>What follower count do I need to start earning?</summary>
@@ -360,15 +341,10 @@
     <!-- ============ CLOSING CTA ============ -->
     <section class="cta home-cta">
       <div class="container">
-        <div class="cta__card">
-          <h2 class="cta__title">Music promotion through content</h2>
-          <p class="cta__text">Artists reach new audiences through real social posts. Creators earn
-            from the content they already make.</p>
-          <div class="home-cta__actions">
-            <a href="music.html" class="btn btn--primary btn--md">Join as an artist</a>
-            <a href="index.html" class="btn btn--light btn--md">Join as a creator</a>
-          </div>
-          <p class="home-cta__fees">Free to join. Musin takes a 20% commission only on confirmed posts.</p>
+        <h2 class="cta__title">Music promotion through content</h2>
+        <div class="home-cta__actions">
+          <a href="music.html" class="btn btn--primary btn--md">Join as a music artist</a>
+          <a href="index.html" class="btn btn--light btn--md">Join as a content creator</a>
         </div>
       </div>
     </section>
@@ -408,6 +384,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-  <script src="assets/js/home.js?v=6"></script>
+  <script src="assets/js/home.js?v=7"></script>
 </body>
 </html>

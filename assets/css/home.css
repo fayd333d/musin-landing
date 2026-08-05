@@ -57,7 +57,7 @@
   width: fit-content;
   max-width: 100%;
   margin: 28px auto 0;
-  padding: 32px 40px;
+  padding: 44px 56px;
   border-radius: var(--radius-card);
   background: var(--bg-card-2);
   text-align: center;
@@ -66,13 +66,13 @@
 /* Text to the left of the wheel, CTAs under the text */
 .mode-pane {
   display: grid;
-  grid-template-columns: minmax(0, 300px) minmax(0, auto);
+  grid-template-columns: minmax(0, 400px) minmax(0, auto);
   grid-template-areas:
     "copy visual"
     "actions visual";
   align-items: center;
-  column-gap: 40px;
-  row-gap: 20px;
+  column-gap: 56px;
+  row-gap: 24px;
   text-align: left;
 }
 
@@ -81,8 +81,8 @@
 .mode-pane__text {
   grid-area: copy;
   align-self: end;
-  font-size: 20px;
-  line-height: 32px;
+  font-size: 26px;
+  line-height: 42px;
   color: var(--text-primary);
 }
 
@@ -96,18 +96,18 @@
 
 /* Smaller than the page's standard buttons — these sit inside a card */
 .mode-pane__btn {
-  padding: 11px 22px;
-  font-size: 14px;
-  line-height: 20px;
+  padding: 13px 26px;
+  font-size: 15px;
+  line-height: 22px;
 }
 
 .mode-pane__visual { grid-area: visual; min-width: 0; }
 
 /* Sized so three screens sit side by side without the card growing wide */
 .mode-pane__visual .create__scroller {
-  --wheel-card: clamp(120px, 13vw, 156px);
+  --wheel-card: clamp(150px, 17vw, 210px);
   width: calc(var(--wheel-card) * 2.8);
-  height: calc(var(--wheel-card) * 16 / 9 + 24px);
+  height: calc(var(--wheel-card) * 16 / 9 + 28px);
   cursor: default;
   touch-action: auto;
 }
@@ -118,17 +118,17 @@
 .mode-pane__visual .create__scroller.no-anim .video-card,
 .mode-pane__visual .create__scroller.no-anim .campaign-tile { transition: none; }
 
-/* The shades fade into the card, not the page background, and stay a soft
-   gradient the whole way — the base rule holds a solid block for its first 30%,
-   which clipped a hard edge across the side cards. */
+/* The shades fade into the card, not the page background. Both stops are the
+   card's own colour — a transparent stop would interpolate through black and
+   leave the gradient's own edge visible against the panel. */
 .mode-pane__visual .create__shade { width: clamp(32px, 16%, 88px); }
 
 .mode-pane__visual .create__shade--left {
-  background: linear-gradient(to right, var(--bg-card-2), rgba(28, 28, 28, 0));
+  background: linear-gradient(to right, rgb(28, 28, 28) 0%, rgba(28, 28, 28, 0) 100%);
 }
 
 .mode-pane__visual .create__shade--right {
-  background: linear-gradient(to left, var(--bg-card-2), rgba(28, 28, 28, 0));
+  background: linear-gradient(to left, rgb(28, 28, 28) 0%, rgba(28, 28, 28, 0) 100%);
 }
 
 /* ---- Campaign cards inside the wheel (same as the Music landing) ---- */
@@ -251,36 +251,32 @@
   letter-spacing: -2.5px;
 }
 
-/* ============ Every genre, both sides ============
-   The tag cloud from the persona pages; the section title needs the spacing
-   their merged heads gave it. */
-.home-genres { padding: 24px 0 96px; }
-.home-genres .section-title { margin-bottom: 44px; }
-
-/* ============ How it works ============ */
-.how { padding: 0 0 96px; }
-
-.how__lead {
-  max-width: 720px;
-  margin: 20px auto 0;
-  font-size: 19px;
-  line-height: 30px;
-  text-align: center;
-  color: var(--text-tertiary);
-}
+/* ============ How it works ============
+   Two cards angled towards the reader like the wheels elsewhere on the page,
+   just at a shallower angle since they hold text rather than artwork. */
+.how { padding: 0 0 112px; }
 
 .how__cols {
   margin-top: 56px;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px;
+  gap: 40px;
+  perspective: 1600px;
 }
 
 .how__col {
   padding: 36px 36px 40px;
   border-radius: 32px;
   background: var(--bg-card-2);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+  transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
+
+.how__col:first-child { transform: rotateY(9deg) translateZ(-14px); transform-origin: right center; }
+.how__col:last-child { transform: rotateY(-9deg) translateZ(-14px); transform-origin: left center; }
+
+/* Straighten whichever card the reader is looking at */
+.how__col:hover { transform: rotateY(0deg) translateZ(0); }
 
 .how__who {
   font-size: 22px;
@@ -296,7 +292,6 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  counter-reset: step;
 }
 
 .how__steps li {
@@ -333,16 +328,6 @@
   font-size: 16px;
   line-height: 25px;
   color: var(--text-tertiary);
-}
-
-/* The one fee line on the page — kept short rather than given its own section */
-.how__fees {
-  margin-top: 32px;
-  text-align: center;
-  font-size: 17px;
-  line-height: 26px;
-  font-weight: 600;
-  color: var(--text-secondary);
 }
 
 /* ============ Inside Musin app ============ */
@@ -418,22 +403,16 @@
 /* Closer to the cards above it than the shared 128px would put it */
 .home-faq { padding-top: 72px; }
 
-/* ============ Closing CTA ============ */
-.home-cta { padding-bottom: 96px; }
+/* ============ Closing CTA ============
+   No panel — just the headline and the two routes, on the page background. */
+.home-cta { padding: 40px 0 112px; text-align: center; }
 
 .home-cta__actions {
-  margin-top: 8px;
+  margin-top: 32px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 16px;
-}
-
-.home-cta__fees {
-  margin-top: 4px;
-  font-size: 15px;
-  line-height: 24px;
-  color: var(--text-dim);
 }
 
 /* ============ Responsive ============ */
@@ -480,10 +459,32 @@
   .stats { padding: 24px 0 88px; }
   .stats__row { flex-direction: column; align-items: center; gap: 56px; }
 
-  .home-genres { padding-bottom: 72px; }
+  /* Too narrow for two angled cards: they square up and slide over each other
+     instead, the way the app cards below them do */
   .how { padding-bottom: 72px; }
-  .how__cols { margin-top: 40px; grid-template-columns: minmax(0, 1fr); gap: 20px; }
-  .how__col { padding: 28px 24px 32px; }
+
+  .how__cols {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+    perspective: none;
+  }
+
+  .how__col {
+    position: sticky;
+    top: 104px;
+    padding: 28px 24px 32px;
+    transform: none;
+  }
+
+  .how__col:first-child,
+  .how__col:last-child,
+  .how__col:hover { transform: none; }
+
   .home-app { padding-bottom: 72px; }
 
   .why-viewport { margin-top: 40px; }
@@ -504,11 +505,10 @@
   .why { padding-bottom: 32px; }
   .why-card { border-radius: 28px; }
 
-  .how__lead { font-size: 17px; line-height: 27px; }
   .how__who { font-size: 19px; line-height: 27px; }
+  .how__col { top: 88px; }
   .how__steps b { font-size: 16px; }
   .how__steps span:not(.how__n) { font-size: 15px; line-height: 24px; }
-  .how__fees { font-size: 15px; line-height: 24px; }
 
   .home-faq { padding: 64px 0 72px; }
   .home-cta { padding-bottom: 72px; }
