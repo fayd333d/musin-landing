@@ -12,7 +12,9 @@
 
 .hero-video {
   position: relative;
-  min-height: min(78vh, 760px);
+  /* Tall enough that the logo line always starts just past the fold,
+     whatever the screen height */
+  min-height: calc(100vh - 40px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,6 +22,11 @@
 }
 
 /* Masked so the footage itself dissolves rather than being cut off */
+/* svh tracks the visible area once mobile browser chrome collapses */
+@supports (height: 100svh) {
+  .hero-video { min-height: calc(100svh - 40px); }
+}
+
 .hero-video__media {
   position: absolute;
   inset: 0;
@@ -75,7 +82,7 @@
 .hero-video__cta { margin-top: 6px; }
 
 /* Tucked under the hero's fade-out rather than a section apart from it */
-.logos { padding-top: 0; margin-top: -40px; }
+.logos { padding-top: 0; margin-top: -24px; }
 
 /* ============ Platform numbers ============
    Two stat blocks stacked, each over a row of four cards that flip together. */
@@ -248,11 +255,18 @@
 .persona__visual { grid-area: visual; min-width: 0; }
 .persona__actions { grid-area: actions; align-self: start; display: flex; flex-wrap: wrap; gap: 16px; }
 
+/* Sized so "Join as a content creator" holds one line in the 460px column */
+.persona .section-title--left {
+  font-size: clamp(26px, 6.8vw, 38px);
+  line-height: 1.2;
+  letter-spacing: -0.6px;
+}
+
 .persona__text {
   margin-top: 20px;
-  font-size: 22px;
-  line-height: 34px;
-  color: var(--text-tertiary);
+  font-size: 24px;
+  line-height: 36px;
+  color: var(--text-primary);
 }
 
 .persona__visual .create__scroller {
@@ -368,6 +382,16 @@
 .how { padding: 0 0 112px; }
 .how .app-stack { margin-top: 56px; }
 
+/* Matched to the role section headings */
+.how .app-card__title {
+  font-size: clamp(26px, 6.8vw, 38px);
+  line-height: 1.2;
+  letter-spacing: -0.6px;
+}
+
+/* The two content creator steps mirror the artist ones */
+.app-card--mirrored { flex-direction: row-reverse; }
+
 /* ============ Why it works ============
    The cards ride the same coverflow as the hero wheels, but the centre index
    follows the page scroll rather than a timer. */
@@ -376,16 +400,24 @@
 .why-viewport { margin-top: 56px; }
 
 .why-stack {
-  --why-card: clamp(260px, 34vw, 420px);
+  /* Bigger cards so the type inside the artwork reads at the size the
+     How it works cards use */
+  --why-card: clamp(280px, 42vw, 560px);
   position: relative;
   height: calc(var(--why-card) + 40px);
   overflow: hidden;
   cursor: grab;
-  /* let the page scroll vertically while we take the horizontal drag */
+  /* let the page scroll vertically while we take the horizontal drag, and
+     keep a sideways flick from reaching the browser's back gesture */
   touch-action: pan-y;
+  overscroll-behavior-x: contain;
 }
 
 .why-stack.is-dragging { cursor: grabbing; }
+
+/* The cards either side are the control for stepping the wheel */
+.why-card { cursor: pointer; }
+.why-card.is-centre { cursor: grab; }
 
 .why-stack.no-anim .why-card { transition: none; }
 
@@ -411,7 +443,7 @@
 /* Card 3 draws its own type, so it needs the page's text styles */
 .why-card__title {
   font-family: var(--font-body);
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 700;
   fill: var(--text-primary);
 }
@@ -439,23 +471,8 @@
 .home-faq { padding-top: 72px; }
 
 /* ============ Closing CTA ============
-   A full-bleed band rather than a card. It fades from the brand wash down to
-   plain black, so it runs into the black footer with no visible edge. */
-.home-cta {
-  margin-top: 40px;
-  padding: 96px 0 96px;
-  text-align: center;
-  background:
-    radial-gradient(120% 150% at 50% 0%, rgba(229, 69, 82, 0.3) 0%, rgba(229, 69, 82, 0) 58%),
-    linear-gradient(to bottom, var(--bg-card-2) 0%, var(--bg-card-2) 55%, var(--bg) 100%);
-}
-
-.home-cta__inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-}
+   The shared gradient card from the persona pages, plus a second button. */
+.home-cta { padding: 40px 0 96px; }
 
 .home-cta__actions {
   margin-top: 16px;
@@ -465,14 +482,13 @@
   gap: 16px;
 }
 
-/* Full black, with the band above fading into it */
 .footer { background: var(--bg); }
 
 /* ============ Responsive ============ */
 @media (max-width: 1100px) {
   .persona__row { column-gap: 40px; grid-template-columns: minmax(0, 380px) minmax(0, 1fr); }
   .persona--mirrored .persona__row { grid-template-columns: minmax(0, 1fr) minmax(0, 380px); }
-  .persona__text { font-size: 20px; line-height: 32px; }
+  .persona__text { font-size: 21px; line-height: 32px; }
 
   /* Four 196px cards no longer fit the container */
   .flip-row { grid-template-columns: repeat(4, minmax(0, 1fr)); width: 100%; }
@@ -482,8 +498,7 @@
 }
 
 @media (max-width: 860px) {
-  .hero-video { min-height: min(72vh, 620px); }
-  .logos { margin-top: -28px; }
+  .logos { margin-top: 0; }
   .hero-video__copy { gap: 20px; padding: 48px 20px; }
   .hero-video__text { font-size: 19px; line-height: 30px; }
 
@@ -516,21 +531,21 @@
   .persona .section-title--left { text-align: center; }
 
   .how { padding-bottom: 80px; }
+  .app-card--mirrored { flex-direction: column; }
   .why-viewport { margin-top: 40px; }
 }
 
 @media (max-width: 600px) {
-  .hero-video { min-height: min(70vh, 560px); }
   .hero-video__text { font-size: 17px; line-height: 28px; }
 
   .flip-row { gap: 12px; }
-  .persona__text { font-size: 17px; line-height: 28px; }
+  .persona__text { font-size: 19px; line-height: 30px; }
   .persona__actions .btn { flex: 1 1 auto; }
 
   .why { padding-bottom: 32px; }
   .why-card { border-radius: 28px; }
 
   .home-faq { padding: 64px 0 72px; }
-  .home-cta { padding: 72px 0 72px; }
+  .home-cta { padding: 24px 0 72px; }
   .home-cta__actions .btn { flex: 1 1 auto; }
 }
