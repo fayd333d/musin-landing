@@ -211,81 +211,136 @@ if (clipStage) {
   });
 }
 
-/* ---------- Hero tabs ----------
-   Only the visible pane's wheel runs, so the hidden one isn't decoding video
-   or burning frames off screen. */
-const modeTabs = [...document.querySelectorAll(".mode-tab")];
-
-function selectMode(tab) {
-  modeTabs.forEach((t) => {
-    const on = t === tab;
-    const pane = document.getElementById(t.getAttribute("aria-controls"));
-    t.classList.toggle("is-active", on);
-    t.setAttribute("aria-selected", String(on));
-    t.tabIndex = on ? 0 : -1;
-    if (!pane) return;
-    pane.hidden = !on;
-    pane.classList.toggle("is-active", on);
-  });
-
-  const musicOn = tab.id === "tabMusic";
-  if (campaignWheel) musicOn ? campaignWheel.play() : campaignWheel.pause();
-  if (clipWheel) {
-    if (musicOn) {
-      clipWheel.pause();
-      clipWheel.cards.forEach((c) => {
-        const v = c.querySelector("video");
-        if (v && typeof v.pause === "function") v.pause();
-      });
-    } else {
-      clipWheel.play();
-      // the pane was display:none until now, so re-measure before playing
-      clipWheel.render();
-      const v = clipWheel.centre().querySelector("video");
-      if (v && typeof v.play === "function") {
-        const p = v.play();
-        if (p && p.catch) p.catch(() => {});
-      }
-    }
-  }
-}
-
-modeTabs.forEach((tab) => {
-  tab.addEventListener("click", () => selectMode(tab));
-  tab.addEventListener("keydown", (e) => {
-    if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
-    e.preventDefault();
-    const i = modeTabs.indexOf(tab);
-    const next = modeTabs[(i + (e.key === "ArrowRight" ? 1 : modeTabs.length - 1)) % modeTabs.length];
-    next.focus();
-    selectMode(next);
-  });
-});
-
-// the Content pane starts hidden, so its wheel shouldn't be running yet
-if (clipWheel) clipWheel.pause();
-
-/* Pause both wheels while the hero is off screen */
-const heroSection = document.getElementById("hero");
-if (heroSection) {
+/* ---------- Each wheel runs only while its own section is on screen ---------- */
+function runInView(wheel, sectionId) {
+  if (!wheel) return;
+  const section = document.getElementById(sectionId);
+  if (!section) return;
   new IntersectionObserver(
     (entries) => entries.forEach((e) => {
-      const activeTab = modeTabs.find((t) => t.classList.contains("is-active"));
       if (e.isIntersecting) {
-        if (activeTab) selectMode(activeTab);
+        wheel.render(); // the section may have been laid out at zero width
+        wheel.play();
       } else {
-        if (campaignWheel) campaignWheel.pause();
-        if (clipWheel) {
-          clipWheel.pause();
-          clipWheel.cards.forEach((c) => {
-            const v = c.querySelector("video");
-            if (v && typeof v.pause === "function") v.pause();
-          });
-        }
+        wheel.pause();
+        wheel.cards.forEach((c) => {
+          const v = c.querySelector("video");
+          if (v && typeof v.pause === "function") v.pause();
+        });
       }
     }),
     { threshold: 0.15 }
-  ).observe(heroSection);
+  ).observe(section);
+}
+
+runInView(campaignWheel, "forArtists");
+runInView(clipWheel, "forCreators");
+
+/* ---------- Platform numbers: two rows of cards that flip in turn ----------
+   Each card holds two faces. Flipping shows the hidden one, and the face that
+   just turned away is refilled with the next entry, so the rows can cycle
+   through the whole catalogue without ever duplicating a visible card. */
+const flipTracks = [
+  ["Miss the rage", "Den Best", 4], ["Still lonely", "Hoover", 5],
+  ["6 Gold", "Leboi", 6], ["You\u2019re my fire", "Flare John", 7],
+  ["SVEG", "Lukrix", 8], ["My world", "Je333", 9],
+  ["U WUT", "Zen X", 10], ["Can\u2019t get away", "Lin Xiao", 11],
+  ["Adrenaline rush", "Quayo", 12], ["Not 1 of us", "ZEZTI", 13],
+  ["Hope", "Block Demons", 14], ["Lit up", "Garraba", 15],
+];
+
+const flipCreators = [
+  [1, "instagram", "locotarrr", "74K"], [2, "tiktok", "maywayqt", "102K"],
+  [3, "youtube", "evennie0", "891"], [4, "tiktok", "3xox3ne", "1.3K"],
+  [5, "tiktok", "slaybay01", "21K"], [6, "instagram", "flex__111", "13K"],
+  [9, "tiktok", "glogirlx", "46K"], [10, "tiktok", "lemanche23", "14K"],
+  [12, "instagram", "ivori8", "19K"], [13, "youtube", "musfile", "3.5K"],
+  [15, "instagram", "edit_ed", "72K"], [16, "tiktok", "dancingbonito", "13K"],
+];
+
+const trackFace = ([title, artist, cover]) => `
+  <div class="track-chip">
+    <div class="track-chip__cover" style="background-image:url('assets/img/covers/cover-${cover}.jpg')"></div>
+    <div>
+      <p class="track-chip__title">${title}</p>
+      <p class="track-chip__artist">${artist}</p>
+    </div>
+  </div>`;
+
+const creatorFace = ([pic, platform, handle, followers]) => `
+  <div class="creator-chip">
+    <div class="creator-chip__photo" style="background-image:url('assets/img/creators/creator-${pic}.jpg')"></div>
+    <div>
+      <p class="creator-chip__name">
+        <span class="creator-chip__platform creator-chip__platform--${platform}" role="img" aria-label="${platform}"></span>${handle}
+      </p>
+      <p class="creator-chip__followers">${followers} followers</p>
+    </div>
+  </div>`;
+
+function buildFlipRow(row, data, renderFace) {
+  if (!row) return null;
+  const COLS = 4;
+  let next = COLS; // the first four are on screen; the rest queue up behind them
+
+  row.innerHTML = Array.from({ length: COLS }, (_, i) => `
+    <div class="flip-card">
+      <div class="flip-card__face flip-card__face--front">${renderFace(data[i])}</div>
+      <div class="flip-card__face flip-card__face--back">${renderFace(data[(i + COLS) % data.length])}</div>
+    </div>`).join("");
+
+  const cards = [...row.children];
+  let flipped = false;
+
+  return function flip() {
+    flipped = !flipped;
+    cards.forEach((c) => c.classList.toggle("is-flipped", flipped));
+
+    // once the turn has finished, refill the face now pointing away
+    setTimeout(() => {
+      const hidden = flipped ? ".flip-card__face--front" : ".flip-card__face--back";
+      cards.forEach((c) => {
+        c.querySelector(hidden).innerHTML = renderFace(data[next % data.length]);
+        next += 1;
+      });
+    }, 850);
+  };
+}
+
+const flipTrackRow = buildFlipRow(document.getElementById("trackFlips"), flipTracks, trackFace);
+const flipCreatorRow = buildFlipRow(document.getElementById("creatorFlips"), flipCreators, creatorFace);
+
+/* Tracks turn three seconds after the section is reached, creators three
+   seconds after that, then back and forth. */
+if (flipTrackRow && flipCreatorRow && !prefersReducedMotion) {
+  const statsSection = document.getElementById("stats");
+  let timer = null;
+  let turn = 0;
+
+  const start = () => {
+    if (timer) return;
+    timer = gsap.to({}, {
+      duration: 3,
+      repeat: -1,
+      onRepeat: () => {
+        (turn % 2 === 0 ? flipTrackRow : flipCreatorRow)();
+        turn += 1;
+      },
+    });
+  };
+
+  if (statsSection) {
+    new IntersectionObserver(
+      (entries) => entries.forEach((e) => {
+        if (e.isIntersecting) start();
+        else if (timer) timer.pause();
+        if (e.isIntersecting && timer) timer.play();
+      }),
+      { threshold: 0.25 }
+    ).observe(statsSection);
+  } else {
+    start();
+  }
 }
 
 /* ---------- Why Musin: the same coverflow as the hero wheels ----------

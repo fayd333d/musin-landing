@@ -9,11 +9,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600&display=swap" rel="stylesheet">
-  <!-- The hero opens on the Promote Music wheel, so its first cover matters most -->
-  <link rel="preload" as="image" href="assets/img/covers/cover-4.jpg" fetchpriority="high">
+  <!-- The hero panel fills the first screen, so its still matters most -->
+  <link rel="preload" as="image" href="assets/img/hero-video-placeholder.jpg" fetchpriority="high">
   <!-- Shared shell (nav, sections, cards, footer) + home specifics -->
   <link rel="stylesheet" href="assets/css/content.css?v=36">
-  <link rel="stylesheet" href="assets/css/home.css?v=12">
+  <link rel="stylesheet" href="assets/css/home.css?v=13">
 </head>
 <body>
 
@@ -54,66 +54,17 @@
     <!-- ============ HERO ============ -->
     <section class="hero home-hero" id="hero">
       <div class="container">
-        <h1 class="home-hero__title">Music promotion through content</h1>
-
-        <div class="mode-tabs" role="tablist" aria-label="What would you like to do?">
-          <button type="button" class="mode-tab is-active" role="tab" id="tabMusic" aria-selected="true" aria-controls="paneMusic">Promote Music</button>
-          <button type="button" class="mode-tab" role="tab" id="tabContent" aria-selected="false" aria-controls="paneContent" tabindex="-1">Create Content</button>
-        </div>
-
-        <div class="mode-box">
-          <!-- Promote Music: campaign cards, the same wheel as the Music landing -->
-          <div class="mode-pane is-active" id="paneMusic" role="tabpanel" aria-labelledby="tabMusic">
-            <div class="mode-pane__visual">
-              <div class="create__viewport">
-                <div class="create__scroller" id="campaignScroller" aria-label="Example campaigns on Musin"></div>
-                <div class="create__shade create__shade--left" aria-hidden="true"></div>
-                <div class="create__shade create__shade--right" aria-hidden="true"></div>
-              </div>
-            </div>
-            <p class="mode-pane__text">Reach new audiences and build engagement around your music through social media content.</p>
-            <div class="mode-pane__actions">
-              <a href="music.html" class="btn btn--primary mode-pane__btn">Join as a music artist</a>
-              <a href="music.html" class="btn btn--light mode-pane__btn">Learn More</a>
-            </div>
-          </div>
-
-          <!-- Create Content: example clips, autoplaying and advancing on their own -->
-          <div class="mode-pane" id="paneContent" role="tabpanel" aria-labelledby="tabContent" hidden>
-            <div class="mode-pane__visual">
-              <div class="create__viewport">
-                <div class="create__scroller" id="clipScroller" aria-label="Example posts made with Musin tracks">
-                  <div class="video-card"><video src="assets/video/video-4.mp4#t=0.1" muted loop playsinline preload="metadata"></video></div>
-                  <div class="video-card"><video src="assets/video/video-5.mp4#t=0.1" muted loop playsinline preload="metadata"></video></div>
-                  <div class="video-card"><video src="assets/video/video-6.mp4#t=0.1" muted loop playsinline preload="metadata"></video></div>
-                  <div class="video-card"><video src="assets/video/video-7.mp4#t=0.1" muted loop playsinline preload="metadata"></video></div>
-                  <div class="video-card"><video src="assets/video/video-8.mp4#t=0.1" muted loop playsinline preload="metadata"></video></div>
-                  <div class="video-card"><video src="assets/video/video-9.mp4#t=0.1" muted loop playsinline preload="metadata"></video></div>
-                  <div class="video-card"><video src="assets/video/video-10.mp4#t=0.1" muted loop playsinline preload="metadata"></video></div>
-                  <div class="video-card"><video src="assets/video/video-11.mp4#t=0.1" muted loop playsinline preload="metadata"></video></div>
-                  <div class="video-card"><video src="assets/video/video-12.mp4#t=0.1" muted loop playsinline preload="metadata"></video></div>
-                  <div class="video-card"><video src="assets/video/video-13.mp4#t=0.1" muted loop playsinline preload="metadata"></video></div>
-                </div>
-                <div class="create__shade create__shade--left" aria-hidden="true"></div>
-                <div class="create__shade create__shade--right" aria-hidden="true"></div>
-              </div>
-            </div>
-            <p class="mode-pane__text">Discover music that fits your content and get paid to feature it in your social media posts.</p>
-            <div class="mode-pane__actions">
-              <a href="index.html" class="btn btn--primary mode-pane__btn">Join as a content creator</a>
-              <a href="index.html" class="btn btn--light mode-pane__btn">Learn More</a>
-            </div>
+        <!-- Placeholder still stands in for the looping video -->
+        <div class="hero-video">
+          <img class="hero-video__media" src="assets/img/hero-video-placeholder.jpg" alt="" fetchpriority="high">
+          <div class="hero-video__scrim" aria-hidden="true"></div>
+          <div class="hero-video__copy">
+            <h1 class="hero-video__title">Connecting music with content</h1>
+            <p class="hero-video__text">Musin is a music promotion platform that connects tracks with
+              content creators who feature them in their social media posts.</p>
+            <a href="#" class="btn btn--primary btn--md hero-video__cta">Get started for free</a>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- ============ WHAT MUSIN IS ============ -->
-    <section class="about" id="about">
-      <div class="container about__container">
-        <p class="about__text">Musin is a platform that connects tracks with content creators who can feature them in their social media posts.</p>
-        <p class="about__text">For artists, managers and labels, Musin provides a direct way to generate content around a track at scale generating wide audience engagement around music.</p>
-        <p class="about__text">For content creators, influencers and agencies, Musin offers an opportunity to earn by posting on social media with selected music.</p>
       </div>
     </section>
 
@@ -133,46 +84,113 @@
       </div>
     </section>
 
-    <!-- ============ STATISTICS ============ -->
-    <section class="stats" aria-label="Musin in numbers">
-      <div class="container stats__row">
+    <!-- ============ PLATFORM NUMBERS ============ -->
+    <section class="stats" id="stats" aria-label="Musin in numbers">
+      <div class="container stats__col">
         <div class="genres__stat">
           <p class="genres__number" id="trackCount">3,818</p>
           <p class="genres__unit">Tracks available now</p>
         </div>
+        <!-- All four flip together; JS fills both faces -->
+        <div class="flip-row" id="trackFlips" aria-hidden="true"></div>
+
         <div class="genres__stat">
           <p class="genres__number" id="creatorCount">8,024</p>
           <p class="genres__unit">Content creators active</p>
+        </div>
+        <div class="flip-row" id="creatorFlips" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- ============ FOR ARTISTS ============ -->
+    <section class="persona" id="forArtists">
+      <div class="container persona__row">
+        <div class="persona__copy">
+          <h2 class="section-title section-title--left">For artists, managers and labels</h2>
+          <p class="persona__text">Reach new audiences and build engagement around your music through
+            social media content.</p>
+        </div>
+        <div class="persona__visual">
+          <div class="create__viewport">
+            <div class="create__scroller" id="campaignScroller" aria-label="Example campaigns on Musin"></div>
+            <div class="create__shade create__shade--left" aria-hidden="true"></div>
+            <div class="create__shade create__shade--right" aria-hidden="true"></div>
+          </div>
+        </div>
+        <div class="persona__actions">
+          <a href="music.html" class="btn btn--primary btn--md">Promote music</a>
+          <a href="music.html" class="btn btn--light btn--md">Learn more</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FOR CREATORS ============ -->
+    <section class="persona persona--mirrored" id="forCreators">
+      <div class="container persona__row">
+        <div class="persona__copy">
+          <h2 class="section-title section-title--left">For social media users, influencers, agencies</h2>
+          <p class="persona__text">Discover music that fits your content and get paid to feature it in
+            your social media posts.</p>
+        </div>
+        <div class="persona__visual">
+          <div class="create__viewport">
+            <div class="create__scroller" id="clipScroller" aria-label="Example posts made with Musin tracks">
+              <div class="video-card"><video src="assets/video/video-4.mp4#t=0.1" muted loop playsinline preload="metadata"></video></div>
+              <div class="video-card"><video src="assets/video/video-5.mp4#t=0.1" muted loop playsinline preload="metadata"></video></div>
+              <div class="video-card"><video src="assets/video/video-6.mp4#t=0.1" muted loop playsinline preload="metadata"></video></div>
+              <div class="video-card"><video src="assets/video/video-7.mp4#t=0.1" muted loop playsinline preload="metadata"></video></div>
+              <div class="video-card"><video src="assets/video/video-8.mp4#t=0.1" muted loop playsinline preload="metadata"></video></div>
+              <div class="video-card"><video src="assets/video/video-9.mp4#t=0.1" muted loop playsinline preload="metadata"></video></div>
+              <div class="video-card"><video src="assets/video/video-10.mp4#t=0.1" muted loop playsinline preload="metadata"></video></div>
+              <div class="video-card"><video src="assets/video/video-11.mp4#t=0.1" muted loop playsinline preload="metadata"></video></div>
+              <div class="video-card"><video src="assets/video/video-12.mp4#t=0.1" muted loop playsinline preload="metadata"></video></div>
+              <div class="video-card"><video src="assets/video/video-13.mp4#t=0.1" muted loop playsinline preload="metadata"></video></div>
+            </div>
+            <div class="create__shade create__shade--left" aria-hidden="true"></div>
+            <div class="create__shade create__shade--right" aria-hidden="true"></div>
+          </div>
+        </div>
+        <div class="persona__actions">
+          <a href="index.html" class="btn btn--primary btn--md">Create content</a>
+          <a href="index.html" class="btn btn--light btn--md">Learn more</a>
         </div>
       </div>
     </section>
 
     <!-- ============ HOW IT WORKS ============ -->
-    <section class="how" id="how">
+    <section class="payments how" id="how">
       <div class="container">
         <h2 class="section-title">How it works</h2>
-        <div class="how__cols">
-          <div class="how__col">
-            <h3 class="how__who">Music promotion</h3>
-            <ol class="how__steps">
-              <li><span class="how__n">1</span><div><b>Create campaign</b><span>Upload your track and set campaign parameters.</span></div></li>
-              <li><span class="how__n">2</span><div><b>Select accounts</b><span>Choose the accounts you want to post with your track.</span></div></li>
-              <li><span class="how__n">3</span><div><b>Confirm publications</b><span>Review submitted post links and confirm they contain your track.</span></div></li>
-              <li><span class="how__n">4</span><div><b>Pay per post</b><span>Pay only for completed and confirmed publications.</span></div></li>
-            </ol>
+        <div class="pay-stack">
+          <div class="pay-card">
+            <div class="pay-card__icon"></div>
+            <div class="pay-card__body">
+              <h3 class="pay-card__title">Create a campaign</h3>
+              <p class="pay-card__text">Artists upload a track and set the campaign parameters.</p>
+            </div>
           </div>
-
-          <div class="how__col">
-            <h3 class="how__who">Content creation</h3>
-            <ol class="how__steps">
-              <li><span class="how__n">1</span><div><b>Set your price</b><span>Choose your price within the limit based on your follower count.</span></div></li>
-              <li><span class="how__n">2</span><div><b>Create and post</b><span>Create content with the selected track and publish it.</span></div></li>
-              <li><span class="how__n">3</span><div><b>Submit link</b><span>Add your publication link so the artist can confirm it.</span></div></li>
-              <li><span class="how__n">4</span><div><b>Get paid</b><span>Payment is released after confirmation, or automatically if no dispute is opened.</span></div></li>
-            </ol>
+          <div class="pay-card">
+            <div class="pay-card__icon"></div>
+            <div class="pay-card__body">
+              <h3 class="pay-card__title">Match with creators</h3>
+              <p class="pay-card__text">Artists choose who posts; creators choose which tracks to post with.</p>
+            </div>
+          </div>
+          <div class="pay-card">
+            <div class="pay-card__icon"></div>
+            <div class="pay-card__body">
+              <h3 class="pay-card__title">Post and confirm</h3>
+              <p class="pay-card__text">Creators publish in their own style and submit the post link for confirmation.</p>
+            </div>
+          </div>
+          <div class="pay-card">
+            <div class="pay-card__icon"></div>
+            <div class="pay-card__body">
+              <h3 class="pay-card__title">Pay per confirmed post</h3>
+              <p class="pay-card__text">Payment is released once the post is confirmed. Free to join, with a 20% commission on confirmed posts.</p>
+            </div>
           </div>
         </div>
-
       </div>
     </section>
 
@@ -341,10 +359,13 @@
     <!-- ============ CLOSING CTA ============ -->
     <section class="cta home-cta">
       <div class="container">
-        <h2 class="cta__title">Music promotion through content</h2>
-        <div class="home-cta__actions">
-          <a href="music.html" class="btn btn--primary btn--md">Join as a music artist</a>
-          <a href="index.html" class="btn btn--light btn--md">Join as a content creator</a>
+        <div class="cta__card home-cta__card">
+          <h2 class="cta__title">Music spreads through content</h2>
+          <p class="cta__text">Choose how you want to use Musin</p>
+          <div class="home-cta__actions">
+            <a href="music.html" class="btn btn--primary btn--md">Promote music</a>
+            <a href="index.html" class="btn btn--light btn--md">Create Content</a>
+          </div>
         </div>
       </div>
     </section>
@@ -384,6 +405,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-  <script src="assets/js/home.js?v=7"></script>
+  <script src="assets/js/home.js?v=8"></script>
 </body>
 </html>

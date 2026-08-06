@@ -3,132 +3,268 @@
    is shared with the other two landings and only what's specific to the home
    page is defined here. */
 
-/* ============ Hero ============ */
-.home-hero {
-  padding-top: 72px;
-  padding-bottom: 112px;
+/* ============ Hero ============
+   A wide video panel with the copy centred over it. The <img> is a placeholder
+   for the looping clip that will replace it. */
+.home-hero { padding: 24px 0 72px; }
+
+.hero-video {
+  position: relative;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  background: var(--bg-card);
+  aspect-ratio: 21 / 9;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-video__media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Keeps the copy readable whatever frame is showing */
+.hero-video__scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(10, 10, 10, 0.86), rgba(10, 10, 10, 0.42) 55%, rgba(10, 10, 10, 0.62)),
+    rgba(10, 10, 10, 0.18);
+}
+
+.hero-video__copy {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  max-width: 780px;
+  padding: 48px 40px;
   text-align: center;
 }
 
-.home-hero__title {
-  max-width: 900px;
-  margin: 0 auto;
-  font-size: 48px;
-  line-height: 60px;
+.hero-video__title {
+  font-size: 56px;
+  line-height: 66px;
   font-weight: 600;
-  letter-spacing: -0.96px;
+  letter-spacing: -1.1px;
   color: var(--text-primary);
 }
 
-/* ---- Mode tabs ----
-   A brand-pink track with a white pill marking the selected side. It sits
-   under the hero title, above the role card. */
-.mode-tabs {
-  display: inline-flex;
-  margin-top: 36px;
-  padding: 6px;
-  border-radius: 9999px;
-  background: var(--brand);
+.hero-video__text {
+  font-size: 20px;
+  line-height: 32px;
+  color: var(--text-secondary);
 }
 
-.mode-tab {
-  appearance: none;
-  border: 0;
-  cursor: pointer;
-  padding: 13px 30px;
-  border-radius: 9999px;
-  background: transparent;
-  color: #fff;
-  font-family: var(--font-body);
-  font-size: 19px;
-  line-height: 26px;
-  font-weight: 600;
-  white-space: nowrap;
-  transition: background 0.25s ease, color 0.25s ease;
+.hero-video__cta { margin-top: 4px; }
+
+/* ============ Platform numbers ============
+   Two stat blocks stacked, each over a row of four cards that flip together. */
+.stats { padding: 24px 0 112px; }
+
+.stats__col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
 }
 
-.mode-tab.is-active { background: #fff; color: var(--brand); }
-.mode-tab:not(.is-active):hover { background: rgba(255, 255, 255, 0.14); }
-.mode-tab:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.stats .genres__number {
+  font-size: clamp(56px, 6.5vw, 88px);
+  letter-spacing: -2.5px;
+}
 
-/* The card hugs its contents rather than filling the container */
-.mode-box {
+.stats__col .genres__stat + .flip-row { margin-bottom: 32px; }
+
+.flip-row {
+  display: grid;
+  grid-template-columns: repeat(4, 196px);
+  gap: 20px;
+  perspective: 1400px;
+}
+
+.flip-card {
   position: relative;
-  width: fit-content;
-  max-width: 100%;
-  margin: 28px auto 0;
-  padding: 44px 56px;
-  border-radius: var(--radius-card);
+  height: 264px;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.flip-card.is-flipped { transform: rotateY(180deg); }
+
+/* Both faces sit in the same box; only the one facing us renders */
+.flip-card__face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.flip-card__face--back { transform: rotateY(180deg); }
+
+.flip-card .track-chip,
+.flip-card .creator-chip {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+/* ---- The two chip styles, lifted from the persona pages ---- */
+.track-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding: 16px 16px 20px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
   background: var(--bg-card-2);
   text-align: center;
 }
 
-/* Text to the left of the wheel, CTAs under the text */
-.mode-pane {
+.track-chip__cover {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 16px;
+  background-color: var(--bg-card);
+  background-size: cover;
+  background-position: center;
+}
+
+.track-chip__title {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--text-primary);
+}
+
+.track-chip__artist {
+  margin-top: 2px;
+  font-size: 13px;
+  line-height: 1.35;
+  color: var(--text-dim);
+}
+
+.creator-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 16px 20px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--bg-card-2);
+  text-align: center;
+}
+
+.creator-chip__photo {
+  width: 148px;
+  height: 148px;
+  border-radius: 50%;
+  background-color: var(--bg-card);
+  background-size: cover;
+  background-position: center;
+  flex: 0 0 auto;
+}
+
+.creator-chip__name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--text-primary);
+}
+
+.creator-chip__platform {
+  flex: 0 0 auto;
+  width: 15px;
+  height: 15px;
+  background-color: var(--text-primary);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+.creator-chip__platform--instagram { -webkit-mask-image: url("../img/social/s08-instagram.svg"); mask-image: url("../img/social/s08-instagram.svg"); }
+.creator-chip__platform--tiktok { -webkit-mask-image: url("../img/social/s10-tiktok.svg"); mask-image: url("../img/social/s10-tiktok.svg"); }
+.creator-chip__platform--youtube { -webkit-mask-image: url("../img/social/s09-youtube.svg"); mask-image: url("../img/social/s09-youtube.svg"); }
+
+.creator-chip__followers {
+  margin-top: 3px;
+  font-size: 13px;
+  line-height: 1.35;
+  color: var(--text-dim);
+}
+
+/* ============ Persona sections ============
+   Copy one side, wheel the other, CTAs under the copy. No panel. */
+.persona { padding: 0 0 112px; }
+
+.persona__row {
   display: grid;
-  grid-template-columns: minmax(0, 400px) minmax(0, auto);
+  grid-template-columns: minmax(0, 460px) minmax(0, 1fr);
   grid-template-areas:
     "copy visual"
     "actions visual";
   align-items: center;
-  column-gap: 56px;
-  row-gap: 24px;
-  text-align: left;
+  column-gap: 64px;
+  row-gap: 28px;
 }
 
-.mode-pane[hidden] { display: none; }
-
-.mode-pane__text {
-  grid-area: copy;
-  align-self: end;
-  font-size: 26px;
-  line-height: 42px;
-  color: var(--text-primary);
+/* The creator side mirrors it: wheel left, copy right */
+.persona--mirrored .persona__row {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 460px);
+  grid-template-areas:
+    "visual copy"
+    "visual actions";
 }
 
-.mode-pane__actions {
-  grid-area: actions;
-  align-self: start;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
+.persona__copy { grid-area: copy; align-self: end; }
+.persona__visual { grid-area: visual; min-width: 0; }
+.persona__actions { grid-area: actions; align-self: start; display: flex; flex-wrap: wrap; gap: 16px; }
+
+.persona__text {
+  margin-top: 20px;
+  font-size: 22px;
+  line-height: 34px;
+  color: var(--text-tertiary);
 }
 
-/* Smaller than the page's standard buttons — these sit inside a card */
-.mode-pane__btn {
-  padding: 13px 26px;
-  font-size: 15px;
-  line-height: 22px;
-}
-
-.mode-pane__visual { grid-area: visual; min-width: 0; }
-
-/* Sized so three screens sit side by side without the card growing wide */
-.mode-pane__visual .create__scroller {
-  --wheel-card: clamp(150px, 17vw, 210px);
-  width: calc(var(--wheel-card) * 2.8);
-  height: calc(var(--wheel-card) * 16 / 9 + 28px);
+.persona__visual .create__scroller {
+  --wheel-card: clamp(150px, 17vw, 214px);
+  height: calc(var(--wheel-card) * 16 / 9 + 32px);
   cursor: default;
   touch-action: auto;
 }
 
-.mode-pane__visual .video-card,
-.mode-pane__visual .campaign-tile { width: var(--wheel-card); }
+.persona__visual .video-card,
+.persona__visual .campaign-tile { width: var(--wheel-card); }
 
-.mode-pane__visual .create__scroller.no-anim .video-card,
-.mode-pane__visual .create__scroller.no-anim .campaign-tile { transition: none; }
+.persona__visual .create__scroller.no-anim .video-card,
+.persona__visual .create__scroller.no-anim .campaign-tile { transition: none; }
 
-/* The shades fade into the card, not the page background. Both stops are the
-   card's own colour — a transparent stop would interpolate through black and
-   leave the gradient's own edge visible against the panel. */
-.mode-pane__visual .create__shade { width: clamp(32px, 16%, 88px); }
+/* These wheels sit on the page background, so the shades fade to that */
+.persona__visual .create__shade { width: clamp(40px, 14%, 120px); }
+.persona__visual .create__shade--left { background: linear-gradient(to right, rgb(10, 10, 10) 0%, rgba(10, 10, 10, 0) 100%); }
+.persona__visual .create__shade--right { background: linear-gradient(to left, rgb(10, 10, 10) 0%, rgba(10, 10, 10, 0) 100%); }
 
-.mode-pane__visual .create__shade--left {
-  background: linear-gradient(to right, rgb(28, 28, 28) 0%, rgba(28, 28, 28, 0) 100%);
-}
-
-.mode-pane__visual .create__shade--right {
-  background: linear-gradient(to left, rgb(28, 28, 28) 0%, rgba(28, 28, 28, 0) 100%);
+.persona__visual .video-card video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* ---- Campaign cards inside the wheel (same as the Music landing) ---- */
@@ -214,121 +350,15 @@
   font-variant-numeric: tabular-nums;
 }
 
-.mode-pane__visual .video-card video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* ============ What Musin is ============ */
-.about { padding: 40px 0 96px; }
-
-.about__container { max-width: 900px; }
-
-.about__text {
-  font-size: 26px;
-  line-height: 42px;
-  color: var(--text-primary);
-}
-
-.about__text + .about__text { margin-top: 28px; }
-
-/* ============ Statistics ============
-   Side by side on wide screens, stacked on small ones */
-.stats { padding: 40px 0 112px; }
-
-.stats__row {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: clamp(48px, 10vw, 140px);
-}
-
-/* One shared size for both numbers, so neither is scaled against its own
-   label — the JS leaves these alone */
-.stats .genres__number {
-  font-size: clamp(56px, 6.5vw, 88px);
-  letter-spacing: -2.5px;
-}
-
 /* ============ How it works ============
-   Two cards angled towards the reader like the wheels elsewhere on the page,
-   just at a shallower angle since they hold text rather than artwork. */
+   The persona pages' stacking glyph cards; only the glyphs differ. */
 .how { padding: 0 0 112px; }
+.how .pay-stack { margin-top: 56px; }
 
-.how__cols {
-  margin-top: 56px;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 40px;
-  perspective: 1600px;
-}
-
-.how__col {
-  padding: 36px 36px 40px;
-  border-radius: 32px;
-  background: var(--bg-card-2);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
-  transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
-}
-
-.how__col:first-child { transform: rotateY(9deg) translateZ(-14px); transform-origin: right center; }
-.how__col:last-child { transform: rotateY(-9deg) translateZ(-14px); transform-origin: left center; }
-
-/* Straighten whichever card the reader is looking at */
-.how__col:hover { transform: rotateY(0deg) translateZ(0); }
-
-.how__who {
-  font-size: 22px;
-  line-height: 30px;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.how__steps {
-  margin-top: 24px;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.how__steps li {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-}
-
-.how__n {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: var(--brand);
-  color: #fff;
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 1;
-}
-
-.how__steps b {
-  display: block;
-  font-size: 17px;
-  line-height: 26px;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.how__steps span:not(.how__n) {
-  display: block;
-  font-size: 16px;
-  line-height: 25px;
-  color: var(--text-tertiary);
-}
+.how .pay-card:nth-child(1) .pay-card__icon::before { -webkit-mask-image: url("../img/icons/music-note.svg"); mask-image: url("../img/icons/music-note.svg"); }
+.how .pay-card:nth-child(2) .pay-card__icon::before { -webkit-mask-image: url("../img/icons/pay-profile.svg"); mask-image: url("../img/icons/pay-profile.svg"); }
+.how .pay-card:nth-child(3) .pay-card__icon::before { -webkit-mask-image: url("../img/icons/pay-check.svg"); mask-image: url("../img/icons/pay-check.svg"); }
+.how .pay-card:nth-child(4) .pay-card__icon::before { -webkit-mask-image: url("../img/icons/pay-dollar.svg"); mask-image: url("../img/icons/pay-dollar.svg"); }
 
 /* ============ Inside Musin app ============ */
 .home-app { padding: 0 0 96px; }
@@ -404,11 +434,20 @@
 .home-faq { padding-top: 72px; }
 
 /* ============ Closing CTA ============
-   No panel — just the headline and the two routes, on the page background. */
-.home-cta { padding: 40px 0 112px; text-align: center; }
+   A panel like the persona pages', warmed with a brand-tinted wash. */
+.home-cta { padding: 40px 0 112px; }
+
+.home-cta__card {
+  gap: 16px;
+  padding: 80px 40px;
+  background:
+    radial-gradient(120% 140% at 50% 0%, rgba(229, 69, 82, 0.28) 0%, rgba(229, 69, 82, 0) 62%),
+    var(--bg-card-2);
+  border: 1px solid rgba(229, 69, 82, 0.22);
+}
 
 .home-cta__actions {
-  margin-top: 32px;
+  margin-top: 16px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -417,100 +456,70 @@
 
 /* ============ Responsive ============ */
 @media (max-width: 1100px) {
-  .home-hero__title { font-size: 42px; line-height: 54px; }
-  .mode-pane { column-gap: 28px; grid-template-columns: minmax(0, 260px) minmax(0, auto); }
-  .mode-pane__text { font-size: 18px; line-height: 28px; }
+  .hero-video__title { font-size: 46px; line-height: 56px; }
+  .persona__row { column-gap: 40px; grid-template-columns: minmax(0, 380px) minmax(0, 1fr); }
+  .persona--mirrored .persona__row { grid-template-columns: minmax(0, 1fr) minmax(0, 380px); }
+  .persona__text { font-size: 20px; line-height: 32px; }
+
+  /* Four 196px cards no longer fit the container */
+  .flip-row { grid-template-columns: repeat(4, minmax(0, 1fr)); width: 100%; }
+  .flip-card { height: auto; aspect-ratio: 196 / 264; }
 }
 
 @media (max-width: 860px) {
-  .home-hero { padding-top: 40px; padding-bottom: 80px; }
-  .home-hero__title { font-size: 36px; line-height: 46px; letter-spacing: -0.72px; }
+  .home-hero { padding-bottom: 56px; }
+  .hero-video { aspect-ratio: 4 / 5; min-height: 0; }
+  .hero-video__copy { gap: 20px; padding: 32px 24px; }
+  .hero-video__title { font-size: 36px; line-height: 46px; letter-spacing: -0.72px; }
+  .hero-video__text { font-size: 17px; line-height: 28px; }
 
-  .mode-tabs { margin-top: 28px; }
-  .mode-tab { padding: 12px 22px; font-size: 17px; line-height: 24px; }
-  .mode-box { width: auto; margin-top: 24px; padding: 24px; }
+  .stats { padding: 16px 0 88px; }
+  .stats__col { gap: 32px; }
+  .stats__col .genres__stat + .flip-row { margin-bottom: 16px; }
 
-  /* Stacked: wheel on top, then the text, then the CTAs */
-  .mode-pane {
+  /* Two by two rather than a squeezed single row */
+  .flip-row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; max-width: 460px; }
+
+  /* Stacked: copy, then the wheel, then the CTAs */
+  .persona { padding-bottom: 80px; }
+
+  .persona__row,
+  .persona--mirrored .persona__row {
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
-      "visual"
       "copy"
+      "visual"
       "actions";
     justify-items: center;
     text-align: center;
-    row-gap: 24px;
+    row-gap: 28px;
   }
 
-  .mode-pane__text { align-self: auto; max-width: 460px; font-size: 19px; line-height: 30px; }
-  .mode-pane__actions { align-self: auto; justify-content: center; }
-  .mode-pane__visual { width: 100%; }
+  .persona__copy { align-self: auto; max-width: 520px; }
+  .persona__actions { align-self: auto; justify-content: center; }
+  .persona__visual { width: 100%; }
+  .persona__visual .create__scroller { --wheel-card: clamp(150px, 44vw, 220px); }
+  .persona .section-title--left { text-align: center; }
 
-  .mode-pane__visual .create__scroller {
-    --wheel-card: clamp(140px, 40vw, 200px);
-    width: 100%;
-  }
-
-  .about { padding: 24px 0 80px; }
-  .about__text { font-size: 21px; line-height: 34px; }
-  .about__text + .about__text { margin-top: 22px; }
-
-  /* Stats stack on small screens */
-  .stats { padding: 24px 0 88px; }
-  .stats__row { flex-direction: column; align-items: center; gap: 56px; }
-
-  /* Too narrow for two angled cards: they square up and slide over each other
-     instead, the way the app cards below them do */
-  .how { padding-bottom: 72px; }
-
-  .how__cols {
-    margin-top: 40px;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    max-width: 520px;
-    margin-left: auto;
-    margin-right: auto;
-    perspective: none;
-  }
-
-  .how__col {
-    position: sticky;
-    top: 104px;
-    padding: 28px 24px 32px;
-    transform: none;
-  }
-
-  .how__col:first-child,
-  .how__col:last-child,
-  .how__col:hover { transform: none; }
-
+  .how { padding-bottom: 80px; }
   .home-app { padding-bottom: 72px; }
-
   .why-viewport { margin-top: 40px; }
 }
 
 @media (max-width: 600px) {
-  .home-hero__title { font-size: 30px; line-height: 40px; }
-  /* the pair still has to fit one line */
-  .mode-tabs { padding: 5px; }
-  .mode-tab { padding: 11px 14px; font-size: 14px; line-height: 20px; }
-  .mode-box { margin-top: 20px; padding: 18px 16px 24px; border-radius: 28px; }
-  .mode-pane__text { font-size: 17px; line-height: 27px; }
-  .mode-pane__btn { flex: 1 1 auto; }
+  .hero-video { border-radius: 28px; }
+  .hero-video__title { font-size: 30px; line-height: 40px; }
+  .hero-video__text { font-size: 16px; line-height: 26px; }
 
-  .about { padding-bottom: 64px; }
-  .about__text { font-size: 18px; line-height: 30px; }
+  .flip-row { gap: 12px; }
+  .persona__text { font-size: 17px; line-height: 28px; }
+  .persona__actions .btn { flex: 1 1 auto; }
 
   .why { padding-bottom: 32px; }
   .why-card { border-radius: 28px; }
 
-  .how__who { font-size: 19px; line-height: 27px; }
-  .how__col { top: 88px; }
-  .how__steps b { font-size: 16px; }
-  .how__steps span:not(.how__n) { font-size: 15px; line-height: 24px; }
-
   .home-faq { padding: 64px 0 72px; }
-  .home-cta { padding-bottom: 72px; }
+  .home-cta { padding-bottom: 80px; }
+  .home-cta__card { padding: 56px 24px; }
   .home-cta__actions .btn { flex: 1 1 auto; }
 }
