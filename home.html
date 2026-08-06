@@ -12,8 +12,8 @@
   <!-- The hero panel fills the first screen, so its still matters most -->
   <link rel="preload" as="image" href="assets/img/hero-video-placeholder.jpg" fetchpriority="high">
   <!-- Shared shell (nav, sections, cards, footer) + home specifics -->
-  <link rel="stylesheet" href="assets/css/content.css?v=37">
-  <link rel="stylesheet" href="assets/css/home.css?v=14">
+  <link rel="stylesheet" href="assets/css/content.css?v=38">
+  <link rel="stylesheet" href="assets/css/home.css?v=16">
 </head>
 <body>
 
@@ -60,7 +60,8 @@
         <div class="hero-video__scrim" aria-hidden="true"></div>
         <div class="hero-video__copy">
           <h1 class="hero-video__title">Connecting music with content</h1>
-          <p class="hero-video__text">Musin is a music promotion platform that connects music with content creators.</p>
+          <p class="hero-video__text">Musin is a music promotion platform<br>
+            that connects music with content creators.</p>
           <a href="#" class="btn btn--primary btn--md hero-video__cta">Get started for free</a>
         </div>
       </div>
@@ -164,8 +165,8 @@
           <div class="app-card">
             <div class="app-card__panel">
               <div class="app-card__copy">
-                <h3 class="app-card__title">Create a campaign</h3>
-                <p class="app-card__text">Artists upload a track and set the campaign parameters.</p>
+                <h3 class="app-card__title">Music Campaign</h3>
+                <p class="app-card__text">Music artists upload a track and define the campaign parameters.</p>
               </div>
             </div>
             <div class="app-card__screen">
@@ -178,8 +179,8 @@
           <div class="app-card">
             <div class="app-card__panel">
               <div class="app-card__copy">
-                <h3 class="app-card__title">Match with creators</h3>
-                <p class="app-card__text">Artists choose who posts; creators choose which tracks to post with.</p>
+                <h3 class="app-card__title">Mutual Selection</h3>
+                <p class="app-card__text">Music artists choose who posts with their track and content creators choose what to post with.</p>
               </div>
             </div>
             <div class="app-card__screen">
@@ -192,8 +193,8 @@
           <div class="app-card">
             <div class="app-card__panel">
               <div class="app-card__copy">
-                <h3 class="app-card__title">Post and confirm</h3>
-                <p class="app-card__text">Creators publish in their own style and submit the post link for confirmation.</p>
+                <h3 class="app-card__title">Post Confirmation</h3>
+                <p class="app-card__text">Content creators publish content using the selected track and submit the post link for confirmation.</p>
               </div>
             </div>
             <div class="app-card__screen">
@@ -206,8 +207,8 @@
           <div class="app-card">
             <div class="app-card__panel">
               <div class="app-card__copy">
-                <h3 class="app-card__title">Pay per confirmed post</h3>
-                <p class="app-card__text">Payment is released once the post is confirmed. Free to join, with a 20% commission on confirmed posts.</p>
+                <h3 class="app-card__title">Pay per Post</h3>
+                <p class="app-card__text">Payment is released for each published post after confirmation or automatically if no dispute is opened.</p>
               </div>
             </div>
             <div class="app-card__screen">
@@ -279,6 +280,77 @@
               <path d="M169 382.5l5 5 9-10" stroke="#0a0a0a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
               <text class="why-card__label" x="204" y="377">Matched</text>
               <text class="why-card__sub" x="204" y="397">Ready to post</text>
+            </svg>
+          </article>
+
+          <article class="why-card">
+            <svg class="why-card__art" viewBox="0 0 480 480" role="img" aria-labelledby="why4title why4desc">
+              <title id="why4title">Authentic music engagement</title>
+              <desc id="why4desc">Music reaches audiences through original content created by people who choose to feature it.</desc>
+              <path d="M0 40C0 17.9086 17.9086 0 40 0H440C462.091 0 480 17.9086 480 40V440C480 462.091 462.091 480 440 480H40C17.9086 480 0 462.091 0 440V40Z" fill="#1A1A1A"/>
+
+              <text class="why-card__title" x="33" y="57">Authentic music engagement</text>
+              <text class="why-card__text" x="33" y="89">Music reaches audiences through original</text>
+              <text class="why-card__text" x="33" y="117">content created by people who choose to</text>
+              <text class="why-card__text" x="33" y="145">feature it.</text>
+
+              <!-- One track at the top -->
+              <g>
+                <rect x="140" y="166" width="200" height="64" rx="18" fill="#262626"/>
+                <rect x="156" y="178" width="40" height="40" rx="10" fill="#e54552"/>
+                <path d="M170 208v-16l14-3v16" stroke="#0a0a0a" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+                <circle cx="168" cy="208" r="3.4" fill="#0a0a0a"/>
+                <circle cx="182" cy="205" r="3.4" fill="#0a0a0a"/>
+                <text class="why-card__label" x="208" y="194">Track name</text>
+                <text class="why-card__sub" x="208" y="212">Artist</text>
+              </g>
+
+              <!-- Fans out into three separate posts -->
+              <path d="M240 230v4c0 6-5 12-12 12H100c-7 0-12 5-12 12v4" stroke="#3e3e3e" stroke-width="2" fill="none"/>
+              <path d="M240 230v32" stroke="#3e3e3e" stroke-width="2" fill="none"/>
+              <path d="M240 230v4c0 6 5 12 12 12h128c7 0 12 5 12 12v4" stroke="#3e3e3e" stroke-width="2" fill="none"/>
+
+              <!-- Each creator's own post: different content, same track -->
+              <g>
+                <rect x="36" y="262" width="104" height="122" rx="20" fill="#262626"/>
+                <rect x="36" y="262" width="104" height="122" rx="20" fill="#3ddc97" opacity="0.1"/>
+                <clipPath id="why4a"><circle cx="66" cy="364" r="12"/></clipPath>
+                <image href="assets/img/creators/creator-2.jpg" x="54" y="352" width="24" height="24" clip-path="url(#why4a)" preserveAspectRatio="xMidYMid slice"/>
+                <path d="M80 302l24 14-24 14z" fill="#fafafa" opacity="0.9"/>
+                <circle cx="66" cy="318" r="9" fill="none" stroke="#fafafa" stroke-width="2" opacity="0.35"/>
+                <path d="M124 370.5c0 0-4.6-2.8-4.6-6c0-1.5 1.1-2.5 2.5-2.5c0.9 0 1.7 0.4 2.1 1.1c0.4-0.7 1.2-1.1 2.1-1.1c1.4 0 2.5 1 2.5 2.5c0 3.2-4.6 6-4.6 6z" fill="#e54552"/>
+              </g>
+
+              <g>
+                <rect x="188" y="262" width="104" height="122" rx="20" fill="#262626"/>
+                <rect x="188" y="262" width="104" height="122" rx="20" fill="#e54552" opacity="0.12"/>
+                <clipPath id="why4b"><circle cx="218" cy="364" r="12"/></clipPath>
+                <image href="assets/img/creators/creator-7.jpg" x="206" y="352" width="24" height="24" clip-path="url(#why4b)" preserveAspectRatio="xMidYMid slice"/>
+                <rect x="210" y="300" width="60" height="8" rx="4" fill="#fafafa" opacity="0.28"/>
+                <rect x="210" y="316" width="42" height="8" rx="4" fill="#fafafa" opacity="0.18"/>
+                <rect x="210" y="332" width="52" height="8" rx="4" fill="#fafafa" opacity="0.12"/>
+                <path d="M276 370.5c0 0-4.6-2.8-4.6-6c0-1.5 1.1-2.5 2.5-2.5c0.9 0 1.7 0.4 2.1 1.1c0.4-0.7 1.2-1.1 2.1-1.1c1.4 0 2.5 1 2.5 2.5c0 3.2-4.6 6-4.6 6z" fill="#e54552"/>
+              </g>
+
+              <g>
+                <rect x="340" y="262" width="104" height="122" rx="20" fill="#262626"/>
+                <rect x="340" y="262" width="104" height="122" rx="20" fill="#d8a608" opacity="0.12"/>
+                <clipPath id="why4c"><circle cx="370" cy="364" r="12"/></clipPath>
+                <image href="assets/img/creators/creator-11.jpg" x="358" y="352" width="24" height="24" clip-path="url(#why4c)" preserveAspectRatio="xMidYMid slice"/>
+                <path d="M360 324l14-18 12 15 10-9 16 22" stroke="#fafafa" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.4"/>
+                <circle cx="368" cy="296" r="7" fill="#fafafa" opacity="0.3"/>
+                <path d="M428 370.5c0 0-4.6-2.8-4.6-6c0-1.5 1.1-2.5 2.5-2.5c0.9 0 1.7 0.4 2.1 1.1c0.4-0.7 1.2-1.1 2.1-1.1c1.4 0 2.5 1 2.5 2.5c0 3.2-4.6 6-4.6 6z" fill="#e54552"/>
+              </g>
+
+              <!-- The engagement those posts send back to the track -->
+              <path d="M88 384v4c0 6 5 12 12 12h128c7 0 12 5 12 12" stroke="#3e3e3e" stroke-width="2" fill="none"/>
+              <path d="M240 384v28" stroke="#3e3e3e" stroke-width="2" fill="none"/>
+              <path d="M392 384v4c0 6-5 12-12 12H252c-7 0-12 5-12 12" stroke="#3e3e3e" stroke-width="2" fill="none"/>
+
+              <rect x="130" y="412" width="220" height="48" rx="18" fill="#262626" stroke="#e54552" stroke-width="1.5"/>
+              <path d="M162 445.5c0 0-11.5-7-11.5-15c0-3.8 2.8-6.4 6.2-6.4c2.2 0 4.2 1.1 5.3 2.9c1.1-1.8 3.1-2.9 5.3-2.9c3.4 0 6.2 2.6 6.2 6.4c0 8-11.5 15-11.5 15z" fill="#e54552"/>
+              <text class="why-card__label" x="186" y="431">Real engagement</text>
+              <text class="why-card__sub" x="186" y="450">From the audiences who watched</text>
             </svg>
           </article>
           </div>

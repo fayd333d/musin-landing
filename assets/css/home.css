@@ -6,7 +6,9 @@
 /* ============ Hero ============
    A full-bleed video panel with the copy centred over it. The <img> is a
    placeholder for the looping clip that will replace it. */
-.home-hero { padding: 0 0 72px; }
+/* No bottom padding: the panel fades out into the page instead of ending on
+   an edge, and the logo line picks up straight after it. */
+.home-hero { padding: 0; }
 
 .hero-video {
   position: relative;
@@ -14,24 +16,31 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  background: var(--bg-card);
+  background: var(--bg);
 }
 
+/* Masked so the footage itself dissolves rather than being cut off */
 .hero-video__media {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  -webkit-mask-image: linear-gradient(to bottom, #000 52%, rgba(0, 0, 0, 0) 96%);
+  mask-image: linear-gradient(to bottom, #000 52%, rgba(0, 0, 0, 0) 96%);
 }
 
-/* Keeps the copy readable whatever frame is showing */
+/* Keeps the copy readable, and lands on the page colour at the bottom so the
+   mask has nothing to reveal but the background */
 .hero-video__scrim {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(to top, rgba(10, 10, 10, 0.88), rgba(10, 10, 10, 0.42) 55%, rgba(10, 10, 10, 0.66)),
+    linear-gradient(to top,
+      rgb(10, 10, 10) 0%,
+      rgba(10, 10, 10, 0.72) 22%,
+      rgba(10, 10, 10, 0.4) 52%,
+      rgba(10, 10, 10, 0.66) 100%),
     rgba(10, 10, 10, 0.2);
 }
 
@@ -58,13 +67,15 @@
 }
 
 .hero-video__text {
-  max-width: 760px;
   font-size: 26px;
   line-height: 42px;
   color: var(--text-primary);
 }
 
 .hero-video__cta { margin-top: 6px; }
+
+/* Tucked under the hero's fade-out rather than a section apart from it */
+.logos { padding-top: 0; margin-top: -40px; }
 
 /* ============ Platform numbers ============
    Two stat blocks stacked, each over a row of four cards that flip together. */
@@ -428,16 +439,15 @@
 .home-faq { padding-top: 72px; }
 
 /* ============ Closing CTA ============
-   A full-bleed band rather than a card. The footer below is given the same
-   base colour, so the two read as one panel running to the bottom of the page
-   — the brand wash has faded out well before the join. */
+   A full-bleed band rather than a card. It fades from the brand wash down to
+   plain black, so it runs into the black footer with no visible edge. */
 .home-cta {
   margin-top: 40px;
-  padding: 96px 0 72px;
+  padding: 96px 0 96px;
   text-align: center;
   background:
     radial-gradient(120% 150% at 50% 0%, rgba(229, 69, 82, 0.3) 0%, rgba(229, 69, 82, 0) 58%),
-    var(--bg-card-2);
+    linear-gradient(to bottom, var(--bg-card-2) 0%, var(--bg-card-2) 55%, var(--bg) 100%);
 }
 
 .home-cta__inner {
@@ -455,8 +465,8 @@
   gap: 16px;
 }
 
-/* Continues the band; only loaded on this page */
-.footer { background: var(--bg-card-2); }
+/* Full black, with the band above fading into it */
+.footer { background: var(--bg); }
 
 /* ============ Responsive ============ */
 @media (max-width: 1100px) {
@@ -472,8 +482,8 @@
 }
 
 @media (max-width: 860px) {
-  .home-hero { padding-bottom: 56px; }
   .hero-video { min-height: min(72vh, 620px); }
+  .logos { margin-top: -28px; }
   .hero-video__copy { gap: 20px; padding: 48px 20px; }
   .hero-video__text { font-size: 19px; line-height: 30px; }
 
@@ -521,6 +531,6 @@
   .why-card { border-radius: 28px; }
 
   .home-faq { padding: 64px 0 72px; }
-  .home-cta { padding: 72px 0 56px; }
+  .home-cta { padding: 72px 0 72px; }
   .home-cta__actions .btn { flex: 1 1 auto; }
 }
