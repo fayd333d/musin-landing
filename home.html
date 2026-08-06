@@ -12,8 +12,8 @@
   <!-- The hero panel fills the first screen, so its still matters most -->
   <link rel="preload" as="image" href="assets/img/hero-video-placeholder.jpg" fetchpriority="high">
   <!-- Shared shell (nav, sections, cards, footer) + home specifics -->
-  <link rel="stylesheet" href="assets/css/content.css?v=36">
-  <link rel="stylesheet" href="assets/css/home.css?v=13">
+  <link rel="stylesheet" href="assets/css/content.css?v=37">
+  <link rel="stylesheet" href="assets/css/home.css?v=14">
 </head>
 <body>
 
@@ -53,17 +53,15 @@
   <main>
     <!-- ============ HERO ============ -->
     <section class="hero home-hero" id="hero">
-      <div class="container">
-        <!-- Placeholder still stands in for the looping video -->
-        <div class="hero-video">
-          <img class="hero-video__media" src="assets/img/hero-video-placeholder.jpg" alt="" fetchpriority="high">
-          <div class="hero-video__scrim" aria-hidden="true"></div>
-          <div class="hero-video__copy">
-            <h1 class="hero-video__title">Connecting music with content</h1>
-            <p class="hero-video__text">Musin is a music promotion platform that connects tracks with
-              content creators who feature them in their social media posts.</p>
-            <a href="#" class="btn btn--primary btn--md hero-video__cta">Get started for free</a>
-          </div>
+      <!-- Full-bleed: no container, so the panel runs to the screen edges.
+           The still stands in for the looping clip. -->
+      <div class="hero-video">
+        <img class="hero-video__media" src="assets/img/hero-video-placeholder.jpg" alt="" fetchpriority="high">
+        <div class="hero-video__scrim" aria-hidden="true"></div>
+        <div class="hero-video__copy">
+          <h1 class="hero-video__title">Connecting music with content</h1>
+          <p class="hero-video__text">Musin is a music promotion platform that connects music with content creators.</p>
+          <a href="#" class="btn btn--primary btn--md hero-video__cta">Get started for free</a>
         </div>
       </div>
     </section>
@@ -106,7 +104,7 @@
     <section class="persona" id="forArtists">
       <div class="container persona__row">
         <div class="persona__copy">
-          <h2 class="section-title section-title--left">For artists, managers and labels</h2>
+          <h2 class="section-title section-title--left">Join as a music artist</h2>
           <p class="persona__text">Reach new audiences and build engagement around your music through
             social media content.</p>
         </div>
@@ -128,7 +126,7 @@
     <section class="persona persona--mirrored" id="forCreators">
       <div class="container persona__row">
         <div class="persona__copy">
-          <h2 class="section-title section-title--left">For social media users, influencers, agencies</h2>
+          <h2 class="section-title section-title--left">Join as a content creator</h2>
           <p class="persona__text">Discover music that fits your content and get paid to feature it in
             your social media posts.</p>
         </div>
@@ -157,52 +155,16 @@
       </div>
     </section>
 
-    <!-- ============ HOW IT WORKS ============ -->
-    <section class="payments how" id="how">
+    <!-- ============ HOW IT WORKS ============
+         The four steps, each shown on the app screen where it happens. -->
+    <section class="app how" id="how">
       <div class="container">
         <h2 class="section-title">How it works</h2>
-        <div class="pay-stack">
-          <div class="pay-card">
-            <div class="pay-card__icon"></div>
-            <div class="pay-card__body">
-              <h3 class="pay-card__title">Create a campaign</h3>
-              <p class="pay-card__text">Artists upload a track and set the campaign parameters.</p>
-            </div>
-          </div>
-          <div class="pay-card">
-            <div class="pay-card__icon"></div>
-            <div class="pay-card__body">
-              <h3 class="pay-card__title">Match with creators</h3>
-              <p class="pay-card__text">Artists choose who posts; creators choose which tracks to post with.</p>
-            </div>
-          </div>
-          <div class="pay-card">
-            <div class="pay-card__icon"></div>
-            <div class="pay-card__body">
-              <h3 class="pay-card__title">Post and confirm</h3>
-              <p class="pay-card__text">Creators publish in their own style and submit the post link for confirmation.</p>
-            </div>
-          </div>
-          <div class="pay-card">
-            <div class="pay-card__icon"></div>
-            <div class="pay-card__body">
-              <h3 class="pay-card__title">Pay per confirmed post</h3>
-              <p class="pay-card__text">Payment is released once the post is confirmed. Free to join, with a 20% commission on confirmed posts.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ INSIDE MUSIN APP ============ -->
-    <section class="app home-app" id="app">
-      <div class="container">
-        <h2 class="section-title">Inside Musin app</h2>
-        <div class="app-stack" id="appStack">
+        <div class="app-stack">
           <div class="app-card">
             <div class="app-card__panel">
               <div class="app-card__copy">
-                <h3 class="app-card__title">Create campaign</h3>
+                <h3 class="app-card__title">Create a campaign</h3>
                 <p class="app-card__text">Artists upload a track and set the campaign parameters.</p>
               </div>
             </div>
@@ -216,28 +178,42 @@
           <div class="app-card">
             <div class="app-card__panel">
               <div class="app-card__copy">
-                <h3 class="app-card__title">Discover music</h3>
-                <p class="app-card__text">Creators find and receive tracks that match their content.</p>
+                <h3 class="app-card__title">Match with creators</h3>
+                <p class="app-card__text">Artists choose who posts; creators choose which tracks to post with.</p>
               </div>
             </div>
             <div class="app-card__screen">
               <picture>
-                <source media="(max-width: 860px)" srcset="assets/img/app/app-CC-phone1.svg">
-                <img src="assets/img/app/app-CC-PC1.svg" alt="Browsing active campaigns in the Musin app" loading="lazy">
+                <source media="(max-width: 860px)" srcset="assets/img/app/app-MA-phone2.svg">
+                <img src="assets/img/app/app-MA-PC2.svg" alt="Selecting content creator accounts in the Musin app" loading="lazy">
               </picture>
             </div>
           </div>
           <div class="app-card">
             <div class="app-card__panel">
               <div class="app-card__copy">
-                <h3 class="app-card__title">Confirm and pay</h3>
-                <p class="app-card__text">Posts are confirmed and payment is released to the creator.</p>
+                <h3 class="app-card__title">Post and confirm</h3>
+                <p class="app-card__text">Creators publish in their own style and submit the post link for confirmation.</p>
               </div>
             </div>
             <div class="app-card__screen">
               <picture>
                 <source media="(max-width: 860px)" srcset="assets/img/app/app-MA-phone3.svg">
-                <img src="assets/img/app/app-MA-PC3.svg" alt="Campaign payouts and results in the Musin app" loading="lazy">
+                <img src="assets/img/app/app-MA-PC3.svg" alt="Confirming submitted posts in the Musin app" loading="lazy">
+              </picture>
+            </div>
+          </div>
+          <div class="app-card">
+            <div class="app-card__panel">
+              <div class="app-card__copy">
+                <h3 class="app-card__title">Pay per confirmed post</h3>
+                <p class="app-card__text">Payment is released once the post is confirmed. Free to join, with a 20% commission on confirmed posts.</p>
+              </div>
+            </div>
+            <div class="app-card__screen">
+              <picture>
+                <source media="(max-width: 860px)" srcset="assets/img/app/app-CC-phone3.svg">
+                <img src="assets/img/app/app-CC-PC3.svg" alt="Payments and earnings in the Musin app" loading="lazy">
               </picture>
             </div>
           </div>
@@ -245,10 +221,10 @@
       </div>
     </section>
 
-    <!-- ============ WHY MUSIN (stacking cards) ============ -->
+    <!-- ============ WHY IT WORKS (coverflow cards) ============ -->
     <section class="why" id="why">
       <div class="container">
-        <h2 class="section-title">Why Musin</h2>
+        <h2 class="section-title">Why it works</h2>
         <div class="create__viewport why-viewport">
           <div class="why-stack" id="whyStack">
           <article class="why-card">
@@ -356,16 +332,16 @@
         </div>
       </div>
     </section>
-    <!-- ============ CLOSING CTA ============ -->
+    <!-- ============ CLOSING CTA ============
+         Full-bleed band; the footer below shares its background so the two
+         read as one panel running to the bottom of the page. -->
     <section class="cta home-cta">
-      <div class="container">
-        <div class="cta__card home-cta__card">
-          <h2 class="cta__title">Music spreads through content</h2>
-          <p class="cta__text">Choose how you want to use Musin</p>
-          <div class="home-cta__actions">
-            <a href="music.html" class="btn btn--primary btn--md">Promote music</a>
-            <a href="index.html" class="btn btn--light btn--md">Create Content</a>
-          </div>
+      <div class="container home-cta__inner">
+        <h2 class="cta__title">Music spreads through content</h2>
+        <p class="cta__text">Choose how you want to use Musin</p>
+        <div class="home-cta__actions">
+          <a href="music.html" class="btn btn--primary btn--md">Promote music</a>
+          <a href="index.html" class="btn btn--light btn--md">Create Content</a>
         </div>
       </div>
     </section>
@@ -405,6 +381,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-  <script src="assets/js/home.js?v=8"></script>
+  <script src="assets/js/home.js?v=9"></script>
 </body>
 </html>

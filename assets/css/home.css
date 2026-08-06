@@ -4,20 +4,18 @@
    page is defined here. */
 
 /* ============ Hero ============
-   A wide video panel with the copy centred over it. The <img> is a placeholder
-   for the looping clip that will replace it. */
-.home-hero { padding: 24px 0 72px; }
+   A full-bleed video panel with the copy centred over it. The <img> is a
+   placeholder for the looping clip that will replace it. */
+.home-hero { padding: 0 0 72px; }
 
 .hero-video {
   position: relative;
-  border-radius: var(--radius-card);
-  overflow: hidden;
-  background: var(--bg-card);
-  aspect-ratio: 21 / 9;
-  min-height: 420px;
+  min-height: min(78vh, 760px);
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  background: var(--bg-card);
 }
 
 .hero-video__media {
@@ -33,8 +31,8 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(to top, rgba(10, 10, 10, 0.86), rgba(10, 10, 10, 0.42) 55%, rgba(10, 10, 10, 0.62)),
-    rgba(10, 10, 10, 0.18);
+    linear-gradient(to top, rgba(10, 10, 10, 0.88), rgba(10, 10, 10, 0.42) 55%, rgba(10, 10, 10, 0.66)),
+    rgba(10, 10, 10, 0.2);
 }
 
 .hero-video__copy {
@@ -43,27 +41,30 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
-  max-width: 780px;
-  padding: 48px 40px;
+  gap: 26px;
+  width: 100%;
+  padding: 64px 24px;
   text-align: center;
 }
 
+/* Sized off the viewport so the line never wraps */
 .hero-video__title {
-  font-size: 56px;
-  line-height: 66px;
+  font-size: min(5.1vw, 68px);
+  line-height: 1.12;
   font-weight: 600;
   letter-spacing: -1.1px;
+  white-space: nowrap;
   color: var(--text-primary);
 }
 
 .hero-video__text {
-  font-size: 20px;
-  line-height: 32px;
-  color: var(--text-secondary);
+  max-width: 760px;
+  font-size: 26px;
+  line-height: 42px;
+  color: var(--text-primary);
 }
 
-.hero-video__cta { margin-top: 4px; }
+.hero-video__cta { margin-top: 6px; }
 
 /* ============ Platform numbers ============
    Two stat blocks stacked, each over a row of four cards that flip together. */
@@ -351,19 +352,12 @@
 }
 
 /* ============ How it works ============
-   The persona pages' stacking glyph cards; only the glyphs differ. */
+   The persona pages' stacking app cards: each step beside the screen it
+   happens on. */
 .how { padding: 0 0 112px; }
-.how .pay-stack { margin-top: 56px; }
+.how .app-stack { margin-top: 56px; }
 
-.how .pay-card:nth-child(1) .pay-card__icon::before { -webkit-mask-image: url("../img/icons/music-note.svg"); mask-image: url("../img/icons/music-note.svg"); }
-.how .pay-card:nth-child(2) .pay-card__icon::before { -webkit-mask-image: url("../img/icons/pay-profile.svg"); mask-image: url("../img/icons/pay-profile.svg"); }
-.how .pay-card:nth-child(3) .pay-card__icon::before { -webkit-mask-image: url("../img/icons/pay-check.svg"); mask-image: url("../img/icons/pay-check.svg"); }
-.how .pay-card:nth-child(4) .pay-card__icon::before { -webkit-mask-image: url("../img/icons/pay-dollar.svg"); mask-image: url("../img/icons/pay-dollar.svg"); }
-
-/* ============ Inside Musin app ============ */
-.home-app { padding: 0 0 96px; }
-
-/* ============ Why Musin ============
+/* ============ Why it works ============
    The cards ride the same coverflow as the hero wheels, but the centre index
    follows the page scroll rather than a timer. */
 .why { padding: 0 0 48px; }
@@ -434,16 +428,23 @@
 .home-faq { padding-top: 72px; }
 
 /* ============ Closing CTA ============
-   A panel like the persona pages', warmed with a brand-tinted wash. */
-.home-cta { padding: 40px 0 112px; }
-
-.home-cta__card {
-  gap: 16px;
-  padding: 80px 40px;
+   A full-bleed band rather than a card. The footer below is given the same
+   base colour, so the two read as one panel running to the bottom of the page
+   — the brand wash has faded out well before the join. */
+.home-cta {
+  margin-top: 40px;
+  padding: 96px 0 72px;
+  text-align: center;
   background:
-    radial-gradient(120% 140% at 50% 0%, rgba(229, 69, 82, 0.28) 0%, rgba(229, 69, 82, 0) 62%),
+    radial-gradient(120% 150% at 50% 0%, rgba(229, 69, 82, 0.3) 0%, rgba(229, 69, 82, 0) 58%),
     var(--bg-card-2);
-  border: 1px solid rgba(229, 69, 82, 0.22);
+}
+
+.home-cta__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
 }
 
 .home-cta__actions {
@@ -454,9 +455,11 @@
   gap: 16px;
 }
 
+/* Continues the band; only loaded on this page */
+.footer { background: var(--bg-card-2); }
+
 /* ============ Responsive ============ */
 @media (max-width: 1100px) {
-  .hero-video__title { font-size: 46px; line-height: 56px; }
   .persona__row { column-gap: 40px; grid-template-columns: minmax(0, 380px) minmax(0, 1fr); }
   .persona--mirrored .persona__row { grid-template-columns: minmax(0, 1fr) minmax(0, 380px); }
   .persona__text { font-size: 20px; line-height: 32px; }
@@ -464,14 +467,15 @@
   /* Four 196px cards no longer fit the container */
   .flip-row { grid-template-columns: repeat(4, minmax(0, 1fr)); width: 100%; }
   .flip-card { height: auto; aspect-ratio: 196 / 264; }
+
+  .hero-video__text { font-size: 22px; line-height: 36px; }
 }
 
 @media (max-width: 860px) {
   .home-hero { padding-bottom: 56px; }
-  .hero-video { aspect-ratio: 4 / 5; min-height: 0; }
-  .hero-video__copy { gap: 20px; padding: 32px 24px; }
-  .hero-video__title { font-size: 36px; line-height: 46px; letter-spacing: -0.72px; }
-  .hero-video__text { font-size: 17px; line-height: 28px; }
+  .hero-video { min-height: min(72vh, 620px); }
+  .hero-video__copy { gap: 20px; padding: 48px 20px; }
+  .hero-video__text { font-size: 19px; line-height: 30px; }
 
   .stats { padding: 16px 0 88px; }
   .stats__col { gap: 32px; }
@@ -502,14 +506,12 @@
   .persona .section-title--left { text-align: center; }
 
   .how { padding-bottom: 80px; }
-  .home-app { padding-bottom: 72px; }
   .why-viewport { margin-top: 40px; }
 }
 
 @media (max-width: 600px) {
-  .hero-video { border-radius: 28px; }
-  .hero-video__title { font-size: 30px; line-height: 40px; }
-  .hero-video__text { font-size: 16px; line-height: 26px; }
+  .hero-video { min-height: min(70vh, 560px); }
+  .hero-video__text { font-size: 17px; line-height: 28px; }
 
   .flip-row { gap: 12px; }
   .persona__text { font-size: 17px; line-height: 28px; }
@@ -519,7 +521,6 @@
   .why-card { border-radius: 28px; }
 
   .home-faq { padding: 64px 0 72px; }
-  .home-cta { padding-bottom: 80px; }
-  .home-cta__card { padding: 56px 24px; }
+  .home-cta { padding: 72px 0 56px; }
   .home-cta__actions .btn { flex: 1 1 auto; }
 }
