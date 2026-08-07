@@ -266,7 +266,7 @@
   margin-top: 20px;
   font-size: 24px;
   line-height: 36px;
-  color: var(--text-primary);
+  color: var(--text-tertiary);
 }
 
 .persona__visual .create__scroller {
@@ -402,7 +402,7 @@
 .why-stack {
   /* Bigger cards so the type inside the artwork reads at the size the
      How it works cards use */
-  --why-card: clamp(280px, 42vw, 560px);
+  --why-card: clamp(280px, 46vw, 640px);
   position: relative;
   height: calc(var(--why-card) + 40px);
   overflow: hidden;
@@ -450,7 +450,7 @@
 
 .why-card__text {
   font-family: var(--font-body);
-  font-size: 18px;
+  font-size: 15px;
   fill: var(--text-tertiary);
 }
 

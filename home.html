@@ -12,8 +12,8 @@
   <!-- The hero panel fills the first screen, so its still matters most -->
   <link rel="preload" as="image" href="assets/img/hero-video-placeholder.jpg" fetchpriority="high">
   <!-- Shared shell (nav, sections, cards, footer) + home specifics -->
-  <link rel="stylesheet" href="assets/css/content.css?v=39">
-  <link rel="stylesheet" href="assets/css/home.css?v=17">
+  <link rel="stylesheet" href="assets/css/content.css?v=40">
+  <link rel="stylesheet" href="assets/css/home.css?v=18">
 </head>
 <body>
 
@@ -194,7 +194,7 @@
             <div class="app-card__panel">
               <div class="app-card__copy">
                 <h3 class="app-card__title">Select tracks</h3>
-                <p class="app-card__text">Content creators choose tracks to post with on their social media.</p>
+                <p class="app-card__text">Content creators choose tracks to post with.</p>
               </div>
             </div>
             <div class="app-card__screen">
@@ -208,7 +208,7 @@
             <div class="app-card__panel">
               <div class="app-card__copy">
                 <h3 class="app-card__title">Pay per Post</h3>
-                <p class="app-card__text">Payment is released after post confirmation or automatically if no dispute is opened.</p>
+                <p class="app-card__text">Payment is released when a post containing the selected track is published within the set timeframe.</p>
               </div>
             </div>
             <div class="app-card__screen">
@@ -246,7 +246,7 @@
 
               <text class="why-card__title" x="33" y="57">Choice on both sides</text>
               <text class="why-card__text" x="33" y="89">Music artists choose who posts. Content</text>
-              <text class="why-card__text" x="33" y="117">creators choose which tracks to post with.</text>
+              <text class="why-card__text" x="33" y="112">creators choose which tracks to post with.</text>
 
               <!-- Track card, chosen by a creator -->
               <g>
@@ -286,56 +286,59 @@
           <article class="why-card">
             <svg class="why-card__art" viewBox="0 0 480 480" role="img" aria-labelledby="why4title why4desc">
               <title id="why4title">Authentic music engagement</title>
-              <desc id="why4desc">Music spreads through content, reaching new people through different people.</desc>
+              <desc id="why4desc">Music spreads through content, picking up views, likes, comments, shares and streams along the way.</desc>
               <path d="M0 40C0 17.9086 17.9086 0 40 0H440C462.091 0 480 17.9086 480 40V440C480 462.091 462.091 480 440 480H40C17.9086 480 0 462.091 0 440V40Z" fill="#1A1A1A"/>
 
               <text class="why-card__title" x="33" y="57">Authentic music engagement</text>
-              <text class="why-card__text" x="33" y="91">Music spreads through content reaching</text>
-              <text class="why-card__text" x="33" y="119">new people through different people.</text>
+              <text class="why-card__text" x="33" y="89">Music spreads through content reaching</text>
+              <text class="why-card__text" x="33" y="112">new people through different people.</text>
 
-              <!-- Spokes out to each person, then the web between them. The
-                   track card is drawn after, so it hides the inner stubs. -->
-              <g stroke="#3e3e3e" stroke-width="2" fill="none">
-                <path d="M240 310L240 192"/><path d="M240 310L361 251"/><path d="M240 310L361 369"/>
-                <path d="M240 310L240 428"/><path d="M240 310L119 369"/><path d="M240 310L119 251"/>
-              </g>
+              <!-- Everything the track picks up on the way out. The card is
+                   drawn after, so it covers the inner ends of the spokes. -->
               <g stroke="#2e2e2e" stroke-width="1.5" fill="none">
-                <path d="M240 192L361 251L361 369L240 428L119 369L119 251Z"/>
+                <path d="M240 318L112 232"/><path d="M240 318L376 218"/><path d="M240 318L392 386"/>
+                <path d="M240 318L124 404"/><path d="M240 318L252 440"/>
               </g>
 
-              <!-- One track at the centre -->
-              <rect x="146" y="264" width="188" height="92" rx="22" fill="#262626"/>
-              <rect x="166" y="284" width="52" height="52" rx="13" fill="#e54552"/>
-              <path d="M186 322v-20l16-3.5v20" stroke="#0a0a0a" stroke-width="2.4" fill="none" stroke-linecap="round"/>
-              <circle cx="183.5" cy="322" r="4" fill="#0a0a0a"/>
-              <circle cx="199.5" cy="318.5" r="4" fill="#0a0a0a"/>
-              <text class="why-card__label" x="230" y="304">Track name</text>
-              <text class="why-card__sub" x="230" y="324">Artist</text>
+              <rect x="146" y="272" width="188" height="92" rx="22" fill="#262626"/>
+              <rect x="166" y="292" width="52" height="52" rx="13" fill="#e54552"/>
+              <path d="M186 330v-20l16-3.5v20" stroke="#0a0a0a" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+              <circle cx="183.5" cy="330" r="4" fill="#0a0a0a"/>
+              <circle cx="199.5" cy="326.5" r="4" fill="#0a0a0a"/>
+              <text class="why-card__label" x="230" y="312">Track name</text>
+              <text class="why-card__sub" x="230" y="332">Artist</text>
 
-              <!-- The people it travels through -->
-              <clipPath id="why4a"><circle cx="240" cy="192" r="22"/></clipPath>
-              <circle cx="240" cy="192" r="24" fill="#1A1A1A"/>
-              <image href="assets/img/creators/creator-2.jpg" x="218" y="170" width="44" height="44" clip-path="url(#why4a)" preserveAspectRatio="xMidYMid slice"/>
+              <!-- Views -->
+              <circle cx="112" cy="232" r="26" fill="#4A9EFF"/>
+              <g transform="translate(112 232)" stroke="#0a0a0a" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M-12 0c3-5 7-8 12-8s9 3 12 8c-3 5-7 8-12 8s-9-3-12-8z"/>
+                <circle cx="0" cy="0" r="3.4"/>
+              </g>
 
-              <clipPath id="why4b"><circle cx="361" cy="251" r="22"/></clipPath>
-              <circle cx="361" cy="251" r="24" fill="#1A1A1A"/>
-              <image href="assets/img/creators/creator-5.jpg" x="339" y="229" width="44" height="44" clip-path="url(#why4b)" preserveAspectRatio="xMidYMid slice"/>
+              <!-- Likes -->
+              <circle cx="376" cy="218" r="26" fill="#E54552"/>
+              <path d="M376 230.5c0 0-11.5-7-11.5-14.6c0-3.7 2.8-6.2 6.1-6.2c2.2 0 4.2 1.1 5.4 2.9c1.2-1.8 3.2-2.9 5.4-2.9c3.3 0 6.1 2.5 6.1 6.2c0 7.6-11.5 14.6-11.5 14.6z" fill="#0a0a0a"/>
 
-              <clipPath id="why4c"><circle cx="361" cy="369" r="22"/></clipPath>
-              <circle cx="361" cy="369" r="24" fill="#1A1A1A"/>
-              <image href="assets/img/creators/creator-7.jpg" x="339" y="347" width="44" height="44" clip-path="url(#why4c)" preserveAspectRatio="xMidYMid slice"/>
+              <!-- Comments -->
+              <circle cx="392" cy="386" r="26" fill="#3DDC97"/>
+              <g transform="translate(392 386)" fill="none" stroke="#0a0a0a" stroke-width="2.2" stroke-linejoin="round">
+                <path d="M-11 -8h22a2.5 2.5 0 0 1 2.5 2.5v9a2.5 2.5 0 0 1 -2.5 2.5h-12l-6 5v-5h-4a2.5 2.5 0 0 1 -2.5 -2.5v-9a2.5 2.5 0 0 1 2.5 -2.5z"/>
+              </g>
 
-              <clipPath id="why4d"><circle cx="240" cy="428" r="22"/></clipPath>
-              <circle cx="240" cy="428" r="24" fill="#1A1A1A"/>
-              <image href="assets/img/creators/creator-9.jpg" x="218" y="406" width="44" height="44" clip-path="url(#why4d)" preserveAspectRatio="xMidYMid slice"/>
+              <!-- Shares -->
+              <circle cx="124" cy="404" r="26" fill="#A78BFA"/>
+              <g transform="translate(124 404)" stroke="#0a0a0a" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="7" cy="-8" r="3.6"/><circle cx="-8" cy="0" r="3.6"/><circle cx="7" cy="8" r="3.6"/>
+                <path d="M-4.8 -1.8l8.6-4.4M-4.8 1.8l8.6 4.4"/>
+              </g>
 
-              <clipPath id="why4e"><circle cx="119" cy="369" r="22"/></clipPath>
-              <circle cx="119" cy="369" r="24" fill="#1A1A1A"/>
-              <image href="assets/img/creators/creator-11.jpg" x="97" y="347" width="44" height="44" clip-path="url(#why4e)" preserveAspectRatio="xMidYMid slice"/>
-
-              <clipPath id="why4f"><circle cx="119" cy="251" r="22"/></clipPath>
-              <circle cx="119" cy="251" r="24" fill="#1A1A1A"/>
-              <image href="assets/img/creators/creator-14.jpg" x="97" y="229" width="44" height="44" clip-path="url(#why4f)" preserveAspectRatio="xMidYMid slice"/>
+              <!-- Music streams -->
+              <circle cx="252" cy="440" r="26" fill="#D8A608"/>
+              <g transform="translate(252 440)">
+                <path d="M-3 7v-16l12-2.6v16" stroke="#0a0a0a" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+                <circle cx="-6" cy="7" r="3.6" fill="#0a0a0a"/>
+                <circle cx="6" cy="4.4" r="3.6" fill="#0a0a0a"/>
+              </g>
             </svg>
           </article>
           </div>
@@ -352,8 +355,8 @@
         <div class="faq-list">
           <details class="faq-item" open>
             <summary>How much does it cost to join?</summary>
-            <p>Joining is free. There are no listing fees or subscriptions. Musin takes a 20% commission
-              from content creator accounts only on payment for a confirmed post.</p>
+            <p>Joining Musin is free with no listing fees or subscriptions. Content creators pay a 20%
+              commission only when they withdraw their earnings.</p>
           </details>
           <details class="faq-item">
             <summary>What follower count do I need to start earning?</summary>
@@ -438,6 +441,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-  <script src="assets/js/home.js?v=10"></script>
+  <script src="assets/js/home.js?v=11"></script>
 </body>
 </html>

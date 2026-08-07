@@ -138,17 +138,22 @@ function createWheel(stage, { onCentre, interval = 3.2, dim = 0.28, drag = false
     /* Sideways trackpad and wheel input. preventDefault runs on every
        horizontal event — including the ones swallowed by the lock — so a
        flick can never fall through to the browser's back gesture. */
+    /* A trackpad flick arrives as a long burst of events with momentum
+       trailing behind it. The lock is released only once that burst goes
+       quiet, so one gesture always moves exactly one card. */
     let wheelLock = false;
+    let wheelIdle = null;
     stage.addEventListener("wheel", (e) => {
       // only claim the gesture when it's clearly sideways, so the page can
       // still scroll vertically over the cards
       if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
       e.preventDefault();
+      clearTimeout(wheelIdle);
+      wheelIdle = setTimeout(() => { wheelLock = false; }, 260);
       if (wheelLock || Math.abs(e.deltaX) < 6) return;
       wheelLock = true;
       step(e.deltaX > 0 ? 1 : -1);
       restart();
-      setTimeout(() => { wheelLock = false; }, 380);
     }, { passive: false });
   }
 

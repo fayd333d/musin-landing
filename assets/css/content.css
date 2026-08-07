@@ -900,7 +900,7 @@ img { display: block; max-width: 100%; }
   background:
     radial-gradient(120% 150% at 50% 0%, rgba(229, 69, 82, 0.3) 0%, rgba(229, 69, 82, 0) 58%),
     var(--bg-card-2);
-  border: 1px solid rgba(229, 69, 82, 0.22);
+  border: 1px solid var(--border);
 }
 
 .cta__title {
@@ -915,7 +915,7 @@ img { display: block; max-width: 100%; }
   max-width: 640px;
   font-size: 24px;
   line-height: 36px;
-  color: var(--text-primary);
+  color: var(--text-tertiary);
 }
 
 .cta__card .btn { margin-top: 8px; }
