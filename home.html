@@ -9,11 +9,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600&display=swap" rel="stylesheet">
-  <!-- A frame from the loop itself, so the first paint matches the video -->
-  <link rel="preload" as="image" href="assets/img/hero-poster.jpg" fetchpriority="high">
   <!-- Shared shell (nav, sections, cards, footer) + home specifics -->
   <link rel="stylesheet" href="assets/css/content.css?v=43">
-  <link rel="stylesheet" href="assets/css/home.css?v=21">
+  <link rel="stylesheet" href="assets/css/home.css?v=22">
 </head>
 <body>
 
@@ -56,8 +54,9 @@
       <!-- Full-bleed: no container, so the panel runs to the screen edges.
            The still stands in for the looping clip. -->
       <div class="hero-video">
+        <!-- No poster: the clip opens on black, so the panel's own black is
+             the right first paint. A still would jump when playback began. -->
         <video class="hero-video__media" src="assets/video/hero.mp4"
-             poster="assets/img/hero-poster.jpg"
              autoplay muted loop playsinline preload="auto"></video>
         <div class="hero-video__scrim" aria-hidden="true"></div>
         <div class="hero-video__copy">

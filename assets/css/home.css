@@ -33,6 +33,9 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* Matches the panel, so there is nothing else to see before the first
+     frame decodes */
+  background: var(--bg);
   /* Pulled up off centre so more of the lower half of the frame is in view */
   object-position: center 62%;
   -webkit-mask-image: linear-gradient(to bottom, #000 52%, rgba(0, 0, 0, 0) 96%);
