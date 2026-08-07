@@ -67,22 +67,15 @@
 
 /* Sized off the viewport so the line never wraps */
 .hero-video__title {
-  /* A soft highlight drifts across the letters; the flat colour underneath is
-     what shows if background-clip: text isn't supported */
-  background: linear-gradient(100deg,
-    var(--text-primary) 0%, var(--text-primary) 38%,
-    #ffffff 48%, #ffd9dc 52%, var(--text-primary) 62%,
-    var(--text-primary) 100%) 0 0 / 300% 100% no-repeat;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: hero-shine 7s ease-in-out 1.2s infinite;
+  /* Solid fill so the words are always fully legible; the light comes from
+     the shadow rather than from anything painted over the glyphs */
+  color: var(--text-primary);
+  animation: hero-glow 5s ease-in-out infinite;
   font-size: min(5.1vw, 68px);
   line-height: 1.12;
   font-weight: 600;
   letter-spacing: -1.1px;
   white-space: nowrap;
-  color: var(--text-primary);
 }
 
 .hero-video__text {
@@ -91,13 +84,16 @@
   color: var(--text-primary);
 }
 
-@keyframes hero-shine {
-  0%       { background-position: 120% 0; }
-  45%, 100% { background-position: -20% 0; }
+@keyframes hero-glow {
+  0%, 100% { text-shadow: 0 0 16px rgba(255, 255, 255, 0.18), 0 0 40px rgba(229, 69, 82, 0.14); }
+  50%      { text-shadow: 0 0 26px rgba(255, 255, 255, 0.45), 0 0 64px rgba(229, 69, 82, 0.3); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-video__title { animation: none; background-position: -20% 0; }
+  .hero-video__title {
+    animation: none;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.28), 0 0 48px rgba(229, 69, 82, 0.2);
+  }
 }
 
 .hero-video__cta { margin-top: 6px; }
