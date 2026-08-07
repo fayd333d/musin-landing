@@ -400,9 +400,7 @@
 .why-viewport { margin-top: 56px; }
 
 .why-stack {
-  /* Bigger cards so the type inside the artwork reads at the size the
-     How it works cards use */
-  --why-card: clamp(280px, 46vw, 640px);
+  --why-card: clamp(260px, 34vw, 420px);
   position: relative;
   height: calc(var(--why-card) + 40px);
   overflow: hidden;
@@ -450,7 +448,7 @@
 
 .why-card__text {
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 18px;
   fill: var(--text-tertiary);
 }
 

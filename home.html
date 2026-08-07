@@ -9,11 +9,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600&display=swap" rel="stylesheet">
-  <!-- The hero panel fills the first screen, so its still matters most -->
-  <link rel="preload" as="image" href="assets/img/hero-video-placeholder.jpg" fetchpriority="high">
+  <!-- A frame from the loop itself, so the first paint matches the video -->
+  <link rel="preload" as="image" href="assets/img/hero-poster.jpg" fetchpriority="high">
   <!-- Shared shell (nav, sections, cards, footer) + home specifics -->
-  <link rel="stylesheet" href="assets/css/content.css?v=40">
-  <link rel="stylesheet" href="assets/css/home.css?v=18">
+  <link rel="stylesheet" href="assets/css/content.css?v=41">
+  <link rel="stylesheet" href="assets/css/home.css?v=19">
 </head>
 <body>
 
@@ -56,7 +56,9 @@
       <!-- Full-bleed: no container, so the panel runs to the screen edges.
            The still stands in for the looping clip. -->
       <div class="hero-video">
-        <img class="hero-video__media" src="assets/img/hero-video-placeholder.jpg" alt="" fetchpriority="high">
+        <video class="hero-video__media" src="assets/video/hero.mp4"
+             poster="assets/img/hero-poster.jpg"
+             autoplay muted loop playsinline preload="auto"></video>
         <div class="hero-video__scrim" aria-hidden="true"></div>
         <div class="hero-video__copy">
           <h1 class="hero-video__title">Connecting music with content</h1>
@@ -179,7 +181,7 @@
           <div class="app-card">
             <div class="app-card__panel">
               <div class="app-card__copy">
-                <h3 class="app-card__title">Select who posts</h3>
+                <h3 class="app-card__title">Accounts selection</h3>
                 <p class="app-card__text">Music artists choose accounts to post with their track.</p>
               </div>
             </div>
@@ -193,7 +195,7 @@
           <div class="app-card app-card--mirrored">
             <div class="app-card__panel">
               <div class="app-card__copy">
-                <h3 class="app-card__title">Select tracks</h3>
+                <h3 class="app-card__title">Music selection</h3>
                 <p class="app-card__text">Content creators choose tracks to post with.</p>
               </div>
             </div>
@@ -208,7 +210,7 @@
             <div class="app-card__panel">
               <div class="app-card__copy">
                 <h3 class="app-card__title">Pay per Post</h3>
-                <p class="app-card__text">Payment is released when a post containing the selected track is published within the set timeframe.</p>
+                <p class="app-card__text">Payment is released when a post containing selected music is published and confirmed.</p>
               </div>
             </div>
             <div class="app-card__screen">
@@ -246,7 +248,7 @@
 
               <text class="why-card__title" x="33" y="57">Choice on both sides</text>
               <text class="why-card__text" x="33" y="89">Music artists choose who posts. Content</text>
-              <text class="why-card__text" x="33" y="112">creators choose which tracks to post with.</text>
+              <text class="why-card__text" x="33" y="117">creators choose which tracks to post with.</text>
 
               <!-- Track card, chosen by a creator -->
               <g>
@@ -291,50 +293,42 @@
 
               <text class="why-card__title" x="33" y="57">Authentic music engagement</text>
               <text class="why-card__text" x="33" y="89">Music spreads through content reaching</text>
-              <text class="why-card__text" x="33" y="112">new people through different people.</text>
+              <text class="why-card__text" x="33" y="117">new people through different people.</text>
 
-              <!-- Everything the track picks up on the way out. The card is
-                   drawn after, so it covers the inner ends of the spokes. -->
-              <g stroke="#2e2e2e" stroke-width="1.5" fill="none">
-                <path d="M240 318L112 232"/><path d="M240 318L376 218"/><path d="M240 318L392 386"/>
-                <path d="M240 318L124 404"/><path d="M240 318L252 440"/>
-              </g>
-
-              <rect x="146" y="272" width="188" height="92" rx="22" fill="#262626"/>
-              <rect x="166" y="292" width="52" height="52" rx="13" fill="#e54552"/>
-              <path d="M186 330v-20l16-3.5v20" stroke="#0a0a0a" stroke-width="2.4" fill="none" stroke-linecap="round"/>
-              <circle cx="183.5" cy="330" r="4" fill="#0a0a0a"/>
-              <circle cx="199.5" cy="326.5" r="4" fill="#0a0a0a"/>
-              <text class="why-card__label" x="230" y="312">Track name</text>
-              <text class="why-card__sub" x="230" y="332">Artist</text>
+              <!-- A square track tile, with everything it picks up scattered
+                   loose around it -->
+              <rect x="150" y="196" width="180" height="180" rx="40" fill="#262626"/>
+              <rect x="208" y="222" width="64" height="64" rx="16" fill="#e54552"/>
+              <text class="why-card__label" x="240" y="316" text-anchor="middle">Track name</text>
+              <text class="why-card__sub" x="240" y="338" text-anchor="middle">Artist</text>
 
               <!-- Views -->
-              <circle cx="112" cy="232" r="26" fill="#4A9EFF"/>
-              <g transform="translate(112 232)" stroke="#0a0a0a" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="108" cy="216" r="26" fill="#4A9EFF"/>
+              <g transform="translate(108 216)" stroke="#0a0a0a" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M-12 0c3-5 7-8 12-8s9 3 12 8c-3 5-7 8-12 8s-9-3-12-8z"/>
                 <circle cx="0" cy="0" r="3.4"/>
               </g>
 
               <!-- Likes -->
-              <circle cx="376" cy="218" r="26" fill="#E54552"/>
-              <path d="M376 230.5c0 0-11.5-7-11.5-14.6c0-3.7 2.8-6.2 6.1-6.2c2.2 0 4.2 1.1 5.4 2.9c1.2-1.8 3.2-2.9 5.4-2.9c3.3 0 6.1 2.5 6.1 6.2c0 7.6-11.5 14.6-11.5 14.6z" fill="#0a0a0a"/>
+              <circle cx="378" cy="208" r="26" fill="#E54552"/>
+              <path d="M378 220.5c0 0-11.5-7-11.5-14.6c0-3.7 2.8-6.2 6.1-6.2c2.2 0 4.2 1.1 5.4 2.9c1.2-1.8 3.2-2.9 5.4-2.9c3.3 0 6.1 2.5 6.1 6.2c0 7.6-11.5 14.6-11.5 14.6z" fill="#0a0a0a"/>
 
               <!-- Comments -->
-              <circle cx="392" cy="386" r="26" fill="#3DDC97"/>
-              <g transform="translate(392 386)" fill="none" stroke="#0a0a0a" stroke-width="2.2" stroke-linejoin="round">
+              <circle cx="392" cy="372" r="26" fill="#3DDC97"/>
+              <g transform="translate(392 372)" fill="none" stroke="#0a0a0a" stroke-width="2.2" stroke-linejoin="round">
                 <path d="M-11 -8h22a2.5 2.5 0 0 1 2.5 2.5v9a2.5 2.5 0 0 1 -2.5 2.5h-12l-6 5v-5h-4a2.5 2.5 0 0 1 -2.5 -2.5v-9a2.5 2.5 0 0 1 2.5 -2.5z"/>
               </g>
 
               <!-- Shares -->
-              <circle cx="124" cy="404" r="26" fill="#A78BFA"/>
-              <g transform="translate(124 404)" stroke="#0a0a0a" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="110" cy="386" r="26" fill="#A78BFA"/>
+              <g transform="translate(110 386)" stroke="#0a0a0a" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="7" cy="-8" r="3.6"/><circle cx="-8" cy="0" r="3.6"/><circle cx="7" cy="8" r="3.6"/>
                 <path d="M-4.8 -1.8l8.6-4.4M-4.8 1.8l8.6 4.4"/>
               </g>
 
               <!-- Music streams -->
-              <circle cx="252" cy="440" r="26" fill="#D8A608"/>
-              <g transform="translate(252 440)">
+              <circle cx="250" cy="438" r="26" fill="#D8A608"/>
+              <g transform="translate(250 438)">
                 <path d="M-3 7v-16l12-2.6v16" stroke="#0a0a0a" stroke-width="2.2" fill="none" stroke-linecap="round"/>
                 <circle cx="-6" cy="7" r="3.6" fill="#0a0a0a"/>
                 <circle cx="6" cy="4.4" r="3.6" fill="#0a0a0a"/>
