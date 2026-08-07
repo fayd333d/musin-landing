@@ -12,8 +12,8 @@
   <!-- A frame from the loop itself, so the first paint matches the video -->
   <link rel="preload" as="image" href="assets/img/hero-poster.jpg" fetchpriority="high">
   <!-- Shared shell (nav, sections, cards, footer) + home specifics -->
-  <link rel="stylesheet" href="assets/css/content.css?v=41">
-  <link rel="stylesheet" href="assets/css/home.css?v=19">
+  <link rel="stylesheet" href="assets/css/content.css?v=42">
+  <link rel="stylesheet" href="assets/css/home.css?v=20">
 </head>
 <body>
 
@@ -210,7 +210,7 @@
             <div class="app-card__panel">
               <div class="app-card__copy">
                 <h3 class="app-card__title">Pay per Post</h3>
-                <p class="app-card__text">Payment is released when a post containing selected music is published and confirmed.</p>
+                <p class="app-card__text">Payment is released when a post containing selected music is published within the set time period.</p>
               </div>
             </div>
             <div class="app-card__screen">
@@ -297,10 +297,10 @@
 
               <!-- A square track tile, with everything it picks up scattered
                    loose around it -->
-              <rect x="150" y="196" width="180" height="180" rx="40" fill="#262626"/>
-              <rect x="208" y="222" width="64" height="64" rx="16" fill="#e54552"/>
-              <text class="why-card__label" x="240" y="316" text-anchor="middle">Track name</text>
-              <text class="why-card__sub" x="240" y="338" text-anchor="middle">Artist</text>
+              <rect x="165" y="211" width="150" height="150" rx="34" fill="#262626"/>
+              <rect x="213" y="233" width="54" height="54" rx="14" fill="#e54552"/>
+              <text class="why-card__label" x="240" y="311" text-anchor="middle">Track name</text>
+              <text class="why-card__sub" x="240" y="330" text-anchor="middle">Artist</text>
 
               <!-- Views -->
               <circle cx="108" cy="216" r="26" fill="#4A9EFF"/>
@@ -328,10 +328,10 @@
 
               <!-- Music streams -->
               <circle cx="250" cy="438" r="26" fill="#D8A608"/>
-              <g transform="translate(250 438)">
-                <path d="M-3 7v-16l12-2.6v16" stroke="#0a0a0a" stroke-width="2.2" fill="none" stroke-linecap="round"/>
-                <circle cx="-6" cy="7" r="3.6" fill="#0a0a0a"/>
-                <circle cx="6" cy="4.4" r="3.6" fill="#0a0a0a"/>
+              <g transform="translate(250 438)" fill="#0a0a0a">
+                <path d="M-5 6V-8H9V6" fill="none" stroke="#0a0a0a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="-9" cy="6" r="4"/>
+                <circle cx="5" cy="6" r="4"/>
               </g>
             </svg>
           </article>

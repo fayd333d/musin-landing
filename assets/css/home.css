@@ -33,6 +33,8 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* Pulled up off centre so more of the lower half of the frame is in view */
+  object-position: center 62%;
   -webkit-mask-image: linear-gradient(to bottom, #000 52%, rgba(0, 0, 0, 0) 96%);
   mask-image: linear-gradient(to bottom, #000 52%, rgba(0, 0, 0, 0) 96%);
 }
@@ -65,6 +67,16 @@
 
 /* Sized off the viewport so the line never wraps */
 .hero-video__title {
+  /* A soft highlight drifts across the letters; the flat colour underneath is
+     what shows if background-clip: text isn't supported */
+  background: linear-gradient(100deg,
+    var(--text-primary) 0%, var(--text-primary) 38%,
+    #ffffff 48%, #ffd9dc 52%, var(--text-primary) 62%,
+    var(--text-primary) 100%) 0 0 / 300% 100% no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: hero-shine 7s ease-in-out 1.2s infinite;
   font-size: min(5.1vw, 68px);
   line-height: 1.12;
   font-weight: 600;
@@ -77,6 +89,15 @@
   font-size: 26px;
   line-height: 42px;
   color: var(--text-primary);
+}
+
+@keyframes hero-shine {
+  0%       { background-position: 120% 0; }
+  45%, 100% { background-position: -20% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-video__title { animation: none; background-position: -20% 0; }
 }
 
 .hero-video__cta { margin-top: 6px; }
@@ -381,6 +402,9 @@
    happens on. */
 .how { padding: 0 0 112px; }
 .how .app-stack { margin-top: 56px; }
+
+/* A little wider than the shared 38%, so the longest step name holds one line */
+.how .app-card__panel { flex-basis: 42%; }
 
 /* Matched to the role section headings */
 .how .app-card__title {

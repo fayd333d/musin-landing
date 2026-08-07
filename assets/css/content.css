@@ -889,6 +889,20 @@ img { display: block; max-width: 100%; }
 /* ============ CTA ============ */
 .cta { padding-bottom: 64px; }
 
+/* Registered so the glow colour can be animated; the plain background below
+   is what shows where @property isn't supported */
+@property --cta-glow {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: rgba(229, 69, 82, 0.3);
+}
+
+@property --cta-glow-fade {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: rgba(229, 69, 82, 0);
+}
+
 .cta__card {
   display: flex;
   flex-direction: column;
@@ -898,9 +912,20 @@ img { display: block; max-width: 100%; }
   padding: 80px 40px;
   border-radius: var(--radius-card);
   background:
-    radial-gradient(120% 150% at 50% 0%, rgba(229, 69, 82, 0.3) 0%, rgba(229, 69, 82, 0) 58%),
+    radial-gradient(120% 150% at 50% 0%, var(--cta-glow) 0%, var(--cta-glow-fade) 58%),
     var(--bg-card-2);
   border: 1px solid var(--border);
+  animation: cta-glow 24s ease-in-out infinite;
+}
+
+@keyframes cta-glow {
+  0%, 100% { --cta-glow: rgba(229, 69, 82, 0.30); --cta-glow-fade: rgba(229, 69, 82, 0); }
+  33%      { --cta-glow: rgba(167, 139, 250, 0.28); --cta-glow-fade: rgba(167, 139, 250, 0); }
+  66%      { --cta-glow: rgba(61, 220, 151, 0.22); --cta-glow-fade: rgba(61, 220, 151, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta__card { animation: none; }
 }
 
 .cta__title {
