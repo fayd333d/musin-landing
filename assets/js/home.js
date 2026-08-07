@@ -19,12 +19,12 @@ burger.addEventListener("click", () => {
    "slot" (signed distance from the centre, wrapping round the list) so only
    slots -1/0/+1 are visible and the side cards face outward. Here they advance
    on a timer only — no arrows, no dragging, no play/pause. */
-function createWheel(stage, { onCentre, interval = 3.2, dim = 0.28, drag = false, auto = true } = {}) {
+function createWheel(stage, { onCentre, interval = 3.2, dim = 0.28, drag = false, auto = true, start = 0 } = {}) {
   const cards = [...stage.children];
   const N = cards.length;
   if (!N) return null;
 
-  let centreIndex = 0;
+  let centreIndex = ((start % N) + N) % N;
   const lastSlot = new Array(N).fill(null);
 
   function render() {
@@ -373,7 +373,8 @@ if (flipTrackRow && flipCreatorRow && !prefersReducedMotion) {
    No timer here — the cards only move when someone drags, swipes, flicks a
    trackpad sideways, or clicks one of the cards either side. */
 const whyStage = document.getElementById("whyStack");
-const whyWheel = whyStage ? createWheel(whyStage, { dim: 0.34, drag: true, auto: false }) : null;
+/* Opens on "Choice on both sides" rather than the first card */
+const whyWheel = whyStage ? createWheel(whyStage, { dim: 0.34, drag: true, auto: false, start: 2 }) : null;
 
 /* ---------- Statistics ----------
    Each number gently fluctuates within its own range. A slow triangle wave off
