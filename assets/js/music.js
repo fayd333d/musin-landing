@@ -530,7 +530,7 @@ gsap.fromTo(
 /* ---------- Section entrance animations ---------- */
 if (!prefersReducedMotion) {
   gsap.utils
-    .toArray([".section-title", ".cta__card"])
+    .toArray([".section-title", ".cta__inner"])
     .forEach((el) => {
       gsap.from(el, {
         y: 40,

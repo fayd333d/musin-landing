@@ -887,7 +887,13 @@ img { display: block; max-width: 100%; }
 }
 
 /* ============ CTA ============ */
-.cta { padding-bottom: 64px; }
+/* A full-bleed tinted band rather than a card: it runs to the edges of the
+   screen and dissolves into the page above and below, the way the hero does. */
+.cta {
+  position: relative;
+  padding: 128px 0 136px;
+  text-align: center;
+}
 
 /* Registered so the glow colour can be animated; the plain background below
    is what shows where @property isn't supported */
@@ -903,18 +909,25 @@ img { display: block; max-width: 100%; }
   initial-value: rgba(229, 69, 82, 0);
 }
 
-.cta__card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 16px;
-  padding: 80px 40px;
-  border-radius: var(--radius-card);
+/* The band itself. On a pseudo-element so the mask fades the colour without
+   touching the copy sitting on top of it. */
+.cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
   background:
     radial-gradient(120% 150% at 50% 0%, var(--cta-glow) 0%, var(--cta-glow-fade) 58%),
     var(--bg-card-2);
-  border: 1px solid var(--border);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, #000 26%, #000 74%, rgba(0, 0, 0, 0) 100%);
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, #000 26%, #000 74%, rgba(0, 0, 0, 0) 100%);
+}
+
+.cta__inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
 }
 
 /* Held on the first keyframe — our brand red — until the section is scrolled
@@ -951,7 +964,7 @@ img { display: block; max-width: 100%; }
   color: var(--text-tertiary);
 }
 
-.cta__card .btn { margin-top: 8px; }
+.cta__inner .btn { margin-top: 8px; }
 
 /* ============ Footer ============ */
 /* Compact footer (#4) */
@@ -1070,7 +1083,7 @@ img { display: block; max-width: 100%; }
     white-space: nowrap;
   }
 
-  .cta__card { padding: 64px 24px; }
+  .cta { padding: 88px 0 96px; }
 
   /* Inside Musin app — the portrait phone screens take over at this width, so
      the cards stack (text on top, screen underneath) and narrow to suit them.
