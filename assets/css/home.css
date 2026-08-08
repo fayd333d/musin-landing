@@ -299,6 +299,9 @@
 .persona__visual .video-card,
 .persona__visual .campaign-tile { width: var(--wheel-card); }
 
+/* Shorter than the clip wheel's 9:16, so it tracks the squatter tiles */
+#campaignScroller { height: calc(var(--wheel-card) * 13 / 9 + 32px); }
+
 .persona__visual .create__scroller.no-anim .video-card,
 .persona__visual .create__scroller.no-anim .campaign-tile { transition: none; }
 
@@ -318,7 +321,7 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  aspect-ratio: 9 / 16;
+  aspect-ratio: 9 / 13;
   display: flex;
   flex-direction: column;
   padding: 12px;
@@ -335,9 +338,10 @@
 
 .campaign-tile__cover {
   flex: 0 0 auto;
-  /* Smaller than the tile, so the figures below get the room */
+  /* Smaller than the tile, and set down from the top so it sits close to the
+     track name underneath it */
   width: 56%;
-  margin: 2px auto 0;
+  margin: 12% auto 0;
   aspect-ratio: 1 / 1;
   border-radius: 12px;
   background-color: var(--bg-elevated);
@@ -351,7 +355,6 @@
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  padding-top: 4px;
 }
 
 .campaign-tile__track { text-align: center; }
