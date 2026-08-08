@@ -893,13 +893,13 @@ img { display: block; max-width: 100%; }
    is what shows where @property isn't supported */
 @property --cta-glow {
   syntax: "<color>";
-  inherits: false;
+  inherits: true;
   initial-value: rgba(229, 69, 82, 0.3);
 }
 
 @property --cta-glow-fade {
   syntax: "<color>";
-  inherits: false;
+  inherits: true;
   initial-value: rgba(229, 69, 82, 0);
 }
 
@@ -915,13 +915,16 @@ img { display: block; max-width: 100%; }
     radial-gradient(120% 150% at 50% 0%, var(--cta-glow) 0%, var(--cta-glow-fade) 58%),
     var(--bg-card-2);
   border: 1px solid var(--border);
-  /* Held on the first keyframe — our brand red — until the section is
-     scrolled into view, where the script sets it running */
+}
+
+/* Held on the first keyframe — our brand red — until the section is scrolled
+   into view, where the script sets it running */
+[data-cta-glow] {
   animation: cta-glow 12s ease-in-out infinite;
   animation-play-state: paused;
 }
 
-.cta__card.is-live { animation-play-state: running; }
+[data-cta-glow].is-live { animation-play-state: running; }
 
 @keyframes cta-glow {
   0%, 100% { --cta-glow: rgba(229, 69, 82, 0.30); --cta-glow-fade: rgba(229, 69, 82, 0); }
@@ -930,7 +933,7 @@ img { display: block; max-width: 100%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cta__card { animation: none; }
+  [data-cta-glow] { animation: none; }
 }
 
 .cta__title {

@@ -168,17 +168,19 @@ function createWheel(stage, { onCentre, interval = 3.2, dim = 0.28, drag = false
 }
 
 /* ---- Promote Music: campaign cards, as on the Music landing ---- */
+/* Deliberately not the catalogue the "Tracks available now" row cycles —
+   these are campaigns, and repeating the same titles read as a bug. */
 const campaigns = [
-  ["Miss the rage", "Den Best", 4, "14", "486,320", "24,316"],
-  ["Still lonely", "Hoover", 5, "18", "793,540", "39,677"],
-  ["6 Gold", "Leboi", 6, "23", "1,247,860", "62,393"],
-  ["You’re my fire", "Flare John", 7, "32", "2,335,132", "116,757"],
-  ["SVEG", "Lukrix", 8, "27", "1,684,710", "84,236"],
-  ["My world", "Je333", 9, "41", "3,928,450", "196,423"],
-  ["U WUT", "Zen X", 10, "56", "5,612,780", "280,639"],
-  ["Can’t get away", "Lin Xiao", 11, "68", "7,438,920", "371,946"],
-  ["Adrenaline rush", "Quayo", 12, "84", "9,126,370", "456,319"],
-  ["Not 1 of us", "ZEZTI", 13, "36", "4,287,640", "214,382"],
+  ["Nightshift", "Roka", 16, "14", "486,320", "24,316"],
+  ["Paper planes", "Mibbo", 17, "18", "793,540", "39,677"],
+  ["Slow motion", "Kaydo", 18, "23", "1,247,860", "62,393"],
+  ["No signal", "Vintr", 19, "32", "2,335,132", "116,757"],
+  ["Overdrive", "Sayu", 20, "27", "1,684,710", "84,236"],
+  ["Bad habit", "Trell", 21, "41", "3,928,450", "196,423"],
+  ["Golden hour", "Nyra", 22, "56", "5,612,780", "280,639"],
+  ["Rewind", "Osco", 1, "68", "7,438,920", "371,946"],
+  ["Static", "Halvo", 2, "84", "9,126,370", "456,319"],
+  ["Late reply", "Pim", 3, "36", "4,287,640", "214,382"],
 ];
 
 const campaignStage = document.getElementById("campaignScroller");
@@ -374,7 +376,7 @@ if (flipTrackRow && flipCreatorRow && !prefersReducedMotion) {
    trackpad sideways, or clicks one of the cards either side. */
 const whyStage = document.getElementById("whyStack");
 /* Opens on "Choice on both sides" rather than the first card */
-const whyWheel = whyStage ? createWheel(whyStage, { dim: 0.34, drag: true, auto: false, start: 2 }) : null;
+const whyWheel = whyStage ? createWheel(whyStage, { dim: 0.34, drag: true, auto: false, start: 1 }) : null;
 
 /* ---------- Statistics ----------
    Each number gently fluctuates within its own range. A slow triangle wave off

@@ -10,8 +10,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600&display=swap" rel="stylesheet">
   <!-- Shared shell (nav, sections, cards, footer) + home specifics -->
-  <link rel="stylesheet" href="assets/css/content.css?v=43">
-  <link rel="stylesheet" href="assets/css/home.css?v=22">
+  <link rel="stylesheet" href="assets/css/content.css?v=44">
+  <link rel="stylesheet" href="assets/css/home.css?v=23">
 </head>
 <body>
 
@@ -161,7 +161,7 @@
          The four steps, each shown on the app screen where it happens. -->
     <section class="app how" id="how">
       <div class="container">
-        <h2 class="section-title">How it works</h2>
+        <h2 class="section-title">Musin platform</h2>
         <div class="app-stack">
           <div class="app-card">
             <div class="app-card__panel">
@@ -208,8 +208,8 @@
           <div class="app-card app-card--mirrored">
             <div class="app-card__panel">
               <div class="app-card__copy">
-                <h3 class="app-card__title">Pay per Post</h3>
-                <p class="app-card__text">Payment is released when a post containing selected music is published within the set time period.</p>
+                <h3 class="app-card__title">Direct Payments</h3>
+                <p class="app-card__text">Funds are released after each paid post is confirmed.</p>
               </div>
             </div>
             <div class="app-card__screen">
@@ -226,16 +226,12 @@
     <!-- ============ WHY IT WORKS (coverflow cards) ============ -->
     <section class="why" id="why">
       <div class="container">
-        <h2 class="section-title">Why it works</h2>
         <div class="create__viewport why-viewport">
           <div class="why-stack" id="whyStack">
           <article class="why-card">
             <img src="assets/img/why/why-1-direct.svg" alt="Direct collaborations — tracks and social media accounts connect directly." loading="lazy">
           </article>
 
-          <article class="why-card">
-            <img src="assets/img/why/why-2-results.svg" alt="Pay for results — payments are released only after content is confirmed to be published." loading="lazy">
-          </article>
 
           <!-- Card 3 is inline rather than a file so its type renders in the
                page's Inter, matching the lettering baked into the two above -->
@@ -386,15 +382,13 @@
       </div>
     </section>
     <!-- ============ CLOSING CTA ============ -->
-    <section class="cta home-cta">
-      <div class="container">
-        <div class="cta__card home-cta__card">
-          <h2 class="cta__title">Music spreads through content</h2>
-          <p class="cta__text">Choose how you want to use Musin</p>
-          <div class="home-cta__actions">
-            <a href="music.html" class="btn btn--primary btn--md">Promote music</a>
-            <a href="index.html" class="btn btn--light btn--md">Create Content</a>
-          </div>
+    <section class="cta home-cta" data-cta-glow>
+      <div class="container home-cta__inner">
+        <h2 class="cta__title">Music spreads through content</h2>
+        <p class="cta__text">Choose how you want to use Musin</p>
+        <div class="home-cta__actions">
+          <a href="music.html" class="btn btn--primary btn--md">Promote music</a>
+          <a href="index.html" class="btn btn--light btn--md">Create Content</a>
         </div>
       </div>
     </section>
@@ -434,7 +428,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-  <script src="assets/js/cta.js?v=1"></script>
-  <script src="assets/js/home.js?v=12"></script>
+  <script src="assets/js/cta.js?v=2"></script>
+  <script src="assets/js/home.js?v=13"></script>
 </body>
 </html>

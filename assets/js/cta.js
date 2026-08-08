@@ -1,7 +1,7 @@
 /* The closing CTA sits on brand red until it is scrolled to, then cycles
    through the other brand colours. Shared by all three landings. */
 (function () {
-  const card = document.querySelector(".cta__card");
+  const card = document.querySelector("[data-cta-glow]");
   if (!card) return;
 
   const observer = new IntersectionObserver(
