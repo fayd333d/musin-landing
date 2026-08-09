@@ -459,14 +459,7 @@ if (createSection) {
    their coloured tops peek out — no JS needed. */
 
 /* ---------- Logos: auto-run left to right ---------- */
-const logoMarquee = document.getElementById("logoMarquee");
-logoMarquee.appendChild(logoMarquee.querySelector(".logos__group").cloneNode(true));
-
-gsap.fromTo(
-  logoMarquee,
-  { xPercent: -50 },
-  { xPercent: 0, duration: 30, ease: "none", repeat: -1 }
-);
+/* Logos marquee lives in marquee.js, shared with the other landings. */
 
 /* ---------- Section entrance animations ---------- */
 if (!prefersReducedMotion) {

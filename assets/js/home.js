@@ -429,16 +429,7 @@ function liveCounter(numberEl, min, max) {
 liveCounter(document.getElementById("trackCount"), 3764, 3873);
 liveCounter(document.getElementById("creatorCount"), 7843, 8214);
 
-/* ---------- Logos: auto-run left to right ---------- */
-const logoMarquee = document.getElementById("logoMarquee");
-if (logoMarquee) {
-  logoMarquee.appendChild(logoMarquee.querySelector(".logos__group").cloneNode(true));
-  gsap.fromTo(
-    logoMarquee,
-    { xPercent: -50 },
-    { xPercent: 0, duration: 30, ease: "none", repeat: -1 }
-  );
-}
+/* Logos marquee lives in marquee.js, shared with the other landings. */
 
 /* ---------- Section entrance animations ---------- */
 if (!prefersReducedMotion) {
