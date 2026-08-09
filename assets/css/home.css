@@ -144,8 +144,22 @@
 .flip-card__face {
   position: absolute;
   inset: 0;
+  /* a hard guarantee: nothing can sit outside the card, whatever the device
+     font metrics do to the text below the cover */
+  overflow: hidden;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+}
+
+/* The chip fills the card and the artwork gives up height first, so the title
+   and artist always have room inside rather than spilling past the bottom. */
+.flip-card .track-chip,
+.flip-card .creator-chip { height: 100%; }
+
+.flip-card .track-chip__cover,
+.flip-card .creator-chip__photo {
+  flex: 0 1 auto;
+  min-height: 0;
 }
 
 .flip-card__face--back { transform: rotateY(180deg); }
