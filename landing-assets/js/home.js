@@ -457,9 +457,13 @@ if (!prefersReducedMotion) {
   if (!video || !toggle) return;
 
   function sync() {
+    const stopped = video.paused;
     // the button is only ever on screen while the clip is stopped, so it
     // shows a play glyph and nothing else
-    toggle.hidden = !video.paused;
+    toggle.hidden = !stopped;
+    // and the video itself stops rendering, which takes the browser's own
+    // overlay play button with it
+    video.classList.toggle("is-stopped", stopped);
   }
 
   toggle.addEventListener("click", () => {

@@ -1106,6 +1106,9 @@ img { display: block; max-width: 100%; }
       "social"
       "links"
       "copy";
+    /* centres the column track itself; the desktop space-between would
+       otherwise pin the single track to the left edge */
+    justify-content: center;
     justify-items: center;
     gap: 22px;
   }

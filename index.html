@@ -18,8 +18,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600&display=swap" rel="stylesheet">
   <!-- Shared shell (nav, sections, cards, footer) + home specifics -->
-  <link rel="stylesheet" href="/landing-assets/css/content.css?v=58">
-  <link rel="stylesheet" href="/landing-assets/css/home.css?v=39">
+  <link rel="stylesheet" href="/landing-assets/css/content.css?v=59">
+  <link rel="stylesheet" href="/landing-assets/css/home.css?v=41">
 </head>
 <body>
 
@@ -247,21 +247,20 @@
         <div class="create__viewport why-viewport">
           <div class="why-stack" id="whyStack">
           <article class="why-card">
-            <img src="/landing-assets/img/why/why-1-direct.svg" width="480" height="480" alt="Direct collaborations — tracks and social media accounts connect directly." loading="lazy">
+            <h3 class="why-card__heading">Direct collaborations</h3>
+            <p class="why-card__copy">Tracks and social media accounts connect directly.</p>
+            <img class="why-card__art" src="/landing-assets/img/why/why-1-direct.svg" width="480" height="280" alt="" loading="lazy">
           </article>
 
 
-          <!-- Card 3 is inline rather than a file so its type renders in the
-               page's Inter, matching the lettering baked into the two above -->
+          <!-- Headings and copy are real HTML on every card now, so they scale
+               with the page rather than with the artwork -->
           <article class="why-card">
-            <svg class="why-card__art" viewBox="0 0 480 480" role="img" aria-labelledby="why3title why3desc">
+            <h3 class="why-card__heading">Choice on both sides</h3>
+            <p class="why-card__copy">Music artists choose who posts. Content creators choose which tracks to post with.</p>
+            <svg class="why-card__art" viewBox="0 160 480 272" role="img" aria-labelledby="why3title why3desc">
               <title id="why3title">Choice on both sides</title>
               <desc id="why3desc">Music artists choose who posts. Content creators choose which tracks to post with.</desc>
-              <path d="M0 40C0 17.9086 17.9086 0 40 0H440C462.091 0 480 17.9086 480 40V440C480 462.091 462.091 480 440 480H40C17.9086 480 0 462.091 0 440V40Z" fill="#1A1A1A"/>
-
-              <text class="why-card__title" x="33" y="57">Choice on both sides</text>
-              <text class="why-card__text" x="33" y="89">Music artists choose who posts. Content</text>
-              <text class="why-card__text" x="33" y="117">creators choose which tracks to post with.</text>
 
               <!-- Track card, chosen by a creator -->
               <g>
@@ -299,14 +298,11 @@
           </article>
 
           <article class="why-card">
-            <svg class="why-card__art" viewBox="0 0 480 480" role="img" aria-labelledby="why4title why4desc">
+            <h3 class="why-card__heading">Authentic music engagement</h3>
+            <p class="why-card__copy">Music spreads through content, reaching new people through different people.</p>
+            <svg class="why-card__art" viewBox="0 180 480 300" role="img" aria-labelledby="why4title why4desc">
               <title id="why4title">Authentic music engagement</title>
               <desc id="why4desc">Music spreads through content, picking up views, likes, comments, shares and streams along the way.</desc>
-              <path d="M0 40C0 17.9086 17.9086 0 40 0H440C462.091 0 480 17.9086 480 40V440C480 462.091 462.091 480 440 480H40C17.9086 480 0 462.091 0 440V40Z" fill="#1A1A1A"/>
-
-              <text class="why-card__title" x="33" y="57">Authentic music engagement</text>
-              <text class="why-card__text" x="33" y="89">Music spreads through content reaching</text>
-              <text class="why-card__text" x="33" y="117">new people through different people.</text>
 
               <!-- A square track tile, with everything it picks up scattered
                    loose around it -->
@@ -484,6 +480,6 @@
   <script src="/landing-assets/js/marquee.js?v=4"></script>
   <script src="/landing-assets/js/cta.js?v=2"></script>
   <script src="/landing-assets/js/support.js?v=3"></script>
-  <script src="/landing-assets/js/home.js?v=17"></script>
+  <script src="/landing-assets/js/home.js?v=18"></script>
 </body>
 </html>

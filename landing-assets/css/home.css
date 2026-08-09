@@ -103,16 +103,22 @@
   }
 }
 
-/* Safari paints a large play glyph over a paused video; this is background
-   footage with its own control, so hide it. */
-.hero-video__media::-webkit-media-controls,
-.hero-video__media::-webkit-media-controls-panel,
-.hero-video__media::-webkit-media-controls-start-playback-button,
-.hero-video__media::-webkit-media-controls-overlay-play-button {
+/* Safari paints a large play glyph over a paused video. Each pseudo-element
+   needs its own rule: browsers drop the whole selector list if any one of
+   them is unrecognised, which is why grouping them did nothing. */
+.hero-video__media::-webkit-media-controls { display: none !important; }
+.hero-video__media::-webkit-media-controls-panel { display: none !important; }
+.hero-video__media::-webkit-media-controls-start-playback-button {
   display: none !important;
   -webkit-appearance: none;
-  opacity: 0;
 }
+.hero-video__media::-webkit-media-controls-overlay-play-button { display: none !important; }
+.hero-video__media::-webkit-media-controls-play-button { display: none !important; }
+
+/* Whatever the browser wants to paint over a paused video — its own play
+   glyph included — goes away with the element. Frame one is black, and the
+   panel behind it is the same black, so nothing changes visually. */
+.hero-video__media.is-stopped { visibility: hidden; }
 
 .hero-video__cta { margin-top: 6px; }
 
@@ -499,9 +505,11 @@
 .why-viewport { margin-top: 0; }
 
 .why-stack {
+  /* Portrait cards: the copy sits above the artwork, so they need the height */
   --why-card: clamp(260px, 34vw, 420px);
+  --why-ratio: 1.29;
   position: relative;
-  height: calc(var(--why-card) + 40px);
+  height: calc(var(--why-card) * var(--why-ratio) + 40px);
   overflow: hidden;
   cursor: grab;
   /* let the page scroll vertically while we take the horizontal drag, and
@@ -513,16 +521,16 @@
 .why-stack.is-dragging { cursor: grabbing; }
 
 /* The cards either side are the control for stepping the wheel */
-.why-card { cursor: pointer; }
-.why-card.is-centre { cursor: grab; }
-
-.why-stack.no-anim .why-card { transition: none; }
-
 .why-card {
   position: absolute;
   left: 50%;
   top: 50%;
   width: var(--why-card);
+  aspect-ratio: 1 / var(--why-ratio);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 26px 24px 18px;
   border-radius: 40px;
   overflow: hidden;
   background: var(--bg-card);
@@ -530,12 +538,34 @@
   transform-origin: center center;
   transition: transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1), filter 0.55s ease, opacity 0.55s ease;
   backface-visibility: hidden;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
   will-change: transform, filter, opacity;
 }
 
-.why-card img,
-.why-card__art { display: block; width: 100%; height: auto; }
+/* Real text, so it scales with the page instead of with the artwork */
+.why-card__heading {
+  font-size: 26px;
+  line-height: 1.18;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+  color: var(--text-primary);
+}
+
+.why-card__copy {
+  font-size: 17px;
+  line-height: 1.4;
+  color: var(--text-tertiary);
+}
+
+/* takes whatever height is left under the copy */
+.why-card__art {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  margin-top: 10px;
+  object-fit: contain;
+}
+
+.why-card img { display: block; }
 
 /* Card 3 draws its own type, so it needs the page's text styles */
 .why-card__title {
@@ -668,9 +698,11 @@
   .why .section-title { font-size: min(10.5vw, 44px); line-height: 1.06; }
 
   /* As wide as the column allows, so the artwork and its type read larger */
-  /* vw, not %: the stack height is calc(var(--why-card) + 40px), and a
-     percentage there resolves against an auto height and collapses it */
-  .why-stack { --why-card: min(92vw, 400px); }
+  /* narrow enough that a card either side still peeks in */
+  .why-stack { --why-card: min(70vw, 340px); }
+  .why-card { padding: 22px 20px 16px; border-radius: 32px; }
+  .why-card__heading { font-size: 24px; }
+  .why-card__copy { font-size: 16px; }
 
   .how .app-card__title { text-align: center; }
   .how .app-card__text { text-align: center; max-width: none; }
