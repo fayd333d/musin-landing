@@ -507,7 +507,9 @@
 .why-stack {
   /* Portrait cards: the copy sits above the artwork, so they need the height */
   --why-card: clamp(260px, 34vw, 420px);
-  --why-ratio: 1.29;
+  /* the artwork is roughly 480x300, so a 1.29 box left ~180px of dead
+     space under it once object-fit had letterboxed the image */
+  --why-ratio: 1;
   position: relative;
   height: calc(var(--why-card) * var(--why-ratio) + 40px);
   overflow: hidden;
@@ -644,20 +646,21 @@
   .persona__row,
   .persona--mirrored .persona__row {
     grid-template-columns: minmax(0, 1fr);
+    /* button sits under the copy and above the wheel */
     grid-template-areas:
       "copy"
-      "visual"
-      "actions";
-    justify-items: center;
-    text-align: center;
-    row-gap: 28px;
+      "actions"
+      "visual";
+    justify-items: stretch;
+    text-align: left;
+    row-gap: 24px;
   }
 
   .persona__copy { align-self: auto; max-width: 520px; }
-  .persona__actions { align-self: auto; justify-content: center; }
+  .persona__actions { align-self: auto; justify-content: flex-start; }
   .persona__visual { width: 100%; }
   .persona__visual .create__scroller { --wheel-card: clamp(150px, 44vw, 220px); }
-  .persona .section-title--left { text-align: center; }
+  .persona .section-title--left { text-align: left; }
 
   .how { padding-bottom: 80px; }
   .app-card--mirrored { flex-direction: column; }
@@ -716,7 +719,8 @@
 
   .flip-row { gap: 12px; }
   .persona__text { font-size: 19px; line-height: 30px; }
-  .persona__actions .btn { flex: 1 1 auto; }
+  /* one button now, so it sizes to its label instead of filling the row */
+  .persona__actions .btn { flex: 0 0 auto; }
 
   .why { padding-bottom: 56px; }
   .why-card { border-radius: 28px; }
