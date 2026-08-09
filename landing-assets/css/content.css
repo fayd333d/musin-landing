@@ -1019,6 +1019,10 @@ img { display: block; max-width: 100%; }
 
 .footer__brand { display: flex; flex-direction: column; gap: 20px; }
 
+/* Mark sits inline at the head of the copyright line */
+.footer__logo { display: inline-flex; vertical-align: -4px; margin-right: 8px; }
+.footer__logo .nav-logo__mark { width: 20px; height: 20px; }
+
 .footer__copy {
   font-size: 14px;
   line-height: 20px;
@@ -1098,24 +1102,18 @@ img { display: block; max-width: 100%; }
      children take part in this grid directly. */
   .footer__top {
     display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
     grid-template-areas:
-      "social social"
-      "logo   links"
-      "copy   copy";
-    align-items: center;
-    gap: 22px 12px;
+      "social"
+      "links"
+      "copy";
+    justify-items: center;
+    gap: 22px;
   }
 
   .footer__brand { display: contents; }
   .footer__social { grid-area: social; }
-  .footer__logo { grid-area: logo; gap: 7px; }
   .footer__links { grid-area: links; }
   .footer__copy { grid-area: copy; margin: 0; }
-
-  /* the mark matches the social icons, the name matches the page links */
-  .footer__logo .nav-logo__mark { width: 20px; height: 20px; }
-  .footer__logo .nav-logo__type { font-size: clamp(10px, 3vw, 16px); }
 
   /* Social icons centred and spread further apart */
   .footer__social { justify-content: center; gap: 32px; }
@@ -1125,7 +1123,7 @@ img { display: block; max-width: 100%; }
      wrapping onto a second row */
   .footer__links {
     flex-wrap: nowrap;
-    justify-content: flex-end;
+    justify-content: center;
     text-align: center;
     gap: clamp(6px, 2.2vw, 28px);
   }
@@ -1255,7 +1253,7 @@ img { display: block; max-width: 100%; }
   .faq-item summary { font-size: 16px; line-height: 24px; }
   .faq-item p { margin-left: 48px; font-size: 15px; }
 
-  .footer__top { gap: 18px 10px; }
+  .footer__top { gap: 18px; }
   .footer__copy { font-size: 12px; line-height: 16px; }
 
   .footer__social { gap: 26px; }

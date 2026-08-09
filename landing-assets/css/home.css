@@ -103,6 +103,17 @@
   }
 }
 
+/* Safari paints a large play glyph over a paused video; this is background
+   footage with its own control, so hide it. */
+.hero-video__media::-webkit-media-controls,
+.hero-video__media::-webkit-media-controls-panel,
+.hero-video__media::-webkit-media-controls-start-playback-button,
+.hero-video__media::-webkit-media-controls-overlay-play-button {
+  display: none !important;
+  -webkit-appearance: none;
+  opacity: 0;
+}
+
 .hero-video__cta { margin-top: 6px; }
 
 /* Barely there: it only appears when the clip is not running, and should not
@@ -657,7 +668,9 @@
   .why .section-title { font-size: min(10.5vw, 44px); line-height: 1.06; }
 
   /* As wide as the column allows, so the artwork and its type read larger */
-  .why-stack { --why-card: min(100%, 400px); }
+  /* vw, not %: the stack height is calc(var(--why-card) + 40px), and a
+     percentage there resolves against an auto height and collapses it */
+  .why-stack { --why-card: min(92vw, 400px); }
 
   .how .app-card__title { text-align: center; }
   .how .app-card__text { text-align: center; max-width: none; }

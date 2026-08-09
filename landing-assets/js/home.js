@@ -456,24 +456,15 @@ if (!prefersReducedMotion) {
   const toggle = document.getElementById("heroVideoToggle");
   if (!video || !toggle) return;
 
-  const playIcon = toggle.querySelector(".hero-video__icon-play");
-  const pauseIcon = toggle.querySelector(".hero-video__icon-pause");
-
   function sync() {
-    const stopped = video.paused;
-    toggle.hidden = !stopped;
-    playIcon.hidden = !stopped;
-    pauseIcon.hidden = stopped;
-    toggle.setAttribute("aria-label", stopped ? "Play background video" : "Pause background video");
+    // the button is only ever on screen while the clip is stopped, so it
+    // shows a play glyph and nothing else
+    toggle.hidden = !video.paused;
   }
 
   toggle.addEventListener("click", () => {
-    if (video.paused) {
-      const p = video.play();
-      if (p && p.catch) p.catch(() => {});
-    } else {
-      video.pause();
-    }
+    const p = video.play();
+    if (p && p.catch) p.catch(() => {});
   });
 
   video.addEventListener("play", sync);

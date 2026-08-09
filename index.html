@@ -18,8 +18,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600&display=swap" rel="stylesheet">
   <!-- Shared shell (nav, sections, cards, footer) + home specifics -->
-  <link rel="stylesheet" href="/landing-assets/css/content.css?v=57">
-  <link rel="stylesheet" href="/landing-assets/css/home.css?v=38">
+  <link rel="stylesheet" href="/landing-assets/css/content.css?v=58">
+  <link rel="stylesheet" href="/landing-assets/css/home.css?v=39">
 </head>
 <body>
 
@@ -79,8 +79,7 @@
           <button type="button" class="hero-video__toggle" id="heroVideoToggle"
                   aria-label="Play background video" hidden>
             <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <path class="hero-video__icon-play" d="M8 5.5v13l11-6.5z"/>
-              <path class="hero-video__icon-pause" d="M8 5.5h3.2v13H8zM12.8 5.5H16v13h-3.2z" hidden/>
+              <path d="M8 5.5v13l11-6.5z"/>
             </svg>
           </button>
         </div>
@@ -212,7 +211,7 @@
           <div class="app-card app-card--mirrored">
             <div class="app-card__panel">
               <div class="app-card__copy">
-                <h3 class="app-card__title">Music selection</h3>
+                <h3 class="app-card__title">Track selection</h3>
                 <p class="app-card__text">Content creators choose<br class="br-phone"> tracks to post with.</p>
               </div>
             </div>
@@ -248,7 +247,7 @@
         <div class="create__viewport why-viewport">
           <div class="why-stack" id="whyStack">
           <article class="why-card">
-            <img src="/landing-assets/img/why/why-1-direct.svg" alt="Direct collaborations — tracks and social media accounts connect directly." loading="lazy">
+            <img src="/landing-assets/img/why/why-1-direct.svg" width="480" height="480" alt="Direct collaborations — tracks and social media accounts connect directly." loading="lazy">
           </article>
 
 
@@ -423,11 +422,12 @@
       <div class="footer__brand">
         <!-- Flat, so the phone layout can place these independently: the mark
              sits beside the page links and the copyright drops underneath -->
-        <a class="nav-logo footer__logo" href="/" aria-label="Musin home">
-          <img src="/landing-assets/img/logo-mark.svg" alt="" class="nav-logo__mark">
-          <span class="nav-logo__type">Musin</span>
-        </a>
-        <p class="footer__copy">© 2026 Musin. All rights reserved.</p>
+        <p class="footer__copy">
+          <a class="footer__logo" href="/" aria-label="Musin home">
+            <img src="/landing-assets/img/logo-mark.svg" alt="" class="nav-logo__mark">
+          </a>
+          Musin 2026. All rights reserved.
+        </p>
         <div class="footer__social">
           <a href="https://www.youtube.com/@musin_online" aria-label="Musin on YouTube" target="_blank" rel="noopener"><img src="/landing-assets/img/social/s09-youtube.svg" alt=""></a>
           <a href="https://www.instagram.com/musin_online/" aria-label="Musin on Instagram" target="_blank" rel="noopener"><img src="/landing-assets/img/social/s08-instagram.svg" alt=""></a>
@@ -484,6 +484,6 @@
   <script src="/landing-assets/js/marquee.js?v=4"></script>
   <script src="/landing-assets/js/cta.js?v=2"></script>
   <script src="/landing-assets/js/support.js?v=3"></script>
-  <script src="/landing-assets/js/home.js?v=16"></script>
+  <script src="/landing-assets/js/home.js?v=17"></script>
 </body>
 </html>
