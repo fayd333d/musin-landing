@@ -458,6 +458,7 @@ img { display: block; max-width: 100%; }
   flex-direction: column;
   align-items: center;
   gap: 30px;
+  min-width: 0;
   padding: 16px 16px 22px;
   border: 1px solid var(--border);
   border-radius: 20px;
@@ -475,6 +476,18 @@ img { display: block; max-width: 100%; }
   background-size: cover;
   background-position: center;
   flex: 0 0 auto;
+}
+
+/* Names come from a rotating catalogue, so long ones clip inside the card
+   rather than pushing out of it. */
+.track-chip > div { min-width: 0; max-width: 100%; }
+
+.track-chip__title,
+.track-chip__artist {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .track-chip__title {
@@ -754,13 +767,17 @@ img { display: block; max-width: 100%; }
   /* the strip is several screens wide; keeping its painting to itself stops
      the phone repainting it on every scroll frame */
   contain: paint;
+  transform: translateZ(0);
 }
 
 .logos__marquee {
   display: flex;
   width: max-content;
-  will-change: transform;
+  /* No will-change: a permanent layer this wide is what tears while the page
+     scrolls on phones. The animation's own 3D transform promotes it for the
+     duration and lets the browser drop it afterwards. */
   backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .logos__group {
@@ -1161,6 +1178,9 @@ img { display: block; max-width: 100%; }
   /* sized so the longest phrase in either landing's hero stays on its line */
   .hero__title { font-size: 26px; line-height: 35px; letter-spacing: -0.5px; }
   .cta__text { font-size: 19px; line-height: 30px; }
+
+  /* the counter needs clear separation from the heading beneath it */
+  .genres__head { gap: 104px; margin-bottom: 52px; }
 
   .genres { padding: 64px 0 96px; }
   .genre-tag { font-size: 20px; }
