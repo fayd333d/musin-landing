@@ -194,12 +194,13 @@ function buildTrackChips() {
 /* Two copies for a seamless wrap. */
 marqueeInner.innerHTML = buildTrackChips() + buildTrackChips();
 
-gsap.to(marqueeInner, {
+const trackStripTween = gsap.to(marqueeInner, {
   xPercent: -50,
   duration: 40,
   ease: "none",
   repeat: -1,
 });
+makeStripScrollable(document.querySelector(".track-marquee"), marqueeInner, trackStripTween);
 
 /* ---------- Track counter ----------
    The number gently fluctuates between COUNT_MIN and COUNT_MAX. A slow

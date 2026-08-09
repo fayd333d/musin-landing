@@ -207,7 +207,7 @@ if (campaignStage) {
     )
     .join("");
 
-  campaignWheel = createWheel(campaignStage);
+  campaignWheel = createWheel(campaignStage, { drag: true });
 }
 
 /* ---- Create Content: real clips, autoplaying and advancing on their own ---- */
@@ -216,6 +216,7 @@ let clipWheel = null;
 
 if (clipStage) {
   clipWheel = createWheel(clipStage, {
+    drag: true,
     interval: 4.2, // a beat longer, so each clip gets a moment to play
     onCentre: (card, cards) => {
       cards.forEach((c) => {

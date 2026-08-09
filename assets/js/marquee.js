@@ -34,7 +34,7 @@
     tween = gsap.fromTo(
       marquee,
       { x: -halfWidth },
-      { x: 0, duration: halfWidth / PX_PER_SECOND, ease: "none", repeat: -1 }
+      { x: 0, duration: halfWidth / PX_PER_SECOND, ease: "none", repeat: -1, force3D: true }
     );
   }
 

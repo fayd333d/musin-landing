@@ -284,12 +284,13 @@ const creatorMarquee = document.getElementById("creatorMarquee");
 const creatorHtml = buildCreatorChips(creators, "assets/img/creators/creator");
 creatorMarquee.innerHTML = creatorHtml + creatorHtml;
 
-gsap.to(creatorMarquee, {
+const creatorStripTween = gsap.to(creatorMarquee, {
   xPercent: -50,
   duration: 40,
   ease: "none",
   repeat: -1,
 });
+makeStripScrollable(document.querySelector(".track-marquee"), creatorMarquee, creatorStripTween);
 
 /* ---------- Active creator counter ----------
    The number gently fluctuates between COUNT_MIN and COUNT_MAX (#2). A slow
@@ -503,6 +504,43 @@ if (campaignStage) {
         renderWheel();
       },
     });
+
+    /* Swipe or drag moves one card, the same as the other landings. The
+       timer pauses for the gesture and restarts after it. */
+    let dragX = null;
+    campaignStage.addEventListener("pointerdown", (e) => {
+      dragX = e.clientX;
+      campaignStage.classList.add("is-dragging");
+      if (campaignTimer) campaignTimer.pause();
+    });
+
+    const endDrag = (e) => {
+      if (dragX === null) return;
+      const dx = e.clientX - dragX;
+      dragX = null;
+      campaignStage.classList.remove("is-dragging");
+      if (Math.abs(dx) > 40) {
+        centreIndex = (((centreIndex + (dx < 0 ? 1 : -1)) % N) + N) % N;
+        renderWheel();
+      }
+      if (campaignTimer) { campaignTimer.play(); campaignTimer.restart(true); }
+    };
+    window.addEventListener("pointerup", endDrag);
+    window.addEventListener("pointercancel", endDrag);
+
+    let wheelLock = false;
+    let wheelIdle = null;
+    campaignStage.addEventListener("wheel", (e) => {
+      if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+      e.preventDefault();
+      clearTimeout(wheelIdle);
+      wheelIdle = setTimeout(() => { wheelLock = false; }, 260);
+      if (wheelLock || Math.abs(e.deltaX) < 6) return;
+      wheelLock = true;
+      centreIndex = (((centreIndex + (e.deltaX > 0 ? 1 : -1)) % N) + N) % N;
+      renderWheel();
+      if (campaignTimer) campaignTimer.restart(true);
+    }, { passive: false });
 
     const campaignSection = document.getElementById("create");
     if (campaignSection) {
