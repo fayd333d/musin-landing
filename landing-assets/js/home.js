@@ -191,7 +191,7 @@ if (campaignStage) {
     .map(
       ([title, artist, cover, posts, views, engagements]) => `
       <article class="campaign-tile">
-        <div class="campaign-tile__cover" style="background-image:url('assets/img/covers/cover-${cover}.jpg')"></div>
+        <div class="campaign-tile__cover" style="background-image:url('/landing-assets/img/covers/cover-${cover}.jpg')"></div>
         <div class="campaign-tile__body">
           <div class="campaign-tile__track">
             <p class="campaign-tile__title">${title}</p>
@@ -289,7 +289,7 @@ const flipCreators = [
 
 const trackFace = ([title, artist, cover]) => `
   <div class="track-chip">
-    <div class="track-chip__cover" style="background-image:url('assets/img/covers/cover-${cover}.jpg')"></div>
+    <div class="track-chip__cover" style="background-image:url('/landing-assets/img/covers/cover-${cover}.jpg')"></div>
     <div>
       <p class="track-chip__title">${title}</p>
       <p class="track-chip__artist">${artist}</p>
@@ -298,7 +298,7 @@ const trackFace = ([title, artist, cover]) => `
 
 const creatorFace = ([pic, platform, handle, followers]) => `
   <div class="creator-chip">
-    <div class="creator-chip__photo" style="background-image:url('assets/img/creators/creator-${pic}.jpg')"></div>
+    <div class="creator-chip__photo" style="background-image:url('/landing-assets/img/creators/creator-${pic}.jpg')"></div>
     <div>
       <p class="creator-chip__name">
         <span class="creator-chip__platform creator-chip__platform--${platform}" role="img" aria-label="${platform}"></span>${handle}

@@ -18,11 +18,11 @@ burger.addEventListener("click", () => {
    Price, views and track change; the next screen scrolls up into the
    main phone from below, TikTok-style (corrections #6). */
 const heroData = [
-  { price: "+$26", views: "467K", track: "Like It", artist: "Eliot Felix", cover: "assets/img/covers/cover-1.jpg" },
-  { price: "+$48", views: "1.2M", track: "Get On", artist: "Natsha", cover: "assets/img/covers/cover-2.jpg" },
-  { price: "+$81", views: "891K", track: "Sway Me", artist: "Olmoy", cover: "assets/img/covers/cover-3.jpg" },
-  { price: "+$56", views: "829K", track: "Legit Dog", artist: "Katika", cover: "assets/img/covers/cover-21.jpg" },
-  { price: "+$91", views: "1.1M", track: "Lolli", artist: "Indica Steve", cover: "assets/img/covers/cover-22.jpg" },
+  { price: "+$26", views: "467K", track: "Like It", artist: "Eliot Felix", cover: "/landing-assets/img/covers/cover-1.jpg" },
+  { price: "+$48", views: "1.2M", track: "Get On", artist: "Natsha", cover: "/landing-assets/img/covers/cover-2.jpg" },
+  { price: "+$81", views: "891K", track: "Sway Me", artist: "Olmoy", cover: "/landing-assets/img/covers/cover-3.jpg" },
+  { price: "+$56", views: "829K", track: "Legit Dog", artist: "Katika", cover: "/landing-assets/img/covers/cover-21.jpg" },
+  { price: "+$91", views: "1.1M", track: "Lolli", artist: "Indica Steve", cover: "/landing-assets/img/covers/cover-22.jpg" },
 ];
 
 const slides = gsap.utils.toArray(".phone-slide");
@@ -181,7 +181,7 @@ function buildTrackChips() {
     .map(
       ([title, artist, cover]) => `
       <div class="track-chip">
-        <div class="track-chip__cover" style="background-image:url('assets/img/covers/cover-${cover}.jpg')"></div>
+        <div class="track-chip__cover" style="background-image:url('/landing-assets/img/covers/cover-${cover}.jpg')"></div>
         <div>
           <p class="track-chip__title">${title}</p>
           <p class="track-chip__artist">${artist}</p>

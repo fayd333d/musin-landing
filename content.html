@@ -11,17 +11,17 @@
   <meta property="og:title" content="Musin — For Content Creators">
   <meta property="og:description" content="Find music you want to post with and get paid a fixed amount for each confirmed post.">
   <meta property="og:url" content="https://musin.online/content.html">
-  <meta property="og:image" content="https://musin.online/assets/img/og-cover.jpg">
+  <meta property="og:image" content="https://musin.online/landing-assets/img/og-cover.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="assets/img/logo-mark.svg" type="image/svg+xml">
+  <link rel="icon" href="/landing-assets/img/logo-mark.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600&display=swap" rel="stylesheet">
   <!-- Hero is the first thing on screen: fetch its first cover ASAP (the first
        clip is prioritised on the <video> element itself to avoid a double fetch) -->
-  <link rel="preload" as="image" href="assets/img/poster/poster-1.jpg" fetchpriority="high">
-  <link rel="preload" as="image" href="assets/img/covers/cover-1.jpg" fetchpriority="high">
-  <link rel="stylesheet" href="assets/css/content.css?v=51">
+  <link rel="preload" as="image" href="/landing-assets/img/poster/poster-1.jpg" fetchpriority="high">
+  <link rel="preload" as="image" href="/landing-assets/img/covers/cover-1.jpg" fetchpriority="high">
+  <link rel="stylesheet" href="/landing-assets/css/content.css?v=51">
 </head>
 <body>
 
@@ -29,7 +29,7 @@
   <header class="site-header">
     <div class="nav-wrap container">
       <a class="nav-logo" href="index.html" aria-label="Musin home">
-        <img src="assets/img/logo-mark.svg" alt="" class="nav-logo__mark">
+        <img src="/landing-assets/img/logo-mark.svg" alt="" class="nav-logo__mark">
         <span class="nav-logo__type">Musin</span>
       </a>
 
@@ -68,13 +68,13 @@
             <div class="main-phone">
               <div class="main-phone__screen" id="phoneScreen">
                 <!-- Real creator clips: Video 1, 2, 3 cycle every 3 s (#1) -->
-                <video class="phone-slide is-current" poster="assets/img/poster/poster-1.jpg" src="assets/video/video-1.mp4" muted loop playsinline preload="auto" fetchpriority="high"></video>
-                <video class="phone-slide" src="assets/video/video-2.mp4" muted loop playsinline preload="auto"></video>
-                <video class="phone-slide" src="assets/video/video-3.mp4" muted loop playsinline preload="auto"></video>
-                <video class="phone-slide" src="assets/video/video-14.mp4" muted loop playsinline preload="auto"></video>
-                <video class="phone-slide" src="assets/video/video-15.mp4" muted loop playsinline preload="auto"></video>
+                <video class="phone-slide is-current" poster="/landing-assets/img/poster/poster-1.jpg" src="/landing-assets/video/video-1.mp4" muted loop playsinline preload="auto" fetchpriority="high"></video>
+                <video class="phone-slide" src="/landing-assets/video/video-2.mp4" muted loop playsinline preload="auto"></video>
+                <video class="phone-slide" src="/landing-assets/video/video-3.mp4" muted loop playsinline preload="auto"></video>
+                <video class="phone-slide" src="/landing-assets/video/video-14.mp4" muted loop playsinline preload="auto"></video>
+                <video class="phone-slide" src="/landing-assets/video/video-15.mp4" muted loop playsinline preload="auto"></video>
               </div>
-              <img src="assets/img/iphone-frame.png" alt="" class="main-phone__frame">
+              <img src="/landing-assets/img/iphone-frame.png" alt="" class="main-phone__frame">
 
               <div class="notif notif--money" id="notifMoney">
                 <div class="notif__icon notif__icon--green">$</div>
@@ -86,7 +86,7 @@
 
               <div class="notif notif--views" id="notifViews">
                 <div class="notif__icon notif__icon--blue">
-                  <img src="assets/img/icon-eye.svg" alt="">
+                  <img src="/landing-assets/img/icon-eye.svg" alt="">
                 </div>
                 <div class="notif__text">
                   <p class="notif__title" data-rotate="views">324K</p>
@@ -112,7 +112,7 @@
               <div class="hero__cta-wrap">
                 <a href="#" class="btn btn--primary btn--md">
                   Join as a content creator
-                  <img src="assets/img/icon-arrow-right.svg" alt="" class="btn__icon">
+                  <img src="/landing-assets/img/icon-arrow-right.svg" alt="" class="btn__icon">
                 </a>
               </div>
             </div>
@@ -147,24 +147,24 @@
       </div>
       <div class="create__viewport">
         <div class="create__scroller" id="createScroller">
-          <div class="video-card"><video src="assets/video/video-4.mp4#t=0.1" muted playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
-          <div class="video-card"><video src="assets/video/video-5.mp4#t=0.1" muted playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
-          <div class="video-card"><video src="assets/video/video-6.mp4#t=0.1" muted playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
-          <div class="video-card"><video src="assets/video/video-7.mp4#t=0.1" muted playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
-          <div class="video-card"><video src="assets/video/video-8.mp4#t=0.1" muted playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
-          <div class="video-card"><video src="assets/video/video-9.mp4#t=0.1" muted playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
-          <div class="video-card"><video src="assets/video/video-10.mp4#t=0.1" muted playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
-          <div class="video-card"><video src="assets/video/video-11.mp4#t=0.1" muted playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
-          <div class="video-card"><video src="assets/video/video-12.mp4#t=0.1" muted playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
-          <div class="video-card"><video src="assets/video/video-13.mp4#t=0.1" muted playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
+          <div class="video-card"><video src="/landing-assets/video/video-4.mp4#t=0.1" muted playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
+          <div class="video-card"><video src="/landing-assets/video/video-5.mp4#t=0.1" muted playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
+          <div class="video-card"><video src="/landing-assets/video/video-6.mp4#t=0.1" muted playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
+          <div class="video-card"><video src="/landing-assets/video/video-7.mp4#t=0.1" muted playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
+          <div class="video-card"><video src="/landing-assets/video/video-8.mp4#t=0.1" muted playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
+          <div class="video-card"><video src="/landing-assets/video/video-9.mp4#t=0.1" muted playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
+          <div class="video-card"><video src="/landing-assets/video/video-10.mp4#t=0.1" muted playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
+          <div class="video-card"><video src="/landing-assets/video/video-11.mp4#t=0.1" muted playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
+          <div class="video-card"><video src="/landing-assets/video/video-12.mp4#t=0.1" muted playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
+          <div class="video-card"><video src="/landing-assets/video/video-13.mp4#t=0.1" muted playsinline preload="metadata"></video><button class="video-card__play" aria-label="Play video"></button></div>
         </div>
         <div class="create__shade create__shade--left" aria-hidden="true"></div>
         <div class="create__shade create__shade--right" aria-hidden="true"></div>
         <button class="create__arrow create__arrow--left" id="scrollPrev" aria-label="Previous video">
-          <img src="assets/img/icon-arrow-right.svg" alt="" style="transform:rotate(180deg)">
+          <img src="/landing-assets/img/icon-arrow-right.svg" alt="" style="transform:rotate(180deg)">
         </button>
         <button class="create__arrow create__arrow--right" id="scrollNext" aria-label="Next video">
-          <img src="assets/img/icon-arrow-right.svg" alt="">
+          <img src="/landing-assets/img/icon-arrow-right.svg" alt="">
         </button>
       </div>
     </section>
@@ -175,28 +175,28 @@
         <h2 class="section-title">Get paid for posting</h2>
         <div class="pay-stack" id="payStack">
           <div class="pay-card">
-            <div class="pay-card__icon" style="--sym:url('assets/img/icons/pay-dollar.svg')"></div>
+            <div class="pay-card__icon" style="--sym:url('/landing-assets/img/icons/pay-dollar.svg')"></div>
             <div class="pay-card__body">
               <h3 class="pay-card__title">Set your price</h3>
               <p class="pay-card__text">Choose your price within the limit based on your follower count.</p>
             </div>
           </div>
           <div class="pay-card">
-            <div class="pay-card__icon" style="--sym:url('assets/img/icons/pay-share.svg')"></div>
+            <div class="pay-card__icon" style="--sym:url('/landing-assets/img/icons/pay-share.svg')"></div>
             <div class="pay-card__body">
               <h3 class="pay-card__title">Create and post</h3>
               <p class="pay-card__text">Create content with the selected track and publish it.</p>
             </div>
           </div>
           <div class="pay-card">
-            <div class="pay-card__icon" style="--sym:url('assets/img/icons/pay-check.svg')"></div>
+            <div class="pay-card__icon" style="--sym:url('/landing-assets/img/icons/pay-check.svg')"></div>
             <div class="pay-card__body">
               <h3 class="pay-card__title">Submit link</h3>
               <p class="pay-card__text">Add your publication link so the artist can confirm it.</p>
             </div>
           </div>
           <div class="pay-card">
-            <div class="pay-card__icon" style="--sym:url('assets/img/icons/pay-wallet.svg')"></div>
+            <div class="pay-card__icon" style="--sym:url('/landing-assets/img/icons/pay-wallet.svg')"></div>
             <div class="pay-card__body">
               <h3 class="pay-card__title">Get paid</h3>
               <p class="pay-card__text">Payment is released after artist confirmation or automatically if no dispute is opened.</p>
@@ -210,13 +210,13 @@
     <section class="logos" aria-label="Platforms and partners">
       <div class="logos__marquee" id="logoMarquee">
         <div class="logos__group">
-          <img src="assets/img/logos/stripe.svg" alt="Stripe" class="logos__item logos__item--stripe">
-          <img src="assets/img/logos/facebook.svg" alt="Facebook" class="logos__item">
-          <img src="assets/img/logos/spotify.svg" alt="Spotify" class="logos__item">
-          <img src="assets/img/logos/youtube.svg" alt="YouTube" class="logos__item logos__item--wide">
-          <img src="assets/img/logos/instagram.svg" alt="Instagram" class="logos__item">
-          <img src="assets/img/logos/google.svg" alt="Google" class="logos__item">
-          <img src="assets/img/logos/tiktok-glyph.svg" alt="TikTok" class="logos__item">
+          <img src="/landing-assets/img/logos/stripe.svg" alt="Stripe" class="logos__item logos__item--stripe">
+          <img src="/landing-assets/img/logos/facebook.svg" alt="Facebook" class="logos__item">
+          <img src="/landing-assets/img/logos/spotify.svg" alt="Spotify" class="logos__item">
+          <img src="/landing-assets/img/logos/youtube.svg" alt="YouTube" class="logos__item logos__item--wide">
+          <img src="/landing-assets/img/logos/instagram.svg" alt="Instagram" class="logos__item">
+          <img src="/landing-assets/img/logos/google.svg" alt="Google" class="logos__item">
+          <img src="/landing-assets/img/logos/tiktok-glyph.svg" alt="TikTok" class="logos__item">
         </div>
       </div>
     </section>
@@ -235,8 +235,8 @@
             </div>
             <div class="app-card__screen">
               <picture>
-                <source media="(max-width: 860px)" srcset="assets/img/app/app-CC-phone1.svg">
-                <img src="assets/img/app/app-CC-PC1.svg" alt="Browse active campaigns in the Musin app" loading="lazy">
+                <source media="(max-width: 860px)" srcset="/landing-assets/img/app/app-CC-phone1.svg">
+                <img src="/landing-assets/img/app/app-CC-PC1.svg" alt="Browse active campaigns in the Musin app" loading="lazy">
               </picture>
             </div>
           </div>
@@ -249,8 +249,8 @@
             </div>
             <div class="app-card__screen">
               <picture>
-                <source media="(max-width: 860px)" srcset="assets/img/app/app-CC-phone2.svg">
-                <img src="assets/img/app/app-CC-PC2.svg" alt="Track and campaign details in the Musin app" loading="lazy">
+                <source media="(max-width: 860px)" srcset="/landing-assets/img/app/app-CC-phone2.svg">
+                <img src="/landing-assets/img/app/app-CC-PC2.svg" alt="Track and campaign details in the Musin app" loading="lazy">
               </picture>
             </div>
           </div>
@@ -263,8 +263,8 @@
             </div>
             <div class="app-card__screen">
               <picture>
-                <source media="(max-width: 860px)" srcset="assets/img/app/app-CC-phone3.svg">
-                <img src="assets/img/app/app-CC-PC3.svg" alt="Payments and earnings dashboard in the Musin app" loading="lazy">
+                <source media="(max-width: 860px)" srcset="/landing-assets/img/app/app-CC-phone3.svg">
+                <img src="/landing-assets/img/app/app-CC-PC3.svg" alt="Payments and earnings dashboard in the Musin app" loading="lazy">
               </picture>
             </div>
           </div>
@@ -332,16 +332,16 @@
         <!-- On small screens the mark + name sit above the copyright, centred -->
         <div class="footer__identity">
           <a class="nav-logo" href="index.html" aria-label="Musin home">
-            <img src="assets/img/logo-mark.svg" alt="" class="nav-logo__mark">
+            <img src="/landing-assets/img/logo-mark.svg" alt="" class="nav-logo__mark">
             <span class="nav-logo__type">Musin</span>
           </a>
           <p class="footer__copy">© 2026 Musin. All rights reserved.</p>
         </div>
         <div class="footer__social">
-          <a href="https://www.youtube.com/@musin_online" aria-label="Musin on YouTube" target="_blank" rel="noopener"><img src="assets/img/social/s09-youtube.svg" alt=""></a>
-          <a href="https://www.instagram.com/musin_online/" aria-label="Musin on Instagram" target="_blank" rel="noopener"><img src="assets/img/social/s08-instagram.svg" alt=""></a>
-          <a href="https://www.tiktok.com/@musin.online" aria-label="Musin on TikTok" target="_blank" rel="noopener"><img src="assets/img/social/s10-tiktok.svg" alt=""></a>
-          <a href="https://t.me/musinonline" aria-label="Musin on Telegram" target="_blank" rel="noopener"><img src="assets/img/social/s05-telegram.svg" alt=""></a>
+          <a href="https://www.youtube.com/@musin_online" aria-label="Musin on YouTube" target="_blank" rel="noopener"><img src="/landing-assets/img/social/s09-youtube.svg" alt=""></a>
+          <a href="https://www.instagram.com/musin_online/" aria-label="Musin on Instagram" target="_blank" rel="noopener"><img src="/landing-assets/img/social/s08-instagram.svg" alt=""></a>
+          <a href="https://www.tiktok.com/@musin.online" aria-label="Musin on TikTok" target="_blank" rel="noopener"><img src="/landing-assets/img/social/s10-tiktok.svg" alt=""></a>
+          <a href="https://t.me/musinonline" aria-label="Musin on Telegram" target="_blank" rel="noopener"><img src="/landing-assets/img/social/s05-telegram.svg" alt=""></a>
         </div>
       </div>
 
@@ -390,10 +390,10 @@
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-  <script src="assets/js/scrollstrip.js?v=1"></script>
-  <script src="assets/js/marquee.js?v=4"></script>
-  <script src="assets/js/cta.js?v=2"></script>
-  <script src="assets/js/support.js?v=3"></script>
-  <script src="assets/js/content.js?v=33"></script>
+  <script src="/landing-assets/js/scrollstrip.js?v=1"></script>
+  <script src="/landing-assets/js/marquee.js?v=4"></script>
+  <script src="/landing-assets/js/cta.js?v=2"></script>
+  <script src="/landing-assets/js/support.js?v=3"></script>
+  <script src="/landing-assets/js/content.js?v=33"></script>
 </body>
 </html>

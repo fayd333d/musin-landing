@@ -261,7 +261,7 @@ const creators = [
   [14, "tiktok", "artell", "34K"],
 ];
 
-/* `prefix` is the path up to the file number, e.g. "assets/img/creators/creator" */
+/* `prefix` is the path up to the file number, e.g. "/landing-assets/img/creators/creator" */
 function buildCreatorChips(list, prefix) {
   return list
     .map(
@@ -281,7 +281,7 @@ function buildCreatorChips(list, prefix) {
 
 /* Two copies for a seamless wrap. */
 const creatorMarquee = document.getElementById("creatorMarquee");
-const creatorHtml = buildCreatorChips(creators, "assets/img/creators/creator");
+const creatorHtml = buildCreatorChips(creators, "/landing-assets/img/creators/creator");
 creatorMarquee.innerHTML = creatorHtml + creatorHtml;
 
 const creatorStripTween = gsap.to(creatorMarquee, {
@@ -430,7 +430,7 @@ if (campaignStage) {
     .map(
       ([title, artist, cover, posts, views]) => `
       <article class="campaign-tile">
-        <div class="campaign-tile__cover" style="background-image:url('assets/img/covers/cover-${cover}.jpg')"></div>
+        <div class="campaign-tile__cover" style="background-image:url('/landing-assets/img/covers/cover-${cover}.jpg')"></div>
         <div class="campaign-tile__body">
           <div class="campaign-tile__track">
             <p class="campaign-tile__title">${title}</p>
