@@ -30,6 +30,8 @@
 }
 
 .hero-video__media {
+  /* background footage, not a player: no taps, no native transport UI */
+  pointer-events: none;
   position: absolute;
   inset: 0;
   width: 100%;
@@ -622,23 +624,28 @@
 
   /* --- breathing room between the stacked sections --- */
   .stats__col { gap: 40px; }
-  .stats__col .genres__stat + .flip-row { margin-bottom: 48px; }
+  .stats__col .genres__stat + .flip-row { margin-bottom: 72px; }
   .stats { padding: 24px 0 128px; }
-  .persona { padding-bottom: 128px; }
+  .persona { padding-bottom: 168px; }
+
+  /* Musin platform keeps a single large heading rather than a split one */
+  .how__title { font-size: min(10.5vw, 44px); line-height: 1.06; }
+
   .how .app-card__title { text-align: center; }
+  .how .app-card__text { text-align: center; max-width: none; }
+
+  /* the Why Musin heading sits closer to its cards than a full section gap */
+  .why .section-title { margin-bottom: 32px; }
 
   .flip-row { gap: 12px; }
   .persona__text { font-size: 19px; line-height: 30px; }
   .persona__actions .btn { flex: 1 1 auto; }
 
-  .why { padding-bottom: 32px; }
+  .why { padding-bottom: 56px; }
   .why-card { border-radius: 28px; }
 
   .home-faq { padding: 96px 0 88px; }
-  .stats { padding: 24px 0 104px; }
-  .persona { padding-bottom: 104px; }
   .how { padding-bottom: 96px; }
-  .why { padding-bottom: 56px; }
   .home-cta__actions .btn { flex: 1 1 auto; }
 
   /* "Music spreads through content" holds a single line: sized off the

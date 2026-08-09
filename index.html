@@ -18,8 +18,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600&display=swap" rel="stylesheet">
   <!-- Shared shell (nav, sections, cards, footer) + home specifics -->
-  <link rel="stylesheet" href="/landing-assets/css/content.css?v=55">
-  <link rel="stylesheet" href="/landing-assets/css/home.css?v=34">
+  <link rel="stylesheet" href="/landing-assets/css/content.css?v=56">
+  <link rel="stylesheet" href="/landing-assets/css/home.css?v=36">
 </head>
 <body>
 
@@ -65,7 +65,9 @@
         <!-- No poster: the clip opens on black, so the panel's own black is
              the right first paint. A still would jump when playback began. -->
         <video class="hero-video__media" src="/landing-assets/video/hero.mp4"
-             autoplay muted loop playsinline preload="auto"></video>
+             autoplay muted loop playsinline preload="auto" tabindex="-1"
+             disablepictureinpicture disableremoteplayback
+             controlslist="nodownload noplaybackrate noremoteplayback"></video>
         <div class="hero-video__scrim" aria-hidden="true"></div>
         <div class="hero-video__copy">
           <h1 class="hero-video__title">Connecting music<br class="br-phone"> with content</h1>
@@ -113,7 +115,7 @@
     <section class="persona" id="forArtists">
       <div class="container persona__row">
         <div class="persona__copy">
-          <h2 class="section-title section-title--left split-title"><span class="split-title__lead">Join as a</span> <span class="split-title__main">music artist</span></h2>
+          <h2 class="section-title section-title--left split-title"><span class="split-title__lead">Join as a</span> <span class="split-title__main">Music Artist</span></h2>
           <p class="persona__text">Reach new audiences and build engagement around your music through
             social media content.</p>
         </div>
@@ -135,7 +137,7 @@
     <section class="persona persona--mirrored" id="forCreators">
       <div class="container persona__row">
         <div class="persona__copy">
-          <h2 class="section-title section-title--left split-title"><span class="split-title__lead">Join as a</span> <span class="split-title__main">content creator</span></h2>
+          <h2 class="section-title section-title--left split-title"><span class="split-title__lead">Join as a</span> <span class="split-title__main">Content Creator</span></h2>
           <p class="persona__text">Discover music that fits your content and get paid to feature it in
             your social media posts.</p>
         </div>
@@ -168,13 +170,13 @@
          The four steps, each shown on the app screen where it happens. -->
     <section class="app how" id="how">
       <div class="container">
-        <h2 class="section-title split-title split-title--centre"><span class="split-title__lead">Musin</span> <span class="split-title__main">platform</span></h2>
+        <h2 class="section-title how__title">Musin platform</h2>
         <div class="app-stack">
           <div class="app-card">
             <div class="app-card__panel">
               <div class="app-card__copy">
                 <h3 class="app-card__title">Music Campaign</h3>
-                <p class="app-card__text">Music artists upload a track and define the campaign parameters.</p>
+                <p class="app-card__text">Music artists upload a track and<br class="br-phone"> define the campaign parameters.</p>
               </div>
             </div>
             <div class="app-card__screen">
@@ -188,7 +190,7 @@
             <div class="app-card__panel">
               <div class="app-card__copy">
                 <h3 class="app-card__title">Accounts selection</h3>
-                <p class="app-card__text">Music artists choose accounts to post with their track.</p>
+                <p class="app-card__text">Music artists choose accounts<br class="br-phone"> to post with their track.</p>
               </div>
             </div>
             <div class="app-card__screen">
@@ -202,7 +204,7 @@
             <div class="app-card__panel">
               <div class="app-card__copy">
                 <h3 class="app-card__title">Music selection</h3>
-                <p class="app-card__text">Content creators choose tracks to post with.</p>
+                <p class="app-card__text">Content creators choose<br class="br-phone"> tracks to post with.</p>
               </div>
             </div>
             <div class="app-card__screen">
@@ -216,7 +218,7 @@
             <div class="app-card__panel">
               <div class="app-card__copy">
                 <h3 class="app-card__title">Direct Payments</h3>
-                <p class="app-card__text">Funds are released after each paid post is confirmed.</p>
+                <p class="app-card__text">Funds are released after<br class="br-phone"> each paid post is confirmed.</p>
               </div>
             </div>
             <div class="app-card__screen">
@@ -233,6 +235,7 @@
     <!-- ============ WHY IT WORKS (coverflow cards) ============ -->
     <section class="why" id="why">
       <div class="container">
+        <h2 class="section-title">Why Musin</h2>
         <div class="create__viewport why-viewport">
           <div class="why-stack" id="whyStack">
           <article class="why-card">

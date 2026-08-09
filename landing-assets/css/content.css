@@ -1194,6 +1194,7 @@ img { display: block; max-width: 100%; }
   .br-phone { display: inline; }
 
   .app .app-card__title { text-align: center; }
+  .app .app-card__text { text-align: center; max-width: none; }
 
   /* the counter needs clear separation from the heading beneath it */
   .genres__head { gap: 104px; margin-bottom: 52px; }
@@ -1203,9 +1204,9 @@ img { display: block; max-width: 100%; }
   .genre-lines { gap: 18px; }
 
   /* the create/payments join sat ~190px apart on a phone */
-  .create { padding: 56px 0 40px; }
+  .create { padding: 56px 0 64px; }
 
-  .payments { padding-top: 32px; padding-bottom: 96px; }
+  .payments { padding-top: 56px; padding-bottom: 96px; }
   .pay-stack { gap: 24px; }
   /* All stick at the same offset so cards fully cover each other (#6) */
   /* a narrower glyph column leaves the copy enough width that its last
