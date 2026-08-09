@@ -18,15 +18,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600&display=swap" rel="stylesheet">
   <!-- Shared shell (nav, sections, cards, footer) + home specifics -->
-  <link rel="stylesheet" href="/landing-assets/css/content.css?v=51">
-  <link rel="stylesheet" href="/landing-assets/css/home.css?v=31">
+  <link rel="stylesheet" href="/landing-assets/css/content.css?v=55">
+  <link rel="stylesheet" href="/landing-assets/css/home.css?v=34">
 </head>
 <body>
 
   <!-- ============ HEADER ============ -->
   <header class="site-header">
     <div class="nav-wrap container">
-      <a class="nav-logo" href="index.html" aria-label="Musin home">
+      <a class="nav-logo" href="/" aria-label="Musin home">
         <img src="/landing-assets/img/logo-mark.svg" alt="" class="nav-logo__mark">
         <span class="nav-logo__type">Musin</span>
       </a>
@@ -34,9 +34,9 @@
       <!-- Nav links grouped on the right, next to the Log in button -->
       <div class="nav-right">
         <nav class="nav-links" aria-label="Main navigation">
-          <a href="index.html" class="nav-link is-active" aria-current="page">Home</a>
-          <a href="content.html" class="nav-link">Content</a>
-          <a href="music.html" class="nav-link">Music</a>
+          <a href="/" class="nav-link is-active" aria-current="page">Home</a>
+          <a href="/content" class="nav-link">Content</a>
+          <a href="/music" class="nav-link">Music</a>
         </nav>
         <div class="nav-actions">
           <a href="/sign-in" class="btn btn--light nav-cta">Log in / Sign up</a>
@@ -49,9 +49,9 @@
 
     <div class="mobile-menu" hidden>
       <nav class="mobile-menu__links" aria-label="Mobile navigation">
-        <a href="index.html" class="nav-link is-active" aria-current="page">Home</a>
-        <a href="content.html" class="nav-link">Content</a>
-        <a href="music.html" class="nav-link">Music</a>
+        <a href="/" class="nav-link is-active" aria-current="page">Home</a>
+        <a href="/content" class="nav-link">Content</a>
+        <a href="/music" class="nav-link">Music</a>
       </nav>
     </div>
   </header>
@@ -68,7 +68,7 @@
              autoplay muted loop playsinline preload="auto"></video>
         <div class="hero-video__scrim" aria-hidden="true"></div>
         <div class="hero-video__copy">
-          <h1 class="hero-video__title">Connecting music with content</h1>
+          <h1 class="hero-video__title">Connecting music<br class="br-phone"> with content</h1>
           <p class="hero-video__text">Musin is a music promotion platform<br>
             that connects music with content creators.</p>
           <a href="#" class="btn btn--primary btn--md hero-video__cta">Get started for free</a>
@@ -113,7 +113,7 @@
     <section class="persona" id="forArtists">
       <div class="container persona__row">
         <div class="persona__copy">
-          <h2 class="section-title section-title--left">Join as a music artist</h2>
+          <h2 class="section-title section-title--left split-title"><span class="split-title__lead">Join as a</span> <span class="split-title__main">music artist</span></h2>
           <p class="persona__text">Reach new audiences and build engagement around your music through
             social media content.</p>
         </div>
@@ -125,8 +125,8 @@
           </div>
         </div>
         <div class="persona__actions">
-          <a href="music.html" class="btn btn--primary btn--md">Promote music</a>
-          <a href="music.html" class="btn btn--light btn--md">Learn more</a>
+          <a href="/music" class="btn btn--primary btn--md">Promote music</a>
+          <a href="/music" class="btn btn--light btn--md">Learn more</a>
         </div>
       </div>
     </section>
@@ -135,7 +135,7 @@
     <section class="persona persona--mirrored" id="forCreators">
       <div class="container persona__row">
         <div class="persona__copy">
-          <h2 class="section-title section-title--left">Join as a content creator</h2>
+          <h2 class="section-title section-title--left split-title"><span class="split-title__lead">Join as a</span> <span class="split-title__main">content creator</span></h2>
           <p class="persona__text">Discover music that fits your content and get paid to feature it in
             your social media posts.</p>
         </div>
@@ -158,8 +158,8 @@
           </div>
         </div>
         <div class="persona__actions">
-          <a href="content.html" class="btn btn--primary btn--md">Create content</a>
-          <a href="content.html" class="btn btn--light btn--md">Learn more</a>
+          <a href="/content" class="btn btn--primary btn--md">Create content</a>
+          <a href="/content" class="btn btn--light btn--md">Learn more</a>
         </div>
       </div>
     </section>
@@ -168,7 +168,7 @@
          The four steps, each shown on the app screen where it happens. -->
     <section class="app how" id="how">
       <div class="container">
-        <h2 class="section-title">Musin platform</h2>
+        <h2 class="section-title split-title split-title--centre"><span class="split-title__lead">Musin</span> <span class="split-title__main">platform</span></h2>
         <div class="app-stack">
           <div class="app-card">
             <div class="app-card__panel">
@@ -398,8 +398,8 @@
         <h2 class="cta__title">Music spreads through content</h2>
         <p class="cta__text">Choose how you want to use Musin</p>
         <div class="home-cta__actions">
-          <a href="music.html" class="btn btn--primary btn--md">Promote music</a>
-          <a href="content.html" class="btn btn--light btn--md">Create Content</a>
+          <a href="/music" class="btn btn--primary btn--md">Promote music</a>
+          <a href="/content" class="btn btn--light btn--md">Create Content</a>
         </div>
       </div>
     </section>
@@ -411,7 +411,7 @@
       <div class="footer__brand">
         <!-- On small screens the mark + name sit above the copyright, centred -->
         <div class="footer__identity">
-          <a class="nav-logo" href="index.html" aria-label="Musin home">
+          <a class="nav-logo" href="/" aria-label="Musin home">
             <img src="/landing-assets/img/logo-mark.svg" alt="" class="nav-logo__mark">
             <span class="nav-logo__type">Musin</span>
           </a>
@@ -426,12 +426,12 @@
       </div>
 
       <nav class="footer__links" aria-label="Footer">
-        <a href="features.html">Features</a>
-        <a href="vision.html">Vision</a>
+        <a href="/features">Features</a>
+        <a href="/vision">Vision</a>
         <button type="button" class="footer__link-btn" data-support-open>Support</button>
-        <a href="terms.html">Terms</a>
-        <a href="privacy.html">Privacy</a>
-        <a href="cookies.html">Cookies</a>
+        <a href="/terms">Terms</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/cookies">Cookies</a>
       </nav>
     </div>
   </footer>

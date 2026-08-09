@@ -41,6 +41,9 @@ img { display: block; max-width: 100%; }
 }
 
 /* ============ Buttons ============ */
+/* Line breaks that only apply on phone screens (switched on in the 600 block) */
+.br-phone { display: none; }
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -1122,6 +1125,15 @@ img { display: block; max-width: 100%; }
     white-space: nowrap;
   }
 
+  /* Both header controls were filling the bar edge to edge. The bar takes its
+     height from them, so it needs its own floor for the smaller ones to sit
+     inside rather than just shrinking the bar with them. */
+  .nav-wrap { min-height: 52px; }
+  .nav-cta { padding: 6px 12px; font-size: 13px; }
+  .nav-burger { width: 32px; height: 32px; padding: 8px 7px; gap: 4px; border-radius: 10px; }
+  .nav-burger.is-open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .nav-burger.is-open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
   .cta { padding: 88px 0 96px; }
 
   /* a smaller glyph leaves the text enough width that the last word doesn't
@@ -1179,6 +1191,10 @@ img { display: block; max-width: 100%; }
   .hero__title { font-size: 26px; line-height: 35px; letter-spacing: -0.5px; }
   .cta__text { font-size: 19px; line-height: 30px; }
 
+  .br-phone { display: inline; }
+
+  .app .app-card__title { text-align: center; }
+
   /* the counter needs clear separation from the heading beneath it */
   .genres__head { gap: 104px; margin-bottom: 52px; }
 
@@ -1186,9 +1202,10 @@ img { display: block; max-width: 100%; }
   .genre-tag { font-size: 20px; }
   .genre-lines { gap: 18px; }
 
-  .create { padding: 56px 0 96px; }
+  /* the create/payments join sat ~190px apart on a phone */
+  .create { padding: 56px 0 40px; }
 
-  .payments { padding-bottom: 96px; }
+  .payments { padding-top: 32px; padding-bottom: 96px; }
   .pay-stack { gap: 24px; }
   /* All stick at the same offset so cards fully cover each other (#6) */
   /* a narrower glyph column leaves the copy enough width that its last

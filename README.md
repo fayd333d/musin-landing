@@ -7,17 +7,23 @@ No build step. Every page is plain HTML with shared CSS and JS.
 
 ## Pages
 
-| File | Purpose |
+Each page is a directory with an `index.html`, so the URLs are extensionless.
+
+| URL | File |
 | --- | --- |
-| `index.html` | Home — the default entry point |
-| `content.html` | For Content Creators |
-| `music.html` | For Music Artists |
-| `features.html` | What the platform does |
-| `vision.html` | Why Musin exists |
-| `terms.html` | Terms and Conditions |
-| `privacy.html` | Privacy Policy |
-| `cookies.html` | Cookie Policy |
-| `404.html` | Not-found page |
+| `/` | `index.html` — Home, the default entry point |
+| `/content` | `content/index.html` — For Content Creators |
+| `/music` | `music/index.html` — For Music Artists |
+| `/features` | `features/index.html` |
+| `/vision` | `vision/index.html` |
+| `/terms` | `terms/index.html` |
+| `/privacy` | `privacy/index.html` |
+| `/cookies` | `cookies/index.html` |
+| `/home` | `home/index.html` — alias, redirects to `/` |
+| — | `404.html` — not-found page |
+
+Internal links are root-absolute (`/content`, not `content.html`), so they
+resolve the same from any depth.
 
 ## Assets
 

@@ -106,6 +106,11 @@
 /* Tucked under the hero's fade-out rather than a section apart from it */
 .logos { padding-top: 0; margin-top: -24px; }
 
+/* Titles that split into a small lead and a larger main line on phones.
+   Inline by default, so wider screens read them as one sentence. */
+.split-title__lead,
+.split-title__main { display: inline; }
+
 /* ============ Platform numbers ============
    Two stat blocks stacked, each over a row of four cards that flip together. */
 .stats { padding: 24px 0 112px; }
@@ -593,6 +598,34 @@
 
 @media (max-width: 600px) {
   .hero-video__text { font-size: 17px; line-height: 28px; }
+
+  /* Two lines, much larger: "Connecting music" over "with content" */
+  .hero-video__title {
+    /* full width: the copy column centres its children, which otherwise
+       shrink-wraps the heading and makes it wrap far more than it needs to */
+    width: 100%;
+    /* 10.4vw keeps "Connecting music" on its line: it needs 366px of the
+       362px available at 11vw */
+    font-size: min(10.4vw, 52px);
+    line-height: 1.08;
+    white-space: normal;
+  }
+
+  /* "Join as a" / "music artist", "Musin" / "platform" */
+  .split-title { line-height: 1.06; }
+  .split-title__lead { display: block; }
+  .split-title__main {
+    display: block;
+    font-size: min(10.5vw, 44px);
+    white-space: nowrap;
+  }
+
+  /* --- breathing room between the stacked sections --- */
+  .stats__col { gap: 40px; }
+  .stats__col .genres__stat + .flip-row { margin-bottom: 48px; }
+  .stats { padding: 24px 0 128px; }
+  .persona { padding-bottom: 128px; }
+  .how .app-card__title { text-align: center; }
 
   .flip-row { gap: 12px; }
   .persona__text { font-size: 19px; line-height: 30px; }

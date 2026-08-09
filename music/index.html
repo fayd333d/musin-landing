@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Musin — For Music Artists</title>
   <meta name="description" content="Upload your music, people post with it, grow your audience. Launch music campaigns on Musin, choose who posts with your track and pay for every confirmed post.">
-  <link rel="canonical" href="https://musin.online/music.html">
+  <link rel="canonical" href="https://musin.online/music">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Musin">
   <meta property="og:title" content="Musin — For Music Artists">
   <meta property="og:description" content="Launch a campaign, choose who posts with your track, and pay per confirmed post.">
-  <meta property="og:url" content="https://musin.online/music.html">
+  <meta property="og:url" content="https://musin.online/music">
   <meta property="og:image" content="https://musin.online/landing-assets/img/og-cover.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="/landing-assets/img/logo-mark.svg" type="image/svg+xml">
@@ -22,7 +22,7 @@
   <link rel="preload" as="image" href="/landing-assets/img/poster/poster-ma-a.jpg" fetchpriority="high">
   <link rel="preload" as="image" href="/landing-assets/img/my-track-cover.svg" fetchpriority="high">
   <!-- Shared shell (nav, sections, cards, footer) + music-artist specifics -->
-  <link rel="stylesheet" href="/landing-assets/css/content.css?v=51">
+  <link rel="stylesheet" href="/landing-assets/css/content.css?v=55">
   <link rel="stylesheet" href="/landing-assets/css/music.css?v=16">
 </head>
 <body>
@@ -30,7 +30,7 @@
   <!-- ============ HEADER ============ -->
   <header class="site-header">
     <div class="nav-wrap container">
-      <a class="nav-logo" href="index.html" aria-label="Musin home">
+      <a class="nav-logo" href="/" aria-label="Musin home">
         <img src="/landing-assets/img/logo-mark.svg" alt="" class="nav-logo__mark">
         <span class="nav-logo__type">Musin</span>
       </a>
@@ -38,9 +38,9 @@
       <!-- Nav links grouped on the right, next to the Log in button -->
       <div class="nav-right">
         <nav class="nav-links" aria-label="Main navigation">
-          <a href="index.html" class="nav-link">Home</a>
-          <a href="content.html" class="nav-link">Content</a>
-          <a href="music.html" class="nav-link is-active" aria-current="page">Music</a>
+          <a href="/" class="nav-link">Home</a>
+          <a href="/content" class="nav-link">Content</a>
+          <a href="/music" class="nav-link is-active" aria-current="page">Music</a>
         </nav>
         <div class="nav-actions">
           <a href="/sign-in" class="btn btn--light nav-cta">Log in / Sign up</a>
@@ -53,9 +53,9 @@
 
     <div class="mobile-menu" hidden>
       <nav class="mobile-menu__links" aria-label="Mobile navigation">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="content.html" class="nav-link">Content</a>
-        <a href="music.html" class="nav-link is-active" aria-current="page">Music</a>
+        <a href="/" class="nav-link">Home</a>
+        <a href="/content" class="nav-link">Content</a>
+        <a href="/music" class="nav-link is-active" aria-current="page">Music</a>
       </nav>
     </div>
   </header>
@@ -149,7 +149,7 @@
           <p class="genres__number" id="creatorCount">8,024</p>
           <p class="genres__unit">content creators active</p>
         </div>
-        <h2 class="section-title">Match your music with content</h2>
+        <h2 class="section-title">Match your music<br class="br-phone"> with content</h2>
       </div>
       <!-- Music genres, then the creators who can post with them -->
       <div class="genre-lines" id="genreLines">
@@ -165,7 +165,7 @@
     <!-- ============ BUILD ENGAGEMENT AROUND YOUR MUSIC ============ -->
     <section class="create campaigns" id="create">
       <div class="container create__head">
-        <h2 class="section-title">Build engagement around your music</h2>
+        <h2 class="section-title">Build engagement<br class="br-phone"> around your music</h2>
       </div>
       <!-- Same coverflow as the Content landing's clips, but the cards advance
            on their own — no arrows, no dragging -->
@@ -339,7 +339,7 @@
         <!-- On small screens the mark, name and copyright sit on one centred
              line — see .footer__identity in music.css (#9) -->
         <div class="footer__identity">
-          <a class="nav-logo" href="index.html" aria-label="Musin home">
+          <a class="nav-logo" href="/" aria-label="Musin home">
             <img src="/landing-assets/img/logo-mark.svg" alt="" class="nav-logo__mark">
             <span class="nav-logo__type">Musin</span>
           </a>
@@ -354,12 +354,12 @@
       </div>
 
       <nav class="footer__links" aria-label="Footer">
-        <a href="features.html">Features</a>
-        <a href="vision.html">Vision</a>
+        <a href="/features">Features</a>
+        <a href="/vision">Vision</a>
         <button type="button" class="footer__link-btn" data-support-open>Support</button>
-        <a href="terms.html">Terms</a>
-        <a href="privacy.html">Privacy</a>
-        <a href="cookies.html">Cookies</a>
+        <a href="/terms">Terms</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/cookies">Cookies</a>
       </nav>
     </div>
   </footer>
