@@ -457,6 +457,8 @@ liveCounter(document.getElementById("creatorCount"), 7843, 8214);
 if (!prefersReducedMotion) {
   gsap.utils
     .toArray([".home-hero__title", ".about__text", ".section-title"])
+    // the role sections are static: no rise-in on their heading either
+    .filter((el) => !el.closest(".persona"))
     .forEach((el) => {
       gsap.from(el, {
         y: 40,
@@ -466,22 +468,6 @@ if (!prefersReducedMotion) {
         scrollTrigger: { trigger: el, start: "top 85%" },
       });
     });
-
-  /* The role sections read as one block, so the copy and its button come up
-     just behind the heading rather than being already in place. */
-  gsap.utils.toArray(".persona__row").forEach((row) => {
-    const parts = [row.querySelector(".persona__text"), row.querySelector(".persona__actions")]
-      .filter(Boolean);
-    if (!parts.length) return;
-    gsap.from(parts, {
-      y: 40,
-      opacity: 0,
-      duration: 0.8,
-      ease: "power2.out",
-      stagger: 0.08,
-      scrollTrigger: { trigger: row.querySelector(".section-title") || row, start: "top 85%" },
-    });
-  });
 }
 
 /* ---------- Hero clip: a way back in when autoplay is blocked ----------
