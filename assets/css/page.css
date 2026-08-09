@@ -109,21 +109,6 @@
 .feature-card h3 { margin-top: 0; }
 .feature-card p { margin-top: 10px; font-size: 16px; line-height: 26px; }
 
-.feature-card--soon { border-style: dashed; }
-
-.feature-card__tag {
-  display: inline-block;
-  margin-bottom: 10px;
-  padding: 3px 10px;
-  border-radius: 999px;
-  background: var(--bg-elevated);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.3px;
-  text-transform: uppercase;
-  color: var(--text-dim);
-}
-
 @media (max-width: 600px) {
   .doc { padding: 48px 0 88px; }
   .doc__lead { font-size: 18px; line-height: 29px; }
