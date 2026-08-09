@@ -13,29 +13,44 @@
 
   const PX_PER_SECOND = 37; // unchanged from the original one-group-per-30s
   let tween = null;
+  let builtGroupWidth = 0;
+  let builtCopies = 0;
 
-  function build() {
-    if (tween) tween.kill();
-    gsap.set(marquee, { x: 0 });
-
-    // back to a single group, so the measurement is of one group only
-    marquee.querySelectorAll(".logos__group").forEach((g, i) => { if (i) g.remove(); });
-
-    const groupWidth = group.getBoundingClientRect().width;
-    if (!groupWidth) return;
-
+  function copiesNeeded(groupWidth) {
     /* Size for the widest the window can get, plus one spare copy, so the gap
        cannot reappear even if the resize rebuild below never runs. */
     const widest = Math.max(window.innerWidth, (window.screen && window.screen.width) || 0);
-    const perHalf = Math.ceil(widest / groupWidth) + 1;
-    for (let i = 1; i < perHalf * 2; i += 1) marquee.appendChild(group.cloneNode(true));
+    return (Math.ceil(widest / groupWidth) + 1) * 2;
+  }
 
-    const halfWidth = groupWidth * perHalf;
+  function build() {
+    // measure the original group; the clones are identical, so no need to
+    // tear the strip down before knowing whether anything has to change
+    const groupWidth = group.getBoundingClientRect().width;
+    if (!groupWidth) return;
+
+    const copies = copiesNeeded(groupWidth);
+
+    /* Rebuilding restarts the loop, which reads as a jump. Only do it when the
+       layout genuinely changed — not on every resize event. */
+    if (tween && copies === builtCopies && Math.abs(groupWidth - builtGroupWidth) < 1) return;
+
+    const progress = tween ? tween.progress() : 0;
+    if (tween) tween.kill();
+
+    marquee.querySelectorAll(".logos__group").forEach((g, i) => { if (i) g.remove(); });
+    for (let i = 1; i < copies; i += 1) marquee.appendChild(group.cloneNode(true));
+
+    const halfWidth = (groupWidth * copies) / 2;
     tween = gsap.fromTo(
       marquee,
       { x: -halfWidth },
       { x: 0, duration: halfWidth / PX_PER_SECOND, ease: "none", repeat: -1, force3D: true }
     );
+    tween.progress(progress); // carry on from where it was, rather than snapping
+
+    builtGroupWidth = groupWidth;
+    builtCopies = copies;
   }
 
   build();
@@ -44,8 +59,13 @@
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(build);
   window.addEventListener("load", build);
 
+  /* On phones, scrolling up expands the browser chrome, which fires resize with
+     only the height changed. Rebuilding on that is what made the strip jump. */
+  let lastWidth = window.innerWidth;
   let resizeTimer = null;
   window.addEventListener("resize", () => {
+    if (window.innerWidth === lastWidth) return;
+    lastWidth = window.innerWidth;
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(build, 200);
   });
