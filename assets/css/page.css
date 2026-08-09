@@ -1,0 +1,131 @@
+/* ============ Document pages ============
+   Features, Vision, Terms, Privacy and Cookies. They share the landing shell
+   from content.css and add a single readable text column. */
+
+.doc {
+  padding: 72px 0 112px;
+}
+
+.doc__inner {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.doc__title {
+  font-size: clamp(34px, 5vw, 52px);
+  line-height: 1.12;
+  font-weight: 600;
+  letter-spacing: -1px;
+  color: var(--text-primary);
+}
+
+.doc__meta {
+  margin-top: 12px;
+  font-size: 15px;
+  color: var(--text-dim);
+}
+
+.doc__lead {
+  margin-top: 24px;
+  font-size: 20px;
+  line-height: 32px;
+  color: var(--text-secondary);
+}
+
+.doc h2 {
+  margin-top: 56px;
+  font-size: 26px;
+  line-height: 34px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.doc h3 {
+  margin-top: 32px;
+  font-size: 19px;
+  line-height: 28px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.doc p {
+  margin-top: 16px;
+  font-size: 17px;
+  line-height: 28px;
+  color: var(--text-tertiary);
+}
+
+.doc ul,
+.doc ol {
+  margin: 16px 0 0;
+  padding-left: 22px;
+}
+
+.doc li {
+  margin-top: 8px;
+  font-size: 17px;
+  line-height: 28px;
+  color: var(--text-tertiary);
+}
+
+.doc a { color: var(--text-primary); }
+
+/* Anything still awaiting a real value from the company records */
+.doc .todo {
+  padding: 1px 7px;
+  border: 1px dashed var(--brand);
+  border-radius: 6px;
+  color: var(--brand);
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+
+.doc__contact {
+  margin-top: 48px;
+  padding: 24px 28px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--bg-card);
+}
+
+.doc__contact p { margin-top: 8px; }
+.doc__contact p:first-child { margin-top: 0; }
+
+/* Feature grid on the Features page */
+.feature-grid {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.feature-card {
+  padding: 26px;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  background: var(--bg-card);
+}
+
+.feature-card h3 { margin-top: 0; }
+.feature-card p { margin-top: 10px; font-size: 16px; line-height: 26px; }
+
+.feature-card--soon { border-style: dashed; }
+
+.feature-card__tag {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--bg-elevated);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+@media (max-width: 600px) {
+  .doc { padding: 48px 0 88px; }
+  .doc__lead { font-size: 18px; line-height: 29px; }
+  .doc h2 { margin-top: 44px; font-size: 23px; line-height: 30px; }
+}

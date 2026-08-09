@@ -1165,3 +1165,120 @@ img { display: block; max-width: 100%; }
   html { scroll-behavior: auto; }
   * { animation: none !important; transition: none !important; }
 }
+
+/* ============ Footer link that opens a dialog ============ */
+/* Sits in the same row as the footer anchors, so it has to shed button chrome */
+.footer__link-btn {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* ============ Support dialog ============ */
+.support-dialog {
+  width: min(520px, calc(100vw - 32px));
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  background: var(--bg-card);
+  color: var(--text-primary);
+}
+
+.support-dialog::backdrop { background: rgba(0, 0, 0, 0.66); }
+
+.support-dialog__body { padding: 32px; }
+
+.support-dialog__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.support-dialog__title { font-size: 24px; line-height: 32px; font-weight: 600; }
+
+.support-dialog__note {
+  margin-top: 6px;
+  font-size: 15px;
+  line-height: 22px;
+  color: var(--text-tertiary);
+}
+
+.support-dialog__close {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: none;
+  color: var(--text-secondary);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.support-dialog__close:hover { background: var(--bg-elevated); }
+
+.support-field { margin-top: 20px; }
+
+.support-field label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.support-field textarea,
+.support-field input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  font: inherit;
+  font-size: 15px;
+}
+
+.support-field textarea { min-height: 148px; resize: vertical; }
+
+.support-field textarea:focus,
+.support-field input:focus {
+  outline: 2px solid var(--brand);
+  outline-offset: 1px;
+}
+
+.support-count {
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--text-dim);
+  text-align: right;
+}
+
+.support-count.is-over { color: var(--brand); }
+
+.support-dialog__foot {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.support-status {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--text-tertiary);
+}
+
+@media (max-width: 600px) {
+  .support-dialog__body { padding: 24px; }
+  .support-dialog__foot { flex-direction: column; align-items: stretch; }
+  .support-dialog__foot .btn { width: 100%; }
+}
