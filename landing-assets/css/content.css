@@ -1020,7 +1020,7 @@ img { display: block; max-width: 100%; }
 .footer__brand { display: flex; flex-direction: column; gap: 20px; }
 
 /* Mark sits inline at the head of the copyright line */
-.footer__logo { display: inline-flex; vertical-align: -4px; margin-right: 8px; }
+.footer__logo { display: inline-flex; vertical-align: -5px; margin-right: 8px; }
 .footer__logo .nav-logo__mark { width: 20px; height: 20px; }
 
 .footer__copy {

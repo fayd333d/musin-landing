@@ -542,8 +542,10 @@
 }
 
 /* Real text, so it scales with the page instead of with the artwork */
+.why-card { text-align: center; }
+
 .why-card__heading {
-  font-size: 26px;
+  font-size: 24px;
   line-height: 1.18;
   font-weight: 600;
   letter-spacing: -0.4px;
@@ -699,10 +701,12 @@
 
   /* As wide as the column allows, so the artwork and its type read larger */
   /* narrow enough that a card either side still peeks in */
-  .why-stack { --why-card: min(70vw, 340px); }
-  .why-card { padding: 22px 20px 16px; border-radius: 32px; }
-  .why-card__heading { font-size: 24px; }
-  .why-card__copy { font-size: 16px; }
+  /* wide enough for the copy to break where it should (the longest line
+     needs 247px inside), narrow enough that both neighbours still show */
+  .why-stack { --why-card: min(74vw, 340px); }
+  .why-card { padding: 20px 16px 14px; border-radius: 28px; }
+  .why-card__heading { font-size: 20px; letter-spacing: -0.3px; }
+  .why-card__copy { font-size: 15px; }
 
   .how .app-card__title { text-align: center; }
   .how .app-card__text { text-align: center; max-width: none; }

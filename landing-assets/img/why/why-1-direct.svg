@@ -1,4 +1,6 @@
 <svg width="480" height="280" viewBox="0 160 480 280" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+<g transform="translate(0 -24)">
 <foreignObject x="-8" y="254" width="367" height="148"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(20px);clip-path:url(#bgblur_0_2517_85512_clip_path);height:100%;width:100%"></div></foreignObject><g data-figma-bg-blur-radius="40" transform="translate(18.30 49.35) scale(0.85)">
 <path d="M32 257C32 247.059 40.0589 239 50 239H194C203.941 239 212 247.059 212 257V401C212 410.941 203.941 419 194 419H50C40.0589 419 32 410.941 32 401V257Z" fill="#262626"/>
 <g transform="translate(16.4 -219.2) scale(1.6)"><g clip-path="url(#clip1_2517_85512)">
