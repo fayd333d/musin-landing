@@ -105,6 +105,29 @@
 
 .hero-video__cta { margin-top: 6px; }
 
+/* Barely there: it only appears when the clip is not running, and should not
+   compete with the call to action above it. */
+.hero-video__toggle {
+  margin-top: 2px;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-primary);
+  opacity: 0.38;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.hero-video__toggle:hover,
+.hero-video__toggle:focus-visible { opacity: 0.85; }
+.hero-video__toggle svg { width: 16px; height: 16px; fill: currentColor; }
+.hero-video__toggle[hidden] { display: none; }
+
 /* Tucked under the hero's fade-out rather than a section apart from it */
 .logos { padding-top: 0; margin-top: -24px; }
 
@@ -613,14 +636,15 @@
     white-space: normal;
   }
 
-  /* "Join as a" / "music artist", "Musin" / "platform" */
-  .split-title { line-height: 1.06; }
-  .split-title__lead { display: block; }
-  .split-title__main {
-    display: block;
+  /* Both lines of the role headings at the same large size. Needs to match
+     the specificity of the .persona .section-title--left rule above. */
+  .split-title,
+  .persona .section-title--left.split-title {
+    line-height: 1.06;
     font-size: min(10.5vw, 44px);
-    white-space: nowrap;
   }
+  .split-title__lead { display: block; }
+  .split-title__main { display: block; white-space: nowrap; }
 
   /* --- breathing room between the stacked sections --- */
   .stats__col { gap: 40px; }
@@ -628,8 +652,12 @@
   .stats { padding: 24px 0 128px; }
   .persona { padding-bottom: 168px; }
 
-  /* Musin platform keeps a single large heading rather than a split one */
-  .how__title { font-size: min(10.5vw, 44px); line-height: 1.06; }
+  /* "Inside" over "Musin app", and Why Musin matched to it */
+  .how__title,
+  .why .section-title { font-size: min(10.5vw, 44px); line-height: 1.06; }
+
+  /* As wide as the column allows, so the artwork and its type read larger */
+  .why-stack { --why-card: min(100%, 400px); }
 
   .how .app-card__title { text-align: center; }
   .how .app-card__text { text-align: center; max-width: none; }

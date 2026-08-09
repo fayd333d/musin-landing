@@ -1019,9 +1019,6 @@ img { display: block; max-width: 100%; }
 
 .footer__brand { display: flex; flex-direction: column; gap: 20px; }
 
-/* Logo + name and the copyright line; centred and stacked on small screens */
-.footer__identity { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; }
-
 .footer__copy {
   font-size: 14px;
   line-height: 20px;
@@ -1096,15 +1093,29 @@ img { display: block; max-width: 100%; }
 
   .footer__brand { align-items: center; gap: 24px; }
 
-  /* Logo + "Musin" sits above "© 2026 Musin…", both centred */
-  .footer__identity {
-    display: flex;
-    flex-direction: column;
+  /* Phone: social across the top, then the mark beside the page links, with
+     the copyright tucked underneath them. display:contents lets the brand's
+     children take part in this grid directly. */
+  .footer__top {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      "social social"
+      "logo   links"
+      "copy   copy";
     align-items: center;
-    gap: 10px;
+    gap: 22px 12px;
   }
 
-  .footer__copy { margin: 0; }
+  .footer__brand { display: contents; }
+  .footer__social { grid-area: social; }
+  .footer__logo { grid-area: logo; gap: 7px; }
+  .footer__links { grid-area: links; }
+  .footer__copy { grid-area: copy; margin: 0; }
+
+  /* the mark matches the social icons, the name matches the page links */
+  .footer__logo .nav-logo__mark { width: 20px; height: 20px; }
+  .footer__logo .nav-logo__type { font-size: clamp(10px, 3vw, 16px); }
 
   /* Social icons centred and spread further apart */
   .footer__social { justify-content: center; gap: 32px; }
@@ -1114,9 +1125,9 @@ img { display: block; max-width: 100%; }
      wrapping onto a second row */
   .footer__links {
     flex-wrap: nowrap;
-    justify-content: center;
+    justify-content: flex-end;
     text-align: center;
-    gap: clamp(8px, 2.6vw, 28px);
+    gap: clamp(6px, 2.2vw, 28px);
   }
 
   .footer__links a,
@@ -1130,7 +1141,16 @@ img { display: block; max-width: 100%; }
      inside rather than just shrinking the bar with them. */
   .nav-wrap { min-height: 52px; }
   .nav-cta { padding: 6px 12px; font-size: 13px; }
-  .nav-burger { width: 32px; height: 32px; padding: 8px 7px; gap: 4px; border-radius: 10px; }
+  /* no plate behind it — just the three lines */
+  .nav-burger {
+    width: 30px;
+    height: 30px;
+    padding: 8px 3px;
+    gap: 4px;
+    background: none;
+    border: 0;
+    border-radius: 0;
+  }
   .nav-burger.is-open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
   .nav-burger.is-open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
@@ -1235,7 +1255,8 @@ img { display: block; max-width: 100%; }
   .faq-item summary { font-size: 16px; line-height: 24px; }
   .faq-item p { margin-left: 48px; font-size: 15px; }
 
-  .footer__top { gap: 32px; }
+  .footer__top { gap: 18px 10px; }
+  .footer__copy { font-size: 12px; line-height: 16px; }
 
   .footer__social { gap: 26px; }
 }

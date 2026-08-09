@@ -18,8 +18,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600&display=swap" rel="stylesheet">
   <!-- Shared shell (nav, sections, cards, footer) + home specifics -->
-  <link rel="stylesheet" href="/landing-assets/css/content.css?v=56">
-  <link rel="stylesheet" href="/landing-assets/css/home.css?v=36">
+  <link rel="stylesheet" href="/landing-assets/css/content.css?v=57">
+  <link rel="stylesheet" href="/landing-assets/css/home.css?v=38">
 </head>
 <body>
 
@@ -74,6 +74,15 @@
           <p class="hero-video__text">Musin is a music promotion platform<br>
             that connects music with content creators.</p>
           <a href="#" class="btn btn--primary btn--md hero-video__cta">Get started for free</a>
+          <!-- Only shown when the clip is not running — battery saver blocks
+               autoplay, and there is otherwise no way to start it. -->
+          <button type="button" class="hero-video__toggle" id="heroVideoToggle"
+                  aria-label="Play background video" hidden>
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path class="hero-video__icon-play" d="M8 5.5v13l11-6.5z"/>
+              <path class="hero-video__icon-pause" d="M8 5.5h3.2v13H8zM12.8 5.5H16v13h-3.2z" hidden/>
+            </svg>
+          </button>
         </div>
       </div>
     </section>
@@ -115,7 +124,7 @@
     <section class="persona" id="forArtists">
       <div class="container persona__row">
         <div class="persona__copy">
-          <h2 class="section-title section-title--left split-title"><span class="split-title__lead">Join as a</span> <span class="split-title__main">Music Artist</span></h2>
+          <h2 class="section-title section-title--left split-title"><span class="split-title__lead">Join as a</span> <span class="split-title__main">music artist</span></h2>
           <p class="persona__text">Reach new audiences and build engagement around your music through
             social media content.</p>
         </div>
@@ -137,7 +146,7 @@
     <section class="persona persona--mirrored" id="forCreators">
       <div class="container persona__row">
         <div class="persona__copy">
-          <h2 class="section-title section-title--left split-title"><span class="split-title__lead">Join as a</span> <span class="split-title__main">Content Creator</span></h2>
+          <h2 class="section-title section-title--left split-title"><span class="split-title__lead">Join as a</span> <span class="split-title__main">content creator</span></h2>
           <p class="persona__text">Discover music that fits your content and get paid to feature it in
             your social media posts.</p>
         </div>
@@ -170,7 +179,7 @@
          The four steps, each shown on the app screen where it happens. -->
     <section class="app how" id="how">
       <div class="container">
-        <h2 class="section-title how__title">Musin platform</h2>
+        <h2 class="section-title how__title">Inside<br class="br-phone"> Musin app</h2>
         <div class="app-stack">
           <div class="app-card">
             <div class="app-card__panel">
@@ -412,14 +421,13 @@
   <footer class="footer">
     <div class="container footer__top">
       <div class="footer__brand">
-        <!-- On small screens the mark + name sit above the copyright, centred -->
-        <div class="footer__identity">
-          <a class="nav-logo" href="/" aria-label="Musin home">
-            <img src="/landing-assets/img/logo-mark.svg" alt="" class="nav-logo__mark">
-            <span class="nav-logo__type">Musin</span>
-          </a>
-          <p class="footer__copy">© 2026 Musin. All rights reserved.</p>
-        </div>
+        <!-- Flat, so the phone layout can place these independently: the mark
+             sits beside the page links and the copyright drops underneath -->
+        <a class="nav-logo footer__logo" href="/" aria-label="Musin home">
+          <img src="/landing-assets/img/logo-mark.svg" alt="" class="nav-logo__mark">
+          <span class="nav-logo__type">Musin</span>
+        </a>
+        <p class="footer__copy">© 2026 Musin. All rights reserved.</p>
         <div class="footer__social">
           <a href="https://www.youtube.com/@musin_online" aria-label="Musin on YouTube" target="_blank" rel="noopener"><img src="/landing-assets/img/social/s09-youtube.svg" alt=""></a>
           <a href="https://www.instagram.com/musin_online/" aria-label="Musin on Instagram" target="_blank" rel="noopener"><img src="/landing-assets/img/social/s08-instagram.svg" alt=""></a>
@@ -476,6 +484,6 @@
   <script src="/landing-assets/js/marquee.js?v=4"></script>
   <script src="/landing-assets/js/cta.js?v=2"></script>
   <script src="/landing-assets/js/support.js?v=3"></script>
-  <script src="/landing-assets/js/home.js?v=15"></script>
+  <script src="/landing-assets/js/home.js?v=16"></script>
 </body>
 </html>

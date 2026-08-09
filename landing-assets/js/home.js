@@ -446,3 +446,39 @@ if (!prefersReducedMotion) {
       });
     });
 }
+
+/* ---------- Hero clip: a way back in when autoplay is blocked ----------
+   Battery saver (and some data-saver modes) refuse to autoplay the background
+   video and there is no other control for it. The button only appears while
+   the clip is not running, so nobody sees it in the normal case. */
+(function () {
+  const video = document.querySelector(".hero-video__media");
+  const toggle = document.getElementById("heroVideoToggle");
+  if (!video || !toggle) return;
+
+  const playIcon = toggle.querySelector(".hero-video__icon-play");
+  const pauseIcon = toggle.querySelector(".hero-video__icon-pause");
+
+  function sync() {
+    const stopped = video.paused;
+    toggle.hidden = !stopped;
+    playIcon.hidden = !stopped;
+    pauseIcon.hidden = stopped;
+    toggle.setAttribute("aria-label", stopped ? "Play background video" : "Pause background video");
+  }
+
+  toggle.addEventListener("click", () => {
+    if (video.paused) {
+      const p = video.play();
+      if (p && p.catch) p.catch(() => {});
+    } else {
+      video.pause();
+    }
+  });
+
+  video.addEventListener("play", sync);
+  video.addEventListener("pause", sync);
+  // autoplay is decided a moment after load, so check once things settle
+  setTimeout(sync, 600);
+  sync();
+})();
