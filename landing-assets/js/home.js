@@ -19,7 +19,7 @@ burger.addEventListener("click", () => {
    "slot" (signed distance from the centre, wrapping round the list) so only
    slots -1/0/+1 are visible and the side cards face outward. Here they advance
    on a timer only — no arrows, no dragging, no play/pause. */
-function createWheel(stage, { onCentre, interval = 3.2, dim = 0.28, drag = false, auto = true, start = 0 } = {}) {
+function createWheel(stage, { onCentre, interval = 3.2, dim = 0.28, drag = false, auto = true, start = 0, spacing: spacingFactor = 0.9 } = {}) {
   const cards = [...stage.children];
   const N = cards.length;
   if (!N) return null;
@@ -29,7 +29,7 @@ function createWheel(stage, { onCentre, interval = 3.2, dim = 0.28, drag = false
 
   function render() {
     const cardW = cards[0].offsetWidth || 160;
-    const spacing = cardW * 0.9; // room so the side cards aren't hidden behind the centre
+    const spacing = cardW * spacingFactor; // room so the side cards aren't hidden behind the centre
     cards.forEach((card, i) => {
       let s = (((i - centreIndex) % N) + N) % N; // 0..N-1
       if (s > N / 2) s -= N; // wrap to a signed slot
@@ -71,6 +71,15 @@ function createWheel(stage, { onCentre, interval = 3.2, dim = 0.28, drag = false
   stage.classList.remove("no-anim");
 
   window.addEventListener("resize", render);
+
+  /* Artwork and webfonts settle after the first render, and the slot maths is
+     measured off the card. Re-run it once they land or the cards end up at
+     mismatched sizes and offsets on a cold load. */
+  stage.querySelectorAll("img").forEach((img) => {
+    if (!img.complete) img.addEventListener("load", render, { once: true });
+  });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(render);
+  window.addEventListener("load", render);
 
   /* The timer runs from the start and the observer only pauses it off screen,
      so a wheel can never end up stuck if the observer never reports back. */
@@ -377,7 +386,9 @@ if (flipTrackRow && flipCreatorRow && !prefersReducedMotion) {
    trackpad sideways, or clicks one of the cards either side. */
 const whyStage = document.getElementById("whyStack");
 /* Opens on "Choice on both sides" rather than the first card */
-const whyWheel = whyStage ? createWheel(whyStage, { dim: 0.34, drag: true, auto: false, start: 1 }) : null;
+const whyWheel = whyStage
+  ? createWheel(whyStage, { dim: 0.34, drag: true, auto: false, start: 1, spacing: 0.72 })
+  : null;
 
 /* ---------- Statistics ----------
    Each number gently fluctuates within its own range. A slow triangle wave off

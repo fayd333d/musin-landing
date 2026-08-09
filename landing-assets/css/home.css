@@ -528,7 +528,9 @@
   left: 50%;
   top: 50%;
   width: var(--why-card);
-  aspect-ratio: 1 / var(--why-ratio);
+  /* explicit, so a card with more copy cannot end up taller than its
+     neighbours the way an aspect-ratio box can */
+  height: calc(var(--why-card) * var(--why-ratio));
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -565,8 +567,10 @@
   flex: 1 1 auto;
   min-height: 0;
   width: 100%;
+  height: 100%;
   margin-top: 10px;
   object-fit: contain;
+  object-position: center;
 }
 
 .why-card img { display: block; }
@@ -645,19 +649,24 @@
 
   .persona__row,
   .persona--mirrored .persona__row {
-    grid-template-columns: minmax(0, 1fr);
-    /* button sits under the copy and above the wheel */
+    /* the heading and the button share the top row, copy spans underneath */
+    grid-template-columns: minmax(0, 1fr) auto;
     grid-template-areas:
-      "copy"
-      "actions"
-      "visual";
+      "title  actions"
+      "text   text"
+      "visual visual";
+    align-items: center;
     justify-items: stretch;
     text-align: left;
-    row-gap: 24px;
+    row-gap: 18px;
+    column-gap: 14px;
   }
 
-  .persona__copy { align-self: auto; max-width: 520px; }
-  .persona__actions { align-self: auto; justify-content: flex-start; }
+  /* lets the heading and copy become grid items in their own right */
+  .persona__copy { display: contents; }
+  .persona .section-title--left { grid-area: title; }
+  .persona__text { grid-area: text; margin-top: 0; }
+  .persona__actions { grid-area: actions; align-self: center; justify-content: flex-end; }
   .persona__visual { width: 100%; }
   .persona__visual .create__scroller { --wheel-card: clamp(150px, 44vw, 220px); }
   .persona .section-title--left { text-align: left; }
@@ -696,7 +705,7 @@
   .stats__col { gap: 40px; }
   .stats__col .genres__stat + .flip-row { margin-bottom: 72px; }
   .stats { padding: 24px 0 128px; }
-  .persona { padding-bottom: 168px; }
+  .persona { padding-bottom: 136px; }
 
   /* "Inside" over "Musin app", and Why Musin matched to it */
   .how__title,
