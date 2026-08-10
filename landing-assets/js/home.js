@@ -471,32 +471,35 @@ if (!prefersReducedMotion) {
 }
 
 /* ---------- Hero clip: a way back in when autoplay is blocked ----------
-   Battery saver (and some data-saver modes) refuse to autoplay the background
-   video and there is no other control for it. The button only appears while
-   the clip is not running, so nobody sees it in the normal case. */
+   Battery saver and data saver refuse to autoplay, and the clip has no other
+   control. Assume it will play and keep the button hidden; only reveal it if
+   the browser actually turns the request down.
+
+   The video is never hidden while paused: iOS will not autoplay a video it
+   considers invisible, so doing that stops it from ever starting. */
 (function () {
   const video = document.querySelector(".hero-video__media");
   const toggle = document.getElementById("heroVideoToggle");
   if (!video || !toggle) return;
 
-  function sync() {
-    const stopped = video.paused;
-    // the button is only ever on screen while the clip is stopped, so it
-    // shows a play glyph and nothing else
-    toggle.hidden = !stopped;
-    // and the video itself stops rendering, which takes the browser's own
-    // overlay play button with it
-    video.classList.toggle("is-stopped", stopped);
+  const setToggle = (visible) => { toggle.hidden = !visible; };
+
+  function tryPlay() {
+    const p = video.play();
+    if (p && typeof p.then === "function") {
+      p.then(() => setToggle(false)).catch(() => setToggle(true));
+    }
   }
 
-  toggle.addEventListener("click", () => {
-    const p = video.play();
-    if (p && p.catch) p.catch(() => {});
-  });
+  toggle.addEventListener("click", tryPlay);
+  video.addEventListener("play", () => setToggle(false));
+  video.addEventListener("pause", () => setToggle(true));
 
-  video.addEventListener("play", sync);
-  video.addEventListener("pause", sync);
-  // autoplay is decided a moment after load, so check once things settle
-  setTimeout(sync, 600);
-  sync();
+  setToggle(false); // no flash of the button while autoplay is still deciding
+
+  if (video.readyState >= 2) tryPlay();
+  else video.addEventListener("canplay", tryPlay, { once: true });
+
+  // last resort: if it is still stopped once everything has settled, offer it
+  setTimeout(() => { if (video.paused) setToggle(true); }, 1500);
 })();

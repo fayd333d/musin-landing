@@ -115,11 +115,6 @@
 .hero-video__media::-webkit-media-controls-overlay-play-button { display: none !important; }
 .hero-video__media::-webkit-media-controls-play-button { display: none !important; }
 
-/* Whatever the browser wants to paint over a paused video — its own play
-   glyph included — goes away with the element. Frame one is black, and the
-   panel behind it is the same black, so nothing changes visually. */
-.hero-video__media.is-stopped { visibility: hidden; }
-
 .hero-video__cta { margin-top: 6px; }
 
 /* Barely there: it only appears when the clip is not running, and should not
