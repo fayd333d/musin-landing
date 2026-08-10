@@ -482,7 +482,13 @@ if (!prefersReducedMotion) {
   const toggle = document.getElementById("heroVideoToggle");
   if (!video || !toggle) return;
 
-  const setToggle = (visible) => { toggle.hidden = !visible; };
+  const still = document.getElementById("heroVideoStill");
+  const setToggle = (visible) => {
+    toggle.hidden = !visible;
+    // the cover only goes up once playback has actually been refused, so it
+    // can never be the reason autoplay did not start
+    if (still) still.hidden = !visible;
+  };
 
   function tryPlay() {
     const p = video.play();

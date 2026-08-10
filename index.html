@@ -19,7 +19,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600&display=swap" rel="stylesheet">
   <!-- Shared shell (nav, sections, cards, footer) + home specifics -->
   <link rel="stylesheet" href="/landing-assets/css/content.css?v=60">
-  <link rel="stylesheet" href="/landing-assets/css/home.css?v=47">
+  <link rel="stylesheet" href="/landing-assets/css/home.css?v=48">
 </head>
 <body>
 
@@ -68,6 +68,10 @@
              autoplay muted loop playsinline preload="auto" tabindex="-1"
              disablepictureinpicture disableremoteplayback
              controlslist="nodownload noplaybackrate noremoteplayback"></video>
+        <!-- Covers the browser's own play glyph when autoplay has been refused.
+             A sibling element paints above the video's native controls, and
+             unlike hiding the video it cannot stop autoplay from starting. -->
+        <div class="hero-video__still" id="heroVideoStill" aria-hidden="true" hidden></div>
         <div class="hero-video__scrim" aria-hidden="true"></div>
         <div class="hero-video__copy">
           <h1 class="hero-video__title">Connecting music<br class="br-phone"> with content</h1>
@@ -478,6 +482,6 @@
   <script src="/landing-assets/js/marquee.js?v=4"></script>
   <script src="/landing-assets/js/cta.js?v=2"></script>
   <script src="/landing-assets/js/support.js?v=3"></script>
-  <script src="/landing-assets/js/home.js?v=22"></script>
+  <script src="/landing-assets/js/home.js?v=23"></script>
 </body>
 </html>

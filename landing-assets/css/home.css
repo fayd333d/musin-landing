@@ -115,6 +115,16 @@
 .hero-video__media::-webkit-media-controls-overlay-play-button { display: none !important; }
 .hero-video__media::-webkit-media-controls-play-button { display: none !important; }
 
+/* Sits over the clip, under the scrim and copy. Same black as the panel and
+   as the clip's own first frame, so covering it changes nothing visually. */
+.hero-video__still {
+  position: absolute;
+  inset: 0;
+  background: var(--bg);
+}
+
+.hero-video__still[hidden] { display: none; }
+
 .hero-video__cta { margin-top: 6px; }
 
 /* Barely there: it only appears when the clip is not running, and should not
