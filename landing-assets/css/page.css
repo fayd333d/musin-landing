@@ -95,6 +95,11 @@
 .doc__contact p { margin-top: 8px; }
 .doc__contact p:first-child { margin-top: 0; }
 
+/* Index of legal documents; the link carries the weight, the note explains it */
+.legal-index { list-style: none; padding-left: 0; }
+.legal-index li { margin-top: 14px; }
+.legal-index a { font-weight: 600; }
+
 /* Feature grid on the Features page */
 .feature-grid {
   margin-top: 32px;
