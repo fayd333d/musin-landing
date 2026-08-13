@@ -6,6 +6,10 @@
   padding: 72px 0 112px;
 }
 
+/* Anchored headings are linked directly from the footer and from the Meta and
+   TikTok dashboards; without this they land under the sticky header. */
+.doc [id] { scroll-margin-top: 104px; }
+
 .doc__inner {
   max-width: 780px;
   margin: 0 auto;
@@ -111,6 +115,7 @@
 
 @media (max-width: 600px) {
   .doc { padding: 48px 0 88px; }
+  .doc [id] { scroll-margin-top: 72px; }
   .doc__lead { font-size: 18px; line-height: 29px; }
   .doc h2 { margin-top: 44px; font-size: 23px; line-height: 30px; }
 }

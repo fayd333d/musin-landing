@@ -8,6 +8,4 @@
   <url><loc>https://musin.online/terms</loc><changefreq>monthly</changefreq><priority>0.3</priority></url>
   <url><loc>https://musin.online/privacy</loc><changefreq>monthly</changefreq><priority>0.3</priority></url>
   <url><loc>https://musin.online/cookies</loc><changefreq>monthly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://musin.online/impressum</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
-  <url><loc>https://musin.online/data-deletion</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
 </urlset>
