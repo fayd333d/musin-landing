@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/landing-assets/css/content.css?v=61">
+  <link rel="stylesheet" href="/landing-assets/css/content.css?v=63">
   <link rel="stylesheet" href="/landing-assets/css/page.css?v=4">
 </head>
 <body>
@@ -128,10 +128,34 @@
         <a href="/features">Features</a>
         <a href="/vision">Vision</a>
         <button type="button" class="footer__link-btn" data-support-open>Support</button>
-        <a href="/legal">Legal</a>
+        <button type="button" class="footer__link-btn" data-legal-open>Legal</button>
       </nav>
     </div>
   </footer>
+
+  <!-- ============ LEGAL ============ -->
+  <dialog class="legal-dialog" id="legalDialog" aria-labelledby="legalTitle">
+    <div class="legal-dialog__body">
+      <div class="legal-dialog__head">
+        <h2 class="legal-dialog__title" id="legalTitle">Legal</h2>
+        <button type="button" class="legal-dialog__close" data-legal-close aria-label="Close">&times;</button>
+      </div>
+
+      <p class="legal-dialog__who">
+        <strong>Makarov d.o.o.</strong>, trading as Musin · Kosićevo 13, Opatija, Croatia ·
+        MBS 080549024 · OIB 13825430097 · Represented by Nezir Likaj, Managing Director ·
+        <a href="mailto:ask@musin.online">ask@musin.online</a>
+      </p>
+
+      <ul class="legal-dialog__list">
+        <li><a href="/terms">Terms and Conditions<span>Access to and use of the Musin platform</span></a></li>
+        <li><a href="/privacy">Privacy Policy<span>How personal data is collected, used and protected</span></a></li>
+        <li><a href="/cookies">Cookie Policy<span>Cookies and similar technologies</span></a></li>
+        <li><a href="/privacy#impressum">Legal Notice (Impressum)<span>Full company and responsibility details</span></a></li>
+        <li><a href="/privacy#data-deletion">Data Deletion Instructions<span>What we access and how to have it deleted</span></a></li>
+      </ul>
+    </div>
+  </dialog>
 
   <!-- ============ SUPPORT ============ -->
   <dialog class="support-dialog" id="supportDialog" aria-labelledby="supportTitle">
@@ -165,6 +189,7 @@
     </div>
   </dialog>
 
+  <script src="/landing-assets/js/legal.js?v=1"></script>
   <script src="/landing-assets/js/support.js?v=3"></script>
   <script src="/landing-assets/js/nav.js?v=1"></script>
 </body>

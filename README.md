@@ -16,7 +16,6 @@ Each page is a directory with an `index.html`, so the URLs are extensionless.
 | `/music` | `music/index.html` — For Music Artists |
 | `/features` | `features/index.html` |
 | `/vision` | `vision/index.html` |
-| `/legal` | `legal/index.html` — hub linking the four legal documents |
 | `/terms` | `terms/index.html` |
 | `/privacy` | `privacy/index.html` — also holds `#impressum` and `#data-deletion` |
 | `/cookies` | `cookies/index.html` |
