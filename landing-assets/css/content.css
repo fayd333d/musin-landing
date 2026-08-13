@@ -1121,19 +1121,18 @@ img { display: block; max-width: 100%; }
   /* Social icons centred and spread further apart */
   .footer__social { justify-content: center; gap: 32px; }
 
-  /* Page links centred under the brand block */
-  /* All six links stay on one line — the type shrinks to fit rather than
-     wrapping onto a second row */
+  /* Eight links no longer fit on one line, so they wrap onto two rather than
+     shrinking the type to the point of illegibility */
   .footer__links {
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     justify-content: center;
     text-align: center;
-    gap: clamp(6px, 2.2vw, 28px);
+    gap: 10px clamp(10px, 3.4vw, 28px);
   }
 
   .footer__links a,
   .footer__links button {
-    font-size: clamp(10px, 3vw, 16px);
+    font-size: clamp(13px, 3.4vw, 16px);
     white-space: nowrap;
   }
 
