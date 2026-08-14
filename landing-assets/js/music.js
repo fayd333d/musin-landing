@@ -290,7 +290,6 @@ const creatorStripTween = gsap.to(creatorMarquee, {
   ease: "none",
   repeat: -1,
 });
-makeStripScrollable(document.querySelector(".track-marquee"), creatorMarquee, creatorStripTween);
 
 /* ---------- Active creator counter ----------
    The number gently fluctuates between COUNT_MIN and COUNT_MAX (#2). A slow

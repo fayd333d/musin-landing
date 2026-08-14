@@ -200,7 +200,6 @@ const trackStripTween = gsap.to(marqueeInner, {
   ease: "none",
   repeat: -1,
 });
-makeStripScrollable(document.querySelector(".track-marquee"), marqueeInner, trackStripTween);
 
 /* ---------- Track counter ----------
    The number gently fluctuates between COUNT_MIN and COUNT_MAX. A slow
@@ -322,6 +321,17 @@ const wheelCards = [...stage.querySelectorAll(".video-card")];
 const N = wheelCards.length;
 let centreIndex = 0; // first screen the user sees is Video 4 (#3)
 const lastSlot = new Array(N).fill(null);
+/* Set while a sideways drag is in flight, so the click that ends the gesture
+   doesn't also land on a card and toggle its clip. */
+let dragMoved = false;
+
+/* Where card i currently sits relative to the centre, as a signed slot: 0 is
+   centred, -1 is one to the left, +1 one to the right. */
+function slotOf(i) {
+  let s = (((i - centreIndex) % N) + N) % N; // 0..N-1
+  if (s > N / 2) s -= N; // wrap to a signed slot
+  return s;
+}
 
 /* Each card holds a real clip (Video 4-13). The centre clip autoplays; when it
    ends the wheel advances and the next one autoplays. The user can pause it or
@@ -349,6 +359,11 @@ wheelCards.forEach((card, i) => {
   if (!video) return;
   const toggle = (e) => {
     if (e) e.stopPropagation();
+    if (dragMoved) return; // this click ended a drag, not a tap
+    /* Tapping a card either side brings it to the centre instead of playing
+       it, so the wheel reads the same way as the Home landing's clip row. */
+    const slot = slotOf(i);
+    if (slot !== 0) { advance(slot); return; }
     if (video.paused) {
       wheelCards.forEach((c) => {
         const v = c.querySelector("video");
@@ -373,8 +388,7 @@ function renderWheel() {
   const cardW = wheelCards[0].offsetWidth || 280;
   const spacing = cardW * 0.9; // more space so side cards aren't hidden behind the centre (#5)
   wheelCards.forEach((card, i) => {
-    let s = (((i - centreIndex) % N) + N) % N; // 0..N-1
-    if (s > N / 2) s -= N; // wrap to a signed slot
+    const s = slotOf(i);
     const a = Math.abs(s);
     const dir = Math.sign(s);
     const near = Math.min(a, 2);
@@ -416,16 +430,49 @@ const nextBtn = document.getElementById("scrollNext");
 if (prevBtn) prevBtn.addEventListener("click", () => advance(-1));
 if (nextBtn) nextBtn.addEventListener("click", () => advance(1));
 
-/* Swipe / drag to move one card (both directions, phone + pointer) */
+/* Drag with a pointer, swipe on touch, or flick a trackpad sideways — the same
+   set of gestures the Home landing's clip row accepts. Each one moves the
+   wheel by a single card. */
 let dragStartX = null;
-stage.addEventListener("pointerdown", (e) => { dragStartX = e.clientX; stage.classList.add("is-dragging"); });
-window.addEventListener("pointerup", (e) => {
+stage.addEventListener("pointerdown", (e) => {
+  dragStartX = e.clientX;
+  dragMoved = false;
+  stage.classList.add("is-dragging");
+});
+
+stage.addEventListener("pointermove", (e) => {
+  if (dragStartX !== null && Math.abs(e.clientX - dragStartX) > 6) dragMoved = true;
+});
+
+const endDrag = (e) => {
   if (dragStartX === null) return;
   const dx = e.clientX - dragStartX;
-  if (Math.abs(dx) > 40) advance(dx < 0 ? 1 : -1);
   dragStartX = null;
   stage.classList.remove("is-dragging");
-});
+  if (Math.abs(dx) > 40) advance(dx < 0 ? 1 : -1);
+  /* Cleared after the click that follows this pointerup has been dispatched,
+     so the tap guard in the card handler still sees the drag. */
+  setTimeout(() => { dragMoved = false; }, 0);
+};
+window.addEventListener("pointerup", endDrag);
+window.addEventListener("pointercancel", endDrag);
+
+/* A trackpad flick arrives as a long burst of events with momentum trailing
+   behind it. The lock is released only once that burst goes quiet, so one
+   gesture always moves exactly one card. */
+let wheelLock = false;
+let wheelIdle = null;
+stage.addEventListener("wheel", (e) => {
+  // only claim the gesture when it's clearly sideways, so the page can still
+  // scroll vertically over the cards
+  if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+  e.preventDefault();
+  clearTimeout(wheelIdle);
+  wheelIdle = setTimeout(() => { wheelLock = false; }, 260);
+  if (wheelLock || Math.abs(e.deltaX) < 6) return;
+  wheelLock = true;
+  advance(e.deltaX > 0 ? 1 : -1);
+}, { passive: false });
 
 window.addEventListener("resize", renderWheel);
 stage.classList.add("no-anim");

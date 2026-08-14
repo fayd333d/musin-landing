@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600&display=swap" rel="stylesheet">
   <!-- Shared shell (nav, sections, cards, footer) + home specifics -->
-  <link rel="stylesheet" href="/landing-assets/css/content.css?v=63">
+  <link rel="stylesheet" href="/landing-assets/css/content.css?v=64">
   <link rel="stylesheet" href="/landing-assets/css/home.css?v=48">
 </head>
 <body>
@@ -359,13 +359,42 @@
         <h2 class="section-title">FAQ</h2>
         <div class="faq-list">
           <details class="faq-item" open>
-            <summary>How much does it cost to join?</summary>
-            <p>Joining Musin is free with no listing fees or subscriptions. Content creators pay a 20% commission only when they withdraw their earnings. Artists pay a 10% platform fee on funds deposited into a campaign — nothing is charged until a campaign is launched.</p>
+            <summary>How do payments work?</summary>
+            <p>Every payment follows the same timeline, and it works the same way for artists and creators.</p>
+            <p>A post qualifies when it uses the campaign track, is published inside the campaign period, and keeps the track for the required timeframe if the artist set one. When the creator submits the post link, Musin records its publish date automatically.</p>
+            <p>The payment is then calculated and released 14 days after that publish date, or when the campaign ends — whichever comes first. Campaigns run for a maximum of 30 days, so no payment is ever further away than that.</p>
+            <p>The artist can confirm a post at any point before that moment, which marks it dispute-free. Confirming does not release the payment sooner, and staying silent does not hold it back.</p>
+          </details>
+          <details class="faq-item">
+            <summary>How is a creator’s payment calculated?</summary>
+            <p>Every creator sets a fixed price per post. The payout is a percentage of that price, decided by how the post actually performed.</p>
+            <p>At the moment of payout — 14 days after publication, or campaign end, whichever comes first — Musin measures two things:</p>
+            <ul>
+              <li>Reach: views compared with the account’s follower count.</li>
+              <li>Engagement: likes, comments, shares and saves compared with views.</li>
+            </ul>
+            <p>Both are judged against what is normal for an account of that size on that platform, so a small account is never measured against a large one.</p>
+            <p>Weak on both measures pays 50% of the listed price. Strong on both pays 110%. Everything else — an ordinary result, or strong on one measure but not the other — pays the full 100%.</p>
+            <p>An artist’s cost is therefore capped even if a post goes viral, and a creator is never paid nothing for a post that qualified.</p>
+          </details>
+          <details class="faq-item">
+            <summary>What does Musin charge?</summary>
+            <p>Joining Musin is free. There are no listing fees and no subscriptions, and nothing is charged until a campaign is launched.</p>
+            <p>There are two charges on the platform:</p>
+            <ul>
+              <li>Creators pay a 20% commission, taken when they withdraw their balance — not when a post is confirmed.</li>
+              <li>Artists pay a 10% platform fee on the funds they deposit into a campaign.</li>
+            </ul>
+          </details>
+          <details class="faq-item">
+            <summary>How do withdrawals work?</summary>
+            <p>Creators can withdraw their balance once every 14 days. Earnings from qualified posts build up in the balance between withdrawals, so everything earned can be taken out in a single transfer, and the 20% commission is applied at that point.</p>
+            <p>Artists can withdraw whatever is left of their reserved funds once a campaign ends, including amounts held back from posts that paid below the listed price.</p>
+            <p>All payouts run through Stripe, in local currency where supported.</p>
           </details>
           <details class="faq-item">
             <summary>What follower count do I need to start earning?</summary>
-            <p>100 followers is enough to start as a content creator. Your follower count sets the
-              upper limit on the price you can ask per post.</p>
+            <p>100 followers is enough to start as a content creator. Your follower count sets the upper limit on the price you can ask per post.</p>
           </details>
           <details class="faq-item">
             <summary>How does Musin verify accounts?</summary>
@@ -376,28 +405,16 @@
             <p>TikTok, Instagram and YouTube for posting, Spotify for tracks, and Stripe for payouts.</p>
           </details>
           <details class="faq-item">
-            <summary>How do payments work?</summary>
-            <p>A post is eligible for payment when it uses the correct track, is published within the campaign period, and follows the required track timeframe if one was set. When the creator submits the post link, Musin captures its publish date automatically. The artist can review and confirm the post any time before payout — this marks it as dispute-free but doesn’t release payment early. Whether or not the artist confirms, payment is calculated and released 14 days after the post’s publish date, or when the campaign ends, whichever comes first. Campaigns run for a maximum of 30 days.</p>
-          </details>
-          <details class="faq-item">
-            <summary>How is a creator’s payment calculated?</summary>
-            <p>Each creator sets a fixed price per post. Payout is measured 14 days after the post’s publish date, or when the campaign ends, whichever comes first, and adjusts based on how the post performed relative to what’s typical for that account’s size and platform — both its reach (views relative to followers) and engagement (likes, comments, shares and saves relative to views). A post that underperforms on both measures pays 50% of the listed price, a post that excels on both pays 110%, and everything else — a normal result, or strong on one measure but not the other — pays the full listed price. This means an artist’s cost is never open-ended, even if a post goes viral, and a creator is never paid nothing for a completed, confirmed post.</p>
-          </details>
-          <details class="faq-item">
             <summary>Why does content drive music discovery?</summary>
-            <p>People discover music while watching videos they already enjoy. When a track becomes
-              part of relevant social content it reaches audiences in a natural and memorable context.</p>
+            <p>People discover music while watching videos they already enjoy. When a track becomes part of relevant social content it reaches audiences in a natural and memorable context.</p>
           </details>
           <details class="faq-item">
             <summary>How is content-based promotion different from traditional advertising?</summary>
-            <p>Traditional advertising asks people to stop and pay attention. Content-based promotion
-              places music inside something they already chose to watch.</p>
+            <p>Traditional advertising asks people to stop and pay attention. Content-based promotion places music inside something they already chose to watch.</p>
           </details>
           <details class="faq-item">
             <summary>Why use Musin instead of arranging collaborations manually?</summary>
-            <p>Musin brings track discovery, account selection, campaign management, post confirmation
-              and payments into one place instead of relying on scattered messages, spreadsheets and
-              individual negotiations.</p>
+            <p>Musin brings track discovery, account selection, campaign management, post confirmation and payments into one place instead of relying on scattered messages, spreadsheets and individual negotiations.</p>
           </details>
         </div>
       </div>

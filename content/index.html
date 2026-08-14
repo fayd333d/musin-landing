@@ -21,7 +21,7 @@
        clip is prioritised on the <video> element itself to avoid a double fetch) -->
   <link rel="preload" as="image" href="/landing-assets/img/poster/poster-1.jpg" fetchpriority="high">
   <link rel="preload" as="image" href="/landing-assets/img/covers/cover-1.jpg" fetchpriority="high">
-  <link rel="stylesheet" href="/landing-assets/css/content.css?v=63">
+  <link rel="stylesheet" href="/landing-assets/css/content.css?v=64">
 </head>
 <body>
 
@@ -291,15 +291,37 @@
           </details>
           <details class="faq-item">
             <summary>How do payments work?</summary>
-            <p>A post is eligible for payment when it uses the correct track, is published within the campaign period, and follows the required track timeframe if one was set. When you submit your post link, Musin captures its publish date automatically. The artist can review and confirm any time before payout — this just marks it as dispute-free and doesn’t speed up or slow down payment. Whether or not they confirm, your payout is calculated and added to your balance 14 days after your post’s publish date, or when the campaign ends, whichever comes first. Campaigns run for a maximum of 30 days.</p>
+            <p>Every payment follows the same timeline, and it works the same way for every creator.</p>
+            <p>Your post qualifies when it uses the campaign track, is published inside the campaign period, and keeps the track for the required timeframe if the artist set one. When you submit your post link, Musin records its publish date automatically.</p>
+            <p>Your payment is then calculated and added to your balance 14 days after that publish date, or when the campaign ends — whichever comes first. Campaigns run for a maximum of 30 days, so you are never waiting longer than that.</p>
+            <p>The artist can confirm your post at any point before that moment, which marks it dispute-free. Confirming does not pay you sooner, and staying silent does not hold your payment back.</p>
           </details>
           <details class="faq-item">
             <summary>How is my payment calculated?</summary>
-            <p>You set a price per post within the limit set by your follower count. Musin captures your post’s publish date automatically when you submit the link, then measures its performance 14 days later, or when the campaign ends, whichever comes first — looking at both how many people it reached relative to your follower count, and how many of them engaged (likes, comments, shares, saves) relative to the views. If both are weak for an account your size, you get 50% of your set price; if both are strong, you get 110%; everything else pays the full price. You’re never paid nothing for a completed, confirmed post.</p>
+            <p>You set a fixed price per post, within the limit your follower count allows. Your payout is a percentage of that price, decided by how your post actually performed.</p>
+            <p>At the moment of payout — 14 days after you publish, or campaign end, whichever comes first — Musin measures two things:</p>
+            <ul>
+              <li>Reach: your views compared with your follower count.</li>
+              <li>Engagement: likes, comments, shares and saves compared with your views.</li>
+            </ul>
+            <p>Both are judged against what is normal for an account of your size on that platform, so you are never measured against a bigger account.</p>
+            <p>Weak on both measures pays 50% of your set price. Strong on both pays 110%. Everything else — an ordinary result, or strong on one measure but not the other — pays your full 100%.</p>
+            <p>You are never paid nothing for a post that qualified.</p>
           </details>
           <details class="faq-item">
-            <summary>How often can I withdraw my earnings?</summary>
-            <p>You can withdraw your Musin balance once every 14 days. Earnings from confirmed posts build up in your balance between withdrawals, so you can cash out everything you’ve earned in one transfer.</p>
+            <summary>What does Musin charge?</summary>
+            <p>Joining Musin is free. There are no listing fees and no subscriptions.</p>
+            <p>There are two charges on the platform:</p>
+            <ul>
+              <li>As a creator, you pay a 20% commission, taken when you withdraw your balance — not when a post is confirmed.</li>
+              <li>Artists pay a 10% platform fee on the funds they deposit into a campaign.</li>
+            </ul>
+          </details>
+          <details class="faq-item">
+            <summary>How do withdrawals work?</summary>
+            <p>You can withdraw your balance once every 14 days. Earnings from qualified posts build up in your balance between withdrawals, so you can take everything you have earned out in a single transfer.</p>
+            <p>The 20% commission is applied at that point, not when a post is confirmed.</p>
+            <p>Payouts run through Stripe, in your local currency where supported.</p>
           </details>
           <details class="faq-item">
             <summary>Do I have to post with every track?</summary>
@@ -312,14 +334,6 @@
           <details class="faq-item">
             <summary>Do I need to worry about music licensing?</summary>
             <p>No. Musin gives you a platform-cleared direct sound link for every track you select, so your post uses properly licensed audio for commercial use.</p>
-          </details>
-          <details class="faq-item">
-            <summary>Is it free?</summary>
-            <p>Yes. Creating an account and finding tracks is completely free. Musin charges a 20% commission only when you receive payment for a confirmed post.</p>
-          </details>
-          <details class="faq-item">
-            <summary>How are payouts handled?</summary>
-            <p>All payouts are processed securely through Stripe and sent in your local currency where supported.</p>
           </details>
         </div>
       </div>
@@ -421,11 +435,10 @@
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-  <script src="/landing-assets/js/scrollstrip.js?v=1"></script>
   <script src="/landing-assets/js/marquee.js?v=4"></script>
   <script src="/landing-assets/js/cta.js?v=2"></script>
   <script src="/landing-assets/js/legal.js?v=1"></script>
   <script src="/landing-assets/js/support.js?v=3"></script>
-  <script src="/landing-assets/js/content.js?v=33"></script>
+  <script src="/landing-assets/js/content.js?v=34"></script>
 </body>
 </html>
