@@ -1031,12 +1031,6 @@ img { display: block; max-width: 100%; }
   color: var(--text-dim);
 }
 
-.footer__social { display: flex; flex-wrap: wrap; gap: 18px; }
-
-.footer__social a { opacity: 0.55; transition: opacity 0.2s ease; }
-.footer__social a:hover { opacity: 1; }
-.footer__social img { width: 20px; height: 20px; }
-
 .footer__links {
   display: flex;
   flex-wrap: nowrap;
@@ -1099,13 +1093,12 @@ img { display: block; max-width: 100%; }
 
   .footer__brand { align-items: center; gap: 24px; }
 
-  /* Phone: social across the top, then the mark beside the page links, with
-     the copyright tucked underneath them. display:contents lets the brand's
-     children take part in this grid directly. */
+  /* Phone: the page links, with the copyright tucked underneath them.
+     display:contents lets the brand's children take part in this grid
+     directly. */
   .footer__top {
     display: grid;
     grid-template-areas:
-      "social"
       "links"
       "copy";
     /* centres the column track itself; the desktop space-between would
@@ -1116,12 +1109,8 @@ img { display: block; max-width: 100%; }
   }
 
   .footer__brand { display: contents; }
-  .footer__social { grid-area: social; }
   .footer__links { grid-area: links; }
   .footer__copy { grid-area: copy; margin: 0; }
-
-  /* Social icons centred and spread further apart */
-  .footer__social { justify-content: center; gap: 32px; }
 
   /* Eight links no longer fit on one line, so they wrap onto two rather than
      shrinking the type to the point of illegibility */
@@ -1261,7 +1250,6 @@ img { display: block; max-width: 100%; }
   .footer__top { gap: 18px; }
   .footer__copy { font-size: 12px; line-height: 16px; }
 
-  .footer__social { gap: 26px; }
 }
 
 /* Reduced motion */
