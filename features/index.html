@@ -17,13 +17,13 @@
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:alt" content="Musin">
   <meta name="twitter:card" content="summary_large_image">
-  <!-- .ico first: Telegram's in-app browser and older mobile Safari ignore
-       the SVG, then probe /favicon.ico and fall back to a generic glyph -->
-  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <!-- Served from /landing-assets, the only prefix this deployment owns: the
+       domain routes unmatched root paths to the dashboard app, so /favicon.ico here would 404 -->
+  <link rel="icon" href="/landing-assets/img/icons/favicon.ico" sizes="32x32">
   <link rel="icon" href="/landing-assets/img/icons/favicon-32.png" type="image/png" sizes="32x32">
   <link rel="icon" href="/landing-assets/img/logo-mark.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link rel="manifest" href="/site.webmanifest">
+  <link rel="apple-touch-icon" href="/landing-assets/img/icons/apple-touch-icon.png">
+  <link rel="manifest" href="/landing-assets/site.webmanifest">
   <meta name="theme-color" content="#0a0a0a">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
